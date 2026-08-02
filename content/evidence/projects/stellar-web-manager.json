@@ -1,0 +1,93 @@
+{
+  "id": "stellar-web-manager",
+  "name": "Stellar Web Manager",
+  "slug": "stellar-web-manager",
+  "tier": "flagship",
+  "selectedForEntrance": true,
+  "includeInEvidenceTable": true,
+  "includeInArchive": true,
+  "sortOrder": 50,
+  "subtitle": {
+    "status": "confirmed",
+    "value": "AI Project Management Platform"
+  },
+  "typeLabels": {
+    "status": "confirmed",
+    "value": ["Full-Stack SaaS", "AI Productivity Platform"]
+  },
+  "completionStatus": {
+    "status": "confirmed",
+    "value": "Completed"
+  },
+  "objective": {
+    "status": "confirmed",
+    "value": "Collaborative project management with AI-assisted productivity in workflows."
+  },
+  "role": {
+    "status": "confirmed",
+    "value": "Primary Developer — full-stack architecture, MERN, authn/authz, collaboration, analytics, AI assistant, APIs, DB architecture."
+  },
+  "creditLine": {
+    "status": "missing"
+  },
+  "technologies": {
+    "status": "confirmed",
+    "value": [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "JWT",
+      "REST APIs",
+      "AI assistant integration",
+      "Tailwind CSS",
+      "Git"
+    ]
+  },
+  "repositoryUrl": {
+    "status": "confirmed",
+    "value": "https://github.com/AliHassan-15/Project-Management-System"
+  },
+  "evidenceLabel": {
+    "status": "confirmed",
+    "value": "Stellar Web Manager"
+  },
+  "repositoryNote": {
+    "status": "missing"
+  },
+  "measuredOutcomes": {
+    "status": "missing"
+  },
+  "liveDemo": {
+    "status": "missing"
+  },
+  "aiUsageClass": "essential",
+  "caseStudy": {
+    "problem": {
+      "status": "missing"
+    },
+    "overview": {
+      "status": "confirmed",
+      "value": "Collaborative project management with AI-assisted productivity in workflows."
+    },
+    "architecture": {
+      "status": "confirmed",
+      "value": "MERN with AI-assisted productivity in workflows (not standalone chatbot); React client; Node/Express services; MongoDB; JWT; business logic in backend; AI via well-defined APIs; modular services; clear separation of app logic and AI."
+    },
+    "decisions": {
+      "status": "missing"
+    },
+    "tradeoffs": {
+      "status": "missing"
+    },
+    "lessons": {
+      "status": "missing"
+    },
+    "constraints": {
+      "status": "missing"
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  }
+}

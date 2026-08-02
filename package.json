@@ -1,0 +1,31 @@
+{
+  "name": "eos",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "pnpm --filter eos-companion dev",
+    "build": "pnpm --filter eos-companion build",
+    "start": "pnpm --filter eos-companion start",
+    "lint": "pnpm --filter eos-companion lint",
+    "typecheck": "pnpm --filter eos-companion typecheck",
+    "format": "pnpm --filter eos-companion format",
+    "format:check": "pnpm --filter eos-companion format:check",
+    "content:validate": "pnpm --filter eos-companion content:validate",
+    "readme:generate": "pnpm --filter eos-companion readme:generate",
+    "readme:check": "pnpm --filter eos-companion readme:check",
+    "verify": "pnpm --filter eos-companion verify",
+    "verify:release": "pnpm --filter eos-companion verify:release",
+    "audit:deps": "pnpm audit --prod --audit-level=high",
+    "deploy:production": "node scripts/deploy-production.mjs"
+  },
+  "pnpm": {
+    "overrides": {
+      "sharp": ">=0.35.0",
+      "postcss": ">=8.5.18"
+    }
+  }
+}

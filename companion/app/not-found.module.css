@@ -1,0 +1,9 @@
+.page {
+  padding-block: var(--eos-space-8);
+  max-width: var(--eos-measure-prose);
+}
+
+.actions {
+  display: grid;
+  gap: var(--eos-space-3);
+}

@@ -1,0 +1,16 @@
+.shell {
+  position: relative;
+  z-index: var(--eos-layer-content);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-block: max(var(--eos-space-5), env(safe-area-inset-top, 0px))
+    max(0px, env(safe-area-inset-bottom, 0px));
+}
+
+.main {
+  flex: 1;
+  padding-block: var(--eos-space-8) var(--eos-space-6);
+  outline: none;
+}

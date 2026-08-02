@@ -1,0 +1,22 @@
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: var(--eos-border-width-strong) solid var(--eos-color-focus);
+  outline-offset: var(--eos-space-1);
+  transition: var(--eos-transition-focus);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--eos-duration-steady);
+  animation-timing-function: var(--eos-ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

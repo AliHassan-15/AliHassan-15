@@ -1,0 +1,38 @@
+{
+  "name": "Ali Hassan",
+  "handle": "AliHassan-15",
+  "title": "Product-Minded AI & Full-Stack Software Engineer",
+  "canonicalSentence": "Every artifact in the Engineering Operating System exists to demonstrate deliberate engineering—where systems thinking, technical depth, craftsmanship, clarity, and long-term quality consistently take precedence over trends, spectacle, or self-promotion.",
+  "seniorSentence": "I build production-ready full-stack and AI systems, with a focus on scalable architecture, clean engineering, and shipping reliable software that solves real problems.",
+  "geography": "Pakistan",
+  "educationShort": "BS in Computer Science, FAST NUCES",
+  "opportunity": "Building independently and open to full-time software engineering opportunities.",
+  "philosophyDefinition": "Good engineering is when the code disappears behind the problem it solves. If someone else can understand it, extend it, and trust it months later without needing the author in the room, the job is done well. Review questions: Did I solve the right problem? Will this still make sense after shipping excitement fades? Did I make the next engineer’s job easier? Clever code fades; clear thinking, thoughtful trade-offs, and software that keeps working in the real world remain.",
+  "philosophyEntrance": "Good engineering is when the code disappears behind the problem it solves. If someone else can understand it, extend it, and trust it months later without needing the author in the room, the job is done well.",
+  "principles": [
+    "Solve the real problem before writing code.",
+    "Build complete systems, not isolated features.",
+    "Let evidence guide decisions."
+  ],
+  "links": {
+    "githubProfile": "https://github.com/AliHassan-15",
+    "githubEntrance": "https://github.com/AliHassan-15/AliHassan-15",
+    "companionDestination": "https://eos-companion.vercel.app"
+  },
+  "aboutProse": {
+    "status": "deferred",
+    "deferralId": "DOC-24"
+  },
+  "email": {
+    "status": "deferred",
+    "deferralId": "D-01"
+  },
+  "linkedIn": {
+    "status": "deferred",
+    "deferralId": "D-02"
+  },
+  "availabilityOneLiner": {
+    "status": "deferred",
+    "deferralId": "D-10"
+  }
+}

@@ -1,0 +1,14 @@
+/**
+ * Contextual tokens — bounded remaps onto semantics.
+ * Never a second identity. Companion foundation context only in M2.
+ */
+
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+  --eos-context-companion-canvas: var(--eos-color-canvas);
+  --eos-context-companion-ink: var(--eos-color-text-primary);
+  --eos-context-companion-muted-ink: var(--eos-color-text-secondary);
+  --eos-context-companion-rule: var(--eos-color-border-subtle);
+  --eos-context-companion-focus-ring: var(--eos-color-focus);
+}

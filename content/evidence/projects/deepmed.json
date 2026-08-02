@@ -1,0 +1,88 @@
+{
+  "id": "deepmed",
+  "name": "DeepMed",
+  "slug": "deepmed",
+  "tier": "flagship",
+  "selectedForEntrance": true,
+  "includeInEvidenceTable": true,
+  "includeInArchive": true,
+  "sortOrder": 10,
+  "subtitle": {
+    "status": "confirmed",
+    "value": "AI Healthcare Platform"
+  },
+  "typeLabels": {
+    "status": "confirmed",
+    "value": ["AI Product", "Multi-Agent AI", "Full-Stack", "Healthcare"]
+  },
+  "completionStatus": {
+    "status": "confirmed",
+    "value": "Completed (Final Year Project)"
+  },
+  "objective": {
+    "status": "confirmed",
+    "value": "Voice-first AI healthcare platform for patient intake before clinical consultation."
+  },
+  "role": {
+    "status": "confirmed",
+    "value": "Technical Lead (team of 3); ownership per approved credit line"
+  },
+  "creditLine": {
+    "status": "confirmed",
+    "value": "Team project (3 members). I served as Technical Lead, leading the overall technical direction while owning the system architecture, backend engineering, database design, API development, LLM workflow orchestration, AI integration, technical documentation, and the majority of testing and quality assurance."
+  },
+  "technologies": {
+    "status": "deferred",
+    "deferralId": "D-11"
+  },
+  "repositoryUrl": {
+    "status": "confirmed",
+    "value": "https://github.com/AliHassan-15/DEEPMED-Testing"
+  },
+  "evidenceLabel": {
+    "status": "confirmed",
+    "value": "DeepMed (testing / QA)"
+  },
+  "repositoryNote": {
+    "status": "confirmed",
+    "value": "Public evidence: testing and QA companion repository. Main source repository remains private due to university restrictions."
+  },
+  "measuredOutcomes": {
+    "status": "missing"
+  },
+  "liveDemo": {
+    "status": "deferred",
+    "deferralId": "D-04"
+  },
+  "aiUsageClass": "essential",
+  "caseStudy": {
+    "problem": {
+      "status": "missing"
+    },
+    "overview": {
+      "status": "confirmed",
+      "value": "Voice-first AI healthcare platform improving patient intake before clinical consultation; coordinates AI-driven workflows for symptoms, concerns, structured triage, clinical summaries, appointment scheduling support; conversational AI + backend + intelligent workflows + modern web UI as production-oriented healthcare platform."
+    },
+    "architecture": {
+      "status": "missing"
+    },
+    "decisions": {
+      "status": "confirmed",
+      "value": "Separate deterministic backend logic from AI reasoning so auth/appointments/records/workflows stay predictable while conversational intelligence stays flexible; orchestrate AI agents without tight coupling for severity analysis / adaptive scheduling pipeline — clear responsibilities, controlled context, structured outputs."
+    },
+    "tradeoffs": {
+      "status": "missing"
+    },
+    "lessons": {
+      "status": "confirmed",
+      "value": "Stronger evaluation pipelines; observability; structured tracing; prompt versioning; automated evaluation datasets; better fallbacks; formalize agent memory; clearer AI orchestration boundaries; isolate experimentation from production deployment."
+    },
+    "constraints": {
+      "status": "confirmed",
+      "value": "Main source repository private (university restrictions); public testing/QA companion repository."
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  }
+}

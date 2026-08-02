@@ -1,0 +1,136 @@
+/**
+ * M2 construction provisional primitives (CSS).
+ *
+ * Product Bible DL-01 / DL-02 / DL-03 / DL-06 / DL-08 remain Deferred as
+ * constitutional locks. Values here are engineering construction defaults
+ * (see docs/engineering/decision-log.md D-ENG-006). They are not Product
+ * Bible amendments.
+ *
+ * Hierarchy: Primitive → Semantic → Contextual → component consumption.
+ * Product UI must not consume these primitives directly.
+ */
+
+:root {
+  /* Neutral value scale — near-monochrome, cool undertone, restrained */
+  --eos-primitive-neutral-0: #ffffff;
+  --eos-primitive-neutral-25: #fafbfc;
+  --eos-primitive-neutral-50: #f4f6f8;
+  --eos-primitive-neutral-100: #e8ecf0;
+  --eos-primitive-neutral-200: #d5dbe3;
+  --eos-primitive-neutral-300: #b8c0cc;
+  --eos-primitive-neutral-400: #8b95a5;
+  --eos-primitive-neutral-500: #6b7585;
+  --eos-primitive-neutral-600: #525b6a;
+  --eos-primitive-neutral-700: #3d4553;
+  --eos-primitive-neutral-800: #2a303a;
+  --eos-primitive-neutral-900: #181c24;
+  --eos-primitive-neutral-950: #0d1016;
+  --eos-primitive-neutral-1000: #07090d;
+
+  /* Informational accent scale — single controlled accent family */
+  --eos-primitive-accent-100: #e8eef8;
+  --eos-primitive-accent-200: #c5d4ec;
+  --eos-primitive-accent-300: #8fa9d4;
+  --eos-primitive-accent-400: #5b7fb8;
+  --eos-primitive-accent-500: #3d5f94;
+  --eos-primitive-accent-600: #2f4a75;
+  --eos-primitive-accent-700: #243a5c;
+
+  /* Status scales — utilitarian, desaturated */
+  --eos-primitive-success-400: #4a8f6f;
+  --eos-primitive-success-500: #377a5b;
+  --eos-primitive-warn-400: #b08940;
+  --eos-primitive-warn-500: #956f2e;
+  --eos-primitive-fail-400: #b05a5a;
+  --eos-primitive-fail-500: #944545;
+  --eos-primitive-info-400: #5b7fb8;
+  --eos-primitive-info-500: #3d5f94;
+
+  /* Space scale (rem) */
+  --eos-primitive-space-0: 0rem;
+  --eos-primitive-space-1: 0.25rem;
+  --eos-primitive-space-2: 0.5rem;
+  --eos-primitive-space-3: 0.75rem;
+  --eos-primitive-space-4: 1rem;
+  --eos-primitive-space-5: 1.5rem;
+  --eos-primitive-space-6: 2rem;
+  --eos-primitive-space-7: 3rem;
+  --eos-primitive-space-8: 4rem;
+  --eos-primitive-space-9: 6rem;
+
+  /* Type metrics */
+  --eos-primitive-font-sans:
+    var(--eos-font-sans), "IBM Plex Sans", "Segoe UI", sans-serif;
+  --eos-primitive-font-mono:
+    var(--eos-font-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --eos-primitive-font-size-100: 0.75rem;
+  --eos-primitive-font-size-200: 0.875rem;
+  --eos-primitive-font-size-300: 1rem;
+  --eos-primitive-font-size-400: 1.125rem;
+  --eos-primitive-font-size-500: 1.375rem;
+  --eos-primitive-font-size-600: 1.75rem;
+  --eos-primitive-font-size-700: 2.125rem;
+  --eos-primitive-font-size-800: 2.75rem;
+  --eos-primitive-line-height-tight: 1.25;
+  --eos-primitive-line-height-snug: 1.375;
+  --eos-primitive-line-height-normal: 1.55;
+  --eos-primitive-line-height-relaxed: 1.7;
+  --eos-primitive-font-weight-regular: 400;
+  --eos-primitive-font-weight-medium: 500;
+  --eos-primitive-font-weight-semibold: 600;
+  --eos-primitive-letter-spacing-tight: -0.02em;
+  --eos-primitive-letter-spacing-normal: 0em;
+  --eos-primitive-letter-spacing-wide: 0.02em;
+
+  /* Size / control metrics */
+  --eos-primitive-size-control-sm: 2rem;
+  --eos-primitive-size-control-md: 2.5rem;
+  --eos-primitive-size-control-lg: 3rem;
+  --eos-primitive-size-icon-sm: 1rem;
+  --eos-primitive-size-icon-md: 1.25rem;
+  --eos-primitive-size-icon-lg: 1.5rem;
+  --eos-primitive-measure-narrow: 28rem;
+  --eos-primitive-measure-prose: 40rem;
+  --eos-primitive-measure-wide: 64rem;
+
+  /* Radius — calm geometry; no ultra-round identity */
+  --eos-primitive-radius-none: 0rem;
+  --eos-primitive-radius-subtle: 0.125rem;
+  --eos-primitive-radius-standard: 0.25rem;
+  --eos-primitive-radius-emphasis: 0.5rem;
+
+  /* Border weight */
+  --eos-primitive-border-none: 0;
+  --eos-primitive-border-hairline: 1px;
+  --eos-primitive-border-standard: 1px;
+  --eos-primitive-border-strong: 2px;
+
+  /* Elevation shadow recipes — quiet structural depth only */
+  --eos-primitive-shadow-none: none;
+  --eos-primitive-shadow-subtle: 0 1px 2px rgb(7 9 13 / 0.06);
+  --eos-primitive-shadow-standard: 0 2px 8px rgb(7 9 13 / 0.08);
+  --eos-primitive-shadow-emphasis: 0 8px 24px rgb(7 9 13 / 0.12);
+
+  /* Opacity */
+  --eos-primitive-opacity-disabled: 0.45;
+  --eos-primitive-opacity-muted: 0.68;
+  --eos-primitive-opacity-overlay-subtle: 0.4;
+  --eos-primitive-opacity-overlay-strong: 0.72;
+
+  /* Layering roles */
+  --eos-primitive-layer-canvas: 0;
+  --eos-primitive-layer-content: 1;
+  --eos-primitive-layer-sticky: 10;
+  --eos-primitive-layer-overlay: 100;
+  --eos-primitive-layer-modal: 200;
+  --eos-primitive-layer-transient: 300;
+
+  /* Motion primitives — architecture only; no animation choreography */
+  --eos-primitive-duration-instant: 0ms;
+  --eos-primitive-duration-swift: 120ms;
+  --eos-primitive-duration-steady: 200ms;
+  --eos-primitive-duration-deliberate: 320ms;
+  --eos-primitive-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --eos-primitive-ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+  --eos-primitive-ease-linear: linear;
+}

@@ -1,0 +1,9 @@
+.root {
+  display: inline-block;
+  color: var(--eos-color-text-primary);
+  font-family: var(--eos-font-family-sans);
+  font-size: var(--eos-font-size-body-sm);
+  font-weight: var(--eos-font-weight-medium);
+  line-height: var(--eos-line-height-normal);
+  letter-spacing: var(--eos-letter-spacing-normal);
+}

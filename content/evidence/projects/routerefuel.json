@@ -1,0 +1,64 @@
+{
+  "id": "routerefuel",
+  "name": "RouteRefuel",
+  "slug": "routerefuel",
+  "tier": "supporting",
+  "selectedForEntrance": false,
+  "includeInEvidenceTable": true,
+  "includeInArchive": true,
+  "sortOrder": 60,
+  "subtitle": {
+    "status": "missing"
+  },
+  "typeLabels": {
+    "status": "confirmed",
+    "value": ["Django + React logistics full-stack"]
+  },
+  "completionStatus": {
+    "status": "missing"
+  },
+  "objective": {
+    "status": "missing"
+  },
+  "role": {
+    "status": "missing"
+  },
+  "creditLine": {
+    "status": "missing"
+  },
+  "technologies": {
+    "status": "confirmed",
+    "value": ["Django", "React"]
+  },
+  "repositoryUrl": {
+    "status": "confirmed",
+    "value": "https://github.com/AliHassan-15/RouteRefuel"
+  },
+  "evidenceLabel": {
+    "status": "confirmed",
+    "value": "RouteRefuel"
+  },
+  "repositoryNote": {
+    "status": "missing"
+  },
+  "measuredOutcomes": {
+    "status": "missing"
+  },
+  "liveDemo": {
+    "status": "missing"
+  },
+  "aiUsageClass": "unspecified",
+  "caseStudy": {
+    "problem": { "status": "missing" },
+    "overview": {
+      "status": "confirmed",
+      "value": "Django + React logistics full-stack."
+    },
+    "architecture": { "status": "deferred", "deferralId": "Disc-05" },
+    "decisions": { "status": "deferred", "deferralId": "Disc-05" },
+    "tradeoffs": { "status": "deferred", "deferralId": "Disc-05" },
+    "lessons": { "status": "deferred", "deferralId": "Disc-05" },
+    "constraints": { "status": "missing" },
+    "rejectedApproaches": { "status": "missing" }
+  }
+}

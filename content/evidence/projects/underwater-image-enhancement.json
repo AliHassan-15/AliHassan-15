@@ -1,0 +1,89 @@
+{
+  "id": "underwater-image-enhancement",
+  "name": "Underwater Image Enhancement System",
+  "slug": "underwater-image-enhancement",
+  "tier": "flagship",
+  "selectedForEntrance": true,
+  "includeInEvidenceTable": true,
+  "includeInArchive": true,
+  "sortOrder": 30,
+  "subtitle": {
+    "status": "missing"
+  },
+  "typeLabels": {
+    "status": "confirmed",
+    "value": ["AI / Computer Vision", "Full-Stack AI Application"]
+  },
+  "completionStatus": {
+    "status": "confirmed",
+    "value": "Completed"
+  },
+  "objective": {
+    "status": "confirmed",
+    "value": "AI-powered enhancement of underwater photographs with a full pipeline from training to a production-style web interface."
+  },
+  "role": {
+    "status": "confirmed",
+    "value": "Sole Developer — dataset prep, model design, training, evaluation (PSNR/SSIM), Grad-CAM, FastAPI, React, end-to-end deploy architecture."
+  },
+  "creditLine": {
+    "status": "missing"
+  },
+  "technologies": {
+    "status": "confirmed",
+    "value": [
+      "AttentionResUNet",
+      "FastAPI",
+      "React",
+      "PSNR/SSIM evaluation",
+      "Grad-CAM"
+    ]
+  },
+  "repositoryUrl": {
+    "status": "confirmed",
+    "value": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System"
+  },
+  "evidenceLabel": {
+    "status": "confirmed",
+    "value": "Underwater Image Enhancement"
+  },
+  "repositoryNote": {
+    "status": "missing"
+  },
+  "measuredOutcomes": {
+    "status": "missing"
+  },
+  "liveDemo": {
+    "status": "missing"
+  },
+  "aiUsageClass": "essential",
+  "caseStudy": {
+    "problem": {
+      "status": "missing"
+    },
+    "overview": {
+      "status": "confirmed",
+      "value": "AI image enhancement platform restoring underwater photos via custom AttentionResUNet; full pipeline training → production-style deployment; FastAPI backend + React frontend."
+    },
+    "architecture": {
+      "status": "missing"
+    },
+    "decisions": {
+      "status": "confirmed",
+      "value": "Turning research into usable software — balance quality, inference speed, API, frontend, deployment as one product."
+    },
+    "tradeoffs": {
+      "status": "missing"
+    },
+    "lessons": {
+      "status": "confirmed",
+      "value": "Containerize inference early; improve GPU deploy; async for larger workloads; stronger experiment tracking; cleaner model serving separated from app logic."
+    },
+    "constraints": {
+      "status": "missing"
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  }
+}

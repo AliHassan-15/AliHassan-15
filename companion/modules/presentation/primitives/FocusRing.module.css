@@ -1,0 +1,9 @@
+.root {
+  display: inline-flex;
+  border-radius: var(--eos-radius-standard);
+}
+
+.root:focus-within {
+  outline: var(--eos-border-width-strong) solid var(--eos-color-focus);
+  outline-offset: var(--eos-space-1);
+}

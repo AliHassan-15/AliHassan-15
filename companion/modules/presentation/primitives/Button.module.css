@@ -1,0 +1,90 @@
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eos-space-2);
+  border-radius: var(--eos-radius-standard);
+  border-style: solid;
+  border-width: var(--eos-border-width-standard);
+  font-family: var(--eos-font-family-sans);
+  font-weight: var(--eos-font-weight-medium);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  line-height: var(--eos-line-height-tight);
+  cursor: pointer;
+  transition: var(--eos-transition-interactive);
+  text-decoration: none;
+}
+
+.root:disabled {
+  cursor: not-allowed;
+  opacity: var(--eos-opacity-disabled);
+}
+
+.root:active:not(:disabled) {
+  opacity: var(--eos-interactive-press-opacity);
+  transform: translateY(var(--eos-motion-press-nudge));
+}
+
+.sm {
+  min-height: var(--eos-size-control-sm);
+  padding-inline: var(--eos-space-3);
+  font-size: var(--eos-font-size-body-sm);
+}
+
+.md {
+  min-height: var(--eos-size-control-md);
+  padding-inline: var(--eos-space-4);
+  font-size: var(--eos-font-size-body);
+}
+
+.primary {
+  border-color: var(--eos-color-text-primary);
+  background: var(--eos-color-text-primary);
+  color: var(--eos-color-text-inverse);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--eos-color-text-secondary);
+  border-color: var(--eos-color-text-secondary);
+}
+
+.secondary {
+  border-color: var(--eos-color-border-strong);
+  background: var(--eos-color-surface);
+  color: var(--eos-color-text-primary);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--eos-color-surface-muted);
+}
+
+.ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--eos-color-text-primary);
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--eos-color-surface-muted);
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eos-space-2);
+}
+
+.contentLoading {
+  opacity: 0;
+}
+
+.loadingLabel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: inherit;
+  font-size: var(--eos-font-size-body);
+  letter-spacing: var(--eos-letter-spacing-wide);
+}

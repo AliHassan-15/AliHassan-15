@@ -1,0 +1,25 @@
+.main {
+  position: relative;
+  z-index: var(--eos-layer-content);
+  padding-block: var(--eos-space-7) var(--eos-space-9);
+}
+
+.padded {
+  padding: var(--eos-space-5);
+}
+
+.bareControl {
+  min-height: var(--eos-size-control-sm);
+  padding-inline: var(--eos-space-3);
+  border: var(--eos-border-width-hairline) solid var(--eos-color-border-strong);
+  border-radius: var(--eos-radius-standard);
+  background: var(--eos-color-surface);
+  color: var(--eos-color-text-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.srAnchor {
+  color: var(--eos-color-text-tertiary);
+  font-size: var(--eos-font-size-caption);
+}

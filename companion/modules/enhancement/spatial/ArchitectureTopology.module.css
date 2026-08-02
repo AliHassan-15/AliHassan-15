@@ -1,0 +1,74 @@
+.figure {
+  display: grid;
+  gap: var(--eos-space-4);
+  margin: 0;
+  padding-block: var(--eos-space-3);
+  max-width: var(--eos-measure-prose);
+}
+
+.caption {
+  margin: 0;
+  color: var(--eos-color-text-tertiary);
+}
+
+.list {
+  margin: 0;
+  padding-left: var(--eos-space-5);
+  display: grid;
+  gap: var(--eos-space-2);
+  color: var(--eos-color-text-primary);
+}
+
+.listItem {
+  padding-left: var(--eos-space-2);
+}
+
+/**
+ * Quiet orthographic hint — list remains the reading surface.
+ */
+.depth {
+  display: none;
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
+  padding-block: var(--eos-space-2);
+  opacity: 0.65;
+}
+
+html[data-eos-spatial="full"] .depth {
+  display: block;
+}
+
+.stack {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(42deg) rotateZ(-16deg);
+  min-height: calc(var(--eos-space-8) + var(--eos-space-6));
+  margin-inline: var(--eos-space-3);
+}
+
+.plane {
+  position: absolute;
+  inset-inline: 0;
+  display: flex;
+  align-items: center;
+  min-height: var(--eos-size-control-sm);
+  padding-inline: var(--eos-space-3);
+  border: var(--eos-border-width-hairline) solid var(--eos-color-border-subtle);
+  background: transparent;
+  color: var(--eos-color-text-secondary);
+  font-size: var(--eos-font-size-caption);
+  font-weight: var(--eos-font-weight-regular);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  transform: translateY(calc(var(--eos-topology-index) * var(--eos-space-4)))
+    translateZ(calc(var(--eos-topology-index) * -1 * var(--eos-space-2)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depth {
+    display: none;
+  }
+}
+
+html[data-eos-spatial="off"] .depth {
+  display: none;
+}

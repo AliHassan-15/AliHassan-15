@@ -1,0 +1,46 @@
+.article {
+  display: grid;
+  gap: var(--eos-space-8);
+  max-width: var(--eos-measure-prose);
+}
+
+.hero {
+  padding-top: var(--eos-space-4);
+}
+
+.title {
+  margin: 0;
+  color: var(--eos-color-text-secondary);
+  font-size: var(--eos-font-size-heading-3);
+  font-weight: var(--eos-font-weight-medium);
+  letter-spacing: var(--eos-letter-spacing-tight);
+  line-height: var(--eos-line-height-snug);
+}
+
+.canonical {
+  color: var(--eos-color-text-primary);
+  max-width: var(--eos-measure-prose);
+}
+
+.context,
+.opportunity {
+  margin: 0;
+  max-width: var(--eos-measure-prose);
+}
+
+.block {
+  padding-block: var(--eos-space-1);
+}
+
+.principles {
+  margin: 0;
+  padding-left: var(--eos-space-5);
+  display: grid;
+  gap: var(--eos-space-2);
+  list-style-position: outside;
+  color: var(--eos-color-text-primary);
+}
+
+.principles li {
+  padding-left: var(--eos-space-1);
+}

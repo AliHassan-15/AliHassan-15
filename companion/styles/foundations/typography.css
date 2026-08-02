@@ -1,0 +1,69 @@
+/**
+ * Typography roles — hierarchy only.
+ * No page-specific or marketing hero scales.
+ */
+
+:where(h1, h2, h3, h4, h5, h6) {
+  color: var(--eos-color-text-primary);
+  font-family: var(--eos-font-family-sans);
+  font-weight: var(--eos-font-weight-semibold);
+  letter-spacing: var(--eos-letter-spacing-tight);
+  line-height: var(--eos-line-height-tight);
+  text-wrap: balance;
+}
+
+:where(h1) {
+  font-size: var(--eos-font-size-heading-1);
+}
+
+:where(h2) {
+  font-size: var(--eos-font-size-heading-2);
+  line-height: var(--eos-line-height-snug);
+}
+
+:where(h3) {
+  font-size: var(--eos-font-size-heading-3);
+  line-height: var(--eos-line-height-snug);
+  font-weight: var(--eos-font-weight-medium);
+}
+
+:where(p) {
+  color: var(--eos-color-text-secondary);
+  font-size: var(--eos-font-size-body);
+  line-height: var(--eos-line-height-relaxed);
+  max-width: var(--eos-measure-prose);
+  text-wrap: pretty;
+}
+
+:where(small) {
+  color: var(--eos-color-text-tertiary);
+  font-size: var(--eos-font-size-caption);
+  line-height: var(--eos-line-height-normal);
+  letter-spacing: var(--eos-letter-spacing-wide);
+}
+
+.eos-type-display {
+  color: var(--eos-color-text-primary);
+  font-size: var(--eos-font-size-display);
+  font-weight: var(--eos-font-weight-semibold);
+  letter-spacing: var(--eos-letter-spacing-tight);
+  line-height: var(--eos-line-height-tight);
+}
+
+.eos-type-body {
+  color: var(--eos-color-text-secondary);
+  font-size: var(--eos-font-size-body);
+  line-height: var(--eos-line-height-relaxed);
+}
+
+.eos-type-meta {
+  color: var(--eos-color-text-tertiary);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+}
+
+.eos-type-code {
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-body-sm);
+  color: var(--eos-color-text-primary);
+}

@@ -1,0 +1,26 @@
+.root {
+  position: absolute;
+  left: var(--eos-space-4);
+  top: var(--eos-space-4);
+  z-index: var(--eos-layer-transient);
+  padding: var(--eos-space-2) var(--eos-space-4);
+  border-radius: var(--eos-radius-standard);
+  border: var(--eos-border-width-standard) solid var(--eos-color-border-strong);
+  background: var(--eos-color-surface);
+  color: var(--eos-color-text-primary);
+  font-size: var(--eos-font-size-body-sm);
+  font-weight: var(--eos-font-weight-medium);
+  text-decoration: none;
+  transform: translateY(calc(-1 * (100% + var(--eos-space-8))));
+  transition: var(--eos-transition-interactive);
+}
+
+.root:focus {
+  outline: none;
+}
+
+.root:focus-visible {
+  transform: translateY(0);
+  outline: var(--eos-border-width-strong) solid var(--eos-color-focus);
+  outline-offset: var(--eos-space-1);
+}

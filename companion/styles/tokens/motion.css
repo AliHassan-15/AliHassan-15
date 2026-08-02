@@ -1,0 +1,41 @@
+/**
+ * Motion token architecture + reduced-motion continuity.
+ * Reduced motion never removes understanding — it replaces movement with
+ * hierarchy and immediate presence (Documents 06 / 19).
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  [data-theme="light"],
+  [data-theme="dark"] {
+    --eos-duration-instant: 0ms;
+    --eos-duration-swift: 0ms;
+    --eos-duration-steady: 0ms;
+    --eos-duration-deliberate: 0ms;
+    --eos-transition-color: none;
+    --eos-transition-surface: none;
+    --eos-transition-opacity: none;
+    --eos-transition-transform: none;
+    --eos-transition-interactive: none;
+    --eos-transition-focus: none;
+    --eos-motion-reveal-distance: 0px;
+    --eos-motion-stagger: 0ms;
+    --eos-motion-press-nudge: 0px;
+  }
+}
+
+html[data-eos-motion="reduce"] {
+  --eos-duration-instant: 0ms;
+  --eos-duration-swift: 0ms;
+  --eos-duration-steady: 0ms;
+  --eos-duration-deliberate: 0ms;
+  --eos-transition-color: none;
+  --eos-transition-surface: none;
+  --eos-transition-opacity: none;
+  --eos-transition-transform: none;
+  --eos-transition-interactive: none;
+  --eos-transition-focus: none;
+  --eos-motion-reveal-distance: 0px;
+  --eos-motion-stagger: 0ms;
+  --eos-motion-press-nudge: 0px;
+}

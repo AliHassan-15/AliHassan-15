@@ -1,0 +1,4 @@
+::selection {
+  background-color: var(--eos-color-selection-bg);
+  color: var(--eos-color-selection-fg);
+}

@@ -1,0 +1,29 @@
+html {
+  background-color: var(--eos-color-canvas);
+  color: var(--eos-color-text-primary);
+}
+
+body {
+  position: relative;
+  z-index: var(--eos-layer-content);
+  min-height: 100vh;
+  background-color: var(--eos-color-canvas);
+  color: var(--eos-color-text-primary);
+  font-family: var(--eos-font-family-sans);
+  font-size: var(--eos-font-size-body);
+  font-weight: var(--eos-font-weight-regular);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--eos-font-family-mono);
+}

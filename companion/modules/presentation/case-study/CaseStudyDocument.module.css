@@ -1,0 +1,38 @@
+.document {
+  display: grid;
+  gap: var(--eos-space-7);
+  max-width: var(--eos-measure-prose);
+}
+
+.hero {
+  padding-top: var(--eos-space-4);
+}
+
+.meta {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: var(--eos-letter-spacing-wide);
+}
+
+.types {
+  color: var(--eos-color-text-secondary);
+  font-size: var(--eos-font-size-body);
+  font-weight: var(--eos-font-weight-regular);
+}
+
+.evidence {
+  display: grid;
+  gap: var(--eos-space-5);
+  padding-block: var(--eos-space-6);
+  border-top: var(--eos-border-width-hairline) solid
+    var(--eos-color-border-subtle);
+}
+
+.evidenceRow {
+  display: grid;
+  gap: var(--eos-space-2);
+}
+
+.sections {
+  display: grid;
+}

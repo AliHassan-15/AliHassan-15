@@ -1,0 +1,193 @@
+/**
+ * Semantic tokens — product meaning mapped onto primitives.
+ * Light and dark share one semantic vocabulary; only values remap.
+ * Consumers use these (or contextual aliases), never primitives.
+ */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --eos-color-canvas: var(--eos-primitive-neutral-25);
+  --eos-color-surface: var(--eos-primitive-neutral-0);
+  --eos-color-surface-elevated: var(--eos-primitive-neutral-0);
+  --eos-color-surface-muted: var(--eos-primitive-neutral-50);
+
+  --eos-color-text-primary: var(--eos-primitive-neutral-950);
+  --eos-color-text-secondary: var(--eos-primitive-neutral-600);
+  --eos-color-text-tertiary: var(--eos-primitive-neutral-500);
+  --eos-color-text-inverse: var(--eos-primitive-neutral-0);
+  --eos-color-text-disabled: var(--eos-primitive-neutral-400);
+
+  --eos-color-border-subtle: var(--eos-primitive-neutral-100);
+  --eos-color-border-strong: var(--eos-primitive-neutral-300);
+
+  --eos-color-focus: var(--eos-primitive-accent-500);
+  --eos-color-selection-bg: var(--eos-primitive-accent-100);
+  --eos-color-selection-fg: var(--eos-primitive-neutral-950);
+
+  --eos-color-accent: var(--eos-primitive-accent-500);
+  --eos-color-accent-subtle: var(--eos-primitive-accent-100);
+
+  --eos-color-status-success: var(--eos-primitive-success-500);
+  --eos-color-status-warn: var(--eos-primitive-warn-500);
+  --eos-color-status-fail: var(--eos-primitive-fail-500);
+  --eos-color-status-info: var(--eos-primitive-info-500);
+
+  --eos-color-overlay: rgb(
+    7 9 13 / var(--eos-primitive-opacity-overlay-subtle)
+  );
+
+  --eos-color-atmosphere-a: var(--eos-primitive-neutral-50);
+  --eos-color-atmosphere-b: var(--eos-primitive-neutral-100);
+
+  --eos-elevation-none: var(--eos-primitive-shadow-none);
+  --eos-elevation-subtle: var(--eos-primitive-shadow-subtle);
+  --eos-elevation-standard: var(--eos-primitive-shadow-standard);
+  --eos-elevation-emphasis: var(--eos-primitive-shadow-emphasis);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --eos-color-canvas: var(--eos-primitive-neutral-1000);
+  --eos-color-surface: var(--eos-primitive-neutral-950);
+  --eos-color-surface-elevated: var(--eos-primitive-neutral-900);
+  --eos-color-surface-muted: var(--eos-primitive-neutral-900);
+
+  --eos-color-text-primary: var(--eos-primitive-neutral-50);
+  --eos-color-text-secondary: var(--eos-primitive-neutral-400);
+  --eos-color-text-tertiary: var(--eos-primitive-neutral-500);
+  --eos-color-text-inverse: var(--eos-primitive-neutral-950);
+  --eos-color-text-disabled: var(--eos-primitive-neutral-600);
+
+  --eos-color-border-subtle: var(--eos-primitive-neutral-800);
+  --eos-color-border-strong: var(--eos-primitive-neutral-600);
+
+  --eos-color-focus: var(--eos-primitive-accent-300);
+  --eos-color-selection-bg: var(--eos-primitive-accent-700);
+  --eos-color-selection-fg: var(--eos-primitive-neutral-50);
+
+  --eos-color-accent: var(--eos-primitive-accent-300);
+  --eos-color-accent-subtle: var(--eos-primitive-accent-700);
+
+  --eos-color-status-success: var(--eos-primitive-success-400);
+  --eos-color-status-warn: var(--eos-primitive-warn-400);
+  --eos-color-status-fail: var(--eos-primitive-fail-400);
+  --eos-color-status-info: var(--eos-primitive-info-400);
+
+  --eos-color-overlay: rgb(
+    7 9 13 / var(--eos-primitive-opacity-overlay-strong)
+  );
+
+  --eos-color-atmosphere-a: var(--eos-primitive-neutral-900);
+  --eos-color-atmosphere-b: var(--eos-primitive-neutral-900);
+
+  --eos-elevation-none: var(--eos-primitive-shadow-none);
+  --eos-elevation-subtle: 0 1px 2px rgb(0 0 0 / 0.2);
+  --eos-elevation-standard: 0 2px 10px rgb(0 0 0 / 0.28);
+  --eos-elevation-emphasis: 0 10px 28px rgb(0 0 0 / 0.35);
+}
+
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+  /* Shared semantic non-color foundations (stable across themes) */
+  --eos-space-0: var(--eos-primitive-space-0);
+  --eos-space-1: var(--eos-primitive-space-1);
+  --eos-space-2: var(--eos-primitive-space-2);
+  --eos-space-3: var(--eos-primitive-space-3);
+  --eos-space-4: var(--eos-primitive-space-4);
+  --eos-space-5: var(--eos-primitive-space-5);
+  --eos-space-6: var(--eos-primitive-space-6);
+  --eos-space-7: var(--eos-primitive-space-7);
+  --eos-space-8: var(--eos-primitive-space-8);
+  --eos-space-9: var(--eos-primitive-space-9);
+
+  --eos-font-family-sans: var(--eos-primitive-font-sans);
+  --eos-font-family-mono: var(--eos-primitive-font-mono);
+
+  --eos-font-size-caption: var(--eos-primitive-font-size-100);
+  --eos-font-size-body-sm: var(--eos-primitive-font-size-200);
+  --eos-font-size-body: var(--eos-primitive-font-size-300);
+  --eos-font-size-body-lg: var(--eos-primitive-font-size-400);
+  --eos-font-size-heading-3: var(--eos-primitive-font-size-500);
+  --eos-font-size-heading-2: var(--eos-primitive-font-size-600);
+  --eos-font-size-heading-1: var(--eos-primitive-font-size-700);
+  --eos-font-size-display: var(--eos-primitive-font-size-800);
+
+  --eos-line-height-tight: var(--eos-primitive-line-height-tight);
+  --eos-line-height-snug: var(--eos-primitive-line-height-snug);
+  --eos-line-height-normal: var(--eos-primitive-line-height-normal);
+  --eos-line-height-relaxed: var(--eos-primitive-line-height-relaxed);
+
+  --eos-font-weight-regular: var(--eos-primitive-font-weight-regular);
+  --eos-font-weight-medium: var(--eos-primitive-font-weight-medium);
+  --eos-font-weight-semibold: var(--eos-primitive-font-weight-semibold);
+
+  --eos-letter-spacing-tight: var(--eos-primitive-letter-spacing-tight);
+  --eos-letter-spacing-normal: var(--eos-primitive-letter-spacing-normal);
+  --eos-letter-spacing-wide: var(--eos-primitive-letter-spacing-wide);
+
+  --eos-size-control-sm: var(--eos-primitive-size-control-sm);
+  --eos-size-control-md: var(--eos-primitive-size-control-md);
+  --eos-size-control-lg: var(--eos-primitive-size-control-lg);
+  --eos-size-icon-sm: var(--eos-primitive-size-icon-sm);
+  --eos-size-icon-md: var(--eos-primitive-size-icon-md);
+  --eos-size-icon-lg: var(--eos-primitive-size-icon-lg);
+  --eos-measure-narrow: var(--eos-primitive-measure-narrow);
+  --eos-measure-prose: var(--eos-primitive-measure-prose);
+  --eos-measure-wide: var(--eos-primitive-measure-wide);
+
+  --eos-radius-none: var(--eos-primitive-radius-none);
+  --eos-radius-subtle: var(--eos-primitive-radius-subtle);
+  --eos-radius-standard: var(--eos-primitive-radius-standard);
+  --eos-radius-emphasis: var(--eos-primitive-radius-emphasis);
+
+  --eos-border-width-none: var(--eos-primitive-border-none);
+  --eos-border-width-hairline: var(--eos-primitive-border-hairline);
+  --eos-border-width-standard: var(--eos-primitive-border-standard);
+  --eos-border-width-strong: var(--eos-primitive-border-strong);
+
+  --eos-opacity-disabled: var(--eos-primitive-opacity-disabled);
+  --eos-opacity-muted: var(--eos-primitive-opacity-muted);
+  --eos-opacity-overlay-subtle: var(--eos-primitive-opacity-overlay-subtle);
+  --eos-opacity-overlay-strong: var(--eos-primitive-opacity-overlay-strong);
+
+  --eos-layer-canvas: var(--eos-primitive-layer-canvas);
+  --eos-layer-content: var(--eos-primitive-layer-content);
+  --eos-layer-sticky: var(--eos-primitive-layer-sticky);
+  --eos-layer-overlay: var(--eos-primitive-layer-overlay);
+  --eos-layer-modal: var(--eos-primitive-layer-modal);
+  --eos-layer-transient: var(--eos-primitive-layer-transient);
+
+  --eos-duration-instant: var(--eos-primitive-duration-instant);
+  --eos-duration-swift: var(--eos-primitive-duration-swift);
+  --eos-duration-steady: var(--eos-primitive-duration-steady);
+  --eos-duration-deliberate: var(--eos-primitive-duration-deliberate);
+  --eos-ease-standard: var(--eos-primitive-ease-standard);
+  --eos-ease-emphasized: var(--eos-primitive-ease-emphasized);
+  --eos-ease-linear: var(--eos-primitive-ease-linear);
+  --eos-transition-color: color var(--eos-duration-steady)
+    var(--eos-ease-standard);
+  --eos-transition-surface:
+    background-color var(--eos-duration-steady) var(--eos-ease-standard),
+    border-color var(--eos-duration-steady) var(--eos-ease-standard),
+    color var(--eos-duration-steady) var(--eos-ease-standard);
+  --eos-transition-opacity: opacity var(--eos-duration-steady)
+    var(--eos-ease-standard);
+  --eos-transition-transform: transform var(--eos-duration-steady)
+    var(--eos-ease-emphasized);
+  --eos-transition-interactive:
+    color var(--eos-duration-swift) var(--eos-ease-standard),
+    background-color var(--eos-duration-swift) var(--eos-ease-standard),
+    border-color var(--eos-duration-swift) var(--eos-ease-standard),
+    opacity var(--eos-duration-swift) var(--eos-ease-standard),
+    transform var(--eos-duration-swift) var(--eos-ease-standard);
+  --eos-transition-focus:
+    outline-color var(--eos-duration-swift) var(--eos-ease-standard),
+    outline-offset var(--eos-duration-swift) var(--eos-ease-standard);
+  --eos-motion-reveal-distance: 0.25rem;
+  --eos-motion-stagger: 40ms;
+  --eos-motion-press-nudge: 0px;
+}

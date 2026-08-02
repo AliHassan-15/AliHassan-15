@@ -1,0 +1,85 @@
+{
+  "id": "routewise-eld",
+  "name": "RouteWise ELD",
+  "slug": "routewise-eld",
+  "tier": "flagship",
+  "selectedForEntrance": true,
+  "includeInEvidenceTable": true,
+  "includeInArchive": true,
+  "sortOrder": 20,
+  "subtitle": {
+    "status": "confirmed",
+    "value": "Electronic Logging Device Platform"
+  },
+  "typeLabels": {
+    "status": "confirmed",
+    "value": ["Enterprise SaaS", "Full-Stack Product"]
+  },
+  "completionStatus": {
+    "status": "confirmed",
+    "value": "Completed"
+  },
+  "objective": {
+    "status": "confirmed",
+    "value": "Full-stack ELD platform for U.S. trucking operational workflows."
+  },
+  "role": {
+    "status": "confirmed",
+    "value": "Primary Full-Stack Developer — backend architecture, Django backend, database design, business logic, APIs, frontend, and FE/BE integration."
+  },
+  "creditLine": {
+    "status": "missing"
+  },
+  "technologies": {
+    "status": "confirmed",
+    "value": ["Django"]
+  },
+  "repositoryUrl": {
+    "status": "confirmed",
+    "value": "https://github.com/AliHassan-15/RouteWise-ELD"
+  },
+  "evidenceLabel": {
+    "status": "confirmed",
+    "value": "RouteWise ELD"
+  },
+  "repositoryNote": {
+    "status": "missing"
+  },
+  "measuredOutcomes": {
+    "status": "missing"
+  },
+  "liveDemo": {
+    "status": "deferred",
+    "deferralId": "D-04"
+  },
+  "aiUsageClass": "conventional",
+  "caseStudy": {
+    "problem": {
+      "status": "missing"
+    },
+    "overview": {
+      "status": "confirmed",
+      "value": "Full-stack ELD platform around real U.S. trucking operational workflows; helps drivers/fleet operators manage compliance-related activities via modern web app; auth, operational workflows, backend, persistence, responsive frontend."
+    },
+    "architecture": {
+      "status": "missing"
+    },
+    "decisions": {
+      "status": "confirmed",
+      "value": "Domain understanding before code — HOS/compliance/driver/fleet/multi-role workflows; translate business process without tight coupling; schema, permissions, services that evolve."
+    },
+    "tradeoffs": {
+      "status": "missing"
+    },
+    "lessons": {
+      "status": "confirmed",
+      "value": "More modular domain-driven architecture earlier; API docs from start; stronger integration tests; more deploy automation; better monitoring/structured logging."
+    },
+    "constraints": {
+      "status": "missing"
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  }
+}

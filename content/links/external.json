@@ -1,0 +1,28 @@
+{
+  "links": [
+    {
+      "id": "github-profile",
+      "label": "GitHub",
+      "href": {
+        "status": "confirmed",
+        "value": "https://github.com/AliHassan-15"
+      }
+    },
+    {
+      "id": "email",
+      "label": "Email",
+      "href": {
+        "status": "deferred",
+        "deferralId": "D-01"
+      }
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "href": {
+        "status": "deferred",
+        "deferralId": "D-02"
+      }
+    }
+  ]
+}

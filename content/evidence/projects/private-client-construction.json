@@ -1,0 +1,70 @@
+{
+  "id": "private-client-construction",
+  "name": "Private client construction workflow app",
+  "slug": "private-client-construction",
+  "tier": "supporting",
+  "selectedForEntrance": false,
+  "includeInEvidenceTable": false,
+  "includeInArchive": true,
+  "sortOrder": 70,
+  "subtitle": {
+    "status": "missing"
+  },
+  "typeLabels": {
+    "status": "confirmed",
+    "value": ["Private client construction workflow"]
+  },
+  "completionStatus": {
+    "status": "deferred",
+    "deferralId": "D-03"
+  },
+  "objective": {
+    "status": "deferred",
+    "deferralId": "D-03"
+  },
+  "role": {
+    "status": "deferred",
+    "deferralId": "D-03"
+  },
+  "creditLine": {
+    "status": "missing"
+  },
+  "technologies": {
+    "status": "deferred",
+    "deferralId": "D-03"
+  },
+  "repositoryUrl": {
+    "status": "deferred",
+    "deferralId": "D-03"
+  },
+  "evidenceLabel": {
+    "status": "confirmed",
+    "value": "Private client construction workflow app"
+  },
+  "repositoryNote": {
+    "status": "deferred",
+    "deferralId": "D-03"
+  },
+  "measuredOutcomes": {
+    "status": "deferred",
+    "deferralId": "D-03"
+  },
+  "liveDemo": {
+    "status": "deferred",
+    "deferralId": "D-03"
+  },
+  "aiUsageClass": "conventional",
+  "caseStudy": {
+    "problem": { "status": "deferred", "deferralId": "D-03" },
+    "overview": {
+      "status": "confirmed",
+      "value": "Private client construction workflow app — title framing only; further detail Deferred."
+    },
+    "architecture": { "status": "deferred", "deferralId": "D-03" },
+    "decisions": { "status": "deferred", "deferralId": "D-03" },
+    "tradeoffs": { "status": "deferred", "deferralId": "D-03" },
+    "lessons": { "status": "deferred", "deferralId": "D-03" },
+    "constraints": { "status": "deferred", "deferralId": "D-03" },
+    "rejectedApproaches": { "status": "deferred", "deferralId": "D-03" }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "id": "codebase-rag",
+  "name": "Codebase RAG",
+  "slug": "codebase-rag",
+  "tier": "flagship",
+  "selectedForEntrance": true,
+  "includeInEvidenceTable": true,
+  "includeInArchive": true,
+  "sortOrder": 40,
+  "subtitle": {
+    "status": "confirmed",
+    "value": "AI Developer Assistant"
+  },
+  "typeLabels": {
+    "status": "confirmed",
+    "value": ["AI Developer Tool", "RAG"]
+  },
+  "completionStatus": {
+    "status": "confirmed",
+    "value": "Completed"
+  },
+  "objective": {
+    "status": "confirmed",
+    "value": "Natural-language questions over a codebase with answers grounded in source files."
+  },
+  "role": {
+    "status": "confirmed",
+    "value": "Primary Developer — ingestion, embeddings, retrieval, context management, LLM integration, end-to-end RAG architecture."
+  },
+  "creditLine": {
+    "status": "missing"
+  },
+  "technologies": {
+    "status": "confirmed",
+    "value": [
+      "Python",
+      "FastAPI",
+      "LangChain",
+      "OpenAI APIs",
+      "embedding models",
+      "vector database",
+      "RAG",
+      "Git",
+      "Docker"
+    ]
+  },
+  "repositoryUrl": {
+    "status": "confirmed",
+    "value": "https://github.com/AliHassan-15/Codebase-RAG"
+  },
+  "evidenceLabel": {
+    "status": "confirmed",
+    "value": "Codebase RAG"
+  },
+  "repositoryNote": {
+    "status": "missing"
+  },
+  "measuredOutcomes": {
+    "status": "missing"
+  },
+  "liveDemo": {
+    "status": "missing"
+  },
+  "aiUsageClass": "essential",
+  "caseStudy": {
+    "problem": {
+      "status": "missing"
+    },
+    "overview": {
+      "status": "confirmed",
+      "value": "Natural-language questions over a codebase with context-aware answers grounded in source files."
+    },
+    "architecture": {
+      "status": "confirmed",
+      "value": "Retrieval-first; parse/chunk/embed/index; semantic retrieval before generation; stages: ingestion, embedding, retrieval, prompt construction, response generation."
+    },
+    "decisions": {
+      "status": "missing"
+    },
+    "tradeoffs": {
+      "status": "missing"
+    },
+    "lessons": {
+      "status": "missing"
+    },
+    "constraints": {
+      "status": "missing"
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  }
+}

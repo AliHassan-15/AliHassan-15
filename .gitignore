@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Next.js
+companion/.next/
+companion/out/
+
+# Build / cache
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+!.env.example
+companion/.env
+companion/.env.*
+!companion/.env.example
+
+# Logs / debug
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Test / coverage
+coverage/
+
+# Vercel
+.vercel/
+.deploy-pack/
+
+# Colocated content pack (never commit)
+companion/content/

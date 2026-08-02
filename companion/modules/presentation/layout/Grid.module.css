@@ -1,0 +1,47 @@
+.root {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.columns-1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.columns-2,
+.columns-3 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 48rem) {
+  .columns-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .columns-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.gap-2 {
+  gap: var(--eos-space-2);
+}
+
+.gap-3 {
+  gap: var(--eos-space-3);
+}
+
+.gap-4 {
+  gap: var(--eos-space-4);
+}
+
+.gap-5 {
+  gap: var(--eos-space-5);
+}
+
+.gap-6 {
+  gap: var(--eos-space-6);
+}
+
+.gap-7 {
+  gap: var(--eos-space-7);
+}

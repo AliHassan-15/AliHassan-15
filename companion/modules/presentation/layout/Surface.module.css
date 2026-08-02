@@ -1,0 +1,26 @@
+.root {
+  background: var(--eos-color-surface);
+  color: var(--eos-color-text-primary);
+}
+
+.canvas {
+  background: var(--eos-color-canvas);
+}
+
+.default {
+  background: var(--eos-color-surface);
+}
+
+.muted {
+  background: var(--eos-color-surface-muted);
+}
+
+.elevated {
+  background: var(--eos-color-surface-elevated);
+  box-shadow: var(--eos-elevation-subtle);
+}
+
+.bordered {
+  border: var(--eos-border-width-hairline) solid var(--eos-color-border-subtle);
+  border-radius: var(--eos-radius-standard);
+}

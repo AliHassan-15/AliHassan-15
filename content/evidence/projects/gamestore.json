@@ -1,0 +1,64 @@
+{
+  "id": "gamestore",
+  "name": "GameStore",
+  "slug": "gamestore",
+  "tier": "supporting",
+  "selectedForEntrance": false,
+  "includeInEvidenceTable": true,
+  "includeInArchive": true,
+  "sortOrder": 80,
+  "subtitle": {
+    "status": "missing"
+  },
+  "typeLabels": {
+    "status": "confirmed",
+    "value": ["React, Node.js, Express, PostgreSQL e-commerce"]
+  },
+  "completionStatus": {
+    "status": "missing"
+  },
+  "objective": {
+    "status": "missing"
+  },
+  "role": {
+    "status": "missing"
+  },
+  "creditLine": {
+    "status": "missing"
+  },
+  "technologies": {
+    "status": "confirmed",
+    "value": ["React", "Node.js", "Express", "PostgreSQL"]
+  },
+  "repositoryUrl": {
+    "status": "confirmed",
+    "value": "https://github.com/AliHassan-15/GameStore-site"
+  },
+  "evidenceLabel": {
+    "status": "confirmed",
+    "value": "GameStore"
+  },
+  "repositoryNote": {
+    "status": "missing"
+  },
+  "measuredOutcomes": {
+    "status": "missing"
+  },
+  "liveDemo": {
+    "status": "missing"
+  },
+  "aiUsageClass": "conventional",
+  "caseStudy": {
+    "problem": { "status": "missing" },
+    "overview": {
+      "status": "confirmed",
+      "value": "React, Node.js, Express, PostgreSQL e-commerce."
+    },
+    "architecture": { "status": "deferred", "deferralId": "Disc-05" },
+    "decisions": { "status": "deferred", "deferralId": "Disc-05" },
+    "tradeoffs": { "status": "deferred", "deferralId": "Disc-05" },
+    "lessons": { "status": "deferred", "deferralId": "Disc-05" },
+    "constraints": { "status": "missing" },
+    "rejectedApproaches": { "status": "missing" }
+  }
+}

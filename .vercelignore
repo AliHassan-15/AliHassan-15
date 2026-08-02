@@ -1,0 +1,8 @@
+# Keep deploy uploads lean. Full repo is still available to the build when Root Directory is companion.
+.vercel
+**/node_modules
+**/.next
+**/out
+**/coverage
+**/*.tsbuildinfo
+.git

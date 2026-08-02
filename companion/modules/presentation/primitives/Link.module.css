@@ -1,0 +1,30 @@
+.root {
+  color: var(--eos-color-accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--eos-border-width-hairline);
+  text-underline-offset: var(--eos-space-1);
+  overflow-wrap: anywhere;
+  transition: var(--eos-transition-interactive);
+}
+
+.root:hover {
+  color: var(--eos-color-text-primary);
+}
+
+.root:active {
+  opacity: var(--eos-interactive-press-opacity);
+}
+
+.tone-primary {
+  color: var(--eos-color-accent);
+}
+
+.tone-secondary {
+  color: var(--eos-color-text-secondary);
+  text-decoration-color: transparent;
+}
+
+.tone-secondary:hover {
+  color: var(--eos-color-text-primary);
+  text-decoration-color: var(--eos-color-border-strong);
+}

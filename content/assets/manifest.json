@@ -1,0 +1,20 @@
+{
+  "assets": [
+    {
+      "id": "readme-mark-light",
+      "path": "readme/assets/svg/mark-light.svg",
+      "kind": "svg",
+      "alt": "",
+      "status": "confirmed",
+      "usedBy": ["readme"]
+    },
+    {
+      "id": "readme-mark-dark",
+      "path": "readme/assets/svg/mark-dark.svg",
+      "kind": "svg",
+      "alt": "",
+      "status": "confirmed",
+      "usedBy": ["readme"]
+    }
+  ]
+}

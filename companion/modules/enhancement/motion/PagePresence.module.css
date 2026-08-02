@@ -1,0 +1,28 @@
+.root {
+  animation-name: eos-page-settle;
+  animation-duration: var(--eos-duration-steady);
+  animation-timing-function: var(--eos-ease-standard);
+  animation-fill-mode: both;
+}
+
+@keyframes eos-page-settle {
+  from {
+    opacity: 0.94;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+html[data-eos-motion="reduce"] .root {
+  animation: none;
+  opacity: 1;
+}

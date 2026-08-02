@@ -1,0 +1,15 @@
+.root {
+  border: 0;
+  border-top-style: solid;
+  border-top-width: var(--eos-border-width-hairline);
+  margin: 0;
+  width: 100%;
+}
+
+.subtle {
+  border-top-color: var(--eos-color-border-subtle);
+}
+
+.strong {
+  border-top-color: var(--eos-color-border-strong);
+}

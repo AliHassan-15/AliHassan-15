@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.gap-1 {
+  gap: var(--eos-space-1);
+}
+
+.gap-2 {
+  gap: var(--eos-space-2);
+}
+
+.gap-3 {
+  gap: var(--eos-space-3);
+}
+
+.gap-4 {
+  gap: var(--eos-space-4);
+}
+
+.gap-5 {
+  gap: var(--eos-space-5);
+}

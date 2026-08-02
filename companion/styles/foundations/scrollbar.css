@@ -1,0 +1,24 @@
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--eos-color-border-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: var(--eos-space-2);
+  height: var(--eos-space-2);
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--eos-color-border-strong);
+  border-radius: var(--eos-radius-standard);
+  border: var(--eos-space-1) solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--eos-color-text-tertiary);
+}

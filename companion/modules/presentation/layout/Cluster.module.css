@@ -1,0 +1,44 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-baseline {
+  align-items: baseline;
+}
+
+.gap-1 {
+  gap: var(--eos-space-1);
+}
+
+.gap-2 {
+  gap: var(--eos-space-2);
+}
+
+.gap-3 {
+  gap: var(--eos-space-3);
+}
+
+.gap-4 {
+  gap: var(--eos-space-4);
+}
+
+.gap-5 {
+  gap: var(--eos-space-5);
+}
+
+.gap-6 {
+  gap: var(--eos-space-6);
+}

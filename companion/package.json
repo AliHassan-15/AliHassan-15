@@ -1,0 +1,39 @@
+{
+  "name": "eos-companion",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "tsx scripts/validate-content.ts && tsx scripts/generate-readme.ts check",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "content:validate": "tsx scripts/validate-content.ts",
+    "readme:generate": "tsx scripts/generate-readme.ts write",
+    "readme:check": "tsx scripts/generate-readme.ts check",
+    "verify": "tsx scripts/verify-release.ts",
+    "verify:release": "tsx scripts/verify-release.ts --require-build",
+    "audit:deps": "pnpm audit --prod --audit-level=high"
+  },
+  "dependencies": {
+    "next": "^15.5.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/node": "^22.17.2",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "eslint": "^9.33.0",
+    "eslint-config-next": "^15.5.2",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2",
+    "tsx": "^4.23.4",
+    "typescript": "^5.9.2"
+  }
+}
