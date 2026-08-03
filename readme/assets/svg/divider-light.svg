@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="28" viewBox="0 0 720 28" role="img" aria-labelledby="divider-title divider-desc">
+  <title id="divider-title">Engineering divider</title>
+  <desc id="divider-desc">Horizontal construction rule with registration end marks and calibration ticks.</desc>
+  <g fill="#2a2826">
+    <rect x="0" y="13" width="720" height="1"/>
+    <rect x="0" y="10" width="16" height="7"/>
+    <rect x="704" y="10" width="16" height="7"/>
+  </g>
+  <g fill="#524f4b" opacity="0.58">
+    <rect x="28" y="10" width="1" height="7"/>
+    <rect x="44" y="11" width="1" height="5"/>
+    <rect x="675" y="11" width="1" height="5"/>
+    <rect x="691" y="10" width="1" height="7"/>
+  </g>
+</svg>

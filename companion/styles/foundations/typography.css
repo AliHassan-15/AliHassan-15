@@ -1,30 +1,36 @@
 /**
- * Typography roles — hierarchy only.
- * No page-specific or marketing hero scales.
+ * Typography roles — luxury engineering publication.
  */
 
 :where(h1, h2, h3, h4, h5, h6) {
   color: var(--eos-color-text-primary);
   font-family: var(--eos-font-family-sans);
-  font-weight: var(--eos-font-weight-semibold);
+  font-weight: var(--eos-font-weight-medium);
   letter-spacing: var(--eos-letter-spacing-tight);
   line-height: var(--eos-line-height-tight);
   text-wrap: balance;
 }
 
 :where(h1) {
+  font-family: var(--eos-font-family-display);
   font-size: var(--eos-font-size-heading-1);
+  font-weight: var(--eos-font-weight-regular);
+  letter-spacing: var(--eos-letter-spacing-display);
 }
 
 :where(h2) {
+  font-family: var(--eos-font-family-display);
   font-size: var(--eos-font-size-heading-2);
+  font-weight: var(--eos-font-weight-regular);
   line-height: var(--eos-line-height-snug);
+  letter-spacing: var(--eos-letter-spacing-display-sm);
 }
 
 :where(h3) {
   font-size: var(--eos-font-size-heading-3);
   line-height: var(--eos-line-height-snug);
   font-weight: var(--eos-font-weight-medium);
+  letter-spacing: var(--eos-letter-spacing-display-xs);
 }
 
 :where(p) {
@@ -32,38 +38,16 @@
   font-size: var(--eos-font-size-body);
   line-height: var(--eos-line-height-relaxed);
   max-width: var(--eos-measure-prose);
+  letter-spacing: var(--eos-letter-spacing-normal);
   text-wrap: pretty;
+  orphans: 4;
+  widows: 4;
 }
 
 :where(small) {
   color: var(--eos-color-text-tertiary);
   font-size: var(--eos-font-size-caption);
-  line-height: var(--eos-line-height-normal);
+  line-height: 1.2;
   letter-spacing: var(--eos-letter-spacing-wide);
-}
-
-.eos-type-display {
-  color: var(--eos-color-text-primary);
-  font-size: var(--eos-font-size-display);
-  font-weight: var(--eos-font-weight-semibold);
-  letter-spacing: var(--eos-letter-spacing-tight);
-  line-height: var(--eos-line-height-tight);
-}
-
-.eos-type-body {
-  color: var(--eos-color-text-secondary);
-  font-size: var(--eos-font-size-body);
-  line-height: var(--eos-line-height-relaxed);
-}
-
-.eos-type-meta {
-  color: var(--eos-color-text-tertiary);
-  font-size: var(--eos-font-size-caption);
-  letter-spacing: var(--eos-letter-spacing-wide);
-}
-
-.eos-type-code {
-  font-family: var(--eos-font-family-mono);
-  font-size: var(--eos-font-size-body-sm);
-  color: var(--eos-color-text-primary);
+  font-variant-numeric: tabular-nums;
 }

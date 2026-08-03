@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getIdentity } from "@/modules/meaning";
 
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   const identity = getIdentity();
 
@@ -10,8 +12,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: identity.seniorSentence,
     start_url: "/",
     display: "standalone",
-    background_color: "#07090d",
-    theme_color: "#fafbfc",
+    background_color: "#070706",
+    theme_color: "#ebe9e6",
     lang: "en",
   };
 }

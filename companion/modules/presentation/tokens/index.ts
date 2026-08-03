@@ -43,6 +43,7 @@ export const space = {
 
 export const font = {
   familySans: "var(--eos-font-family-sans)",
+  familyDisplay: "var(--eos-font-family-display)",
   familyMono: "var(--eos-font-family-mono)",
   sizeCaption: "var(--eos-font-size-caption)",
   sizeBodySm: "var(--eos-font-size-body-sm)",

@@ -4,6 +4,6 @@
   font-family: var(--eos-font-family-sans);
   font-size: var(--eos-font-size-body-sm);
   font-weight: var(--eos-font-weight-medium);
-  line-height: var(--eos-line-height-normal);
-  letter-spacing: var(--eos-letter-spacing-normal);
+  line-height: 1.2;
+  letter-spacing: var(--eos-letter-spacing-ui);
 }

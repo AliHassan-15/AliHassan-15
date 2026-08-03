@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="32" viewBox="0 0 240 32" role="img" aria-labelledby="cal-title cal-desc">
+  <title id="cal-title">Calibration marks</title>
+  <desc id="cal-desc">Standalone registration corners and tick ruler.</desc>
+  <g fill="none" stroke="#3c3a37" stroke-width="0.8" stroke-linecap="square">
+    <path d="M8 8H24M8 8V24"/>
+    <path d="M216 8H232V24"/>
+    <path d="M8 24H24M232 24H216"/>
+  </g>
+  <path fill="none" stroke="#8a8680" stroke-width="0.65" stroke-linecap="square" d="M32 14V21M48 14V17.5M64 14V17.5M80 14V21M96 14V17.5M112 14V17.5M128 14V21M144 14V17.5M160 14V17.5M176 14V21M192 14V17.5M208 14V17.5"/>
+  <path fill="none" stroke="#524f4b" stroke-width="0.8" d="M32 22H208"/>
+</svg>

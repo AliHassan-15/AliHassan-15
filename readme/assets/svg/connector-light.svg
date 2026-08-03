@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="64" viewBox="0 0 24 64" role="img" aria-labelledby="connector-title connector-desc">
+  <title id="connector-title">Timeline connector</title>
+  <desc id="connector-desc">Vertical construction connector with end registration.</desc>
+  <g fill="#3c3a37">
+    <rect x="11" y="0" width="2" height="64"/>
+    <rect x="8" y="0" width="8" height="2"/>
+    <rect x="8" y="62" width="8" height="2"/>
+    <rect x="9" y="30" width="6" height="2"/>
+  </g>
+</svg>

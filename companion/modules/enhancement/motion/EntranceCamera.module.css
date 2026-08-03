@@ -1,0 +1,45 @@
+.root {
+  --eos-entrance-scroll: 0;
+  --eos-entrance-shift-y: 0rem;
+  --eos-entrance-shift-x: 0rem;
+  --eos-entrance-bg-y: 0rem;
+  --eos-entrance-mg-y: 0rem;
+  --eos-entrance-fg-y: 0rem;
+  --eos-entrance-bg-x: 0rem;
+  --eos-entrance-mg-x: 0rem;
+  --eos-entrance-fg-x: 0rem;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Perspective only — no rotation applied to planes */
+.root[data-eos-entrance-camera="full"] {
+  perspective: 3600px;
+  perspective-origin: 50% 26%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    --eos-entrance-shift-y: 0rem;
+    --eos-entrance-shift-x: 0rem;
+    --eos-entrance-bg-y: 0rem;
+    --eos-entrance-mg-y: 0rem;
+    --eos-entrance-fg-y: 0rem;
+    --eos-entrance-bg-x: 0rem;
+    --eos-entrance-mg-x: 0rem;
+    --eos-entrance-fg-x: 0rem;
+    perspective: none;
+  }
+}
+
+html[data-eos-motion="reduce"] .root {
+  --eos-entrance-shift-y: 0rem;
+  --eos-entrance-shift-x: 0rem;
+  --eos-entrance-bg-y: 0rem;
+  --eos-entrance-mg-y: 0rem;
+  --eos-entrance-fg-y: 0rem;
+  --eos-entrance-bg-x: 0rem;
+  --eos-entrance-mg-x: 0rem;
+  --eos-entrance-fg-x: 0rem;
+  perspective: none;
+}

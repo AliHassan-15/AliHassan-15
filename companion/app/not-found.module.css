@@ -1,9 +1,21 @@
 .page {
   padding-block: var(--eos-space-8);
   max-width: var(--eos-measure-prose);
+  display: grid;
+  gap: var(--eos-space-5);
 }
 
 .actions {
   display: grid;
   gap: var(--eos-space-3);
+  padding-top: var(--eos-space-5);
+  border-top: var(--eos-border-width-hairline) solid
+    var(--eos-color-border-subtle);
+}
+
+@media (max-width: 320px) {
+  .page {
+    padding-block: var(--eos-space-6);
+    gap: var(--eos-space-4);
+  }
 }

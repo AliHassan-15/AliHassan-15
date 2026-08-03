@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="168" viewBox="0 0 880 168" role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">EOS engineering hero field</title>
+  <desc id="hero-desc">Drafting plate with registration marks, calibration ticks, system route, and AH serial plate.</desc>
+  <g opacity="0.8">
+    <g fill="none" stroke="#3c3a37" stroke-width="0.8" stroke-linecap="square">
+    <path d="M24 32V20H36"/>
+    <path d="M844 20H856V32"/>
+    <path d="M24 136V148H36"/>
+    <path d="M844 148H856V136"/>
+  </g>
+    <rect x="24" y="20" width="832" height="128" fill="none" stroke="#8a8680" stroke-width="0.45" opacity="0.38"/>
+    <path fill="none" stroke="#8a8680" stroke-width="0.65" stroke-linecap="square" d="M40 20V27M56 20V23.5M72 20V23.5M88 20V23.5M104 20V23.5M120 20V27M136 20V23.5M152 20V23.5M168 20V23.5M184 20V23.5M200 20V27M216 20V23.5M232 20V23.5M248 20V23.5M264 20V23.5M280 20V27M296 20V23.5M312 20V23.5M328 20V23.5M344 20V23.5M360 20V27M376 20V23.5M392 20V23.5M408 20V23.5M424 20V23.5M440 20V27M456 20V23.5M472 20V23.5M488 20V23.5M504 20V23.5M520 20V27M536 20V23.5M552 20V23.5M568 20V23.5M584 20V23.5M600 20V27M616 20V23.5M632 20V23.5M648 20V23.5M664 20V23.5M680 20V27M696 20V23.5M712 20V23.5M728 20V23.5M744 20V23.5M760 20V27M776 20V23.5M792 20V23.5M808 20V23.5M824 20V23.5M840 20V27"/>
+    <path fill="none" stroke="#8a8680" stroke-width="0.65" stroke-linecap="square" d="M24 36H31M24 52H27.5M24 68H27.5M24 84H27.5M24 100H31M24 116H27.5M24 132H27.5"/>
+    <path fill="none" stroke="#8a8680" stroke-width="0.45" opacity="0.26" d="M200 20V148M440 20V148M680 20V148"/>
+    <path fill="none" stroke="#8a8680" stroke-width="0.45" opacity="0.22" d="M24 72H856M24 112H856"/>
+    <path fill="none" stroke="#524f4b" stroke-width="0.65" opacity="0.45" d="M72 132L160 96L280 104L400 68L560 60L760 40"/>
+    <g fill="#524f4b" opacity="0.45">
+      <circle cx="160" cy="96" r="1.35"/>
+      <circle cx="280" cy="104" r="1.35"/>
+      <circle cx="400" cy="68" r="1.35"/>
+      <circle cx="560" cy="60" r="1.35"/>
+    </g>
+    <path fill="none" stroke="#3c3a37" stroke-width="0.65" opacity="0.4" d="M432 84H448M440 76V92"/>
+  </g>
+  <g>
+    <rect x="748" y="52" width="72" height="72" fill="#e8e7e4" stroke="#2a2826" stroke-width="0.8"/>
+    <g fill="none" stroke="#2a2826" stroke-width="0.8" stroke-linecap="square">
+    <path d="M748 60V52H756"/>
+    <path d="M812 52H820V60"/>
+    <path d="M748 116V124H756"/>
+    <path d="M812 124H820V116"/>
+  </g>
+    <text x="784" y="94" fill="#2a2826" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="0.1em" text-anchor="middle">AH</text>
+  </g>
+  <text x="40" y="56" fill="#524f4b" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" letter-spacing="0.1em" text-anchor="start">EOS · ENGINEERING OPERATING SYSTEM</text>
+  <text x="40" y="148" fill="#8a8680" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="0.1em" text-anchor="start">DRAFTING FIELD · ENTRANCE SURFACE</text>
+</svg>

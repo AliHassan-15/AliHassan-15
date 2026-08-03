@@ -1,24 +1,266 @@
 /**
- * Global atmospheric foundation — extremely subtle value field only.
- * No particles, noise, WebGL, or animated backgrounds.
+ * Signature atmosphere — museum light + engineering field.
+ * Three independent light masses (far / mid / near) breathe on opacity only.
+ * Field is a subconscious drafting plate. Movement measured in minutes.
  */
 
+body {
+  background-color: var(--eos-color-canvas);
+  background-image:
+    radial-gradient(
+      118% 70% at 48% -22%,
+      var(--eos-color-glow) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      90% 80% at 52% 122%,
+      var(--eos-color-atmosphere-b) 0%,
+      transparent 56%
+    ),
+    radial-gradient(
+      100% 100% at 50% 48%,
+      transparent 48%,
+      var(--eos-color-atmosphere-c) 100%
+    ),
+    linear-gradient(
+      180deg,
+      var(--eos-color-atmosphere-a) 0%,
+      transparent 30%,
+      transparent 74%,
+      var(--eos-color-atmosphere-c) 100%
+    );
+  background-attachment: fixed;
+}
+
+/* Far light — distant ceiling wash */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--eos-layer-canvas);
+  pointer-events: none;
+  background: radial-gradient(
+    68% 48% at 44% -12%,
+    color-mix(in srgb, var(--eos-color-glow) 52%, transparent),
+    transparent 78%
+  );
+  opacity: 0.02;
+  animation: eos-light-far 840s var(--eos-ease-breathe) infinite alternate;
+}
+
+/* Mid light — reflected graphite plate */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: var(--eos-layer-canvas);
   pointer-events: none;
-  background:
-    radial-gradient(
-      120% 80% at 50% -10%,
-      var(--eos-color-atmosphere-b) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      90% 60% at 100% 100%,
-      var(--eos-color-atmosphere-a) 0%,
-      transparent 45%
-    );
-  opacity: 0.2;
+  background: radial-gradient(
+    76% 56% at 56% 108%,
+    var(--eos-color-atmosphere-b),
+    transparent 74%
+  );
+  opacity: 0.026;
+  animation: eos-light-mid 560s var(--eos-ease-breathe) infinite alternate;
+}
+
+/*
+ * Engineering field — drafting plate beyond the viewport.
+ * Discovered after tens of seconds. Never announced.
+ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -28%;
+  z-index: var(--eos-layer-canvas);
+  pointer-events: none;
+  background-color: var(--eos-color-text-tertiary);
+  opacity: 0.002;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20960%20720%22%20fill%3D%22none%22%3E%3Cg%20stroke%3D%22%23000%22%20stroke-linecap%3D%22square%22%3E%3Cpath%20stroke-width%3D%220.7%22%20opacity%3D%220.4%22%20d%3D%22M56%2056H904V664H56Z%22%2F%3E%3Cg%20stroke-width%3D%221%22%20opacity%3D%220.55%22%3E%3Cpath%20d%3D%22M56%2076V56H76%22%2F%3E%3Cpath%20d%3D%22M884%2056H904V76%22%2F%3E%3Cpath%20d%3D%22M56%20644V664H76%22%2F%3E%3Cpath%20d%3D%22M884%20664H904V644%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.5%22%20opacity%3D%220.35%22%3E%3Cpath%20d%3D%22M136%2056V68M216%2056V68M296%2056V72M376%2056V68M456%2056V68M536%2056V72M616%2056V68M696%2056V68M776%2056V72M856%2056V68%22%2F%3E%3Cpath%20d%3D%22M56%20136H68M56%20216H68M56%20296H72M56%20376H68M56%20456H68M56%20536H72M56%20616H68%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.4%22%20opacity%3D%220.22%22%3E%3Cpath%20d%3D%22M216%2056V664M456%2056V664M696%2056V664%22%2F%3E%3Cpath%20d%3D%22M56%20216H904M56%20456H904%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.55%22%20opacity%3D%220.42%22%3E%3Cpath%20d%3D%22M96%20600L220%20500L380%20520L560%20360L760%20340L880%20240%22%2F%3E%3Cpath%20stroke-dasharray%3D%223%2014%22%20d%3D%22M120%20120V300L260%20440%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.9%22%20opacity%3D%220.5%22%3E%3Ccircle%20cx%3D%22220%22%20cy%3D%22500%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%22380%22%20cy%3D%22520%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%22560%22%20cy%3D%22360%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%22760%22%20cy%3D%22340%22%20r%3D%222%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.5%22%20opacity%3D%220.38%22%3E%3Cpath%20d%3D%22M468%20360H492M480%20348V372%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.45%22%20opacity%3D%220.3%22%3E%3Cpath%20d%3D%22M40%2056V40H56%22%2F%3E%3Cpath%20d%3D%22M904%2040H920V56%22%2F%3E%3Cpath%20d%3D%22M40%20664V680H56%22%2F%3E%3Cpath%20d%3D%22M904%20680H920V664%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20960%20720%22%20fill%3D%22none%22%3E%3Cg%20stroke%3D%22%23000%22%20stroke-linecap%3D%22square%22%3E%3Cpath%20stroke-width%3D%220.7%22%20opacity%3D%220.4%22%20d%3D%22M56%2056H904V664H56Z%22%2F%3E%3Cg%20stroke-width%3D%221%22%20opacity%3D%220.55%22%3E%3Cpath%20d%3D%22M56%2076V56H76%22%2F%3E%3Cpath%20d%3D%22M884%2056H904V76%22%2F%3E%3Cpath%20d%3D%22M56%20644V664H76%22%2F%3E%3Cpath%20d%3D%22M884%20664H904V644%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.5%22%20opacity%3D%220.35%22%3E%3Cpath%20d%3D%22M136%2056V68M216%2056V68M296%2056V72M376%2056V68M456%2056V68M536%2056V72M616%2056V68M696%2056V68M776%2056V72M856%2056V68%22%2F%3E%3Cpath%20d%3D%22M56%20136H68M56%20216H68M56%20296H72M56%20376H68M56%20456H68M56%20536H72M56%20616H68%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.4%22%20opacity%3D%220.22%22%3E%3Cpath%20d%3D%22M216%2056V664M456%2056V664M696%2056V664%22%2F%3E%3Cpath%20d%3D%22M56%20216H904M56%20456H904%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.55%22%20opacity%3D%220.42%22%3E%3Cpath%20d%3D%22M96%20600L220%20500L380%20520L560%20360L760%20340L880%20240%22%2F%3E%3Cpath%20stroke-dasharray%3D%223%2014%22%20d%3D%22M120%20120V300L260%20440%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.9%22%20opacity%3D%220.5%22%3E%3Ccircle%20cx%3D%22220%22%20cy%3D%22500%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%22380%22%20cy%3D%22520%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%22560%22%20cy%3D%22360%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%22760%22%20cy%3D%22340%22%20r%3D%222%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.5%22%20opacity%3D%220.38%22%3E%3Cpath%20d%3D%22M468%20360H492M480%20348V372%22%2F%3E%3C%2Fg%3E%3Cg%20stroke-width%3D%220.45%22%20opacity%3D%220.3%22%3E%3Cpath%20d%3D%22M40%2056V40H56%22%2F%3E%3Cpath%20d%3D%22M904%2040H920V56%22%2F%3E%3Cpath%20d%3D%22M40%20664V680H56%22%2F%3E%3Cpath%20d%3D%22M904%20680H920V664%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  -webkit-mask-size: min(168rem, 280vw) min(126rem, 210vw);
+  mask-size: min(168rem, 280vw) min(126rem, 210vw);
+  -webkit-mask-position: 36% 30%;
+  mask-position: 36% 30%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: eos-field-drift 900s var(--eos-ease-breathe) infinite alternate;
+}
+
+[data-theme="dark"] body::after {
+  animation-name: eos-field-drift-dark;
+}
+
+/* Near light — soft presence in the reading plane (SiteShell) */
+.eosAtmosphereNear {
+  position: fixed;
+  inset: 18% 22% 28% 18%;
+  z-index: var(--eos-layer-canvas);
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--eos-color-glow) 36%, transparent),
+    transparent 100%
+  );
+  opacity: 0.012;
+  animation: eos-light-near 420s var(--eos-ease-breathe) infinite alternate;
+}
+
+/* Ambient grain — physical print tooth; discovered late, never announced */
+.eosAtmosphereGrain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--eos-layer-canvas);
+  pointer-events: none;
+  background-image: url("/identity/grain.png");
+  background-size: 42rem 28rem;
+  background-repeat: repeat;
+  opacity: 0.02;
+  mix-blend-mode: multiply;
+  animation: eos-grain-breathe 720s var(--eos-ease-breathe) infinite alternate;
+}
+
+[data-theme="dark"] .eosAtmosphereGrain {
+  mix-blend-mode: soft-light;
+  opacity: 0.028;
+}
+
+@keyframes eos-light-far {
+  from {
+    opacity: 0.016;
+  }
+
+  to {
+    opacity: 0.024;
+  }
+}
+
+@keyframes eos-light-mid {
+  from {
+    opacity: 0.02;
+  }
+
+  to {
+    opacity: 0.03;
+  }
+}
+
+@keyframes eos-light-near {
+  from {
+    opacity: 0.008;
+  }
+
+  to {
+    opacity: 0.015;
+  }
+}
+
+@keyframes eos-grain-breathe {
+  from {
+    opacity: 0.016;
+  }
+
+  to {
+    opacity: 0.024;
+  }
+}
+
+@keyframes eos-field-drift {
+  from {
+    opacity: 0.0016;
+  }
+
+  to {
+    opacity: 0.0024;
+  }
+}
+
+@keyframes eos-field-drift-dark {
+  from {
+    opacity: 0.0026;
+  }
+
+  to {
+    opacity: 0.0038;
+  }
+}
+
+/* Arrival silence — environment holds still */
+html[data-eos-arrival="silence"]::before,
+html[data-eos-arrival="silence"] body::before,
+html[data-eos-arrival="silence"] body::after,
+html[data-eos-arrival="silence"] .eosAtmosphereNear,
+html[data-eos-arrival="silence"] .eosAtmosphereGrain {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before,
+  body::before,
+  body::after,
+  .eosAtmosphereNear,
+  .eosAtmosphereGrain {
+    animation: none;
+  }
+
+  body::after {
+    -webkit-mask-position: 36% 30%;
+    mask-position: 36% 30%;
+  }
+}
+
+html[data-eos-motion="reduce"]::before,
+html[data-eos-motion="reduce"] body::before,
+html[data-eos-motion="reduce"] body::after,
+html[data-eos-motion="reduce"] .eosAtmosphereNear,
+html[data-eos-motion="reduce"] .eosAtmosphereGrain {
+  animation: none;
+}
+
+html[data-eos-motion="reduce"] body::after {
+  -webkit-mask-position: 36% 30%;
+  mask-position: 36% 30%;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  html::before,
+  body::before,
+  .eosAtmosphereNear,
+  .eosAtmosphereGrain {
+    animation: none;
+  }
+
+  html::before {
+    opacity: 0.018;
+  }
+
+  body::before {
+    opacity: 0.024;
+  }
+
+  .eosAtmosphereNear {
+    opacity: 0.01;
+  }
+
+  .eosAtmosphereGrain {
+    opacity: 0.018;
+  }
+
+  body::after {
+    animation: none;
+    opacity: 0.0018;
+    inset: -12%;
+    -webkit-mask-size: 100rem 75rem;
+    mask-size: 100rem 75rem;
+    -webkit-mask-position: 18% 8%;
+    mask-position: 18% 8%;
+  }
+
+  [data-theme="dark"] body::after {
+    opacity: 0.0032;
+  }
 }

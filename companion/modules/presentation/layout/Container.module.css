@@ -16,3 +16,31 @@
 .wide {
   max-width: var(--eos-measure-wide);
 }
+
+@media (max-width: 414px) {
+  .root {
+    padding-inline: max(var(--eos-space-4), env(safe-area-inset-left, 0px))
+      max(var(--eos-space-4), env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (min-width: 1280px) {
+  .root {
+    padding-inline: max(var(--eos-space-6), env(safe-area-inset-left, 0px))
+      max(var(--eos-space-6), env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (min-width: 1920px) {
+  .root {
+    padding-inline: max(var(--eos-space-7), env(safe-area-inset-left, 0px))
+      max(var(--eos-space-7), env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (min-width: 2560px) {
+  .root {
+    padding-inline: max(var(--eos-space-8), env(safe-area-inset-left, 0px))
+      max(var(--eos-space-8), env(safe-area-inset-right, 0px));
+  }
+}

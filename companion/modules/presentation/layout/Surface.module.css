@@ -17,10 +17,11 @@
 
 .elevated {
   background: var(--eos-color-surface-elevated);
-  box-shadow: var(--eos-elevation-subtle);
+  box-shadow: none;
+  border: var(--eos-border-width-hairline) solid var(--eos-color-border-subtle);
 }
 
 .bordered {
   border: var(--eos-border-width-hairline) solid var(--eos-color-border-subtle);
-  border-radius: var(--eos-radius-standard);
+  border-radius: var(--eos-radius-none);
 }

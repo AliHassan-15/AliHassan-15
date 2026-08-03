@@ -1,0 +1,34 @@
+.root {
+  display: contents;
+}
+
+/*
+ * Inhabited silence — typography already present.
+ * Settling is illumination, not appearance.
+ */
+.root[data-eos-entrance="silence"] :global([data-enter]) {
+  opacity: 0.985;
+}
+
+.root[data-eos-entrance="ready"] :global([data-enter]) {
+  opacity: 1;
+  transition: opacity 1.1s var(--eos-ease-breathe);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root[data-eos-entrance="silence"] :global([data-enter]),
+  .root[data-eos-entrance="ready"] :global([data-enter]) {
+    opacity: 1;
+    transition: none;
+  }
+}
+
+html[data-eos-motion="reduce"]
+  .root[data-eos-entrance="silence"]
+  :global([data-enter]),
+html[data-eos-motion="reduce"]
+  .root[data-eos-entrance="ready"]
+  :global([data-enter]) {
+  opacity: 1;
+  transition: none;
+}

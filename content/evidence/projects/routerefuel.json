@@ -8,27 +8,40 @@
   "includeInArchive": true,
   "sortOrder": 60,
   "subtitle": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Cost-optimal U.S. fuel-stop route planner"
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["Django + React logistics full-stack"]
+    "value": [
+      "Django + React logistics full-stack"
+    ]
   },
   "completionStatus": {
     "status": "missing"
   },
   "objective": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Given free-text U.S. start and finish locations, return a driving route, ordered fuel stops chosen for lowest reachable $/gal within a 500-mile tank, and total fuel cost at 10 MPG with an auditable per-stop breakdown."
   },
   "role": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Sole attributed developer (repository README)."
   },
   "creditLine": {
     "status": "missing"
   },
   "technologies": {
     "status": "confirmed",
-    "value": ["Django", "React"]
+    "value": [
+      "Django",
+      "Django REST Framework",
+      "React",
+      "Nominatim",
+      "OSRM",
+      "Leaflet",
+      "SQLite"
+    ]
   },
   "repositoryUrl": {
     "status": "confirmed",
@@ -39,26 +52,76 @@
     "value": "RouteRefuel"
   },
   "repositoryNote": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public repository with API contract (API_CONTRACT.md), OpenAPI/Swagger docs, and optional React + Leaflet UI."
   },
   "measuredOutcomes": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Repository design budget: cold request ≤ 3 external HTTP calls (2 geocode + 1 route); warm/cached often 0; per-station network calls always 0 (coordinates attached at ingest)."
   },
   "liveDemo": {
     "status": "missing"
   },
   "aiUsageClass": "unspecified",
   "caseStudy": {
-    "problem": { "status": "missing" },
+    "problem": {
+      "status": "confirmed",
+      "value": "Plan a U.S. driving route while choosing fuel stops for lowest reachable price per gallon within tank range, with auditable cost totals — not an opaque black-box recommendation."
+    },
     "overview": {
       "status": "confirmed",
-      "value": "Django + React logistics full-stack."
+      "value": "API-first logistics planner: Django REST backend geocodes endpoints (Nominatim), fetches drive geometry (OSRM), selects cheapest reachable corridor stops from an ingested fuel-price dataset, and returns polyline, ordered stops, and totals. Optional React + Leaflet UI for demos."
     },
-    "architecture": { "status": "deferred", "deferralId": "Disc-05" },
-    "decisions": { "status": "deferred", "deferralId": "Disc-05" },
-    "tradeoffs": { "status": "deferred", "deferralId": "Disc-05" },
-    "lessons": { "status": "deferred", "deferralId": "Disc-05" },
-    "constraints": { "status": "missing" },
-    "rejectedApproaches": { "status": "missing" }
+    "architecture": {
+      "status": "confirmed",
+      "value": "Client POST /api/v1/route/ { start, finish } → geocode (Nominatim, cached) → drive route (OSRM, cached) → load corridor stations from DB → pick cheapest reachable stop each tank window → return geometry + stops + totals + meta.external_calls. Vehicle constants: MAX_RANGE_MILES = 500, MPG = 10."
+    },
+    "decisions": {
+      "status": "confirmed",
+      "value": "API-first with an optional React UI: core value is the route/fuel planning contract (documented OpenAPI and API_CONTRACT.md), with the map UI treated as a demo surface rather than the source of truth."
+    },
+    "tradeoffs": {
+      "status": "confirmed",
+      "value": "External-call budget versus freshness: geocode and route results are cached so warm requests avoid repeat Nominatim/OSRM calls; station prices are loaded from the ingested CSV into SQLite so planning never issues per-station network calls."
+    },
+    "lessons": {
+      "status": "missing"
+    },
+    "constraints": {
+      "status": "confirmed",
+      "value": "Tank range fixed at 500 miles and fuel economy at 10 MPG (named constants). Free Nominatim and public OSRM demo endpoints; fuel prices from the assessment CSV loaded once into SQLite."
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "missing"
+    },
+    "decisionRecords": {
+      "status": "missing"
+    },
+    "validationMethodology": {
+      "status": "missing"
+    },
+    "technicalRisks": {
+      "status": "missing"
+    },
+    "failureModes": {
+      "status": "missing"
+    },
+    "knownLimitations": {
+      "status": "missing"
+    },
+    "futureDirections": {
+      "status": "missing"
+    },
+    "assets": {
+      "status": "missing"
+    }
+  },
+  "engineeringReferences": {
+    "status": "missing"
   }
 }

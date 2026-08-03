@@ -4,7 +4,7 @@
   top: var(--eos-space-4);
   z-index: var(--eos-layer-transient);
   padding: var(--eos-space-2) var(--eos-space-4);
-  border-radius: var(--eos-radius-standard);
+  border-radius: var(--eos-radius-none);
   border: var(--eos-border-width-standard) solid var(--eos-color-border-strong);
   background: var(--eos-color-surface);
   color: var(--eos-color-text-primary);

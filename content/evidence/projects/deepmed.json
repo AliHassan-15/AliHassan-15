@@ -13,7 +13,12 @@
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["AI Product", "Multi-Agent AI", "Full-Stack", "Healthcare"]
+    "value": [
+      "AI Product",
+      "Multi-Agent AI",
+      "Full-Stack",
+      "Healthcare"
+    ]
   },
   "completionStatus": {
     "status": "confirmed",
@@ -21,15 +26,42 @@
   },
   "objective": {
     "status": "confirmed",
-    "value": "Voice-first AI healthcare platform for patient intake before clinical consultation."
+    "value": "Structure patient intake before clinical consultation through a voice-first AI system that produces usable clinical context rather than free-form conversation alone.",
+    "confidence": "confirmed",
+    "provenance": [
+      {
+        "kind": "identity",
+        "label": "Identity Specification §18.3.1",
+        "path": "docs/product-bible/02-identity-specification.md",
+        "section": "18.3.1 DeepMed"
+      }
+    ]
   },
   "role": {
     "status": "confirmed",
-    "value": "Technical Lead (team of 3); ownership per approved credit line"
+    "value": "Technical Lead (team of 3); ownership per approved credit line",
+    "confidence": "confirmed",
+    "provenance": [
+      {
+        "kind": "identity",
+        "label": "Identity Specification §18.2–18.3.1",
+        "path": "docs/product-bible/02-identity-specification.md",
+        "section": "18.2 / 18.3.1"
+      }
+    ]
   },
   "creditLine": {
     "status": "confirmed",
-    "value": "Team project (3 members). I served as Technical Lead, leading the overall technical direction while owning the system architecture, backend engineering, database design, API development, LLM workflow orchestration, AI integration, technical documentation, and the majority of testing and quality assurance."
+    "value": "Team of three. Technical Lead for overall technical direction, with ownership of system architecture, backend engineering, database design, API development, LLM workflow orchestration, AI integration, technical documentation, and the majority of testing and quality assurance.",
+    "confidence": "confirmed",
+    "provenance": [
+      {
+        "kind": "identity",
+        "label": "Identity Specification §18.2 credit line",
+        "path": "docs/product-bible/02-identity-specification.md",
+        "section": "18.2"
+      }
+    ]
   },
   "technologies": {
     "status": "deferred",
@@ -37,7 +69,16 @@
   },
   "repositoryUrl": {
     "status": "confirmed",
-    "value": "https://github.com/AliHassan-15/DEEPMED-Testing"
+    "value": "https://github.com/AliHassan-15/DEEPMED-Testing",
+    "confidence": "confirmed",
+    "provenance": [
+      {
+        "kind": "repository",
+        "label": "DEEPMED-Testing public companion",
+        "href": "https://github.com/AliHassan-15/DEEPMED-Testing",
+        "repository": "AliHassan-15/DEEPMED-Testing"
+      }
+    ]
   },
   "evidenceLabel": {
     "status": "confirmed",
@@ -45,10 +86,44 @@
   },
   "repositoryNote": {
     "status": "confirmed",
-    "value": "Public evidence: testing and QA companion repository. Main source repository remains private due to university restrictions."
+    "value": "Public evidence is the testing and QA companion repository: Jest unit tests, Stryker mutation testing, committed coverage and mutation HTML reports, and the FYP mutation-testing report under docs/. The main source repository remains private under university restrictions.",
+    "confidence": "confirmed",
+    "provenance": [
+      {
+        "kind": "identity",
+        "label": "Identity §18.3.1 visibility",
+        "path": "docs/product-bible/02-identity-specification.md",
+        "section": "18.3.1"
+      },
+      {
+        "kind": "readme",
+        "label": "DEEPMED-Testing README",
+        "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/README.md",
+        "path": "README.md"
+      }
+    ]
   },
   "measuredOutcomes": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public testing deliverable (DEEPMED-Testing report, 2026-05-01): Jest baseline 89 tests with 97.88% line / 90.53% branch / 100% function coverage; baseline mutation score 70.15% (94 killed, 40 survived); after five boundary-focused mutant-killer tests, final mutation score 76.12% (102 killed, 32 survived). Reports committed under reports/.",
+    "confidence": "confirmed",
+    "provenance": [
+      {
+        "kind": "testing-report",
+        "label": "FYP mutation testing report — Tables 3, 5, 6",
+        "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+        "repository": "AliHassan-15/DEEPMED-Testing",
+        "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+        "section": "Tables 3, 5, 6",
+        "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+      },
+      {
+        "kind": "testing-report",
+        "label": "Committed HTML reports under reports/",
+        "href": "https://github.com/AliHassan-15/DEEPMED-Testing/tree/master/reports",
+        "path": "reports/"
+      }
+    ]
   },
   "liveDemo": {
     "status": "deferred",
@@ -57,32 +132,392 @@
   "aiUsageClass": "essential",
   "caseStudy": {
     "problem": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Clinical intake before consultation is unstructured. The system must collect symptoms and concerns, produce structured triage context and clinical summaries, and support scheduling — without letting conversational AI make authentication, records, or appointment mechanics unpredictable.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1 What it is / Hardest decisions",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        }
+      ]
     },
     "overview": {
       "status": "confirmed",
-      "value": "Voice-first AI healthcare platform improving patient intake before clinical consultation; coordinates AI-driven workflows for symptoms, concerns, structured triage, clinical summaries, appointment scheduling support; conversational AI + backend + intelligent workflows + modern web UI as production-oriented healthcare platform."
+      "value": "DeepMed is a voice-first healthcare intake system. It coordinates AI-driven workflows for symptoms, concerns, structured triage, clinical summaries, and appointment-support paths. Conversational AI, backend services, and a web interface are treated as one production-oriented system rather than isolated demos.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        }
+      ]
     },
     "architecture": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Deterministic backend work (auth, appointments, records, workflows) is kept separate from AI reasoning. Public testing evidence describes the clinical pipeline as: voice intake produces a structured patient report; sentiment/urgency extraction and severity scoring feed adaptive scheduling; appointment booking and pharmacy pickup follow. Severity scoring and LLM-output normalization are treated as safety-critical, threshold-driven modules.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1 Hardest decisions",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        },
+        {
+          "kind": "testing-report",
+          "label": "FYP report — Context & Objective pipeline",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "repository": "AliHassan-15/DEEPMED-Testing",
+          "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "section": "1. Context & Objective",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        }
+      ]
     },
     "decisions": {
       "status": "confirmed",
-      "value": "Separate deterministic backend logic from AI reasoning so auth/appointments/records/workflows stay predictable while conversational intelligence stays flexible; orchestrate AI agents without tight coupling for severity analysis / adaptive scheduling pipeline — clear responsibilities, controlled context, structured outputs."
+      "value": "Keep deterministic backend work (auth, appointments, records, workflows) separate from AI reasoning so operational paths stay predictable while conversational intelligence can change. Orchestrate agents with clear responsibilities, controlled context, and structured outputs instead of tightly coupling severity analysis and adaptive scheduling into a single opaque pipeline.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1 Hardest decisions",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        }
+      ]
     },
     "tradeoffs": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Predictable operational paths versus flexible conversational intelligence: auth, appointments, records, and workflows stay deterministic, while severity analysis and adaptive scheduling remain agent-orchestrated with controlled context and structured outputs rather than one tightly coupled opaque pipeline.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1 Hardest decisions",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        }
+      ]
     },
     "lessons": {
       "status": "confirmed",
-      "value": "Stronger evaluation pipelines; observability; structured tracing; prompt versioning; automated evaluation datasets; better fallbacks; formalize agent memory; clearer AI orchestration boundaries; isolate experimentation from production deployment."
+      "value": "Evaluation and observability should be first-class: structured tracing, prompt versioning, automated evaluation datasets, and explicit fallbacks. Agent memory and orchestration boundaries need to be formalized early. Experimentation must stay isolated from production deployment paths.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1 Do differently",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        }
+      ]
     },
     "constraints": {
       "status": "confirmed",
-      "value": "Main source repository private (university restrictions); public testing/QA companion repository."
+      "value": "Main source repository is private under university restrictions. Public proof is limited to the testing and QA companion repository.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1 Visibility",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        }
+      ]
     },
     "rejectedApproaches": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Rejected treating high line coverage as sufficient proof of clinical-logic quality (DEEPMED-Testing report): coverage showed computeSeverity fully executed while baseline mutation score remained 70.15%, proving interior happy-path tests miss boundary and arithmetic faults. Rejected tightly coupling severity analysis and adaptive scheduling into a single opaque AI pipeline (Identity §18.3.1) in favor of clear agent responsibilities and structured outputs.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "testing-report",
+          "label": "Coverage–mutation gap reflection",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "section": "3.4 / 4.4",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        },
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1 Hardest decisions",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        }
+      ]
     }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "confirmed",
+      "value": "Public testing archaeology (DEEPMED-Testing): FYP mutation-testing deliverable dated 2026-05-01 (report + committed docs/DOCX). Repository commit on 2026-05-01 adds reproducible baseline config and Ali Hassan report artifacts. Main product repository timeline remains private under university restrictions.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "commit",
+          "label": "docs: add report DOCX and baseline config",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/commit/52670b0f35640c9a4940f23ae1784de48ea6d156",
+          "repository": "AliHassan-15/DEEPMED-Testing",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        },
+        {
+          "kind": "commit",
+          "label": "test: add mutation reports and walkthrough script",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/commit/e2951cb3362b78fe0f945623e14631e992cfdc06",
+          "repository": "AliHassan-15/DEEPMED-Testing",
+          "commit": "e2951cb3362b78fe0f945623e14631e992cfdc06"
+        }
+      ]
+    },
+    "decisionRecords": {
+      "status": "confirmed",
+      "value": "ADR-01 (Identity §18.3.1): Separate deterministic backend logic (auth, appointments, records, workflows) from AI reasoning so operational paths stay predictable while conversational intelligence stays flexible. ADR-02 (Identity): Orchestrate severity analysis and adaptive scheduling as agents with clear responsibilities, controlled context, and structured outputs — not one tightly coupled opaque pipeline. ADR-03 (DEEPMED-Testing report): For mutation evaluation, target cohesive clinical modules computeSeverity.ts and sentiment/normalize.ts because they are safety-critical, threshold-driven, and fault-prone. ADR-04 (report): Prefer specification-driven and adversarial tests over coverage-driven happy-path suites for clinical boundaries.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        },
+        {
+          "kind": "testing-report",
+          "label": "Target module selection",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "section": "3.1",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        }
+      ]
+    },
+    "validationMethodology": {
+      "status": "confirmed",
+      "value": "Automated: Jest (ts-jest) unit tests; Istanbul/Jest coverage HTML; Stryker JS/TS mutation testing with baseline then final configs. Methodology: establish baseline coverage and mutation score; analyze survived mutants (ROR/LCR/AOR/etc.); add mutant-killer tests at exact boundaries and noisy LLM inputs; re-run mutation:final. Reproducibility: npm install; npm test; npm run test:coverage; npm run mutation:baseline; npm run mutation:final. Reports committed under reports/. Target modules copied under src/ for focused FYP testing.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "testing-report",
+          "label": "FYP mutation testing report Tasks 1–4",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "section": "2–6",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        },
+        {
+          "kind": "readme",
+          "label": "DEEPMED-Testing README run instructions",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/README.md",
+          "path": "README.md"
+        }
+      ]
+    },
+    "technicalRisks": {
+      "status": "confirmed",
+      "value": "Silent clinical mis-triage from off-by-one severity boundaries (>= vs >), arithmetic weight faults, and LLM-output normalization failures (trimmed strings, type coercion). High coverage can mask these because interior values exercise code without asserting exact contracts. CompileError mutants excluded from Stryker score computation.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "testing-report",
+          "label": "Why coverage is not enough",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "section": "1.1",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        }
+      ]
+    },
+    "failureModes": {
+      "status": "confirmed",
+      "value": "Documented mutant impacts (report): severity exactly 75 downgraded VERY_HIGH→HIGH; severity exactly 50 downgraded HIGH→MEDIUM; history weight *10→/10 collapsing risk contribution; numeric/boolean emotional indicators dropped; untrimmed sentiment strings failing allow-lists and coercing to neutral.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "testing-report",
+          "label": "Task 3 mutant semantic impact analyses",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "section": "Task 3",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        }
+      ]
+    },
+    "knownLimitations": {
+      "status": "confirmed",
+      "value": "Public evidence is the testing companion only — main FYP source remains private. Final mutation score 76.12% still leaves survived mutants (report notes remaining survivors largely in sentiment normalizer and non-deterministic/compile-error categories). Product wait-time/market figures are vision language only (Identity §18.1). Full product stack Deferred (D-11). Live demo Deferred (D-04).",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "testing-report",
+          "label": "Final reflection — remaining survivors",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "section": "6.3",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        },
+        {
+          "kind": "identity",
+          "label": "Identity §18.1 / D-11 / D-04",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.1"
+        }
+      ]
+    },
+    "futureDirections": {
+      "status": "confirmed",
+      "value": "Identity Do Differently: stronger evaluation pipelines; observability; structured tracing; prompt versioning; automated evaluation datasets; better fallbacks; formalize agent memory; clearer AI orchestration boundaries; isolate experimentation from production deployment. Testing reflection: always include boundary values, noisy real-world inputs, and exact business-contract assertions.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.1 Do differently",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.1"
+        },
+        {
+          "kind": "testing-report",
+          "label": "Final reflection testing guidance",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "path": "docs/FYP-DEEPMED-MutationTesting-Report.md",
+          "section": "6.3",
+          "commit": "52670b0f35640c9a4940f23ae1784de48ea6d156"
+        }
+      ]
+    },
+    "assets": {
+      "status": "confirmed",
+      "value": [
+        "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+        "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/Video-Walkthrough-Script.md",
+        "https://github.com/AliHassan-15/DEEPMED-Testing/tree/master/reports",
+        "https://github.com/AliHassan-15/DEEPMED-Testing/tree/master/tests"
+      ],
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "repository",
+          "label": "DEEPMED-Testing linked artifacts",
+          "href": "https://github.com/AliHassan-15/DEEPMED-Testing",
+          "repository": "AliHassan-15/DEEPMED-Testing"
+        }
+      ]
+    },
+    "decisionLineages": [
+      {
+        "id": "ADR-01",
+        "decision": {
+          "status": "confirmed",
+          "value": "Separate deterministic backend logic (auth, appointments, records, workflows) from AI reasoning.",
+          "confidence": "confirmed",
+          "provenance": [
+            {
+              "kind": "identity",
+              "label": "Identity §18.3.1",
+              "path": "docs/product-bible/02-identity-specification.md",
+              "section": "18.3.1"
+            }
+          ]
+        },
+        "why": {
+          "status": "confirmed",
+          "value": "Operational paths stay predictable while conversational intelligence stays flexible."
+        },
+        "alternativeRejected": {
+          "status": "missing"
+        },
+        "validation": {
+          "status": "confirmed",
+          "value": "Mutation testing targets clinical modules that remain deterministic contracts (computeSeverity, normalize) rather than opaque LLM coupling."
+        },
+        "futureDirection": {
+          "status": "missing"
+        },
+        "referencedAgainBy": [
+          {
+            "kind": "atlas-system",
+            "id": "ai-system-design",
+            "label": "AI System Design"
+          },
+          {
+            "kind": "atlas-decision",
+            "id": "dec-deterministic-ai-split",
+            "label": "Separate deterministic backend paths from AI reasoning"
+          }
+        ]
+      },
+      {
+        "id": "ADR-04",
+        "decision": {
+          "status": "confirmed",
+          "value": "Prefer specification-driven and adversarial tests over coverage-driven happy-path suites for clinical boundaries."
+        },
+        "why": {
+          "status": "confirmed",
+          "value": "High line coverage can mask off-by-one severity boundaries and LLM normalization faults."
+        },
+        "alternativeRejected": {
+          "status": "confirmed",
+          "value": "Coverage-driven happy-path suites as the primary quality signal."
+        },
+        "validation": {
+          "status": "confirmed",
+          "value": "Baseline mutation score 70.15% raised to 76.12% after boundary-focused mutant-killer tests (DEEPMED-Testing report)."
+        },
+        "futureDirection": {
+          "status": "missing"
+        },
+        "referencedAgainBy": [
+          {
+            "kind": "atlas-system",
+            "id": "testing-philosophy",
+            "label": "Testing Philosophy"
+          },
+          {
+            "kind": "atlas-validation",
+            "id": "val-jest-stryker",
+            "label": "Jest + Stryker mutation testing"
+          },
+          {
+            "kind": "atlas-glossary",
+            "id": "gloss-mutation-testing",
+            "label": "Mutation Testing"
+          }
+        ]
+      }
+    ]
+  },
+  "engineeringReferences": {
+    "status": "confirmed",
+    "value": [
+      {
+        "label": "DEEPMED-Testing repository",
+        "href": "https://github.com/AliHassan-15/DEEPMED-Testing",
+        "kind": "repository",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "FYP mutation testing report",
+        "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/FYP-DEEPMED-MutationTesting-Report.md",
+        "kind": "testing-report",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "Mutation walkthrough script",
+        "href": "https://github.com/AliHassan-15/DEEPMED-Testing/blob/master/docs/Video-Walkthrough-Script.md",
+        "kind": "presentation",
+        "confidence": "public-artifact"
+      },
+      {
+        "label": "Committed coverage and mutation reports",
+        "href": "https://github.com/AliHassan-15/DEEPMED-Testing/tree/master/reports",
+        "kind": "testing-report",
+        "confidence": "confirmed"
+      }
+    ]
   }
 }

@@ -16,8 +16,8 @@ jobs:
     timeout-minutes: 15
     env:
       NEXT_TELEMETRY_DISABLED: 1
-      # Honest non-localhost base for CI metadata / sitemap / robots artifacts
-      NEXT_PUBLIC_SITE_URL: https://eos-companion.vercel.app
+      NEXT_PUBLIC_SITE_URL: https://alihassan-15.github.io/AliHassan-15
+      NEXT_PUBLIC_BASE_PATH: /AliHassan-15
 
     steps:
       - name: Checkout

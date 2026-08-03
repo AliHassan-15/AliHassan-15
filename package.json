@@ -19,8 +19,7 @@
     "readme:check": "pnpm --filter eos-companion readme:check",
     "verify": "pnpm --filter eos-companion verify",
     "verify:release": "pnpm --filter eos-companion verify:release",
-    "audit:deps": "pnpm audit --prod --audit-level=high",
-    "deploy:production": "node scripts/deploy-production.mjs"
+    "audit:deps": "pnpm audit --prod --audit-level=high"
   },
   "pnpm": {
     "overrides": {

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Instrument_Serif, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
-import { getSiteUrl } from "@/lib/site-url";
+import { getSiteOrigin } from "@/lib/site-url";
 import { getIdentity } from "@/modules/meaning";
 import {
   getThemeBootstrapScript,
@@ -9,10 +9,17 @@ import {
 } from "@/modules/presentation/theme";
 import "@/styles/global.css";
 
-const sans = IBM_Plex_Sans({
+const sans = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--eos-font-sans",
+  display: "swap",
+});
+
+const display = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--eos-font-display",
   display: "swap",
 });
 
@@ -23,11 +30,11 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const siteUrl = getSiteUrl();
+const siteOrigin = getSiteOrigin();
 const identity = getIdentity();
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteOrigin),
   title: {
     default: `${identity.name} — ${identity.title}`,
     template: `%s · ${identity.name}`,
@@ -67,8 +74,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafbfc" },
-    { media: "(prefers-color-scheme: dark)", color: "#07090d" },
+    { media: "(prefers-color-scheme: light)", color: "#e8e7e4" },
+    { media: "(prefers-color-scheme: dark)", color: "#060605" },
   ],
   colorScheme: "dark light",
   viewportFit: "cover",
@@ -82,7 +89,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${mono.variable}`}
+      className={`${sans.variable} ${display.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <head>

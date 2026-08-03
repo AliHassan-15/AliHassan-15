@@ -26,9 +26,15 @@ Components, routes, and README **do not** own truth.
 
 Evidence fields are discriminated unions:
 
-- `confirmed` → value required; may be shown
+- `confirmed` → value required; may be shown; optional `confidence` + `provenance[]`
 - `missing` → omitted; never invented
 - `deferred` → omitted; optional `deferralId`
+
+Confidence grades (never silently upgraded): `confirmed` | `readme-attributed` | `public-artifact` | `deferred` | `missing`.
+
+Provenance sources may cite repository, commit, file path, document, notebook, README section, testing report, or Identity path. Case studies disclose provenance via a native “Evidence provenance” expander.
+
+Cross-project patterns live in `content/evidence/engineering-patterns.json` (each pattern requires ≥2 `projectIds`).
 
 Presentation helpers refuse silent upgrades. Attempting to require a non-confirmed field throws.
 
@@ -37,11 +43,12 @@ Presentation helpers refuse silent upgrades. Attempting to require a non-confirm
 ## Add a project (content only)
 
 1. Create `content/evidence/projects/<id>.json` matching `projectSchema`
-2. Append `<id>` to `content/evidence/catalog.json`
-3. Run `pnpm content:validate`
-4. Run `pnpm readme:generate` if the project is entrance/evidence-visible
+2. Include `engineeringCaseFile` (timeline, decisionRecords, validationMethodology, technicalRisks, failureModes, knownLimitations, futureDirections, assets) — Confirmed only with provenance; otherwise Missing/Deferred
+3. Append `<id>` to `content/evidence/catalog.json`
+4. Run `pnpm content:validate`
+5. Run `pnpm readme:generate` if the project is entrance/evidence-visible
 
-No React, route, or component edits required for catalog expansion.
+No React, route, or component edits required for catalog expansion. Engineering case-file fields render on existing case-study surfaces via EvidenceField (no new visual system).
 
 ---
 

@@ -14,6 +14,9 @@ export function SiteShell({ children }: SiteShellProps) {
   return (
     <>
       <SkipLink href="#main" />
+      {/* Near museum light — opacity breathe only; paired with html/body far+mid */}
+      <div className="eosAtmosphereNear" aria-hidden="true" />
+      <div className="eosAtmosphereGrain" aria-hidden="true" />
       <Container as="div" width="wide" className={styles.shell}>
         <SiteHeader />
         <main id="main" className={styles.main} tabIndex={-1}>

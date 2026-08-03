@@ -77,7 +77,7 @@ Absolute imports are required for application code. Relative `../` climbs across
 
 - Template: `companion/.env.example`
 - Local file: `companion/.env.local` (gitignored)
-- Production: `NEXT_PUBLIC_SITE_URL` must be the public Companion origin (no trailing slash)
+- Production: `NEXT_PUBLIC_SITE_URL` must be the public Companion URL (no trailing slash); set `NEXT_PUBLIC_BASE_PATH=/AliHassan-15` for GitHub Pages
 
 ---
 

@@ -24,15 +24,21 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
           fontFamily: "system-ui, sans-serif",
           lineHeight: 1.5,
           padding: "2rem",
-          background: "#fafbfc",
-          color: "#181c24",
+          background: "#e8e7e4",
+          color: "#0b0a09",
         }}
       >
         <main>
-          <h1 style={{ fontSize: "1.5rem", fontWeight: 600 }}>
+          <h1
+            style={{
+              fontSize: "1.75rem",
+              fontWeight: 400,
+              letterSpacing: "-0.03em",
+            }}
+          >
             Something went wrong
           </h1>
-          <p style={{ color: "#525b6a", maxWidth: "36rem" }}>
+          <p style={{ color: "#3c3a37", maxWidth: "36rem" }}>
             The Companion failed to load. You can try again. Silence and flat
             presentation remain the complete product when enhancements fail.
           </p>

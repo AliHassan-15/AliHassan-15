@@ -1,0 +1,213 @@
+.shell {
+  display: grid;
+  gap: var(--eos-space-6);
+  position: relative;
+  isolation: isolate;
+}
+
+@media (min-width: 1080px) {
+  .shell {
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+    gap: var(--eos-space-7);
+    align-items: start;
+  }
+}
+
+.nav {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: var(--eos-space-3);
+  padding-block: var(--eos-space-2);
+}
+
+@media (min-width: 1080px) {
+  .nav {
+    position: sticky;
+    top: var(--eos-space-6);
+  }
+}
+
+.navCaption {
+  margin: 0;
+  font-family: var(--eos-font-family-mono);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  font-variant-numeric: tabular-nums;
+}
+
+.navGroup {
+  margin: 0;
+}
+
+.navList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--eos-space-1);
+}
+
+.navItem {
+  margin: 0;
+}
+
+.navControl {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--eos-space-3);
+  width: 100%;
+  margin: 0;
+  padding-block: var(--eos-space-2);
+  padding-inline: var(--eos-space-2) var(--eos-space-3);
+  border: 0;
+  border-inline-start: var(--eos-border-width-hairline) solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: var(--eos-transition-surface);
+}
+
+.navControl[aria-checked="true"] {
+  border-inline-start-color: var(--eos-color-border-strong);
+}
+
+.navControl:hover {
+  color: var(--eos-color-text-secondary);
+}
+
+.navControl:focus {
+  outline: none;
+}
+
+.navControl:focus-visible {
+  outline: var(--eos-border-width-strong) solid var(--eos-color-focus);
+  outline-offset: 2px;
+}
+
+.navMark {
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-caption);
+  color: var(--eos-color-text-tertiary);
+  opacity: 0.55;
+}
+
+.navControl[aria-checked="true"] .navMark {
+  opacity: 0.9;
+  color: var(--eos-color-text-secondary);
+}
+
+.live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.stage {
+  min-width: 0;
+}
+
+/* Active room emphasis — museum gallery, not card theater */
+.shell[data-eos-walkthrough] :global([data-eos-walkthrough-room-target]) {
+  opacity: 0.96;
+  transform: scale(0.995);
+  transform-origin: top left;
+  transition:
+    opacity 220ms var(--eos-ease-emphasized),
+    transform 220ms var(--eos-ease-emphasized);
+}
+
+.shell[data-eos-walkthrough-room="objective"]
+  :global([data-eos-walkthrough-room-target="objective"]),
+.shell[data-eos-walkthrough-room="architecture"]
+  :global([data-eos-walkthrough-room-target="architecture"]),
+.shell[data-eos-walkthrough-room="decisions"]
+  :global([data-eos-walkthrough-room-target="decisions"]),
+.shell[data-eos-walkthrough-room="validation"]
+  :global([data-eos-walkthrough-room-target="validation"]),
+.shell[data-eos-walkthrough-room="failures"]
+  :global([data-eos-walkthrough-room-target="failures"]),
+.shell[data-eos-walkthrough-room="evidence"]
+  :global([data-eos-walkthrough-room-target="evidence"]),
+.shell[data-eos-walkthrough-room="references"]
+  :global([data-eos-walkthrough-room-target="references"]) {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.shell[data-eos-walkthrough-motion="full"]
+  :global([data-eos-walkthrough-room-target][data-eos-room-active="true"]) {
+  animation: eos-walkthrough-drift 54s var(--eos-ease-breathe) infinite
+    alternate;
+}
+
+@keyframes eos-walkthrough-drift {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: 0 10px;
+  }
+}
+
+@media (max-width: 1079px) {
+  .nav {
+    border-bottom: var(--eos-border-width-hairline) solid
+      var(--eos-color-border-subtle);
+    padding-bottom: var(--eos-space-4);
+    margin-bottom: var(--eos-space-2);
+  }
+
+  .navList {
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    overflow-x: auto;
+    gap: var(--eos-space-2);
+  }
+
+  .navControl {
+    border-inline-start: 0;
+    border-bottom: var(--eos-border-width-hairline) solid transparent;
+    white-space: nowrap;
+  }
+
+  .navControl[aria-checked="true"] {
+    border-bottom-color: var(--eos-color-border-strong);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell[data-eos-walkthrough] :global([data-eos-walkthrough-room-target]) {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .shell[data-eos-walkthrough-motion="full"]
+    :global([data-eos-walkthrough-room-target][data-eos-room-active="true"]) {
+    animation: none;
+  }
+}
+
+html[data-eos-motion="reduce"]
+  .shell[data-eos-walkthrough]
+  :global([data-eos-walkthrough-room-target]) {
+  transition: none;
+  transform: none;
+  opacity: 1;
+}
+
+html[data-eos-motion="reduce"]
+  .shell[data-eos-walkthrough-motion="full"]
+  :global([data-eos-walkthrough-room-target][data-eos-room-active="true"]) {
+  animation: none;
+}

@@ -31,29 +31,29 @@ function selectedWorkBlock(project: ProjectContent): string {
   const title = projectDisplayTitle(project);
   const heading = href ? `### [${title}](${href})` : `### ${title}`;
 
-  const lines: string[] = [heading, ""];
+  const parts: string[] = [heading];
 
   const objective = presentEvidenceString(project.objective);
   if (objective.kind === "show") {
-    lines.push(objective.text, "");
+    parts.push(objective.text);
   }
 
   const credit = presentEvidenceString(project.creditLine);
   if (credit.kind === "show") {
-    lines.push(credit.text, "");
+    parts.push(credit.text);
   } else {
     const role = presentEvidenceString(project.role);
     if (role.kind === "show") {
-      lines.push(role.text, "");
+      parts.push(role.text);
     }
   }
 
   const note = presentEvidenceString(project.repositoryNote);
   if (note.kind === "show") {
-    lines.push(note.text, "");
+    parts.push(note.text);
   }
 
-  return lines.join("\n").trimEnd();
+  return parts.join("\n\n");
 }
 
 function evidenceRows(projects: ProjectContent[]): string {
@@ -74,6 +74,27 @@ function evidenceRows(projects: ProjectContent[]): string {
   return rows.join("\n");
 }
 
+function dualThemeImg(baseName: string, width: number, height: number): string {
+  return [
+    "<p>",
+    `  <img src="readme/assets/svg/${baseName}-light.svg" alt="" width="${width}" height="${height}" class="gh-light-mode-only" />`,
+    `  <img src="readme/assets/svg/${baseName}-dark.svg" alt="" width="${width}" height="${height}" class="gh-dark-mode-only" />`,
+    "</p>",
+  ].join("\n");
+}
+
+function sectionBreak(): string {
+  return dualThemeImg("section-divider", 720, 16);
+}
+
+function section(title: string, headerSlug: string, body: string): string {
+  return `## ${title}
+
+${dualThemeImg(`header-${headerSlug}`, 720, 36)}
+
+${body.trim()}`;
+}
+
 export function renderReadme(): string {
   validateAllContent();
   const identity = getIdentity();
@@ -82,65 +103,108 @@ export function renderReadme(): string {
 
   const selectedBlocks = selected.map(selectedWorkBlock).join("\n\n");
 
-  return `# ${identity.name}
+  const companionCta = identity.links.companionDestination
+    ? `**[Open Engineering Companion](${identity.links.companionDestination})**`
+    : "A public destination deployment publishes when it meets the product’s Definition of Done.";
+
+  const contactLinks = [
+    `[GitHub](${identity.links.githubProfile})`,
+    identity.links.companionDestination
+      ? `[Companion](${identity.links.companionDestination})`
+      : null,
+  ]
+    .filter((link): link is string => link !== null)
+    .join(" · ");
+
+  const identityBlock = `# ${identity.name}
 
 **${identity.title}**
 
 ${identity.canonicalSentence}
 
-<p>
-  <img src="readme/assets/svg/mark-light.svg" alt="" width="720" height="48" class="gh-light-mode-only" />
-  <img src="readme/assets/svg/mark-dark.svg" alt="" width="720" height="48" class="gh-dark-mode-only" />
-</p>
+${dualThemeImg("hero", 720, 137)}
+
+${dualThemeImg("divider", 720, 28)}
 
 ${identity.geography} · ${identity.educationShort}
 
+${dualThemeImg("plate-location", 360, 52)}
+
 ${identity.opportunity}
 
----
+${dualThemeImg("plate-availability", 360, 52)}`;
 
-## Engineering
-
-${identity.philosophyEntrance}
+  const philosophy = section(
+    "Philosophy",
+    "philosophy",
+    `${identity.philosophyEntrance}
 
 ${principlesList(identity.principles)}
 
----
+${dualThemeImg("plate-quote", 720, 72)}`,
+  );
 
-## Selected work
+  const focus = section(
+    "Engineering focus",
+    "focus",
+    `${dualThemeImg("plate-focus", 360, 52)}
 
-Confirmed public work only. Measured outcomes are not claimed here.
+${identity.seniorSentence}`,
+  );
 
-${selectedBlocks}
+  const selectedWork = section(
+    "Selected work",
+    "selected",
+    `Confirmed public work only. Measured outcomes are not claimed without evidence.
 
----
+${selectedBlocks}`,
+  );
 
-## Evidence
-
-Public repositories used as proof channels:
+  const evidenceSection = section(
+    "Evidence",
+    "evidence",
+    `Public repositories used as proof channels:
 
 | Project | Repository |
 |---------|------------|
-${evidenceRows(evidence)}
+${evidenceRows(evidence)}`,
+  );
 
----
+  const companion = section(
+    "Engineering Companion",
+    "companion",
+    `This README is the lobby.
 
-## Companion
+The Companion is the engineering environment — Atlas, Journey, Architecture, Demonstrations, Evidence, and Case Studies as one continuous product.
 
-This README is the entrance.
+${dualThemeImg("divider", 720, 28)}
 
-Deeper architecture, decisions, trade-offs, and systems thinking belong in the **Companion Experience** — the destination of EOS.
+${companionCta}
 
-${
-  identity.links.companionDestination
-    ? `Open the Companion: [${identity.links.companionDestination}](${identity.links.companionDestination})`
-    : "A public destination deployment publishes when it meets the product’s Definition of Done."
-}
+Local shell: [\`companion/\`](./companion)`,
+  );
 
-The Companion L1 shell also lives in [\`companion/\`](./companion). Run it locally with \`pnpm dev\` from the repository root.
+  const contact = section(
+    "Contact",
+    "contact",
+    `${dualThemeImg("plate-contact", 360, 52)}
 
-Curiosity belongs here. Proof depth belongs there.
-`;
+${contactLinks}
+
+${dualThemeImg("footer-plate", 720, 40)}
+
+${dualThemeImg("plate-signature", 280, 56)}`,
+  );
+
+  return [
+    identityBlock,
+    philosophy,
+    focus,
+    selectedWork,
+    evidenceSection,
+    companion,
+    contact,
+  ].join(`\n\n${sectionBreak()}\n\n`);
 }
 
 export function writeReadme(): string {
@@ -155,12 +219,6 @@ export function checkReadme(): void {
   const readmePath = path.join(repoRoot(), "README.md");
 
   if (!fs.existsSync(readmePath)) {
-    if (process.env.VERCEL) {
-      console.log(
-        "Skipping README sync check on Vercel — README lives at the monorepo root.",
-      );
-      return;
-    }
     throw new Error(`README.md not found at ${readmePath}`);
   }
 

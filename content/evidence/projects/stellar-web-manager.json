@@ -13,7 +13,10 @@
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["Full-Stack SaaS", "AI Productivity Platform"]
+    "value": [
+      "Full-Stack SaaS",
+      "AI Productivity Platform"
+    ]
   },
   "completionStatus": {
     "status": "confirmed",
@@ -21,11 +24,11 @@
   },
   "objective": {
     "status": "confirmed",
-    "value": "Collaborative project management with AI-assisted productivity in workflows."
+    "value": "Support collaborative project management with AI assistance embedded in workflows — not as a detached chatbot surface."
   },
   "role": {
     "status": "confirmed",
-    "value": "Primary Developer — full-stack architecture, MERN, authn/authz, collaboration, analytics, AI assistant, APIs, DB architecture."
+    "value": "Primary Developer — full-stack architecture, MERN stack, authentication and authorization, collaboration, analytics, AI assistant integration, APIs, and database architecture."
   },
   "creditLine": {
     "status": "missing"
@@ -53,7 +56,8 @@
     "value": "Stellar Web Manager"
   },
   "repositoryNote": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public repository (Project-Management-System) with React client, Node/Express backend, and MongoDB models for users, projects, and tasks."
   },
   "measuredOutcomes": {
     "status": "missing"
@@ -64,18 +68,29 @@
   "aiUsageClass": "essential",
   "caseStudy": {
     "problem": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Teams need project and task collaboration with analytics, while AI assistance must stay inside product workflows — retrieve, summarize, automate — rather than exist as a standalone chatbot product."
     },
     "overview": {
       "status": "confirmed",
-      "value": "Collaborative project management with AI-assisted productivity in workflows."
+      "value": "A collaborative project management system with AI assistance placed inside product workflows. The AI surface supports work in context rather than operating as a standalone chat product."
     },
     "architecture": {
       "status": "confirmed",
-      "value": "MERN with AI-assisted productivity in workflows (not standalone chatbot); React client; Node/Express services; MongoDB; JWT; business logic in backend; AI via well-defined APIs; modular services; clear separation of app logic and AI."
+      "value": "MERN architecture with clear separation between application logic and AI. React client; Node/Express services; MongoDB persistence; JWT authentication; business logic on the backend; AI reached through defined APIs and modular services so assistant behavior does not collapse into the core domain model.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.4 Architecture",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.4"
+        }
+      ]
     },
     "decisions": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Keep application logic and AI on separate sides of defined APIs: core domain (users, projects, tasks, auth) lives in modular backend services; the assistant integrates through those boundaries instead of embedding model calls inside domain persistence."
     },
     "tradeoffs": {
       "status": "missing"
@@ -89,5 +104,55 @@
     "rejectedApproaches": {
       "status": "missing"
     }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "confirmed",
+      "value": "Repository archaeology (Project-Management-System): 17 commits all dated 2025-05-11 — initial commit; update pages/routes/images; env variable setup iterations; network update commits. Public history is a single-day publish/configure window rather than a multi-week visible chronology."
+    },
+    "decisionRecords": {
+      "status": "confirmed",
+      "value": "ADR-01 (Identity §18.3.4): MERN with AI-assisted productivity inside workflows (not a standalone chatbot). ADR-02 (Identity): React client; Node/Express services; MongoDB; JWT; business logic on the backend; AI via well-defined APIs; modular services; clear separation of application logic and AI. Alternative-rejection log Missing."
+    },
+    "validationMethodology": {
+      "status": "missing"
+    },
+    "technicalRisks": {
+      "status": "missing"
+    },
+    "failureModes": {
+      "status": "missing"
+    },
+    "knownLimitations": {
+      "status": "confirmed",
+      "value": "Usage/product metrics Missing (Discovery). Detailed decision log beyond Architecture/Stack Missing. README deployment section lists host options (Vercel/Netlify/Render/Heroku) as guidance — not confirmed as the production deployment of record."
+    },
+    "futureDirections": {
+      "status": "missing"
+    },
+    "assets": {
+      "status": "confirmed",
+      "value": [
+        "https://github.com/AliHassan-15/Project-Management-System",
+        "https://github.com/AliHassan-15/Project-Management-System/blob/master/README.md"
+      ]
+    }
+  },
+  "engineeringReferences": {
+    "status": "confirmed",
+    "value": [
+      {
+        "label": "Project-Management-System repository",
+        "href": "https://github.com/AliHassan-15/Project-Management-System",
+        "kind": "repository",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "Repository README",
+        "href": "https://github.com/AliHassan-15/Project-Management-System/blob/master/README.md",
+        "kind": "readme",
+        "confidence": "readme-attributed"
+      }
+    ]
   }
 }

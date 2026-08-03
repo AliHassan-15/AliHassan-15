@@ -8,17 +8,23 @@
   "includeInArchive": true,
   "sortOrder": 100,
   "subtitle": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "AI-assisted flashcard learning app"
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["AI-assisted learning", "Llama APIs", "Firebase"]
+    "value": [
+      "AI-assisted learning",
+      "Llama APIs",
+      "Firebase"
+    ]
   },
   "completionStatus": {
     "status": "missing"
   },
   "objective": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Generate, store, and study personalized flashcard collections using an LLM, with authenticated users and persisted collections."
   },
   "role": {
     "status": "missing"
@@ -28,7 +34,14 @@
   },
   "technologies": {
     "status": "confirmed",
-    "value": ["Llama APIs", "Firebase"]
+    "value": [
+      "Next.js",
+      "Llama APIs",
+      "Firebase",
+      "Clerk",
+      "Stripe",
+      "Material UI"
+    ]
   },
   "repositoryUrl": {
     "status": "confirmed",
@@ -39,7 +52,8 @@
     "value": "Flashcards Generator"
   },
   "repositoryNote": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public repository README (FlashMaster) documents Next.js app with Clerk auth, Firebase storage, Meta-Llama/llama-3.1-8b generation, Stripe subscriptions, and Material UI."
   },
   "measuredOutcomes": {
     "status": "missing"
@@ -49,16 +63,63 @@
   },
   "aiUsageClass": "unspecified",
   "caseStudy": {
-    "problem": { "status": "missing" },
+    "problem": {
+      "status": "confirmed",
+      "value": "Learners need topic flashcards generated quickly, stored by user, and studied as collections — not a one-off prompt with no persistence."
+    },
     "overview": {
       "status": "confirmed",
-      "value": "AI-assisted learning (Llama APIs, Firebase)."
+      "value": "AI-assisted learning tool: users authenticate, generate flashcards from input via Llama APIs, and save titled collections (10 cards per topic) in Firebase. Identity-confirmed stack centers on Llama APIs and Firebase; repository README also documents Next.js, Clerk, Stripe, and Material UI."
     },
-    "architecture": { "status": "deferred", "deferralId": "Disc-05" },
-    "decisions": { "status": "deferred", "deferralId": "Disc-05" },
-    "tradeoffs": { "status": "deferred", "deferralId": "Disc-05" },
-    "lessons": { "status": "deferred", "deferralId": "Disc-05" },
-    "constraints": { "status": "missing" },
-    "rejectedApproaches": { "status": "missing" }
+    "architecture": {
+      "status": "confirmed",
+      "value": "Next.js application for frontend and backend routes; Clerk for sign-in/sign-up; Firebase for flashcard persistence keyed to user; Meta-Llama/llama-3.1-8b for generation; Stripe for Basic/Pro subscription packages (per repository README)."
+    },
+    "decisions": {
+      "status": "confirmed",
+      "value": "Persist generated cards in Firebase keyed to the authenticated user, and gate premium access through Stripe subscription packages rather than leaving generation as an unauthenticated one-shot."
+    },
+    "tradeoffs": {
+      "status": "missing"
+    },
+    "lessons": {
+      "status": "missing"
+    },
+    "constraints": {
+      "status": "confirmed",
+      "value": "Requires environment keys for Stripe, Llama API, and Clerk (per repository README). Collections are structured as 10 flashcards per topic title."
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "missing"
+    },
+    "decisionRecords": {
+      "status": "missing"
+    },
+    "validationMethodology": {
+      "status": "missing"
+    },
+    "technicalRisks": {
+      "status": "missing"
+    },
+    "failureModes": {
+      "status": "missing"
+    },
+    "knownLimitations": {
+      "status": "missing"
+    },
+    "futureDirections": {
+      "status": "missing"
+    },
+    "assets": {
+      "status": "missing"
+    }
+  },
+  "engineeringReferences": {
+    "status": "missing"
   }
 }

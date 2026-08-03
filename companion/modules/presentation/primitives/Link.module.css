@@ -1,14 +1,24 @@
 .root {
-  color: var(--eos-color-accent);
+  color: var(--eos-color-text-primary);
   text-decoration-line: underline;
   text-decoration-thickness: var(--eos-border-width-hairline);
-  text-underline-offset: var(--eos-space-1);
+  text-underline-offset: 0.26em;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--eos-color-text-secondary) 22%,
+    transparent
+  );
   overflow-wrap: anywhere;
   transition: var(--eos-transition-interactive);
 }
 
 .root:hover {
   color: var(--eos-color-text-primary);
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--eos-color-text-secondary) 34%,
+    transparent
+  );
 }
 
 .root:active {
@@ -16,7 +26,7 @@
 }
 
 .tone-primary {
-  color: var(--eos-color-accent);
+  color: var(--eos-color-text-primary);
 }
 
 .tone-secondary {
@@ -26,5 +36,9 @@
 
 .tone-secondary:hover {
   color: var(--eos-color-text-primary);
-  text-decoration-color: var(--eos-color-border-strong);
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--eos-color-border-strong) 42%,
+    transparent
+  );
 }

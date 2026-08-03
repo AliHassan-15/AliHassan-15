@@ -34,7 +34,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
             Try again
           </Button>
           <Link href={COMPANION_PATHS.home} tone="secondary">
-            Return to Companion home
+            Companion
           </Link>
         </div>
       </Stack>

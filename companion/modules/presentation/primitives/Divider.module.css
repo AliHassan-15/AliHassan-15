@@ -1,15 +1,33 @@
 .root {
   border: 0;
-  border-top-style: solid;
-  border-top-width: var(--eos-border-width-hairline);
   margin: 0;
   width: 100%;
+  height: var(--eos-mark-weight);
+  background:
+    var(--eos-mark-rule-ends-quiet),
+    linear-gradient(
+      var(--eos-color-border-subtle),
+      var(--eos-color-border-subtle)
+    );
+  opacity: 1;
 }
 
 .subtle {
-  border-top-color: var(--eos-color-border-subtle);
+  background:
+    var(--eos-mark-rule-ends-quiet),
+    linear-gradient(
+      var(--eos-color-border-subtle),
+      var(--eos-color-border-subtle)
+    );
+  opacity: 0.72;
 }
 
 .strong {
-  border-top-color: var(--eos-color-border-strong);
+  background:
+    var(--eos-mark-rule-ends-quiet),
+    linear-gradient(
+      var(--eos-color-border-strong),
+      var(--eos-color-border-strong)
+    );
+  opacity: 1;
 }

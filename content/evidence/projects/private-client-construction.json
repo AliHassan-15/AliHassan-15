@@ -12,7 +12,9 @@
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["Private client construction workflow"]
+    "value": [
+      "Private client construction workflow"
+    ]
   },
   "completionStatus": {
     "status": "deferred",
@@ -55,16 +57,75 @@
   },
   "aiUsageClass": "conventional",
   "caseStudy": {
-    "problem": { "status": "deferred", "deferralId": "D-03" },
+    "problem": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
     "overview": {
       "status": "confirmed",
-      "value": "Private client construction workflow app — title framing only; further detail Deferred."
+      "value": "Private client construction workflow application. Title framing only; further detail remains Deferred under D-03."
     },
-    "architecture": { "status": "deferred", "deferralId": "D-03" },
-    "decisions": { "status": "deferred", "deferralId": "D-03" },
-    "tradeoffs": { "status": "deferred", "deferralId": "D-03" },
-    "lessons": { "status": "deferred", "deferralId": "D-03" },
-    "constraints": { "status": "deferred", "deferralId": "D-03" },
-    "rejectedApproaches": { "status": "deferred", "deferralId": "D-03" }
+    "architecture": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "decisions": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "tradeoffs": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "lessons": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "constraints": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "rejectedApproaches": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "decisionRecords": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "validationMethodology": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "technicalRisks": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "failureModes": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "knownLimitations": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "futureDirections": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    },
+    "assets": {
+      "status": "deferred",
+      "deferralId": "D-03"
+    }
+  },
+  "engineeringReferences": {
+    "status": "deferred",
+    "deferralId": "D-03"
   }
 }

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="56" viewBox="0 0 280 56" role="img" aria-labelledby="sig-title sig-desc">
+  <title id="sig-title">Technical signature plate</title>
+  <desc id="sig-desc">AH technical signature on an engineering plate.</desc>
+  <rect x="1" y="1" width="278" height="54" fill="#e8e7e4" stroke="#2a2826" stroke-width="0.8"/>
+  <g fill="none" stroke="#2a2826" stroke-width="0.8" stroke-linecap="square">
+    <path d="M1 9V1H9"/>
+    <path d="M271 1H279V9"/>
+    <path d="M1 47V55H9"/>
+    <path d="M271 55H279V47"/>
+  </g>
+  <text x="18" y="26" fill="#2a2826" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16" letter-spacing="0.1em" text-anchor="start">AH</text>
+  <text x="18" y="44" fill="#524f4b" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="0.1em" text-anchor="start">EOS · TECHNICAL SIGNATURE</text>
+  <path fill="none" stroke="#8a8680" stroke-width="0.65" d="M200 16V40H248"/>
+</svg>

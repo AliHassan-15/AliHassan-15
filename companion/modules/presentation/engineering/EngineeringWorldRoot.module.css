@@ -1,0 +1,53 @@
+.root {
+  display: contents;
+}
+
+/* Shared quiet emphasis — opacity / hairline only */
+.root:global([data-eos-eng-world="active"]) :global([data-eos-eng-item]),
+.root[data-eos-eng-world="active"] :global([data-eos-eng-item]) {
+  opacity: 0.78;
+  transition:
+    opacity 200ms var(--eos-ease-emphasized),
+    border-color 200ms var(--eos-ease-emphasized);
+}
+
+.root[data-eos-eng-world="active"]
+  :global([data-eos-eng-item][data-eos-eng-match="true"]) {
+  opacity: 1;
+}
+
+.root :global([data-eos-eng-item][data-eos-eng-match="true"]) {
+  border-inline-start-color: var(--eos-color-border-strong);
+}
+
+.root[data-eos-eng-camera="full"]
+  :global([data-eos-eng-item][data-eos-eng-match="true"]) {
+  animation: eos-eng-drift 52s var(--eos-ease-breathe) infinite alternate;
+}
+
+@keyframes eos-eng-drift {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root :global([data-eos-eng-item]) {
+    transition: none;
+  }
+
+  .root[data-eos-eng-camera="full"]
+    :global([data-eos-eng-item][data-eos-eng-match="true"]) {
+    animation: none;
+  }
+}
+
+html[data-eos-motion="reduce"]
+  .root[data-eos-eng-camera="full"]
+  :global([data-eos-eng-item][data-eos-eng-match="true"]) {
+  animation: none;
+}

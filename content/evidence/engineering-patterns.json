@@ -1,0 +1,32 @@
+{
+  "patterns": [
+    {
+      "id": "ai-separated-from-deterministic-core",
+      "title": "Separate AI reasoning from deterministic application core",
+      "statement": "Keep auth, persistence, domain workflows, and other deterministic paths outside model nondeterminism; reach AI through explicit boundaries (agents with structured outputs, or well-defined APIs).",
+      "projectIds": ["deepmed", "stellar-web-manager"],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "api-boundary-discipline",
+      "title": "Isolate domain engines behind clear API boundaries",
+      "statement": "Put core calculation or inference behind a package/API boundary that presentation and transport layers call into — hos_engine without Django/network deps; FastAPI inference separate from React; AI behind defined backend APIs.",
+      "projectIds": ["routewise-eld", "underwater-image-enhancement", "stellar-web-manager"],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "measure-before-trusting-quality",
+      "title": "Validate behavior before trusting coverage or expected metrics",
+      "statement": "Treat high coverage and aspirational README metrics as insufficient alone: mutation testing exposed survived clinical faults despite ~98% line coverage; committed notebook PSNR/SSIM supersede README expected bands.",
+      "projectIds": ["deepmed", "underwater-image-enhancement"],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "fail-safe-serving-defaults",
+      "title": "Prefer fail-safe serving defaults under deploy risk",
+      "statement": "When GPU/CUDA packaging is unreliable, force CPU inference for the public API path; when LLM outputs are noisy, normalize with allow-lists, clamps, and boundary assertions rather than trusting raw model strings.",
+      "projectIds": ["underwater-image-enhancement", "deepmed"],
+      "confidence": "confirmed"
+    }
+  ]
+}

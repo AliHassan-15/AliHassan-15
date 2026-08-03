@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="72" viewBox="0 0 720 72" role="img" aria-labelledby="quote-title quote-desc">
+  <title id="quote-title">Engineering quote plate</title>
+  <desc id="quote-desc">Quiet engineering note plate with registration frame.</desc>
+  <rect x="1" y="1" width="718" height="70" fill="none" stroke="#d9d7d2" stroke-width="0.8" opacity="0.58"/>
+  <g fill="none" stroke="#e8e7e4" stroke-width="0.8" stroke-linecap="square">
+    <path d="M1 10V1H10"/>
+    <path d="M710 1H719V10"/>
+    <path d="M1 62V71H10"/>
+    <path d="M710 71H719V62"/>
+  </g>
+  <text x="20" y="28" fill="#8a8680" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="0.1em" text-anchor="start">ENGINEERING NOTE</text>
+  <text x="20" y="50" fill="#e8e7e4" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="0.1em" text-anchor="start">PRECISION OVER SPECTACLE · SYSTEMS OVER FEATURES</text>
+</svg>

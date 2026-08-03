@@ -11,6 +11,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { getSiteUrl } from "../lib/site-url";
 import { COMPANION_PATHS } from "../modules/experience/routes";
+import { runEosConsistencyAudit } from "./verify-eos-consistency";
 import {
   getArchiveProjects,
   getIdentity,
@@ -64,12 +65,18 @@ function walkFiles(
 
 function expectedSitemapUrls(base: string): string[] {
   const projects = getArchiveProjects();
+  const abs = (routePath: string) => {
+    if (routePath === "/" || routePath === "") {
+      return `${base}/`;
+    }
+    return `${base}${routePath.endsWith("/") ? routePath : `${routePath}/`}`;
+  };
   return [
-    `${base}${COMPANION_PATHS.home}`,
-    `${base}${COMPANION_PATHS.archive}`,
-    ...projects.map(
-      (project) => `${base}${COMPANION_PATHS.project(project.slug)}`,
-    ),
+    abs(COMPANION_PATHS.home),
+    abs(COMPANION_PATHS.archive),
+    abs(COMPANION_PATHS.atlas),
+    abs(COMPANION_PATHS.journey),
+    ...projects.map((project) => abs(COMPANION_PATHS.project(project.slug))),
   ];
 }
 
@@ -141,8 +148,8 @@ function verifySitemapIntegrity(): void {
   check("canonical site URL has no trailing slash", !base.endsWith("/"), base);
 
   check(
-    "sitemap includes home + archive + case studies",
-    urls.length === 2 + getArchiveProjects().length,
+    "sitemap includes home + archive + atlas + journey + case studies",
+    urls.length === 4 + getArchiveProjects().length,
     `${urls.length} URLs`,
   );
 
@@ -172,8 +179,8 @@ function verifyCanonicalMetadataSource(): void {
     "utf8",
   );
   check(
-    "root layout sets metadataBase from getSiteUrl",
-    rootLayout.includes("metadataBase") && rootLayout.includes("getSiteUrl"),
+    "root layout sets metadataBase from getSiteOrigin",
+    rootLayout.includes("metadataBase") && rootLayout.includes("getSiteOrigin"),
   );
   check(
     "root layout declares home canonical",
@@ -189,6 +196,26 @@ function verifyCanonicalMetadataSource(): void {
     "archive page declares /archive canonical",
     archivePage.includes('canonical: "/archive"') ||
       archivePage.includes("canonical: '/archive'"),
+  );
+
+  const atlasPage = readFileSync(
+    path.join(companionRoot, "app", "(site)", "atlas", "page.tsx"),
+    "utf8",
+  );
+  check(
+    "atlas page declares /atlas canonical",
+    atlasPage.includes('canonical: "/atlas"') ||
+      atlasPage.includes("canonical: '/atlas'"),
+  );
+
+  const journeyPage = readFileSync(
+    path.join(companionRoot, "app", "(site)", "journey", "page.tsx"),
+    "utf8",
+  );
+  check(
+    "journey page declares /journey canonical",
+    journeyPage.includes('canonical: "/journey"') ||
+      journeyPage.includes("canonical: '/journey'"),
   );
 
   const caseStudy = readFileSync(
@@ -246,6 +273,8 @@ function verifyManifestSource(): void {
 function verifyInternalPathConstants(): void {
   check("COMPANION_PATHS.home", COMPANION_PATHS.home === "/");
   check("COMPANION_PATHS.archive", COMPANION_PATHS.archive === "/archive");
+  check("COMPANION_PATHS.atlas", COMPANION_PATHS.atlas === "/atlas");
+  check("COMPANION_PATHS.journey", COMPANION_PATHS.journey === "/journey");
 }
 
 function verifyInternalLinksInSource(): void {
@@ -264,6 +293,8 @@ function verifyInternalLinksInSource(): void {
   const known = new Set<string>([
     COMPANION_PATHS.home,
     COMPANION_PATHS.archive,
+    COMPANION_PATHS.atlas,
+    COMPANION_PATHS.journey,
     ...getArchiveProjects().map((project) =>
       COMPANION_PATHS.project(project.slug),
     ),
@@ -350,7 +381,11 @@ function verifyPublicEnvBoundary(): void {
     }
   }
 
-  const allowed = new Set(["NEXT_PUBLIC_SITE_URL", "VERCEL_URL", "NODE_ENV"]);
+  const allowed = new Set([
+    "NEXT_PUBLIC_SITE_URL",
+    "NEXT_PUBLIC_BASE_PATH",
+    "NODE_ENV",
+  ]);
 
   const unexpected = [...envRefs].filter((key) => !allowed.has(key));
   check(
@@ -363,7 +398,63 @@ function verifyPublicEnvBoundary(): void {
 }
 
 function verifyBuildArtifacts(): void {
+  const outDir = path.join(companionRoot, "out");
   const nextDir = path.join(companionRoot, ".next");
+
+  if (existsSync(outDir)) {
+    check("production build artifacts present", true, "static export out/");
+
+    const expected = [
+      path.join(outDir, "index.html"),
+      path.join(outDir, "archive", "index.html"),
+      path.join(outDir, "atlas", "index.html"),
+      path.join(outDir, "journey", "index.html"),
+      path.join(outDir, "404.html"),
+      path.join(outDir, "robots.txt"),
+      path.join(outDir, "sitemap.xml"),
+    ];
+
+    for (const file of expected) {
+      check(`route artifact ${path.relative(outDir, file)}`, existsSync(file));
+    }
+
+    const deepmed = path.join(outDir, "archive", "deepmed", "index.html");
+    check("route artifact archive/deepmed/index.html", existsSync(deepmed));
+
+    const audioDir = path.join(outDir, "audio");
+    const audioExpected = [
+      "base-ambience.ogg",
+      "low-air.ogg",
+      "mechanical-texture.ogg",
+      "distant-resonance.ogg",
+    ];
+    for (const name of audioExpected) {
+      check(`static audio ${name}`, existsSync(path.join(audioDir, name)));
+    }
+
+    const nextStatic = path.join(outDir, "_next", "static");
+    if (existsSync(nextStatic)) {
+      const chunks = walkFiles(nextStatic, (file) => file.endsWith(".js"));
+      const forbidden =
+        /BEGIN (RSA |OPENSSH )?PRIVATE KEY|AWS_SECRET_ACCESS_KEY/;
+      let hit = false;
+      for (const chunk of chunks) {
+        if (forbidden.test(readFileSync(chunk, "utf8"))) {
+          hit = true;
+          break;
+        }
+      }
+      check("client bundles free of private key material", !hit);
+    } else {
+      check(
+        "client bundles free of private key material",
+        true,
+        "no _next/static dir",
+      );
+    }
+    return;
+  }
+
   if (!existsSync(nextDir)) {
     if (requireBuild) {
       check(
@@ -375,19 +466,21 @@ function verifyBuildArtifacts(): void {
       check(
         "production build artifacts present",
         true,
-        "skipped (no .next; pass --require-build after build)",
+        "skipped (no out/; pass --require-build after build)",
       );
     }
     return;
   }
 
-  check("production build artifacts present", true);
+  check("production build artifacts present", true, ".next (non-export)");
 
   const appDir = path.join(nextDir, "server", "app");
   const expected = [
     path.join(appDir, "(site)", "page.js"),
     path.join(appDir, "(site)", "archive", "page.js"),
     path.join(appDir, "(site)", "archive", "[slug]", "page.js"),
+    path.join(appDir, "(site)", "atlas", "page.js"),
+    path.join(appDir, "(site)", "journey", "page.js"),
     path.join(appDir, "robots.txt", "route.js"),
     path.join(appDir, "sitemap.xml", "route.js"),
   ];
@@ -465,6 +558,13 @@ function verifySecurityHeadersConfig(): void {
   }
 }
 
+function verifyEosConsistency(): void {
+  const checks = runEosConsistencyAudit();
+  for (const result of checks) {
+    check(result.name, result.ok, result.detail);
+  }
+}
+
 function main(): void {
   console.log("EOS release verification\n");
 
@@ -478,6 +578,7 @@ function main(): void {
   verifyManifestSource();
   verifyInternalPathConstants();
   verifyInternalLinksInSource();
+  verifyEosConsistency();
   verifyNoSecretPatterns();
   verifyPublicEnvBoundary();
   verifyA11ySourceContracts();

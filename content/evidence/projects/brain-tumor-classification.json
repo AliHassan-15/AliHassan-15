@@ -8,17 +8,21 @@
   "includeInArchive": true,
   "sortOrder": 90,
   "subtitle": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "MRI deep learning classification"
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["Deep learning MRI brain tumor classification"]
+    "value": [
+      "Deep learning MRI brain tumor classification"
+    ]
   },
   "completionStatus": {
     "status": "missing"
   },
   "objective": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Classify MRI brain scans into glioma, meningioma, pituitary, or no tumor, and expose predictions through an interactive Streamlit app with visual explanations."
   },
   "role": {
     "status": "missing"
@@ -27,7 +31,14 @@
     "status": "missing"
   },
   "technologies": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": [
+      "Xception",
+      "Keras CNN",
+      "TensorFlow/Keras",
+      "Streamlit",
+      "Gemini 1.5 Flash"
+    ]
   },
   "repositoryUrl": {
     "status": "confirmed",
@@ -38,26 +49,75 @@
     "value": "Brain Tumor Classification"
   },
   "repositoryNote": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public repository with Training/ and Testing/ image sets, saved model weights, Streamlit app.py, and saliency_maps/ artifacts."
   },
   "measuredOutcomes": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Repository README states custom CNN 98% test accuracy and Xception transfer-learning 99% test accuracy. Figures are author-published in-repo; not independently re-measured in Discovery."
   },
   "liveDemo": {
     "status": "missing"
   },
   "aiUsageClass": "unspecified",
   "caseStudy": {
-    "problem": { "status": "missing" },
+    "problem": {
+      "status": "confirmed",
+      "value": "Assist early detection workflows by classifying MRI brain scans into glioma, meningioma, pituitary, or no tumor, with a path from trained models to an interactive prediction UI."
+    },
     "overview": {
       "status": "confirmed",
-      "value": "Deep learning MRI brain tumor classification."
+      "value": "Deep learning MRI tumor classification using a fine-tuned Xception model and a custom Keras CNN, exposed through a Streamlit app that accepts uploads and shows predictions with saliency-map explanations (Gemini 1.5 Flash integrated per README)."
     },
-    "architecture": { "status": "deferred", "deferralId": "Disc-05" },
-    "decisions": { "status": "deferred", "deferralId": "Disc-05" },
-    "tradeoffs": { "status": "deferred", "deferralId": "Disc-05" },
-    "lessons": { "status": "deferred", "deferralId": "Disc-05" },
-    "constraints": { "status": "missing" },
-    "rejectedApproaches": { "status": "missing" }
+    "architecture": {
+      "status": "confirmed",
+      "value": "Two model paths: ImageNet-pretrained Xception fine-tuned for four-class MRI classification, and a custom CNN built in Keras. Streamlit app.py loads saved weights (cnn_model.h5, xception_model.weights.h5), runs inference on uploaded scans, and produces saliency visualizations under saliency_maps/."
+    },
+    "decisions": {
+      "status": "confirmed",
+      "value": "Compare transfer learning (Xception) against a custom CNN in the same product surface so both prediction paths are available in the Streamlit app rather than shipping a single opaque model."
+    },
+    "tradeoffs": {
+      "status": "missing"
+    },
+    "lessons": {
+      "status": "missing"
+    },
+    "constraints": {
+      "status": "confirmed",
+      "value": "Depends on Training/ and Testing/ MRI datasets and pre-trained weight files committed or referenced in the repository for app inference."
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "missing"
+    },
+    "decisionRecords": {
+      "status": "missing"
+    },
+    "validationMethodology": {
+      "status": "missing"
+    },
+    "technicalRisks": {
+      "status": "missing"
+    },
+    "failureModes": {
+      "status": "missing"
+    },
+    "knownLimitations": {
+      "status": "missing"
+    },
+    "futureDirections": {
+      "status": "missing"
+    },
+    "assets": {
+      "status": "missing"
+    }
+  },
+  "engineeringReferences": {
+    "status": "missing"
   }
 }

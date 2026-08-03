@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="36" viewBox="0 0 720 36" role="img" aria-labelledby="hdr-companion-title hdr-companion-desc">
+  <title id="hdr-companion-title">Engineering Companion section header</title>
+  <desc id="hdr-companion-desc">Section header plate for COMPANION.</desc>
+  <g fill="#d9d7d2" opacity="0.85">
+    <rect x="0" y="17" width="720" height="1"/>
+    <rect x="0" y="14" width="12" height="7"/>
+  </g>
+  <text x="24" y="22" fill="#e8e7e4" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="0.1em" text-anchor="start">COMPANION</text>
+  <g fill="none" stroke="#c4c1bb" stroke-width="0.8" stroke-linecap="square">
+    <path d="M692 12H708V28"/>
+  </g>
+</svg>

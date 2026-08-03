@@ -2,6 +2,7 @@
 
 import { Button } from "@/modules/presentation/primitives";
 import { useOptionalAudio } from "./audio-context";
+import { areAmbientAssetsReady } from "./config";
 
 type SoundToggleProps = {
   className?: string;
@@ -10,9 +11,11 @@ type SoundToggleProps = {
 /**
  * System preference control — not a media player.
  * Hidden when audio architecture is not mounted.
+ * Hairline engineering language only — no equalizer theater.
  */
 export function SoundToggle({ className }: SoundToggleProps) {
   const audio = useOptionalAudio();
+  const assetsReady = areAmbientAssetsReady();
 
   if (!audio) {
     return null;
@@ -20,6 +23,7 @@ export function SoundToggle({ className }: SoundToggleProps) {
 
   const { preference, available, setPreference } = audio;
   const on = preference === "on";
+  const canEnable = available && assetsReady;
 
   return (
     <Button
@@ -27,20 +31,22 @@ export function SoundToggle({ className }: SoundToggleProps) {
       variant="ghost"
       size="sm"
       className={className}
-      disabled={!available && !on}
+      disabled={!canEnable && !on}
       aria-pressed={on}
       aria-label={
-        available
+        canEnable
           ? on
-            ? "Sound on. Activate to mute ambient sound."
-            : "Sound off. Activate to enable ambient sound."
-          : "Sound unavailable"
+            ? "Ambient on. Activate to mute environmental sound."
+            : "Ambient off. Activate to enable environmental sound."
+          : assetsReady
+            ? "Ambient unavailable"
+            : "Ambient assets not installed"
       }
       onClick={() => {
         setPreference(on ? "off" : "on");
       }}
     >
-      Sound · {on ? "On" : "Off"}
+      Ambient · {on ? "On" : "Off"}
     </Button>
   );
 }

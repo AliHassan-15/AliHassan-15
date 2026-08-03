@@ -1,0 +1,692 @@
+{
+  "title": "Engineering Systems Atlas",
+  "purpose": "A reference manual for how software is designed across this body of work — recurring systems, decision evolution, validation, and failure knowledge. It is not a project listing.",
+  "systems": [
+    {
+      "id": "ai-system-design",
+      "title": "AI System Design",
+      "summary": "AI is reached through explicit boundaries: deterministic cores stay predictable; assistants and agents use structured outputs or defined APIs rather than collapsing into domain persistence.",
+      "projectIds": [
+        "deepmed",
+        "stellar-web-manager",
+        "codebase-rag"
+      ],
+      "confidence": "confirmed",
+      "relatedSystemIds": [
+        "api-boundary-design",
+        "engineering-decision-records"
+      ],
+      "relatedGlossaryIds": [
+        "gloss-pipeline",
+        "gloss-boundary"
+      ],
+      "relatedArchitectureIds": [],
+      "relatedValidationIds": []
+    },
+    {
+      "id": "api-boundary-design",
+      "title": "API Boundary Design",
+      "summary": "Core calculation and inference sit behind package or HTTP boundaries that presentation layers call into — hos_engine without Django/network deps; FastAPI inference separate from React; AI behind backend APIs.",
+      "projectIds": [
+        "routewise-eld",
+        "underwater-image-enhancement",
+        "stellar-web-manager"
+      ],
+      "confidence": "confirmed",
+      "relatedSystemIds": [
+        "deployment-philosophy",
+        "ai-system-design"
+      ],
+      "relatedGlossaryIds": [
+        "gloss-boundary",
+        "gloss-serving"
+      ],
+      "relatedArchitectureIds": [
+        "arch-fastapi",
+        "arch-hos-engine"
+      ],
+      "relatedValidationIds": []
+    },
+    {
+      "id": "validation-strategy",
+      "title": "Validation Strategy",
+      "summary": "Quality claims require measurement: mutation testing against clinical boundaries; committed notebook PSNR/SSIM over aspirational README bands; pytest scenarios for HOS rules.",
+      "projectIds": [
+        "deepmed",
+        "underwater-image-enhancement",
+        "routewise-eld"
+      ],
+      "confidence": "confirmed",
+      "relatedSystemIds": [
+        "testing-philosophy",
+        "failure-analysis"
+      ],
+      "relatedGlossaryIds": [
+        "gloss-validation",
+        "gloss-mutation-testing"
+      ],
+      "relatedValidationIds": [
+        "val-jest-stryker",
+        "val-pytest-hos",
+        "val-psnr-ssim"
+      ],
+      "relatedArchitectureIds": []
+    },
+    {
+      "id": "testing-philosophy",
+      "title": "Testing Philosophy",
+      "summary": "Coverage alone is insufficient for safety-critical logic; specification-driven and adversarial tests kill boundary faults. Domain engines carry named scenario suites before UI polish.",
+      "projectIds": [
+        "deepmed",
+        "routewise-eld"
+      ],
+      "confidence": "confirmed",
+      "relatedSystemIds": [
+        "validation-strategy"
+      ],
+      "relatedGlossaryIds": [
+        "gloss-mutation-testing",
+        "gloss-validation"
+      ],
+      "relatedValidationIds": [
+        "val-jest-stryker"
+      ],
+      "relatedArchitectureIds": []
+    },
+    {
+      "id": "deployment-philosophy",
+      "title": "Deployment Philosophy",
+      "summary": "Deploy packaging is iterated until the domain engine is importable on the host; when GPU packaging is unreliable, inference defaults to CPU for a stable serving path.",
+      "projectIds": [
+        "routewise-eld",
+        "underwater-image-enhancement"
+      ],
+      "confidence": "confirmed",
+      "relatedSystemIds": [
+        "api-boundary-design"
+      ],
+      "relatedGlossaryIds": [
+        "gloss-serving",
+        "gloss-inference"
+      ],
+      "relatedArchitectureIds": [
+        "arch-fastapi",
+        "arch-hos-engine"
+      ],
+      "relatedValidationIds": []
+    },
+    {
+      "id": "failure-analysis",
+      "title": "Failure Analysis",
+      "summary": "Failures are recorded with project attachment: clinical boundary mis-triage under mutation; undecodable images and PSNR variance; missing checkpoints; deploy import failures for hos_engine.",
+      "projectIds": [
+        "deepmed",
+        "underwater-image-enhancement"
+      ],
+      "confidence": "confirmed",
+      "relatedSystemIds": [
+        "validation-strategy"
+      ],
+      "relatedGlossaryIds": [
+        "gloss-boundary"
+      ],
+      "relatedValidationIds": [
+        "val-jest-stryker",
+        "val-psnr-ssim"
+      ],
+      "relatedArchitectureIds": []
+    },
+    {
+      "id": "engineering-decision-records",
+      "title": "Engineering Decision Records",
+      "summary": "Flagship case files record ADR-style decisions with Identity and repository provenance — deterministic/AI separation, domain-first HOS modeling, retrieval-first pipelines, research-as-product constraints.",
+      "projectIds": [
+        "deepmed",
+        "routewise-eld",
+        "underwater-image-enhancement",
+        "codebase-rag",
+        "stellar-web-manager"
+      ],
+      "confidence": "confirmed",
+      "relatedSystemIds": [
+        "documentation-standards",
+        "ai-system-design"
+      ],
+      "relatedGlossaryIds": [
+        "gloss-adr"
+      ],
+      "relatedValidationIds": [],
+      "relatedArchitectureIds": []
+    },
+    {
+      "id": "documentation-standards",
+      "title": "Documentation Standards",
+      "summary": "Public proof prefers committed reports, notebooks, and engineering case files over marketing copy; Missing and Deferred stay visible; README claims stay attributed.",
+      "projectIds": [
+        "deepmed",
+        "routewise-eld",
+        "underwater-image-enhancement"
+      ],
+      "confidence": "confirmed",
+      "relatedSystemIds": [
+        "engineering-decision-records",
+        "validation-strategy"
+      ],
+      "relatedGlossaryIds": [
+        "gloss-validation"
+      ],
+      "relatedValidationIds": [],
+      "relatedArchitectureIds": []
+    }
+  ],
+  "evolution": [
+    {
+      "id": "evo-2024-retrieval",
+      "year": "2024",
+      "label": "Retrieval-first codebase assistance",
+      "evidence": "Codebase-RAG public initial commit 2024-12-04; Identity §18.3.5 retrieval-before-generation stages.",
+      "projectIds": [
+        "codebase-rag"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "evo-2025-mern-ai",
+      "year": "2025",
+      "label": "MERN workflows with AI behind APIs",
+      "evidence": "Project-Management-System (Stellar) public commit window 2025-05-11; Identity §18.3.4 clear separation of app logic and AI.",
+      "projectIds": [
+        "stellar-web-manager"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "evo-2026-productized-cv",
+      "year": "2026",
+      "label": "Research model shipped as FastAPI + React product",
+      "evidence": "Underwater Image Enhancement initial commit 2026-04-22 (API, models, frontend, training); Identity §18.3.3 research-as-usable-software.",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "evo-2026-mutation-evidence",
+      "year": "2026",
+      "label": "Evidence-driven clinical testing",
+      "evidence": "DEEPMED-Testing FYP mutation deliverable dated 2026-05-01 with committed coverage/mutation reports.",
+      "projectIds": [
+        "deepmed"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "evo-2026-domain-engine",
+      "year": "2026",
+      "label": "Isolated domain engine + deploy packaging iteration",
+      "evidence": "RouteWise-ELD 2026-07-23–24 archaeology: pure-Python hos_engine, then Vercel packaging/vendoring commits.",
+      "projectIds": [
+        "routewise-eld"
+      ],
+      "confidence": "confirmed"
+    }
+  ],
+  "architectureIndex": [
+    {
+      "id": "arch-django",
+      "name": "Django",
+      "projectIds": [
+        "routewise-eld",
+        "routerefuel"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-fastapi",
+      "name": "FastAPI",
+      "projectIds": [
+        "underwater-image-enhancement",
+        "codebase-rag"
+      ],
+      "confidence": "confirmed",
+      "note": "Identity-confirmed for both; Underwater also has public api_server.py."
+    },
+    {
+      "id": "arch-react",
+      "name": "React",
+      "projectIds": [
+        "underwater-image-enhancement",
+        "stellar-web-manager",
+        "routerefuel",
+        "gamestore"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-nextjs",
+      "name": "Next.js",
+      "projectIds": [
+        "flashcards-generator"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-rest-apis",
+      "name": "REST APIs",
+      "projectIds": [
+        "stellar-web-manager"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-nodejs-express",
+      "name": "Node.js / Express.js",
+      "projectIds": [
+        "stellar-web-manager",
+        "gamestore"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-mongodb",
+      "name": "MongoDB",
+      "projectIds": [
+        "stellar-web-manager"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-postgresql",
+      "name": "PostgreSQL",
+      "projectIds": [
+        "gamestore"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-jwt",
+      "name": "JWT",
+      "projectIds": [
+        "stellar-web-manager",
+        "gamestore"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-attentionresunet",
+      "name": "AttentionResUNet",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-pytorch",
+      "name": "PyTorch",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ],
+      "confidence": "public-artifact",
+      "note": "Confirmed via public api_server.py / model training stack in repository."
+    },
+    {
+      "id": "arch-xception-keras",
+      "name": "Xception / Keras CNN / TensorFlow",
+      "projectIds": [
+        "brain-tumor-classification"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "arch-pinecone",
+      "name": "Pinecone",
+      "projectIds": [
+        "codebase-rag"
+      ],
+      "confidence": "readme-attributed",
+      "note": "Documented in Codebase-RAG README Technologies Used; Identity lists vector database generically."
+    },
+    {
+      "id": "arch-slack",
+      "name": "Slack API",
+      "projectIds": [
+        "codebase-rag"
+      ],
+      "confidence": "readme-attributed"
+    },
+    {
+      "id": "arch-hos-engine",
+      "name": "Pure-Python HOS engine",
+      "projectIds": [
+        "routewise-eld"
+      ],
+      "confidence": "confirmed",
+      "note": "Repository package hos_engine/; not listed as Identity-grade stack beyond Django (D-12)."
+    },
+    {
+      "id": "arch-llama-firebase",
+      "name": "Llama APIs / Firebase",
+      "projectIds": [
+        "flashcards-generator"
+      ],
+      "confidence": "confirmed"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "dec-deterministic-ai-split",
+      "decision": "Separate deterministic backend paths from AI reasoning",
+      "projectIds": [
+        "deepmed",
+        "stellar-web-manager"
+      ],
+      "evidence": "Identity §18.3.1 Hardest decisions; Identity §18.3.4 Architecture (AI via well-defined APIs).",
+      "outcome": "Operational auth/records/workflows stay predictable; assistants remain replaceable behind boundaries.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "dec-retrieval-first",
+      "decision": "Retrieve before generate for codebase questions",
+      "projectIds": [
+        "codebase-rag"
+      ],
+      "evidence": "Identity §18.3.5 Architecture stages; repository README Architecture.",
+      "outcome": "Answers expected to stay grounded in indexed source context rather than parameter memory alone.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "dec-hos-isolation",
+      "decision": "Implement FMCSA HOS as a pure-Python package with no web/DB dependencies",
+      "projectIds": [
+        "routewise-eld"
+      ],
+      "evidence": "hos_engine/__init__.py docstring; feat(hos) commit 30d4cac4b62b7441fbd82d4e8b7ca2aecdc5e2b8.",
+      "outcome": "API/UI call plan_trip after routing; engine remains testable with pytest independently.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "dec-cpu-serving",
+      "decision": "Force CPU inference for the public enhancement API",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ],
+      "evidence": "api_server.py clears CUDA_VISIBLE_DEVICES and sets torch device cpu.",
+      "outcome": "Stable serving path when GPU packaging is unreliable; inference speed traded for deploy reliability.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "dec-mutation-over-coverage",
+      "decision": "Treat mutation score as the quality signal for clinical logic, not line coverage alone",
+      "projectIds": [
+        "deepmed"
+      ],
+      "evidence": "DEEPMED-Testing FYP report Tables 3/5/6 and reflections §3.4 / §4.4.",
+      "outcome": "Baseline 97.88% line coverage with 70.15% mutation score; boundary tests raised score to 76.12%.",
+      "confidence": "confirmed"
+    }
+  ],
+  "failures": [
+    {
+      "id": "fail-severity-boundary",
+      "title": "Severity tier boundary misclassification",
+      "detail": "Mutants changing >= to > at scores 75 and 50 downgrade VERY_HIGH→HIGH or HIGH→MEDIUM when interior tests miss exact boundaries.",
+      "projectId": "deepmed",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "fail-llm-normalize",
+      "title": "LLM output normalization faults",
+      "detail": "Dropped numeric indicators, missing trim, and weakened type guards silently alter clinical fields under mutation testing.",
+      "projectId": "deepmed",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "fail-image-decode",
+      "title": "Undecodable upload / missing checkpoint",
+      "detail": "API preprocess fails when image bytes cannot be decoded; serving requires a trained checkpoint produced by the training pipeline.",
+      "projectId": "underwater-image-enhancement",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "fail-psnr-variance",
+      "title": "Wide test-set quality variance",
+      "detail": "Committed Results.ipynb reports PSNR range 10.31–26.08 dB on the test set.",
+      "projectId": "underwater-image-enhancement",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "fail-hos-deploy-import",
+      "title": "hos_engine import failure on host packaging",
+      "detail": "Vercel backend root deploy required vendoring hos_engine so the domain package remains importable (commit 550c0475b0915ca302fbe38b57489d31c03650ea).",
+      "projectId": "routewise-eld",
+      "confidence": "confirmed"
+    }
+  ],
+  "validationIndex": [
+    {
+      "id": "val-jest-stryker",
+      "name": "Jest + Stryker mutation testing",
+      "detail": "Baseline and final mutation runs with committed HTML reports under reports/; mutant-killer tests for clinical boundaries.",
+      "projectIds": [
+        "deepmed"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "val-pytest-hos",
+      "name": "Pytest HOS scenarios",
+      "detail": "tests/test_hos_engine.py documents short trip, break, reset, multi-day logs, near-70h cycle, and auditor checks.",
+      "projectIds": [
+        "routewise-eld"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "val-psnr-ssim",
+      "name": "PSNR / SSIM evaluation",
+      "detail": "Committed Code/Results.ipynb executed outputs; Grad-CAM and classical-vs-DL comparison artifacts in-repo.",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ],
+      "confidence": "confirmed"
+    },
+    {
+      "id": "val-readme-accuracy",
+      "name": "README-stated classification accuracy",
+      "detail": "Brain Tumor Classification README states custom CNN ~98% and Xception ~99% test accuracy — author-published, not independently re-measured.",
+      "projectIds": [
+        "brain-tumor-classification"
+      ],
+      "confidence": "readme-attributed"
+    }
+  ],
+  "glossary": [
+    {
+      "id": "gloss-adr",
+      "term": "ADR",
+      "definition": "Architecture Decision Record style entries in engineering case files (decision, context, and provenance).",
+      "projectIds": [
+        "deepmed",
+        "routewise-eld",
+        "underwater-image-enhancement"
+      ]
+    },
+    {
+      "id": "gloss-retrieval",
+      "term": "Retrieval",
+      "definition": "Fetch relevant indexed source context before LLM generation (retrieval-first pipeline).",
+      "projectIds": [
+        "codebase-rag"
+      ]
+    },
+    {
+      "id": "gloss-mutation-testing",
+      "term": "Mutation Testing",
+      "definition": "Inject small code faults (mutants) and measure whether tests kill them; used on DeepMed clinical modules with Stryker.",
+      "projectIds": [
+        "deepmed"
+      ]
+    },
+    {
+      "id": "gloss-psnr",
+      "term": "PSNR",
+      "definition": "Peak Signal-to-Noise Ratio — image restoration metric reported in Underwater evaluation notebooks.",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ]
+    },
+    {
+      "id": "gloss-ssim",
+      "term": "SSIM",
+      "definition": "Structural Similarity Index — paired with PSNR in Underwater evaluation.",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ]
+    },
+    {
+      "id": "gloss-inference",
+      "term": "Inference",
+      "definition": "Running a trained model to produce outputs (e.g. FastAPI /api/enhance serving AttentionResUNet).",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ]
+    },
+    {
+      "id": "gloss-validation",
+      "term": "Validation",
+      "definition": "Evidence that behavior matches the intended contract — tests, mutation scores, metrics notebooks — not claims alone.",
+      "projectIds": [
+        "deepmed",
+        "underwater-image-enhancement",
+        "routewise-eld"
+      ]
+    },
+    {
+      "id": "gloss-serving",
+      "term": "Serving",
+      "definition": "Production-style model or API exposure path, including CPU-forced serving defaults when GPU deploy is unreliable.",
+      "projectIds": [
+        "underwater-image-enhancement"
+      ]
+    },
+    {
+      "id": "gloss-pipeline",
+      "term": "Pipeline",
+      "definition": "Ordered stages such as ingestion→embedding→retrieval→prompt→generation, or voice intake→severity→scheduling.",
+      "projectIds": [
+        "codebase-rag",
+        "deepmed"
+      ]
+    },
+    {
+      "id": "gloss-boundary",
+      "term": "Boundary",
+      "definition": "A trust or API edge — e.g. hos_engine vs Django, severity tier thresholds, or AI behind defined APIs.",
+      "projectIds": [
+        "routewise-eld",
+        "deepmed",
+        "stellar-web-manager"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel-retrieval-boundary-validation",
+      "title": "Retrieval → API boundary → Validation",
+      "steps": [
+        {
+          "kind": "glossary",
+          "id": "gloss-retrieval",
+          "label": "Retrieval"
+        },
+        {
+          "kind": "project",
+          "id": "codebase-rag",
+          "label": "Codebase RAG"
+        },
+        {
+          "kind": "system",
+          "id": "api-boundary-design",
+          "label": "API Boundary Design"
+        },
+        {
+          "kind": "project",
+          "id": "stellar-web-manager",
+          "label": "Stellar Web Manager"
+        },
+        {
+          "kind": "system",
+          "id": "validation-strategy",
+          "label": "Validation Strategy"
+        },
+        {
+          "kind": "project",
+          "id": "deepmed",
+          "label": "DeepMed"
+        }
+      ]
+    },
+    {
+      "id": "rel-mutation-language",
+      "title": "Mutation Testing language network",
+      "steps": [
+        {
+          "kind": "glossary",
+          "id": "gloss-mutation-testing",
+          "label": "Mutation Testing"
+        },
+        {
+          "kind": "project",
+          "id": "deepmed",
+          "label": "DeepMed"
+        },
+        {
+          "kind": "system",
+          "id": "validation-strategy",
+          "label": "Validation Strategy"
+        },
+        {
+          "kind": "validation",
+          "id": "val-jest-stryker",
+          "label": "Jest + Stryker"
+        },
+        {
+          "kind": "glossary",
+          "id": "gloss-validation",
+          "label": "Validation"
+        }
+      ]
+    },
+    {
+      "id": "rel-serving-cpu",
+      "title": "Inference serving constraints",
+      "steps": [
+        {
+          "kind": "glossary",
+          "id": "gloss-inference",
+          "label": "Inference"
+        },
+        {
+          "kind": "architecture",
+          "id": "arch-attentionresunet",
+          "label": "AttentionResUNet"
+        },
+        {
+          "kind": "project",
+          "id": "underwater-image-enhancement",
+          "label": "Underwater Image Enhancement"
+        },
+        {
+          "kind": "system",
+          "id": "deployment-philosophy",
+          "label": "Deployment Philosophy"
+        },
+        {
+          "kind": "glossary",
+          "id": "gloss-serving",
+          "label": "Serving"
+        }
+      ]
+    }
+  ]
+}

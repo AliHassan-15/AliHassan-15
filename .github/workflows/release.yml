@@ -17,7 +17,8 @@ jobs:
     timeout-minutes: 20
     env:
       NEXT_TELEMETRY_DISABLED: 1
-      NEXT_PUBLIC_SITE_URL: https://eos-companion.vercel.app
+      NEXT_PUBLIC_SITE_URL: https://alihassan-15.github.io/AliHassan-15
+      NEXT_PUBLIC_BASE_PATH: /AliHassan-15
 
     steps:
       - name: Checkout
@@ -66,8 +67,6 @@ jobs:
       - name: Release verification
         run: pnpm verify:release
 
-  # Production deploy is owned by Vercel Git integration when connected.
-  # This job documents the release contract; CLI pack deploy remains available locally.
   note:
     name: release note
     needs: quality
@@ -76,5 +75,5 @@ jobs:
       - name: Reminder
         run: |
           echo "Quality gates passed for ${GITHUB_REF_NAME}."
-          echo "Promote or confirm the Vercel production deployment for eos-companion."
-          echo "Rollback: npx vercel rollback --scope hassanakramali-gmailcoms-projects"
+          echo "Production deploy is GitHub Pages via the Pages workflow on main."
+          echo "Companion: https://alihassan-15.github.io/AliHassan-15/"

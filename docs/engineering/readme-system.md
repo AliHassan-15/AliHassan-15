@@ -44,12 +44,17 @@ Product Bible **IA-02** remains Deferred as constitutional lock. This order is a
 
 ## Assets
 
-| File | Role |
+| Path | Role |
 |------|------|
-| `readme/assets/svg/mark-light.svg` | Light-mode entrance rule mark |
-| `readme/assets/svg/mark-dark.svg` | Dark-mode entrance rule mark |
+| `readme/assets/svg/` | EOS SVG engineering system (light/dark pairs) |
+| `readme/assets/svg/SYSTEM.md` | Asset catalog and rebuild notes |
+| `readme/assets/svg/build-system.mjs` | Geometry source — run to regenerate SVGs |
 
-Marks are structural, not illustration. Empty `alt` on decorative marks; meaning is carried by text.
+Primary entrance assets include hero drafting field, engineering dividers, section headers, status/location plates, AH monogram/signature plates, and footer registration.
+
+Marks are structural, not illustration. Empty `alt` on decorative marks; meaning is carried by text. Language matches Companion registration / calibration vocabulary (graphite, titanium, hairlines).
+
+Rebuild: `node readme/assets/svg/build-system.mjs`
 
 ---
 

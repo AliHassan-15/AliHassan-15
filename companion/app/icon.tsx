@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
+export const dynamic = "force-static";
 
 /**
  * Minimal production mark — monochrome, not marketing art.
@@ -15,8 +16,8 @@ export default function Icon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#0d1016",
-        color: "#f4f6f8",
+        background: "#060605",
+        color: "#e8e7e4",
         fontSize: 11,
         fontWeight: 600,
         letterSpacing: "0.04em",

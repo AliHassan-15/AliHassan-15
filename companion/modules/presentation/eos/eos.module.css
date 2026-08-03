@@ -1,0 +1,75 @@
+/**
+ * EOS publication surfaces — location, reading, lineage.
+ * Reuse existing tokens; no new visual language.
+ */
+
+.location {
+  display: grid;
+  gap: var(--eos-space-2);
+}
+
+.locationStep {
+  display: grid;
+  gap: var(--eos-space-1);
+  justify-items: start;
+}
+
+.locationLink,
+.locationHere {
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  line-height: 1.35;
+}
+
+.locationHere {
+  color: var(--eos-color-text-secondary);
+}
+
+.reading {
+  margin: 0;
+  font-family: var(--eos-font-family-mono);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  font-variant-numeric: tabular-nums;
+}
+
+.copyLink {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  color: var(--eos-color-text-tertiary);
+  line-height: 1.2;
+  text-decoration: none;
+  opacity: 0.55;
+  transition: var(--eos-transition-interactive);
+}
+
+.copyLink:hover,
+.copyLink:focus-visible {
+  color: var(--eos-color-text-secondary);
+  opacity: 0.85;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.copyLink:focus-visible {
+  outline: var(--eos-border-width-hairline) solid var(--eos-color-focus);
+  outline-offset: 2px;
+}
+
+.chain {
+  display: grid;
+  gap: var(--eos-space-2);
+  justify-items: start;
+}
+
+.network {
+  display: grid;
+  gap: var(--eos-space-4);
+}

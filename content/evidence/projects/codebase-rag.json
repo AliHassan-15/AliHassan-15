@@ -13,7 +13,10 @@
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["AI Developer Tool", "RAG"]
+    "value": [
+      "AI Developer Tool",
+      "RAG"
+    ]
   },
   "completionStatus": {
     "status": "confirmed",
@@ -21,11 +24,11 @@
   },
   "objective": {
     "status": "confirmed",
-    "value": "Natural-language questions over a codebase with answers grounded in source files."
+    "value": "Answer natural-language questions over a codebase with responses grounded in retrieved source files rather than unconstrained generation."
   },
   "role": {
     "status": "confirmed",
-    "value": "Primary Developer — ingestion, embeddings, retrieval, context management, LLM integration, end-to-end RAG architecture."
+    "value": "Primary Developer — ingestion, embeddings, retrieval, context management, LLM integration, and end-to-end RAG architecture."
   },
   "creditLine": {
     "status": "missing"
@@ -53,7 +56,8 @@
     "value": "Codebase RAG"
   },
   "repositoryNote": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public repository documents a RAG pipeline with Pinecone vector storage, OpenAI embeddings/LLMs, and Slack (/ai-coding-agent-help) as an interaction surface, alongside the Identity-confirmed stack."
   },
   "measuredOutcomes": {
     "status": "missing"
@@ -64,18 +68,35 @@
   "aiUsageClass": "essential",
   "caseStudy": {
     "problem": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Developers need answers about how a codebase works without reading every file. Unconstrained generation invents structure; answers must be grounded in retrieved source context."
     },
     "overview": {
       "status": "confirmed",
-      "value": "Natural-language questions over a codebase with context-aware answers grounded in source files."
+      "value": "A developer assistant for asking natural-language questions over a codebase. Answers are expected to stay grounded in retrieved source context instead of relying on model memory alone."
     },
     "architecture": {
       "status": "confirmed",
-      "value": "Retrieval-first; parse/chunk/embed/index; semantic retrieval before generation; stages: ingestion, embedding, retrieval, prompt construction, response generation."
+      "value": "Retrieval-first pipeline: parse, chunk, embed, and index source material; retrieve relevant context before generation. Each explicit stage can be inspected and replaced independently. Public repository documents Pinecone as the vector store and Slack (/ai-coding-agent-help) as a query surface. stages: ingestion, embedding, retrieval, prompt construction, response generation.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.5 Architecture",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.5"
+        },
+        {
+          "kind": "readme",
+          "label": "README Architecture / Technologies",
+          "href": "https://github.com/AliHassan-15/Codebase-RAG/blob/master/README.md",
+          "section": "Architecture"
+        }
+      ]
     },
     "decisions": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Retrieve before generate: embed and index the codebase, then ground LLM responses in retrieved snippets rather than asking the model to recall repository structure from parameters alone."
     },
     "tradeoffs": {
       "status": "missing"
@@ -84,10 +105,147 @@
       "status": "missing"
     },
     "constraints": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Public repository prerequisites: Pinecone API key, OpenAI API key, and a Slack workspace with API integration for the documented interaction path."
     },
     "rejectedApproaches": {
       "status": "missing"
     }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "confirmed",
+      "value": "Repository archaeology: public initial commit 2024-12-04 (message: inital commit). Tree contains Codebase_RAG.ipynb and README.md on master. Finer milestone chronology beyond the initial commit is Missing from recovered public history."
+    },
+    "decisionRecords": {
+      "status": "confirmed",
+      "value": "ADR-01 (Identity §18.3.5): Retrieval-first architecture — parse/chunk/embed/index; semantic retrieval before generation; stages ingestion → embedding → retrieval → prompt construction → response generation. ADR-02 (repository README): Store embeddings in Pinecone; generate with OpenAI LLMs; expose interaction via Slack /ai-coding-agent-help. Deeper alternative-rejection log Missing."
+    },
+    "validationMethodology": {
+      "status": "missing"
+    },
+    "technicalRisks": {
+      "status": "missing"
+    },
+    "failureModes": {
+      "status": "missing"
+    },
+    "knownLimitations": {
+      "status": "confirmed",
+      "value": "Public tree is notebook + README oriented; quality metrics Missing (Discovery). Identity stack lists FastAPI/LangChain/Docker as deployment-ready architecture — README Technologies Used lists Python, Pinecone, OpenAI, Slack (complementary repo evidence, not a contradiction claim). Measured outcomes Missing."
+    },
+    "futureDirections": {
+      "status": "confirmed",
+      "value": "Repository README Future Enhancements: multi-language codebase support; fine-tuned models for better code understanding; richer Slack commands/features. These are README aspirations, not completed work."
+    },
+    "assets": {
+      "status": "confirmed",
+      "value": [
+        "https://github.com/AliHassan-15/Codebase-RAG",
+        "https://github.com/AliHassan-15/Codebase-RAG/blob/master/README.md",
+        "https://github.com/AliHassan-15/Codebase-RAG/blob/master/Codebase_RAG.ipynb"
+      ]
+    },
+    "decisionLineages": [
+      {
+        "id": "ADR-01",
+        "decision": {
+          "status": "confirmed",
+          "value": "Retrieve before generate: embed and index the codebase, then ground LLM responses in retrieved snippets rather than asking the model to recall repository structure from parameters alone.",
+          "confidence": "confirmed",
+          "provenance": [
+            {
+              "kind": "identity",
+              "label": "Identity §18.3.5 Architecture",
+              "path": "docs/product-bible/02-identity-specification.md",
+              "section": "18.3.5"
+            },
+            {
+              "kind": "readme",
+              "label": "README Architecture",
+              "href": "https://github.com/AliHassan-15/Codebase-RAG/blob/master/README.md",
+              "section": "Architecture"
+            }
+          ]
+        },
+        "why": {
+          "status": "confirmed",
+          "value": "Unconstrained generation invents structure; answers must stay grounded in retrieved source context.",
+          "confidence": "confirmed",
+          "provenance": [
+            {
+              "kind": "identity",
+              "label": "Identity §18.3.5",
+              "path": "docs/product-bible/02-identity-specification.md",
+              "section": "18.3.5"
+            }
+          ]
+        },
+        "alternativeRejected": {
+          "status": "missing"
+        },
+        "validation": {
+          "status": "missing"
+        },
+        "futureDirection": {
+          "status": "confirmed",
+          "value": "Repository README Future Enhancements: multi-language codebase support; fine-tuned models for better code understanding; richer Slack commands/features. These are README aspirations, not completed work.",
+          "confidence": "readme-attributed",
+          "provenance": [
+            {
+              "kind": "readme",
+              "label": "README Future Enhancements",
+              "href": "https://github.com/AliHassan-15/Codebase-RAG/blob/master/README.md",
+              "section": "Future Enhancements"
+            }
+          ]
+        },
+        "referencedAgainBy": [
+          {
+            "kind": "atlas-decision",
+            "id": "dec-retrieval-first",
+            "label": "Retrieve before generate for codebase questions"
+          },
+          {
+            "kind": "atlas-system",
+            "id": "ai-system-design",
+            "label": "AI System Design"
+          },
+          {
+            "kind": "atlas-glossary",
+            "id": "gloss-retrieval",
+            "label": "Retrieval"
+          },
+          {
+            "kind": "atlas-glossary",
+            "id": "gloss-pipeline",
+            "label": "Pipeline"
+          }
+        ]
+      }
+    ]
+  },
+  "engineeringReferences": {
+    "status": "confirmed",
+    "value": [
+      {
+        "label": "Codebase-RAG repository",
+        "href": "https://github.com/AliHassan-15/Codebase-RAG",
+        "kind": "repository",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "Repository README",
+        "href": "https://github.com/AliHassan-15/Codebase-RAG/blob/master/README.md",
+        "kind": "readme",
+        "confidence": "readme-attributed"
+      },
+      {
+        "label": "Codebase_RAG.ipynb",
+        "href": "https://github.com/AliHassan-15/Codebase-RAG/blob/master/Codebase_RAG.ipynb",
+        "kind": "notebook",
+        "confidence": "public-artifact"
+      }
+    ]
   }
 }

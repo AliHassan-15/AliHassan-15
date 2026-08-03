@@ -1,35 +1,13 @@
 .root {
   display: grid;
-  gap: var(--eos-space-3);
-  padding: var(--eos-space-5);
-  border: var(--eos-border-width-hairline) solid var(--eos-color-border-subtle);
-  border-radius: var(--eos-radius-standard);
-  background: var(--eos-color-surface);
+  gap: var(--eos-space-4);
+  padding: var(--eos-space-5) 0;
+  border: 0;
+  border-top: var(--eos-border-width-hairline) solid
+    var(--eos-color-border-subtle);
+  border-radius: var(--eos-radius-none);
+  background: transparent;
   color: var(--eos-color-text-primary);
-  animation-name: eos-state-settle;
-  animation-duration: var(--eos-duration-steady);
-  animation-timing-function: var(--eos-ease-standard);
-  animation-fill-mode: both;
-}
-
-@keyframes eos-state-settle {
-  from {
-    opacity: 0.65;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .root {
-    animation: none;
-  }
-}
-
-html[data-eos-motion="reduce"] .root {
-  animation: none;
 }
 
 .action {

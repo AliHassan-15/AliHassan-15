@@ -12,9 +12,24 @@ const contentIsColocated = existsSync(colocatedContent);
 const contentRoot = contentIsColocated ? colocatedContent : monorepoContent;
 
 /**
- * Production security headers — simplest durable defaults for a static Companion.
- * Theme bootstrap is an inline script → script-src allows 'unsafe-inline'.
- * next/font self-hosts → no third-party font origins.
+ * GitHub Pages project site basePath.
+ * Local / preview without env → "" (site at /).
+ * Pages CI sets NEXT_PUBLIC_BASE_PATH=/AliHassan-15.
+ */
+const basePath = (() => {
+  const raw = process.env.NEXT_PUBLIC_BASE_PATH?.trim() ?? "";
+  if (!raw || raw === "/") {
+    return "";
+  }
+  return raw.startsWith("/")
+    ? raw.replace(/\/$/, "")
+    : `/${raw.replace(/\/$/, "")}`;
+})();
+
+/**
+ * Production security headers — retained as the Companion header contract.
+ * Static export (GitHub Pages) cannot apply Next.js headers at runtime;
+ * the values remain documented and verifiable in this file.
  */
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -43,8 +58,19 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  output: "export",
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
+  ...(basePath
+    ? {
+        basePath,
+        assetPrefix: basePath,
+      }
+    : {}),
   poweredByHeader: false,
-  // Monorepo only: trace repo-root content into the serverless bundle.
+  // Monorepo only: trace repo-root content into the build graph.
   // Colocated packs keep content inside the app root — no extra tracing root.
   ...(contentIsColocated
     ? {}
@@ -54,14 +80,10 @@ const nextConfig: NextConfig = {
           "/**": [`${contentRoot.replace(/\\/g, "/")}/**/*`],
         },
       }),
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-    ];
-  },
 };
 
 export default nextConfig;
+
+// Keep header contract discoverable for release verification (static export
+// cannot attach these on GitHub Pages).
+void securityHeaders;

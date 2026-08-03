@@ -22,7 +22,7 @@ practical. Anything that cannot be proven is documented as an accepted risk.
 | Permissions | `Permissions-Policy` disables camera, mic, geolocation, payment, USB |
 | CSP | Restrictive defaults; `script-src` / `style-src` allow `'unsafe-inline'` for Next + theme bootstrap; `'unsafe-eval'` retained for Next runtime compatibility |
 | Fingerprinting chrome | `poweredByHeader: false` |
-| Secrets | No server secrets in repo; app env allowlist is `NEXT_PUBLIC_SITE_URL`, `VERCEL_URL`, `NODE_ENV` |
+| Secrets | No server secrets in repo; app env allowlist is `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_BASE_PATH`, `NODE_ENV` |
 | Client bundles | Release verify scans `.next/static` for private-key / AWS secret patterns |
 | SRI | Not applied — first-party self-hosted assets only (next/font, local static). No third-party script CDNs |
 
@@ -88,11 +88,12 @@ Revisit overrides when Next ships patched nested versions natively.
 
 ## Production assumptions
 
-1. `NEXT_PUBLIC_SITE_URL` is set to the real public origin (no trailing slash).
-2. Deployment serves the Next production build (`pnpm build` / `pnpm start` or platform equivalent).
-3. Security headers from `next.config.ts` are not stripped by an intermediate CDN without replacement.
-4. Ambient audio file may be absent; audio must fail silent (M11/M13).
-5. No authentication, backend, or user-generated content surface exists.
+1. `NEXT_PUBLIC_SITE_URL` is set to the real public Companion URL (no trailing slash).
+2. `NEXT_PUBLIC_BASE_PATH` matches the GitHub Pages project basePath when used.
+3. Deployment serves the static export (`companion/out`) via GitHub Pages.
+4. Security header tokens remain documented in `next.config.ts` (Pages cannot apply Next runtime headers).
+5. Ambient audio may be absent; audio must fail silent (M11/M13).
+6. No authentication, backend, or user-generated content surface exists.
 
 ## Known accepted risks
 

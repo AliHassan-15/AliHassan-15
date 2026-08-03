@@ -45,8 +45,8 @@ export function getCaseStudyOrientation(project: ProjectContent): Orientation {
 
   return {
     where: `Companion · Case study · ${project.name}`,
-    why: `Engineering review of ${title}.`,
-    next: "Return to the Product Archive or Companion home when ready.",
+    why: `Engineering dossier — ${title}.`,
+    next: "Return to the Product Archive or Companion when the review is complete.",
     returnLabel: ROUTE_ORIENTATION.archive.label,
     returnHref: COMPANION_PATHS.archive,
   };

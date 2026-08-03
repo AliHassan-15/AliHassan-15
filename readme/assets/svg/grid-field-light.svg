@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="96" viewBox="0 0 720 96" role="img" aria-labelledby="grid-title grid-desc">
+  <title id="grid-title">Engineering grid field</title>
+  <desc id="grid-desc">Sparse drafting grid inside a registration frame.</desc>
+  <g fill="none" stroke="#8a8680" stroke-width="0.65" stroke-linecap="square">
+    <path d="M12 18V8H22"/>
+    <path d="M698 8H708V18"/>
+    <path d="M12 78V88H22"/>
+    <path d="M698 88H708V78"/>
+  </g>
+  <path fill="none" stroke="#8a8680" stroke-width="0.45" opacity="0.32" d="M24 12V84M48 12V84M72 12V84M96 12V84M120 12V84M144 12V84M168 12V84M192 12V84M216 12V84M240 12V84M264 12V84M288 12V84M312 12V84M336 12V84M360 12V84M384 12V84M408 12V84M432 12V84M456 12V84M480 12V84M504 12V84M528 12V84M552 12V84M576 12V84M600 12V84M624 12V84M648 12V84M672 12V84M696 12V84M24 12H696M24 36H696M24 60H696M24 84H696"/>
+  <rect x="12" y="8" width="696" height="80" fill="none" stroke="#3c3a37" stroke-width="0.45" opacity="0.42"/>
+</svg>

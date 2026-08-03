@@ -13,7 +13,10 @@
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["Enterprise SaaS", "Full-Stack Product"]
+    "value": [
+      "Enterprise SaaS",
+      "Full-Stack Product"
+    ]
   },
   "completionStatus": {
     "status": "confirmed",
@@ -21,18 +24,20 @@
   },
   "objective": {
     "status": "confirmed",
-    "value": "Full-stack ELD platform for U.S. trucking operational workflows."
+    "value": "Support U.S. trucking operational workflows with a full-stack ELD platform that models real driver and fleet processes rather than a thin CRUD shell."
   },
   "role": {
     "status": "confirmed",
-    "value": "Primary Full-Stack Developer — backend architecture, Django backend, database design, business logic, APIs, frontend, and FE/BE integration."
+    "value": "Primary Full-Stack Developer — backend architecture, Django backend, database design, business logic, APIs, frontend, and frontend/backend integration."
   },
   "creditLine": {
     "status": "missing"
   },
   "technologies": {
     "status": "confirmed",
-    "value": ["Django"]
+    "value": [
+      "Django"
+    ]
   },
   "repositoryUrl": {
     "status": "confirmed",
@@ -43,7 +48,8 @@
     "value": "RouteWise ELD"
   },
   "repositoryNote": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public source repository. Extended stack details beyond Django and the stated full-stack role remain Deferred under D-12 until Identity-grade confirmation."
   },
   "measuredOutcomes": {
     "status": "missing"
@@ -55,31 +61,214 @@
   "aiUsageClass": "conventional",
   "caseStudy": {
     "problem": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "U.S. trucking compliance and operational workflows (hours of service, driver and fleet roles, multi-role activity) need a full-stack system that models real process — not a thin CRUD shell around forms."
     },
     "overview": {
       "status": "confirmed",
-      "value": "Full-stack ELD platform around real U.S. trucking operational workflows; helps drivers/fleet operators manage compliance-related activities via modern web app; auth, operational workflows, backend, persistence, responsive frontend."
+      "value": "RouteWise ELD is a full-stack platform for U.S. trucking operational workflows. It helps drivers and fleet operators manage compliance-related activity through a web application with authentication, operational flows, persistence, and a responsive frontend."
     },
     "architecture": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Domain understanding precedes implementation: hours of service, compliance, driver and fleet roles, and multi-role workflows. Trust boundary: hos_engine is a pure-Python FMCSA HOS package with no Django, network, or database dependencies; the API calls plan_trip after routing. Persistence and HTTP live in the Django API layer; the React client consumes trip planning, map, and daily-log views. HOS constants encode 11h driving / 14h window / 10h reset / break-after-8 / 70h·8-day cycle from the FMCSA driver guide PDF kept under Requirements/.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.2",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.2"
+        },
+        {
+          "kind": "file",
+          "label": "hos_engine package docstring",
+          "href": "https://github.com/AliHassan-15/RouteWise-ELD/blob/main/hos_engine/__init__.py",
+          "repository": "AliHassan-15/RouteWise-ELD",
+          "path": "hos_engine/__init__.py"
+        },
+        {
+          "kind": "file",
+          "label": "hos_engine/constants.py",
+          "href": "https://github.com/AliHassan-15/RouteWise-ELD/blob/main/hos_engine/constants.py",
+          "path": "hos_engine/constants.py"
+        },
+        {
+          "kind": "commit",
+          "label": "feat(hos): add pure-Python 70/8 hours-of-service engine",
+          "href": "https://github.com/AliHassan-15/RouteWise-ELD/commit/30d4cac4b62b7441fbd82d4e8b7ca2aecdc5e2b8",
+          "commit": "30d4cac4b62b7441fbd82d4e8b7ca2aecdc5e2b8"
+        }
+      ]
     },
     "decisions": {
       "status": "confirmed",
-      "value": "Domain understanding before code — HOS/compliance/driver/fleet/multi-role workflows; translate business process without tight coupling; schema, permissions, services that evolve."
+      "value": "Start from domain understanding before implementation: hours of service, compliance, driver and fleet roles, and multi-role workflows. Translate business process into schema, permissions, and services that can evolve without hard-coding process steps into the UI."
     },
     "tradeoffs": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Evolvable domain model versus hard-coded process in the UI: schema, permissions, and services carry the business rules so driver/fleet workflows can change without rewriting the presentation layer for each process step."
     },
     "lessons": {
       "status": "confirmed",
-      "value": "More modular domain-driven architecture earlier; API docs from start; stronger integration tests; more deploy automation; better monitoring/structured logging."
+      "value": "A more modular domain-driven architecture earlier would have reduced later coupling. API documentation, integration tests, deployment automation, and structured logging should have been established at the start rather than after the product shape stabilized."
     },
     "constraints": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "HOS engine constants (hos_engine/constants.py): max 11h driving inside 14h window; ≥10h off-duty reset; 30-minute break after 8h cumulative driving; 70h/8-day cycle with optional 34h restart; 1h pickup and 1h dropoff on-duty; fuel stop interval 1000 miles. Requirements/ holds the FMCSA driver guide PDF used as source material. Extended non-Django stack listing remains Deferred (D-12)."
     },
     "rejectedApproaches": {
       "status": "missing"
     }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "confirmed",
+      "value": "Repository archaeology (RouteWise-ELD, 33 commits on main in window recovered): 2026-07-23 — initialize repo; feat(hos) pure-Python 70/8 HOS engine; Django API scaffold; geocode/route/HOS trip planning pipeline; FMCSA daily log sheets from HOS segments; React shell/theme; trip planner/map/compliance UI; SVG+PDF daily logs; shared trip across history/logs/map tabs; assessment references and sample sleeper-berth fixture. 2026-07-24 — production deploy config (Render and Vercel); Vercel Services then split frontend/backend projects; vendor hos_engine for Vercel backend root; clearer API errors/health check; UI log-sheet and metrics fixes.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "commit",
+          "label": "feat(hos): add pure-Python 70/8 hours-of-service engine",
+          "href": "https://github.com/AliHassan-15/RouteWise-ELD/commit/30d4cac4b62b7441fbd82d4e8b7ca2aecdc5e2b8",
+          "repository": "AliHassan-15/RouteWise-ELD",
+          "commit": "30d4cac4b62b7441fbd82d4e8b7ca2aecdc5e2b8"
+        },
+        {
+          "kind": "commit",
+          "label": "fix(api): vendor hos_engine for Vercel backend root deploy",
+          "href": "https://github.com/AliHassan-15/RouteWise-ELD/commit/550c0475b0915ca302fbe38b57489d31c03650ea",
+          "repository": "AliHassan-15/RouteWise-ELD",
+          "commit": "550c0475b0915ca302fbe38b57489d31c03650ea"
+        },
+        {
+          "kind": "repository",
+          "label": "RouteWise-ELD commit history",
+          "href": "https://github.com/AliHassan-15/RouteWise-ELD/commits/main",
+          "repository": "AliHassan-15/RouteWise-ELD"
+        }
+      ]
+    },
+    "decisionRecords": {
+      "status": "confirmed",
+      "value": "ADR-01 (Identity §18.3.2): Domain understanding before code — HOS/compliance/driver/fleet/multi-role workflows; translate business process into schema, permissions, and services that evolve without hard-coding process steps into the UI. ADR-02 (hos_engine package docstring + commits): Implement FMCSA HOS calculation as a pure-Python package with no Django/web/network/database dependencies; API and UI call into it after routing. ADR-03 (constants.py + Requirements/ FMCSA guide PDF in repo): Encode property-carrier HOS limits from the Interstate Truck Driver Guide to Hours of Service (FMCSA-HOS-395, April 2022) as named Decimal constants (11h driving, 14h window, 10h reset, 30-min break after 8h driving, 70h/8-day cycle, 34h restart). ADR-04 (commit history): Iterate deploy topology (Render/Vercel configs → Vercel Services → split projects → vendor hos_engine) to make backend packaging succeed on the chosen host."
+    },
+    "validationMethodology": {
+      "status": "confirmed",
+      "value": "Automated: pytest for hos_engine at repo root (pytest.ini testpaths=tests); Django API pytest under backend (README). HOS unit scenarios documented in tests/test_hos_engine.py: short trip needing no rest; one 30-minute break; 10-hour reset; multi-day multiple log sheets; cycle hours near 70-hour limit; auditor regression checks aligned with FMCSA guide examples. Manual/product verification paths are not separately documented beyond README local run and API docs at /api/docs/.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "file",
+          "label": "tests/test_hos_engine.py scenario list",
+          "href": "https://github.com/AliHassan-15/RouteWise-ELD/blob/main/tests/test_hos_engine.py",
+          "path": "tests/test_hos_engine.py"
+        },
+        {
+          "kind": "readme",
+          "label": "README Tests section",
+          "href": "https://github.com/AliHassan-15/RouteWise-ELD/blob/main/README.md",
+          "section": "Tests"
+        }
+      ]
+    },
+    "technicalRisks": {
+      "status": "confirmed",
+      "value": "HOS correctness risk on boundary rules (11/14/10, break-after-8, 70/8 cycle). Deploy packaging risk: hos_engine must be importable from the backend root on Vercel (addressed by vendoring commit). UI presentation risk: truncated route metrics and midnight log-label clipping (fixed in 2026-07-24 commits). External routing/geocoding dependency availability (OpenRouteService key required per README) — stack detail beyond Django remains Deferred D-12 for Identity-grade tech lists."
+    },
+    "failureModes": {
+      "status": "missing"
+    },
+    "knownLimitations": {
+      "status": "confirmed",
+      "value": "Identity-grade technologies beyond Django remain Deferred (D-12). Live demo Deferred (D-04). Operational assumptions encoded as constants include 1h pickup, 1h dropoff, fuel interval 1000 miles, and 70h/8-day cycle. Public framing omits assessment-vendor naming per Identity §18.3.2."
+    },
+    "futureDirections": {
+      "status": "confirmed",
+      "value": "Identity Do Differently: more modular domain-driven architecture earlier; API documentation from the start; stronger integration tests; more deploy automation; better monitoring and structured logging."
+    },
+    "assets": {
+      "status": "confirmed",
+      "value": [
+        "https://github.com/AliHassan-15/RouteWise-ELD",
+        "https://github.com/AliHassan-15/RouteWise-ELD/tree/main/hos_engine",
+        "https://github.com/AliHassan-15/RouteWise-ELD/blob/main/tests/test_hos_engine.py",
+        "https://github.com/AliHassan-15/RouteWise-ELD/tree/main/Requirements"
+      ]
+    },
+    "decisionLineages": [
+      {
+        "id": "ADR-02",
+        "decision": {
+          "status": "confirmed",
+          "value": "Implement FMCSA HOS calculation as a pure-Python package with no Django/web/network/database dependencies."
+        },
+        "why": {
+          "status": "confirmed",
+          "value": "API and UI call into the engine after routing; the domain package stays independently testable."
+        },
+        "alternativeRejected": {
+          "status": "missing"
+        },
+        "validation": {
+          "status": "confirmed",
+          "value": "pytest scenarios in tests/test_hos_engine.py for short trip, break, reset, multi-day logs, near-70h cycle, auditor checks."
+        },
+        "futureDirection": {
+          "status": "missing"
+        },
+        "referencedAgainBy": [
+          {
+            "kind": "atlas-system",
+            "id": "api-boundary-design",
+            "label": "API Boundary Design"
+          },
+          {
+            "kind": "atlas-decision",
+            "id": "dec-hos-isolation",
+            "label": "Pure-Python HOS package"
+          },
+          {
+            "kind": "atlas-glossary",
+            "id": "gloss-boundary",
+            "label": "Boundary"
+          }
+        ]
+      }
+    ]
+  },
+  "engineeringReferences": {
+    "status": "confirmed",
+    "value": [
+      {
+        "label": "RouteWise-ELD repository",
+        "href": "https://github.com/AliHassan-15/RouteWise-ELD",
+        "kind": "repository",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "hos_engine package",
+        "href": "https://github.com/AliHassan-15/RouteWise-ELD/tree/main/hos_engine",
+        "kind": "file",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "HOS engine unit tests",
+        "href": "https://github.com/AliHassan-15/RouteWise-ELD/blob/main/tests/test_hos_engine.py",
+        "kind": "file",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "FMCSA Requirements materials",
+        "href": "https://github.com/AliHassan-15/RouteWise-ELD/tree/main/Requirements",
+        "kind": "document",
+        "confidence": "public-artifact"
+      },
+      {
+        "label": "Repository README",
+        "href": "https://github.com/AliHassan-15/RouteWise-ELD/blob/main/README.md",
+        "kind": "readme",
+        "confidence": "readme-attributed"
+      }
+    ]
   }
 }

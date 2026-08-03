@@ -6,9 +6,11 @@ import {
   getArchiveProjects,
   getIdentity,
   getProjectBySlug,
+  getProjectNetwork,
   projectDisplayTitle,
 } from "@/modules/meaning";
 import { CaseStudyDocument } from "@/modules/presentation/case-study";
+import { EosLocation } from "@/modules/presentation/eos";
 import { Section, Stack } from "@/modules/presentation/layout";
 import { Link, Text } from "@/modules/presentation/primitives";
 import styles from "../../document.module.css";
@@ -75,15 +77,28 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   }
 
   const orientation = getCaseStudyOrientation(project);
+  const network = getProjectNetwork(project.id);
+  const primarySystem = network.systems[0] ?? null;
+
+  const locationSegments = [
+    { label: "Companion", href: COMPANION_PATHS.home },
+    { label: "Product Archive", href: COMPANION_PATHS.archive },
+    {
+      label: "Engineering Systems Atlas",
+      href: primarySystem?.href ?? COMPANION_PATHS.atlas,
+    },
+    ...(primarySystem
+      ? [{ label: primarySystem.title, href: primarySystem.href }]
+      : []),
+    { label: project.name },
+  ];
 
   return (
     <div className={styles.article}>
       <Reveal step={0}>
         <nav className={styles.block} aria-label="Case study location">
-          <Stack gap={2}>
-            <Text as="p" size="caption" tone="tertiary">
-              {orientation.where}
-            </Text>
+          <Stack gap={4}>
+            <EosLocation segments={locationSegments} />
             <Link href={COMPANION_PATHS.archive} tone="secondary">
               ← {orientation.returnLabel}
             </Link>
@@ -98,11 +113,14 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <Reveal step={2}>
         <Section gap={4} className={styles.block}>
           <Stack gap={3}>
+            <Link href={COMPANION_PATHS.atlas} tone="secondary">
+              Engineering Systems Atlas
+            </Link>
             <Link href={COMPANION_PATHS.archive} tone="secondary">
-              Return to Product Archive
+              Product Archive
             </Link>
             <Link href={COMPANION_PATHS.home} tone="secondary">
-              Return to Companion home
+              Companion
             </Link>
             <Text as="p" size="caption" tone="tertiary">
               Next: {orientation.next}

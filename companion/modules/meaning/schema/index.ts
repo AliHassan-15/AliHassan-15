@@ -1,10 +1,20 @@
 export {
   discoveryStatusSchema,
+  evidenceConfidenceSchema,
   evidenceStringSchema,
   evidenceStringListSchema,
+  provenanceKindSchema,
+  provenanceSourceSchema,
+  engineeringReferenceSchema,
+  engineeringReferencesFieldSchema,
   type DiscoveryStatus,
+  type EvidenceConfidence,
   type EvidenceString,
   type EvidenceStringList,
+  type ProvenanceKind,
+  type ProvenanceSource,
+  type EngineeringReference,
+  type EngineeringReferencesField,
 } from "./discovery";
 export { identitySchema, type IdentityContent } from "./identity";
 export {
@@ -13,9 +23,15 @@ export {
   projectTierSchema,
   aiUsageClassSchema,
   caseStudySectionsSchema,
+  engineeringCaseFileSchema,
+  engineeringPatternSchema,
+  engineeringPatternsSchema,
   type ProjectContent,
   type ProjectCatalog,
   type CaseStudySections,
+  type EngineeringCaseFile,
+  type EngineeringPattern,
+  type EngineeringPatternsContent,
 } from "./project";
 export {
   assetReferenceSchema,
@@ -32,3 +48,26 @@ export {
   type ExternalLinksContent,
   type WritingReferencesContent,
 } from "./links";
+export {
+  engineeringAtlasSchema,
+  atlasSystemSchema,
+  atlasEvolutionStepSchema,
+  atlasArchitectureComponentSchema,
+  atlasDecisionSchema,
+  atlasFailureSchema,
+  atlasValidationSchema,
+  atlasGlossaryEntrySchema,
+  atlasRelationshipSchema,
+  atlasRelationshipStepSchema,
+  type EngineeringAtlas,
+  type AtlasSystem,
+  type AtlasEvolutionStep,
+  type AtlasArchitectureComponent,
+  type AtlasDecision,
+  type AtlasFailure,
+  type AtlasValidation,
+  type AtlasGlossaryEntry,
+  type AtlasRelationship,
+  type AtlasRelationshipStep,
+} from "./atlas";
+export { decisionLineageSchema, type DecisionLineage } from "./lineage";

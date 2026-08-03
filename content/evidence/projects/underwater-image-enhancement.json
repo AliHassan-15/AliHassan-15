@@ -8,11 +8,15 @@
   "includeInArchive": true,
   "sortOrder": 30,
   "subtitle": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "AI / Computer Vision · Full-Stack AI Application"
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["AI / Computer Vision", "Full-Stack AI Application"]
+    "value": [
+      "AI / Computer Vision",
+      "Full-Stack AI Application"
+    ]
   },
   "completionStatus": {
     "status": "confirmed",
@@ -20,11 +24,11 @@
   },
   "objective": {
     "status": "confirmed",
-    "value": "AI-powered enhancement of underwater photographs with a full pipeline from training to a production-style web interface."
+    "value": "Restore underwater photographs through a custom model pipeline that continues through evaluation and a production-style web interface — not a notebook-only experiment."
   },
   "role": {
     "status": "confirmed",
-    "value": "Sole Developer — dataset prep, model design, training, evaluation (PSNR/SSIM), Grad-CAM, FastAPI, React, end-to-end deploy architecture."
+    "value": "Sole Developer — dataset preparation, model design, training, evaluation (PSNR/SSIM), Grad-CAM, FastAPI, React, and end-to-end deployment architecture."
   },
   "creditLine": {
     "status": "missing"
@@ -48,10 +52,22 @@
     "value": "Underwater Image Enhancement"
   },
   "repositoryNote": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public repository includes AttentionResUNet training/evaluation notebooks, FastAPI inference server (`/api/enhance`), React frontend, and committed evaluation outputs under Code/Results.ipynb."
   },
   "measuredOutcomes": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Committed evaluation notebook (Code/Results.ipynb) reports test-set AttentionResUNet output PSNR 19.76 ± 2.52 dB and SSIM 0.7353 ± 0.1508; mean PSNR gain +6.78 dB and SSIM gain +0.1496 versus input; PSNR range 10.31–26.08 dB. Evaluation method also includes Grad-CAM and classical-vs-DL comparison artifacts in-repo.",
+    "confidence": "confirmed",
+    "provenance": [
+      {
+        "kind": "notebook",
+        "label": "Code/Results.ipynb executed outputs",
+        "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/Code/Results.ipynb",
+        "path": "Code/Results.ipynb",
+        "commit": "df7dd8872a0cec3feebf940d50061f8f383fd310"
+      }
+    ]
   },
   "liveDemo": {
     "status": "missing"
@@ -59,31 +75,180 @@
   "aiUsageClass": "essential",
   "caseStudy": {
     "problem": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Underwater photographs suffer color cast and contrast loss. The work must restore usable imagery through a trainable model and ship the result as software — API and frontend included — not stop at a notebook checkpoint."
     },
     "overview": {
       "status": "confirmed",
-      "value": "AI image enhancement platform restoring underwater photos via custom AttentionResUNet; full pipeline training → production-style deployment; FastAPI backend + React frontend."
+      "value": "An image enhancement system for underwater photographs using a custom AttentionResUNet. The work covers training through production-style deployment, with a FastAPI backend and React frontend treated as part of the same product boundary."
     },
     "architecture": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Component boundaries: model.py / models_all (AttentionResUNet, with UNet/ResUNet variants available) → training/evaluation notebooks under Code/ → FastAPI api_server.py (CPU-forced inference, preprocess to 256², POST /api/enhance) → React/Vite frontend. Persistence of checkpoints under output/module3_deeplearning/models. Inference lifecycle: upload bytes → decode/resize/normalize [-1,1] → forward pass → PNG response. Failure boundary: missing checkpoint or undecodable image fails before enhancement.",
+      "confidence": "confirmed",
+      "provenance": [
+        {
+          "kind": "identity",
+          "label": "Identity §18.3.3",
+          "path": "docs/product-bible/02-identity-specification.md",
+          "section": "18.3.3"
+        },
+        {
+          "kind": "file",
+          "label": "model.py AttentionResUNet",
+          "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/model.py",
+          "path": "model.py",
+          "commit": "df7dd8872a0cec3feebf940d50061f8f383fd310"
+        },
+        {
+          "kind": "file",
+          "label": "api_server.py inference path",
+          "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/api_server.py",
+          "path": "api_server.py",
+          "commit": "df7dd8872a0cec3feebf940d50061f8f383fd310"
+        }
+      ]
     },
     "decisions": {
       "status": "confirmed",
-      "value": "Turning research into usable software — balance quality, inference speed, API, frontend, deployment as one product."
+      "value": "Treat research quality and product usability as one problem: image quality, inference speed, API surface, frontend interaction, and deployment must hold together. The system is judged as usable software, not only as a model checkpoint."
     },
     "tradeoffs": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Research iteration versus product surface: model quality, inference cost, API contract, frontend, and deployment are judged together, so notebook-only gains that break serving or interaction are not treated as success."
     },
     "lessons": {
       "status": "confirmed",
-      "value": "Containerize inference early; improve GPU deploy; async for larger workloads; stronger experiment tracking; cleaner model serving separated from app logic."
+      "value": "Containerize inference early. Improve GPU deployment paths. Use asynchronous handling for larger workloads. Strengthen experiment tracking. Keep model serving separated from application logic so research iteration does not destabilize the product surface."
     },
     "constraints": {
-      "status": "missing"
+      "status": "confirmed",
+      "value": "Training and evaluation are scoped to the LSUI (Large Scale Underwater Image) dataset. Inference depends on a trained checkpoint (best_model.pth) produced by the training pipeline."
     },
     "rejectedApproaches": {
       "status": "missing"
     }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "confirmed",
+      "value": "Repository archaeology: single public milestone commit 2026-04-22 — Initial commit: underwater image enhancement module (API, models, frontend, training code). Design artifacts in-tree include AttentionResUNet plus UNet/ResUNet variants (models_all import path in api_server.py) and Code/ training/evaluation notebooks."
+    },
+    "decisionRecords": {
+      "status": "confirmed",
+      "value": "ADR-01 (Identity §18.3.3): Treat research quality and product usability as one problem — image quality, inference speed, API, frontend, and deployment judged together. ADR-02 (README + model.py): Use AttentionResUNet (residual blocks + attention gates in U-Net encoder–decoder, 3×256×256, tanh [-1,1]) on LSUI. ADR-03 (api_server.py): Force CPU inference for the FastAPI server (CUDA_VISIBLE_DEVICES cleared; torch device cpu) to avoid CUDA deploy failures; load AttentionResUNet (and related architectures) for POST /api/enhance. ADR-04 (README requirements table): Include Grad-CAM explainability and classical-vs-DL metrics comparison as part of Module 3 acceptance."
+    },
+    "validationMethodology": {
+      "status": "confirmed",
+      "value": "Training/evaluation notebooks under Code/ (train, evaluate, Results). Metrics: PSNR and SSIM on test set; Grad-CAM visualizations; comparison with classical Module 2 via metrics artifacts. Committed Results.ipynb executed outputs report mean output PSNR 19.76 ± 2.52 dB and SSIM 0.7353 ± 0.1508 with mean PSNR gain +6.78 dB vs input. README Expected Metrics (~22–24 dB) are aspirational targets — not substituted for notebook outputs. Local verification path: train.py / evaluate.py; api_server.py + frontend npm run dev."
+    },
+    "technicalRisks": {
+      "status": "confirmed",
+      "value": "CUDA out-of-memory during training (README troubleshooting: reduce batch size). Missing checkpoint if train.py not run before API serve. Frontend/API port coupling (API :8000, frontend :5173). CPU-only serving trades inference speed for deploy reliability."
+    },
+    "failureModes": {
+      "status": "confirmed",
+      "value": "API returns errors when image decode fails (api_server preprocess). Model-not-found if best_model.pth absent (README). Wide quality variance on test set (notebook: PSNR range 10.31–26.08 dB)."
+    },
+    "knownLimitations": {
+      "status": "confirmed",
+      "value": "Scoped to LSUI. Serving defaults to CPU. Live demo Missing. README expected metric band differs from committed notebook results — notebook outputs are the measured evidence."
+    },
+    "futureDirections": {
+      "status": "confirmed",
+      "value": "Identity Do Differently: containerize inference early; improve GPU deploy; async handling for larger workloads; stronger experiment tracking; cleaner model serving separated from application logic."
+    },
+    "assets": {
+      "status": "confirmed",
+      "value": [
+        "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System",
+        "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/Code/Results.ipynb",
+        "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/api_server.py",
+        "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/model.py",
+        "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/frontend/public/visualizations/metrics_distribution.png"
+      ]
+    },
+    "decisionLineages": [
+      {
+        "id": "ADR-03",
+        "decision": {
+          "status": "confirmed",
+          "value": "Force CPU inference for the FastAPI enhancement server (CUDA_VISIBLE_DEVICES cleared; torch device cpu)."
+        },
+        "why": {
+          "status": "confirmed",
+          "value": "Avoid CUDA deploy failures; prefer a stable serving path over GPU packaging risk."
+        },
+        "alternativeRejected": {
+          "status": "missing"
+        },
+        "validation": {
+          "status": "confirmed",
+          "value": "Public api_server.py encodes the CPU-forced path; evaluation metrics remain in committed Results.ipynb."
+        },
+        "futureDirection": {
+          "status": "confirmed",
+          "value": "Identity Do Differently: improve GPU deploy; containerize inference early; cleaner model serving separated from application logic."
+        },
+        "referencedAgainBy": [
+          {
+            "kind": "atlas-system",
+            "id": "deployment-philosophy",
+            "label": "Deployment Philosophy"
+          },
+          {
+            "kind": "atlas-decision",
+            "id": "dec-cpu-serving",
+            "label": "Force CPU inference"
+          },
+          {
+            "kind": "atlas-glossary",
+            "id": "gloss-serving",
+            "label": "Serving"
+          }
+        ]
+      }
+    ]
+  },
+  "engineeringReferences": {
+    "status": "confirmed",
+    "value": [
+      {
+        "label": "Underwater Image Enhancement repository",
+        "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System",
+        "kind": "repository",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "Results notebook (executed outputs)",
+        "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/Code/Results.ipynb",
+        "kind": "notebook",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "FastAPI inference server",
+        "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/api_server.py",
+        "kind": "file",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "AttentionResUNet model definition",
+        "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/model.py",
+        "kind": "file",
+        "confidence": "confirmed"
+      },
+      {
+        "label": "Metrics distribution visualization",
+        "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/frontend/public/visualizations/metrics_distribution.png",
+        "kind": "other",
+        "confidence": "public-artifact"
+      },
+      {
+        "label": "Repository README",
+        "href": "https://github.com/AliHassan-15/Underwater-Image-Enhancement-System/blob/main/README.md",
+        "kind": "readme",
+        "confidence": "readme-attributed"
+      }
+    ]
   }
 }

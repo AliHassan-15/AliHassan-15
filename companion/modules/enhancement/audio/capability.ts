@@ -1,4 +1,5 @@
 import type { AudioCapability, AudioGateReason } from "./types";
+import { areAmbientAssetsReady } from "./config";
 
 export type AudioGateResult = {
   capability: AudioCapability;
@@ -7,6 +8,7 @@ export type AudioGateResult = {
 
 /**
  * Fail-closed probe — audio never required for meaning.
+ * No assets → unavailable (do not invent substitutes).
  */
 export function probeAudioCapability(): AudioGateResult {
   if (typeof window === "undefined") {
@@ -28,6 +30,10 @@ export function probeAudioCapability(): AudioGateResult {
 
   if (typeof Audio === "undefined") {
     return { capability: "unavailable", reason: "no-audio" };
+  }
+
+  if (!areAmbientAssetsReady()) {
+    return { capability: "unavailable", reason: "no-assets" };
   }
 
   return { capability: "available", reason: "ok" };

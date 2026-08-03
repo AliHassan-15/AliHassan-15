@@ -1,0 +1,156 @@
+.root {
+  position: relative;
+  display: grid;
+  gap: var(--eos-space-6);
+}
+
+.live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.scrubber {
+  margin: 0;
+}
+
+.scrubberList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--eos-space-2);
+}
+
+.scrubberItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eos-space-2);
+  margin: 0;
+}
+
+.scrubberControl {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--eos-space-2);
+  margin: 0;
+  padding-block: var(--eos-space-2);
+  padding-inline: var(--eos-space-3);
+  border: var(--eos-border-width-hairline) solid transparent;
+  border-inline-start: var(--eos-border-width-strong) solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  opacity: 0.96;
+  transform: scale(0.997);
+  transform-origin: center left;
+  transition:
+    opacity 200ms var(--eos-ease-emphasized),
+    transform 200ms var(--eos-ease-emphasized),
+    border-color 200ms var(--eos-ease-emphasized);
+}
+
+.scrubberControl[data-eos-demonstration-active="true"] {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--eos-color-border-subtle);
+  border-inline-start-color: var(--eos-color-border-strong);
+}
+
+.scrubberControl:focus {
+  outline: none;
+}
+
+.scrubberControl:focus-visible {
+  outline: var(--eos-border-width-strong) solid var(--eos-color-focus);
+  outline-offset: 2px;
+}
+
+.scrubberRule {
+  font-family: var(--eos-font-family-mono);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  opacity: 0.55;
+}
+
+.plate {
+  display: grid;
+  gap: var(--eos-space-3);
+  max-width: var(--eos-measure-prose);
+  padding-block: var(--eos-space-4);
+  padding-inline: 0;
+  border-top: var(--eos-border-width-hairline) solid
+    var(--eos-color-border-subtle);
+  opacity: 0.96;
+  transform: scale(0.997);
+  transform-origin: top left;
+  transition:
+    opacity 200ms var(--eos-ease-emphasized),
+    transform 200ms var(--eos-ease-emphasized);
+}
+
+.plate[data-eos-demonstration-active="true"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.plateRow,
+.plateBlock {
+  display: grid;
+  gap: var(--eos-space-1);
+}
+
+.relatedList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--eos-space-2);
+}
+
+.root[data-eos-demonstration-motion="reduce"] .scrubberControl,
+.root[data-eos-demonstration-motion="reduce"] .plate {
+  transition: none;
+  transform: none;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrubberControl,
+  .plate {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+html[data-eos-motion="reduce"] .scrubberControl,
+html[data-eos-motion="reduce"] .plate {
+  transition: none;
+  transform: none;
+  opacity: 1;
+}
+
+.section {
+  display: grid;
+  gap: var(--eos-space-6);
+}
+
+.sectionLabel {
+  margin: 0;
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  color: var(--eos-color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}

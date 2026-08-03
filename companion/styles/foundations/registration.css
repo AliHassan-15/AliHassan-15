@@ -1,0 +1,111 @@
+/**
+ * Registration language — EOS visual signature.
+ * Print/drafting crop marks: L-corners, edge ticks, plate anchors.
+ * Extremely low contrast. Never decorative.
+ */
+
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+  --eos-mark-length: 0.1875rem;
+  --eos-mark-inset: 0.125rem;
+  --eos-mark-tick: 0.0875rem;
+  --eos-mark-weight: var(--eos-border-width-hairline);
+  --eos-mark-opacity: 0.032;
+  --eos-mark-opacity-quiet: 0.018;
+
+  --eos-mark-stroke: linear-gradient(
+    var(--eos-color-border-strong),
+    var(--eos-color-border-strong)
+  );
+  --eos-mark-stroke-quiet: linear-gradient(
+    var(--eos-color-border-subtle),
+    var(--eos-color-border-subtle)
+  );
+
+  /* Horizontal rule end ticks */
+  --eos-mark-rule-ends:
+    var(--eos-mark-stroke) left center / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) right center / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat;
+
+  --eos-mark-rule-ends-quiet:
+    var(--eos-mark-stroke-quiet) left center / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke-quiet) right center / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat;
+
+  /* Ticks anchored to the top edge of a bordered region */
+  --eos-mark-rule-caps:
+    var(--eos-mark-stroke) left top / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) right top / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat;
+
+  /* Vertical posts at content top */
+  --eos-mark-posts:
+    var(--eos-mark-stroke) left top / var(--eos-mark-weight)
+      var(--eos-mark-length) no-repeat,
+    var(--eos-mark-stroke) right top / var(--eos-mark-weight)
+      var(--eos-mark-length) no-repeat;
+
+  /* Caps on a vertical spine */
+  --eos-mark-spine-caps:
+    var(--eos-mark-stroke) 0 0 / var(--eos-mark-length) var(--eos-mark-weight)
+      no-repeat,
+    var(--eos-mark-stroke) 0 100% / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat;
+
+  /* Document / paper frame corners */
+  --eos-mark-frame:
+    var(--eos-mark-stroke) 0 0 / var(--eos-mark-length) var(--eos-mark-weight)
+      no-repeat,
+    var(--eos-mark-stroke) 0 0 / var(--eos-mark-weight) var(--eos-mark-length)
+      no-repeat,
+    var(--eos-mark-stroke) 100% 0 / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) 100% 0 / var(--eos-mark-weight)
+      var(--eos-mark-length) no-repeat,
+    var(--eos-mark-stroke) 0 100% / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) 0 100% / var(--eos-mark-weight)
+      var(--eos-mark-length) no-repeat,
+    var(--eos-mark-stroke) 100% 100% / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) 100% 100% / var(--eos-mark-weight)
+      var(--eos-mark-length) no-repeat;
+
+  /* Serial plate: inset corners + mid-edge ticks */
+  --eos-mark-plate:
+    var(--eos-mark-stroke) var(--eos-mark-inset) var(--eos-mark-inset) /
+      var(--eos-mark-length) var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) var(--eos-mark-inset) var(--eos-mark-inset) /
+      var(--eos-mark-weight) var(--eos-mark-length) no-repeat,
+    var(--eos-mark-stroke) calc(100% - var(--eos-mark-inset))
+      var(--eos-mark-inset) / var(--eos-mark-length) var(--eos-mark-weight)
+      no-repeat,
+    var(--eos-mark-stroke) calc(100% - var(--eos-mark-inset))
+      var(--eos-mark-inset) / var(--eos-mark-weight) var(--eos-mark-length)
+      no-repeat,
+    var(--eos-mark-stroke) var(--eos-mark-inset)
+      calc(100% - var(--eos-mark-inset)) / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) var(--eos-mark-inset)
+      calc(100% - var(--eos-mark-inset)) / var(--eos-mark-weight)
+      var(--eos-mark-length) no-repeat,
+    var(--eos-mark-stroke) calc(100% - var(--eos-mark-inset))
+      calc(100% - var(--eos-mark-inset)) / var(--eos-mark-length)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) calc(100% - var(--eos-mark-inset))
+      calc(100% - var(--eos-mark-inset)) / var(--eos-mark-weight)
+      var(--eos-mark-length) no-repeat,
+    var(--eos-mark-stroke) 50% var(--eos-mark-inset) / var(--eos-mark-tick)
+      var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) var(--eos-mark-inset) 50% / var(--eos-mark-weight)
+      var(--eos-mark-tick) no-repeat,
+    var(--eos-mark-stroke) 50% calc(100% - var(--eos-mark-inset)) /
+      var(--eos-mark-tick) var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) calc(100% - var(--eos-mark-inset)) 50% /
+      var(--eos-mark-weight) var(--eos-mark-tick) no-repeat;
+}

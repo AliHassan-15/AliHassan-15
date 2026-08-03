@@ -1,6 +1,6 @@
 .root {
   display: inline-flex;
-  border-radius: var(--eos-radius-standard);
+  border-radius: var(--eos-radius-none);
 }
 
 .root:focus-within {

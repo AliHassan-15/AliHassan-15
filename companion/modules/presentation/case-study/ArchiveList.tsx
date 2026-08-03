@@ -5,6 +5,7 @@ import {
   type ProjectContent,
 } from "@/modules/meaning";
 import { COMPANION_PATHS } from "@/modules/experience/routes";
+import { cx } from "@/modules/presentation/lib/cx";
 import { Heading, Link, Text } from "@/modules/presentation/primitives";
 import styles from "./ArchiveList.module.css";
 
@@ -54,7 +55,15 @@ export function ArchiveList({ projects }: ArchiveListProps) {
               {group.items.map((project) => {
                 const types = discloseEvidenceStringList(project.typeLabels);
                 return (
-                  <li key={project.id} className={styles.item}>
+                  <li
+                    key={project.id}
+                    className={cx(
+                      styles.item,
+                      group.tier === "flagship" && styles.flagship,
+                      group.tier === "supporting" && styles.supporting,
+                      group.tier === "archive" && styles.archiveTier,
+                    )}
+                  >
                     <Link
                       href={COMPANION_PATHS.project(project.slug)}
                       tone="secondary"

@@ -31,27 +31,44 @@
 
 .size-caption {
   font-size: var(--eos-font-size-caption);
-  line-height: var(--eos-line-height-normal);
+  line-height: 1.2;
   letter-spacing: var(--eos-letter-spacing-wide);
+  font-variant-numeric: tabular-nums;
 }
 
 .size-body-sm {
   font-size: var(--eos-font-size-body-sm);
   line-height: var(--eos-line-height-normal);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  text-wrap: pretty;
+  orphans: 3;
+  widows: 3;
 }
 
 .size-body {
   font-size: var(--eos-font-size-body);
   line-height: var(--eos-line-height-relaxed);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  text-wrap: pretty;
+  orphans: 4;
+  widows: 4;
 }
 
 .size-body-lg {
   font-size: var(--eos-font-size-body-lg);
   line-height: var(--eos-line-height-relaxed);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  text-wrap: pretty;
+  orphans: 4;
+  widows: 4;
 }
 
 .size-lead {
-  font-size: var(--eos-font-size-body-lg);
+  font-size: var(--eos-font-size-body);
   line-height: var(--eos-line-height-relaxed);
   max-width: var(--eos-measure-prose);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  text-wrap: pretty;
+  orphans: 4;
+  widows: 4;
 }

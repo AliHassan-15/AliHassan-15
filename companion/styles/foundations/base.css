@@ -1,20 +1,31 @@
 html {
   background-color: var(--eos-color-canvas);
   color: var(--eos-color-text-primary);
+  text-size-adjust: 100%;
+  scroll-padding-top: var(--eos-space-7);
 }
 
 body {
   position: relative;
   z-index: var(--eos-layer-content);
   min-height: 100vh;
+  min-height: 100dvh;
   background-color: var(--eos-color-canvas);
   color: var(--eos-color-text-primary);
   font-family: var(--eos-font-family-sans);
   font-size: var(--eos-font-size-body);
   font-weight: var(--eos-font-weight-regular);
   letter-spacing: var(--eos-letter-spacing-normal);
+  line-height: var(--eos-line-height-relaxed);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1;
+  font-optical-sizing: auto;
+  hanging-punctuation: first last;
 }
 
 a {
@@ -26,4 +37,15 @@ kbd,
 pre,
 samp {
   font-family: var(--eos-font-family-mono);
+  font-feature-settings:
+    "kern" 1,
+    "liga" 0,
+    "tnum" 1;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
 }

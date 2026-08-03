@@ -1,0 +1,223 @@
+.root {
+  display: grid;
+  gap: var(--eos-space-7);
+  position: relative;
+  isolation: isolate;
+}
+
+.section {
+  display: grid;
+  gap: var(--eos-space-6);
+}
+
+.live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(16rem, 20rem);
+  gap: var(--eos-space-3);
+  align-items: stretch;
+  overflow-x: auto;
+  padding-block: var(--eos-space-3);
+  padding-inline: var(--eos-space-1);
+  scroll-snap-type: x proximity;
+}
+
+.stationWrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--eos-space-3);
+  align-items: center;
+  scroll-snap-align: center;
+}
+
+.station {
+  display: grid;
+  gap: var(--eos-space-3);
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding-block: var(--eos-space-4);
+  padding-inline: var(--eos-space-4);
+  border: var(--eos-border-width-hairline) solid var(--eos-color-border-subtle);
+  border-inline-start: var(--eos-border-width-strong) solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  opacity: 0.97;
+  transform: scale(0.996);
+  transform-origin: center top;
+  transition:
+    opacity 200ms var(--eos-ease-emphasized),
+    transform 200ms var(--eos-ease-emphasized),
+    border-color 200ms var(--eos-ease-emphasized);
+}
+
+.station[data-eos-station-active="true"] {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--eos-color-border-subtle);
+  border-inline-start-color: var(--eos-color-border-strong);
+}
+
+.station[data-eos-station-dimmed="true"] {
+  opacity: 0.72;
+}
+
+.station:hover {
+  border-color: var(--eos-color-border-subtle);
+}
+
+.station:focus {
+  outline: none;
+}
+
+.station:focus-visible {
+  outline: var(--eos-border-width-strong) solid var(--eos-color-focus);
+  outline-offset: 2px;
+}
+
+.root[data-eos-journey-motion="full"] .station[data-eos-station-active="true"] {
+  animation: eos-journey-drift 48s var(--eos-ease-breathe) infinite alternate;
+}
+
+@keyframes eos-journey-drift {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: 0 10px;
+  }
+}
+
+.connector {
+  font-family: var(--eos-font-family-mono);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  opacity: 0.55;
+}
+
+.plate {
+  display: grid;
+  gap: var(--eos-space-3);
+  max-width: var(--eos-measure-prose);
+  padding-block: var(--eos-space-4);
+  padding-inline: 0;
+  border-top: var(--eos-border-width-hairline) solid
+    var(--eos-color-border-subtle);
+}
+
+.plateRow,
+.plateBlock {
+  display: grid;
+  gap: var(--eos-space-1);
+}
+
+.plateBlock[data-eos-journey-sync="true"] {
+  opacity: 1;
+}
+
+.relatedList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--eos-space-2);
+}
+
+.connectionControl {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.connectionControl:focus {
+  outline: none;
+}
+
+.connectionControl:focus-visible {
+  outline: var(--eos-border-width-strong) solid var(--eos-color-focus);
+  outline-offset: 2px;
+}
+
+.capabilitySync {
+  display: grid;
+  gap: var(--eos-space-4);
+  padding-top: var(--eos-space-4);
+  border-top: var(--eos-border-width-hairline) solid
+    var(--eos-color-border-subtle);
+}
+
+.syncCaption {
+  margin: 0;
+  font-family: var(--eos-font-family-mono);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  font-variant-numeric: tabular-nums;
+}
+
+.missing {
+  display: grid;
+  gap: var(--eos-space-2);
+}
+
+@media (max-width: 1079px) {
+  .track {
+    grid-auto-flow: row;
+    grid-auto-columns: unset;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .stationWrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .connector {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .station {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .root[data-eos-journey-motion="full"]
+    .station[data-eos-station-active="true"] {
+    animation: none;
+  }
+}
+
+html[data-eos-motion="reduce"] .station {
+  transition: none;
+  transform: none;
+  opacity: 1;
+}
+
+html[data-eos-motion="reduce"]
+  .root[data-eos-journey-motion="full"]
+  .station[data-eos-station-active="true"] {
+  animation: none;
+}

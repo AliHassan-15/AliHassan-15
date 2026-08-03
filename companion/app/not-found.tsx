@@ -22,10 +22,10 @@ export default function NotFoundPage() {
           </Paragraph>
           <div className={styles.actions}>
             <Link href={COMPANION_PATHS.home} tone="secondary">
-              Return to Companion home
+              Companion
             </Link>
             <Link href={COMPANION_PATHS.archive} tone="secondary">
-              Enter the Product Archive
+              Product Archive
             </Link>
           </div>
         </Stack>

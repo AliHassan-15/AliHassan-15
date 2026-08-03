@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="24" viewBox="0 0 160 24" role="img" aria-labelledby="label-title label-desc">
+  <title id="label-title">System section label</title>
+  <desc id="label-desc">Compact registration label plate.</desc>
+  <g fill="none" stroke="#d9d7d2" stroke-width="0.8" stroke-linecap="square">
+    <path d="M0 5V0H5"/>
+    <path d="M155 0H160V5"/>
+    <path d="M0 19V24H5"/>
+    <path d="M155 24H160V19"/>
+  </g>
+  <text x="10" y="16" fill="#e8e7e4" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" letter-spacing="0.1em" text-anchor="start">SYSTEM</text>
+</svg>

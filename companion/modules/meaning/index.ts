@@ -8,11 +8,29 @@ import {
 import {
   discloseEvidenceString,
   discloseEvidenceStringList,
+  evidenceConfidenceCaption,
   evidenceStatusCaption,
   formatEvidenceStatus,
+  formatProvenanceSource,
   presentEvidenceString,
 } from "./honesty";
-import type { IdentityContent, ProjectContent } from "./schema";
+import {
+  getProjectNetwork,
+  relatedLinksForCaseSection,
+  resolveAtlasRelatedHrefs,
+  resolveLineageReferenceHref,
+  resolveRelationshipStepHref,
+} from "./network";
+import {
+  loadEngineeringAtlas,
+  loadEngineeringPatterns,
+} from "./load/secondary";
+import type {
+  EngineeringAtlas,
+  EngineeringPattern,
+  IdentityContent,
+  ProjectContent,
+} from "./schema";
 
 export type {
   IdentityContent,
@@ -21,10 +39,25 @@ export type {
   EvidenceString,
   EvidenceStringList,
   DiscoveryStatus,
+  EvidenceConfidence,
+  ProvenanceSource,
   AssetReference,
+  EngineeringPattern,
+  EngineeringReference,
+  EngineeringAtlas,
+  AtlasSystem,
+  AtlasEvolutionStep,
+  AtlasArchitectureComponent,
+  AtlasDecision,
+  AtlasFailure,
+  AtlasValidation,
+  AtlasGlossaryEntry,
+  AtlasRelationship,
+  DecisionLineage,
 } from "./schema";
 
 export type { HonestyDisclosure, HonestyPresentation } from "./honesty";
+export type { EosHref, ProjectNetwork } from "./network";
 
 export {
   presentEvidenceString,
@@ -32,11 +65,18 @@ export {
   discloseEvidenceStringList,
   formatEvidenceStatus,
   evidenceStatusCaption,
+  evidenceConfidenceCaption,
+  formatProvenanceSource,
   validateAllContent,
   loadIdentity,
   loadProjects,
   loadEntranceProjects,
   loadProjectBySlug,
+  getProjectNetwork,
+  relatedLinksForCaseSection,
+  resolveAtlasRelatedHrefs,
+  resolveLineageReferenceHref,
+  resolveRelationshipStepHref,
 };
 
 /** Presentation-facing identity — links flattened for existing surfaces. */
@@ -70,6 +110,14 @@ export function getArchiveProjects(): ProjectContent[] {
 
 export function getProjectBySlug(slug: string): ProjectContent | null {
   return loadProjectBySlug(slug);
+}
+
+export function getEngineeringPatterns(): EngineeringPattern[] {
+  return loadEngineeringPatterns().patterns;
+}
+
+export function getEngineeringAtlas(): EngineeringAtlas {
+  return loadEngineeringAtlas();
 }
 
 export function projectDisplayTitle(project: ProjectContent): string {

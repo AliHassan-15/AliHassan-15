@@ -1,14 +1,16 @@
 /**
  * Shared interaction language — hover / focus / press continuity.
- * Consumed by controls; pages must not invent private press theater.
+ * Acknowledge. Never celebrate. Mechanical press.
  */
 
 :root {
-  --eos-interactive-press-opacity: 0.88;
+  --eos-interactive-hover-opacity: 0.98;
+  --eos-interactive-press-opacity: 0.992;
 }
 
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --eos-interactive-press-opacity: 0.92;
+    --eos-interactive-hover-opacity: 0.99;
+    --eos-interactive-press-opacity: 0.996;
   }
 }

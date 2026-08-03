@@ -8,17 +8,21 @@
   "includeInArchive": true,
   "sortOrder": 80,
   "subtitle": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Gaming e-commerce platform"
   },
   "typeLabels": {
     "status": "confirmed",
-    "value": ["React, Node.js, Express, PostgreSQL e-commerce"]
+    "value": [
+      "React, Node.js, Express, PostgreSQL e-commerce"
+    ]
   },
   "completionStatus": {
     "status": "missing"
   },
   "objective": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Provide a full e-commerce path for gaming products: browse and filter catalog, cart and orders, reviews, and admin inventory/order management."
   },
   "role": {
     "status": "missing"
@@ -28,7 +32,16 @@
   },
   "technologies": {
     "status": "confirmed",
-    "value": ["React", "Node.js", "Express", "PostgreSQL"]
+    "value": [
+      "React",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "JWT",
+      "Redis",
+      "Stripe",
+      "TypeScript"
+    ]
   },
   "repositoryUrl": {
     "status": "confirmed",
@@ -39,7 +52,8 @@
     "value": "GameStore"
   },
   "repositoryNote": {
-    "status": "missing"
+    "status": "confirmed",
+    "value": "Public repository README documents JWT auth, Redis sessions, Stripe payments, Sequelize/PostgreSQL, and React 18 + Vite frontend."
   },
   "measuredOutcomes": {
     "status": "missing"
@@ -49,16 +63,63 @@
   },
   "aiUsageClass": "conventional",
   "caseStudy": {
-    "problem": { "status": "missing" },
+    "problem": {
+      "status": "confirmed",
+      "value": "Sell and administer gaming products online with authentication, catalog, cart, orders, reviews, and inventory tracking as one application rather than disconnected demos."
+    },
     "overview": {
       "status": "confirmed",
-      "value": "React, Node.js, Express, PostgreSQL e-commerce."
+      "value": "E-commerce system for gaming products: user auth (including Google OAuth support per README), product browse/filter, cart, orders, reviews, and an admin dashboard for products, orders, users, categories, and inventory. Identity-confirmed core stack is React, Node.js, Express, and PostgreSQL."
     },
-    "architecture": { "status": "deferred", "deferralId": "Disc-05" },
-    "decisions": { "status": "deferred", "deferralId": "Disc-05" },
-    "tradeoffs": { "status": "deferred", "deferralId": "Disc-05" },
-    "lessons": { "status": "deferred", "deferralId": "Disc-05" },
-    "constraints": { "status": "missing" },
-    "rejectedApproaches": { "status": "missing" }
+    "architecture": {
+      "status": "confirmed",
+      "value": "Node/Express backend with PostgreSQL (Sequelize), JWT authentication, Redis session storage, Stripe payments, and file upload/image processing. React 18 + TypeScript + Vite frontend with Tailwind; React Query for data fetching and Zustand for client state (per repository README)."
+    },
+    "decisions": {
+      "status": "confirmed",
+      "value": "Token-based JWT authentication with Redis-backed sessions for scalable session handling; Stripe for payment processing rather than custom payment plumbing (per repository README)."
+    },
+    "tradeoffs": {
+      "status": "missing"
+    },
+    "lessons": {
+      "status": "missing"
+    },
+    "constraints": {
+      "status": "confirmed",
+      "value": "Local setup requires Node.js 18+, PostgreSQL 12+, and Redis 6+ (per repository README)."
+    },
+    "rejectedApproaches": {
+      "status": "missing"
+    }
+  },
+  "engineeringCaseFile": {
+    "timeline": {
+      "status": "missing"
+    },
+    "decisionRecords": {
+      "status": "missing"
+    },
+    "validationMethodology": {
+      "status": "missing"
+    },
+    "technicalRisks": {
+      "status": "missing"
+    },
+    "failureModes": {
+      "status": "missing"
+    },
+    "knownLimitations": {
+      "status": "missing"
+    },
+    "futureDirections": {
+      "status": "missing"
+    },
+    "assets": {
+      "status": "missing"
+    }
+  },
+  "engineeringReferences": {
+    "status": "missing"
   }
 }

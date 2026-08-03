@@ -129,12 +129,12 @@ Rules for this section:
 | Objective (stated) | Voice-first AI healthcare platform for patient intake before clinical consultation; AI workflows for symptoms, concerns, structured triage, clinical summaries, appointment scheduling support | Confirmed | Identity §18.3.1 |
 | Role | Technical Lead (team of 3); ownership per approved credit line | Confirmed | Identity §18.2–18.3.1 |
 | Credit line (exact) | Team project (3 members). I served as Technical Lead, leading the overall technical direction while owning the system architecture, backend engineering, database design, API development, LLM workflow orchestration, AI integration, technical documentation, and the majority of testing and quality assurance. | Confirmed | Identity §18.2 |
-| Architecture | See Identity §18.3.1 — Hardest Engineering Decisions; Do Differently (exact owner wording there; not restated here) | Confirmed (by reference) | Identity §18.3.1 |
+| Architecture | Identity §18.3.1 Hardest Engineering Decisions; clinical pipeline stages also in DEEPMED-Testing FYP mutation report | Confirmed (by reference + testing report) | Identity §18.3.1; DEEPMED-Testing report |
 | Technologies | **Deferred** | Deferred | D-11 |
 | Constraints (stated) | Main source repository private (university restrictions); public testing/QA companion repo | Confirmed | Identity §18.3.1 |
 | Engineering decisions | See Identity §18.3.1 — Hardest Engineering Decisions; Do Differently (exact owner wording there; not restated here) | Confirmed (by reference) | Identity §18.3.1 |
-| Outcomes (measured) | Missing | Missing | — |
-| Evidence artifacts | Public testing repo URL stated; FYP PDF artifact exists; main repo private | Artifact exists / Needs verification | `https://github.com/AliHassan-15/DEEPMED-Testing`; FYP PDF path |
+| Outcomes (measured) | Testing deliverable metrics confirmed from DEEPMED-Testing report (coverage + mutation scores). Product wait-time / market figures remain vision-only (Identity §18.1). | Confirmed (testing metrics) / Missing (product KPIs) | `DEEPMED-Testing` docs/FYP-DEEPMED-MutationTesting-Report.md |
+| Evidence artifacts | Public testing repo URL stated; FYP mutation-testing report + committed Jest/Stryker reports; main repo private | Confirmed (testing artifacts) | `https://github.com/AliHassan-15/DEEPMED-Testing` |
 | Current status | Completed (Final Year Project) | Confirmed | Identity §18.3.1 |
 | Visibility (stated) | Yes — main repo private (university restrictions); public companion testing/QA repo | Confirmed | Identity §18.3.1 |
 | Live demo | Deferred | Deferred | D-04 |
@@ -168,10 +168,10 @@ Rules for this section:
 | Role | Sole Developer | Confirmed | Identity §18.3.3 |
 | Architecture (stated) | Exact text in Identity §18.3.3 (What it is / Role); not paraphrased here | Confirmed (by reference) | Identity §18.3.3 |
 | Technologies (confirmed) | AttentionResUNet; FastAPI; React; evaluation PSNR/SSIM; Grad-CAM | Confirmed | Identity §18.3.3 |
-| Constraints | Missing (none further stated) | Missing | — |
+| Constraints | LSUI dataset scope; inference requires trained checkpoint (repo README) | Confirmed (repo README) | Underwater-Image-Enhancement-System README |
 | Engineering decisions | See Identity §18.3.3 — Hardest Engineering Decisions; Do Differently (exact owner wording there; not restated here) | Confirmed (by reference) | Identity §18.3.3 |
-| Outcomes (measured) | PSNR/SSIM used as evaluation method (stated); specific numeric results not confirmed in Identity | Needs verification | Identity §18.3.3 |
-| Evidence artifacts | Public repository URL | Artifact exists / Needs verification | `https://github.com/AliHassan-15/Underwater-Image-Enhancement-System` |
+| Outcomes (measured) | Committed `Code/Results.ipynb` executed output: PSNR 19.76 ± 2.52 dB; SSIM 0.7353 ± 0.1508; PSNR gain +6.78 dB; SSIM gain +0.1496; PSNR range 10.31–26.08 dB | Confirmed (notebook output) | Repo `Code/Results.ipynb` |
+| Evidence artifacts | Public repository URL; evaluation notebook with committed outputs; metrics visualization asset | Artifact exists / Confirmed | `https://github.com/AliHassan-15/Underwater-Image-Enhancement-System` |
 | Current status | Completed | Confirmed | Identity §18.3.3 |
 
 #### P4 — Stellar Web Manager (Project Management System)
@@ -201,8 +201,8 @@ Rules for this section:
 | Role | Primary Developer | Confirmed | Identity §18.3.5 |
 | Architecture (stated) | Exact text in Identity §18.3.5 (Architecture); not paraphrased here | Confirmed (by reference) | Identity §18.3.5 |
 | Technologies (confirmed) | Python; FastAPI; LangChain; OpenAI APIs; embedding models; vector database; RAG; Git; Docker (deployment-ready architecture) | Confirmed | Identity §18.3.5 |
-| Constraints | Missing (none further stated) | Missing | — |
-| Engineering decisions | See Identity §18.3.5 Architecture / Stack (exact owner wording there); deeper decision log Missing | Confirmed (by reference) / Missing | Identity §18.3.5 |
+| Constraints | Public README prerequisites: Pinecone, OpenAI, Slack workspace API | Confirmed (repo README) | Codebase-RAG README |
+| Engineering decisions | Retrieval-first architecture (Identity); deeper decision log beyond that Missing | Confirmed (by reference) / Missing | Identity §18.3.5 |
 | Outcomes (measured) | Missing | Missing | — |
 | Evidence artifacts | Public repository URL | Artifact exists / Needs verification | `https://github.com/AliHassan-15/Codebase-RAG` |
 | Current status | Completed | Confirmed | Identity §18.3.5 |
@@ -211,11 +211,11 @@ Rules for this section:
 
 | Project | Repo / note | Stated facts | Grade | Gaps |
 |---------|-------------|--------------|-------|------|
-| RouteRefuel | `https://github.com/AliHassan-15/RouteRefuel` | Django + React logistics full-stack | Confirmed (brief) | Objective, role detail, architecture, decisions, outcomes Missing |
+| RouteRefuel | `https://github.com/AliHassan-15/RouteRefuel` | Django + React logistics full-stack; README confirms API-first planner, Nominatim/OSRM, ≤3 cold external calls, 500 mi / 10 MPG constants | Confirmed (repo README) | Completion status Missing; lessons / rejected approaches Missing |
 | Private client construction workflow app | Historical repo name `chaudhary-factory`; stated public title only | Private client construction workflow app | Confirmed (stated) | Details Deferred D-03 |
-| GameStore | `https://github.com/AliHassan-15/GameStore-site` | React, Node.js, Express, PostgreSQL e-commerce | Confirmed (brief) | Full field matrix Missing |
-| Brain Tumor Classification | `https://github.com/AliHassan-15/Brain-Tumor-Classification` | Deep learning MRI brain tumor classification | Confirmed (brief) | Full field matrix Missing |
-| Flashcards Generator | `https://github.com/AliHassan-15/Flashcards-generator` | AI-assisted learning; Llama APIs; Firebase | Confirmed (brief) | Full field matrix Missing |
+| GameStore | `https://github.com/AliHassan-15/GameStore-site` | React, Node.js, Express, PostgreSQL (+ README: JWT, Redis, Stripe, TypeScript) | Confirmed (repo README) | Role / trade-offs / lessons / measured outcomes Missing |
+| Brain Tumor Classification | `https://github.com/AliHassan-15/Brain-Tumor-Classification` | Xception + custom Keras CNN + Streamlit; README states 98%/99% test accuracy (author-published) | Confirmed (repo README) | Role / trade-offs / lessons Missing; accuracy not independently re-measured |
+| Flashcards Generator | `https://github.com/AliHassan-15/Flashcards-generator` | Llama APIs + Firebase (+ README: Next.js, Clerk, Stripe, Material UI) | Confirmed (repo README) | Role / trade-offs / lessons / measured outcomes Missing |
 
 ### 5.3 Archive projects (existence only)
 
@@ -249,7 +249,7 @@ Only entries with non-metric, evidenced existence claims.
 |-------------------|----------|-------|
 | Completed DeepMed as Final Year Project; served as Technical Lead on 3-person team with stated ownership scope | Identity credit line + status | Confirmed (role/status); measured clinical outcomes Missing |
 | Completed RouteWise ELD as Primary Full-Stack Developer | Identity §18.3.2 + repo URL | Confirmed (role/status); measured product metrics Missing |
-| Completed Underwater Image Enhancement as Sole Developer including model + API + frontend | Identity §18.3.3 + repo URL | Confirmed (role/status); numeric PSNR/SSIM Needs verification |
+| Completed Underwater Image Enhancement as Sole Developer including model + API + frontend | Identity §18.3.3 + repo URL + Results.ipynb | Confirmed (role/status); numeric PSNR/SSIM Confirmed from notebook output |
 | Completed Stellar Web Manager as Primary Developer | Identity §18.3.4 + repo URL | Confirmed (role/status); usage metrics Missing |
 | Completed Codebase RAG as Primary Developer | Identity §18.3.5 + repo URL | Confirmed (role/status); quality metrics Missing |
 | Reduced consultation wait times by 30–35% | None as measured result | **Not an achievement** — vision/objectives language only |
@@ -390,11 +390,11 @@ Inherits and extends Identity deferred items relevant to evidence:
 | D-12 | RouteWise stack confirmation | Deferred |
 | D-13 | Vision file metadata Draft → Approved | Deferred |
 | D-14 | Process brief path correction in `01-identity.md` | Deferred |
-| Disc-01 | Independent verification notes for each public repo | Deferred (Missing until produced) |
-| Disc-02 | Curated architecture diagram asset pack | Deferred (Missing until produced) |
-| Disc-03 | Screenshot / recording asset pack | Deferred (Missing until produced) |
-| Disc-04 | Measured outcomes per flagship project | Deferred (Missing / Unknown until produced) |
-| Disc-05 | Supporting projects full field matrices | Deferred (Incomplete until produced) |
+| Disc-01 | Independent verification notes for each public repo | Partial — P41 engineering case files record confirmed archaeology for flagships; remaining repos still Incomplete |
+| Disc-02 | Curated architecture diagram asset pack | Deferred (Missing until produced) — in-repo diagrams/notebooks linked as assets where confirmed; no separate curated pack |
+| Disc-03 | Screenshot / recording asset pack | Deferred (Missing until produced) — DeepMed walkthrough script linked; no demo recordings claimed |
+| Disc-04 | Measured outcomes per flagship project | Partial — DeepMed testing metrics + Underwater notebook metrics Confirmed; RouteWise / Stellar / Codebase RAG product metrics still Missing |
+| Disc-05 | Supporting projects full field matrices | Partial — RouteRefuel / GameStore / Brain Tumor / Flashcards matrices filled from public READMEs; remaining gaps (role/lessons/etc.) stay Missing; private client still D-03 |
 | Disc-06 | Separate `professional-evidence` bible file if required | Deferred (Unknown / process) |
 | Disc-07 | Practiced / Learning / Interested skill grades in Discovery | Deferred — out of Discovery scope; see Identity |
 | Disc-08 | Archive project repository URLs and full evidence matrices | Deferred |
@@ -408,12 +408,12 @@ Inherits and extends Identity deferred items relevant to evidence:
 |------|--------|
 | Discovery purpose (WHAT EXISTS) | Complete (this document) |
 | Identity duplication avoided as narrative | Complete (by design) |
-| Load-bearing project skeletons | Incomplete (tech/outcomes gaps) |
-| DeepMed / RouteWise stacks | Deferred |
-| Supporting projects | Incomplete |
-| Archive projects | Incomplete |
+| Load-bearing project skeletons | Improved (P40 evidence recovery); D-11 / D-12 / D-04 still Deferred |
+| DeepMed / RouteWise stacks | Deferred (D-11 / D-12) |
+| Supporting projects | Partial (Disc-05 matrices filled from public READMEs; gaps remain) |
+| Archive projects | Incomplete (Disc-08) |
 | Achievements (non-metric) | Partial |
-| Achievements (metric) | Deferred / Missing / Not allowed without evidence |
+| Achievements (metric) | Partial — DeepMed testing + Underwater notebook metrics Confirmed; other product KPIs Missing |
 | Skills Demonstrated | Partial (project-tied only) |
 | Skills Practiced/Learning/Interested | Deferred Disc-07 (out of Discovery scope) |
 | Technologies Demonstrated | Partial (project-tied only; no inferred rows) |

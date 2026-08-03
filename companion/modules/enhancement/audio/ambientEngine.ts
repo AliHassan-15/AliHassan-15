@@ -1,23 +1,43 @@
-import type { AmbientTrackConfig } from "./types";
+import type {
+  AmbientEnvironmentConfig,
+  AmbientLayerId,
+  AmbientRoomId,
+} from "./types";
+import { shippedAmbientLayers } from "./config";
 
 /**
- * Imperative ambient engine — no React, no UI, no work until enable.
- * Fail silently on autoplay / missing asset / decode errors.
+ * Imperative multi-layer ambient engine — no React, no UI.
+ * No network work until enable. Missing assets fail closed.
  */
 export type AmbientEngine = {
   /** Returns false when playback cannot start — callers must reset preference. */
   setEnabled: (enabled: boolean) => Promise<boolean>;
   setPageVisible: (visible: boolean) => void;
+  setRoom: (room: AmbientRoomId) => void;
+  setReducedMotion: (reduced: boolean) => void;
   dispose: () => void;
 };
 
-export function createAmbientEngine(track: AmbientTrackConfig): AmbientEngine {
-  let audio: HTMLAudioElement | null = null;
+type LayerRuntime = {
+  id: AmbientLayerId;
+  element: HTMLAudioElement;
+};
+
+export function createAmbientEngine(
+  config: AmbientEnvironmentConfig,
+): AmbientEngine {
+  const layers: LayerRuntime[] = [];
   let desired = false;
   let pageVisible = true;
+  let reducedMotion = false;
+  let room: AmbientRoomId = "arrival";
   let settleTimer: ReturnType<typeof setTimeout> | null = null;
   let fadeFrame: number | null = null;
   let generation = 0;
+
+  function fadeMs(): number {
+    return reducedMotion ? config.reducedMotionFadeMs : config.fadeMs;
+  }
 
   function clearSettle(): void {
     if (settleTimer !== null) {
@@ -33,30 +53,46 @@ export function createAmbientEngine(track: AmbientTrackConfig): AmbientEngine {
     }
   }
 
-  function ensureElement(): HTMLAudioElement {
-    if (audio) {
-      return audio;
+  function ensureLayers(): LayerRuntime[] {
+    if (layers.length > 0) {
+      return layers;
     }
-    const element = new Audio();
-    element.preload = "none";
-    element.loop = true;
-    element.src = track.src;
-    element.volume = 0;
-    audio = element;
-    return element;
+    for (const layer of shippedAmbientLayers(config)) {
+      const element = new Audio();
+      element.preload = "none";
+      element.loop = true;
+      element.src = layer.src;
+      element.volume = 0;
+      layers.push({ id: layer.id, element });
+    }
+    return layers;
   }
 
-  function fadeTo(target: number, durationMs: number): Promise<void> {
-    const element = audio;
-    if (!element) {
+  function targetVolumeFor(layerId: AmbientLayerId): number {
+    const weight = config.rooms[room]?.weights[layerId] ?? 0;
+    return clampVolume(config.masterVolume * weight);
+  }
+
+  function fadeLayersToTargets(durationMs: number): Promise<void> {
+    const runtimes = layers;
+    if (runtimes.length === 0) {
       return Promise.resolve();
     }
 
     clearFade();
-    const start = element.volume;
-    const delta = target - start;
-    if (durationMs <= 0 || Math.abs(delta) < 0.001) {
-      element.volume = clampVolume(target);
+    const starts = runtimes.map((layer) => layer.element.volume);
+    const targets = runtimes.map((layer) => targetVolumeFor(layer.id));
+    const deltas = targets.map(
+      (target, index) => target - (starts[index] ?? 0),
+    );
+
+    if (durationMs <= 0 || deltas.every((delta) => Math.abs(delta) < 0.001)) {
+      for (let index = 0; index < runtimes.length; index += 1) {
+        const layer = runtimes[index];
+        if (layer) {
+          layer.element.volume = clampVolume(targets[index] ?? 0);
+        }
+      }
       return Promise.resolve();
     }
 
@@ -65,7 +101,15 @@ export function createAmbientEngine(track: AmbientTrackConfig): AmbientEngine {
     return new Promise((resolve) => {
       const step = (now: number) => {
         const progress = Math.min(1, (now - startedAt) / durationMs);
-        element.volume = clampVolume(start + delta * progress);
+        for (let index = 0; index < runtimes.length; index += 1) {
+          const layer = runtimes[index];
+          if (!layer) {
+            continue;
+          }
+          layer.element.volume = clampVolume(
+            (starts[index] ?? 0) + (deltas[index] ?? 0) * progress,
+          );
+        }
         if (progress < 1) {
           fadeFrame = requestAnimationFrame(step);
           return;
@@ -80,28 +124,60 @@ export function createAmbientEngine(track: AmbientTrackConfig): AmbientEngine {
   async function release(): Promise<void> {
     clearSettle();
     clearFade();
-    const element = audio;
-    audio = null;
-    if (!element) {
-      return;
-    }
-    try {
-      element.pause();
-      element.removeAttribute("src");
-      element.load();
-    } catch {
-      // Fail closed — never interrupt.
+    const snapshot = [...layers];
+    layers.length = 0;
+    for (const layer of snapshot) {
+      try {
+        layer.element.pause();
+        layer.element.removeAttribute("src");
+        layer.element.load();
+      } catch {
+        // Fail closed.
+      }
     }
   }
 
   async function stopSoft(): Promise<void> {
     clearSettle();
-    const element = audio;
-    if (!element) {
+    const runtimes = layers;
+    if (runtimes.length === 0) {
       return;
     }
-    await fadeTo(0, track.fadeMs);
-    element.pause();
+    clearFade();
+    const starts = runtimes.map((layer) => layer.element.volume);
+    const duration = fadeMs();
+    if (duration <= 0) {
+      for (const layer of runtimes) {
+        layer.element.volume = 0;
+        layer.element.pause();
+      }
+      return;
+    }
+    const startedAt = performance.now();
+    await new Promise<void>((resolve) => {
+      const step = (now: number) => {
+        const progress = Math.min(1, (now - startedAt) / duration);
+        for (let index = 0; index < runtimes.length; index += 1) {
+          const layer = runtimes[index];
+          if (!layer) {
+            continue;
+          }
+          layer.element.volume = clampVolume(
+            (starts[index] ?? 0) * (1 - progress),
+          );
+        }
+        if (progress < 1) {
+          fadeFrame = requestAnimationFrame(step);
+          return;
+        }
+        fadeFrame = null;
+        resolve();
+      };
+      fadeFrame = requestAnimationFrame(step);
+    });
+    for (const layer of runtimes) {
+      layer.element.pause();
+    }
   }
 
   async function startSession(session: number): Promise<boolean> {
@@ -109,13 +185,16 @@ export function createAmbientEngine(track: AmbientTrackConfig): AmbientEngine {
       return false;
     }
 
-    const element = ensureElement();
+    const runtimes = ensureLayers();
+    if (runtimes.length === 0) {
+      return false;
+    }
 
     await new Promise<void>((resolve) => {
       settleTimer = setTimeout(() => {
         settleTimer = null;
         resolve();
-      }, track.settleDelayMs);
+      }, config.settleDelayMs);
     });
 
     if (!desired || !pageVisible || session !== generation) {
@@ -123,14 +202,16 @@ export function createAmbientEngine(track: AmbientTrackConfig): AmbientEngine {
     }
 
     try {
-      element.volume = 0;
-      const playResult = element.play();
-      if (playResult !== undefined) {
-        await playResult;
-      }
-      if (element.error) {
-        await release();
-        return false;
+      for (const layer of runtimes) {
+        layer.element.volume = 0;
+        const playResult = layer.element.play();
+        if (playResult !== undefined) {
+          await playResult;
+        }
+        if (layer.element.error) {
+          await release();
+          return false;
+        }
       }
     } catch {
       await release();
@@ -138,11 +219,13 @@ export function createAmbientEngine(track: AmbientTrackConfig): AmbientEngine {
     }
 
     if (!desired || !pageVisible || session !== generation) {
-      element.pause();
+      for (const layer of runtimes) {
+        layer.element.pause();
+      }
       return false;
     }
 
-    await fadeTo(track.targetVolume, track.fadeMs);
+    await fadeLayersToTargets(fadeMs());
     return true;
   }
 
@@ -174,12 +257,29 @@ export function createAmbientEngine(track: AmbientTrackConfig): AmbientEngine {
       if (!visible) {
         clearSettle();
         clearFade();
-        audio?.pause();
+        for (const layer of layers) {
+          layer.element.pause();
+        }
         return;
       }
 
       generation += 1;
       void startSession(generation);
+    },
+
+    setRoom(next: AmbientRoomId) {
+      if (room === next) {
+        return;
+      }
+      room = next;
+      if (!desired || layers.length === 0) {
+        return;
+      }
+      void fadeLayersToTargets(fadeMs());
+    },
+
+    setReducedMotion(next: boolean) {
+      reducedMotion = next;
     },
 
     dispose() {

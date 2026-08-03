@@ -10,6 +10,7 @@ import styles from "./SiteHeader.module.css";
 
 /**
  * Shared chrome — orientation first, navigation second.
+ * Same engineering rooms from every surface.
  */
 export function SiteHeader() {
   const identity = getIdentity();
@@ -23,7 +24,7 @@ export function SiteHeader() {
           tone="tertiary"
           className={styles.kicker}
         >
-          Companion
+          {ROUTE_ORIENTATION.home.label}
         </Text>
         <Link
           href={COMPANION_PATHS.home}
@@ -38,8 +39,14 @@ export function SiteHeader() {
           <Link href={COMPANION_PATHS.archive} tone="secondary">
             {ROUTE_ORIENTATION.archive.label}
           </Link>
+          <Link href={COMPANION_PATHS.atlas} tone="secondary">
+            {ROUTE_ORIENTATION.atlas.label}
+          </Link>
+          <Link href={COMPANION_PATHS.journey} tone="secondary">
+            {ROUTE_ORIENTATION.journey.label}
+          </Link>
           <Link href={identity.githubEntranceUrl} tone="secondary">
-            Entrance
+            {ROUTE_ORIENTATION.home.returnTo.label}
           </Link>
           <span className={styles.prefs}>
             <ThemeToggle className={styles.pref} />

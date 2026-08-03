@@ -3,20 +3,25 @@
 }
 
 :focus-visible {
-  outline: var(--eos-border-width-strong) solid var(--eos-color-focus);
-  outline-offset: var(--eos-space-1);
+  outline: var(--eos-border-width-hairline) solid var(--eos-color-focus);
+  outline-offset: 2px;
+  border-radius: var(--eos-radius-none);
   transition: var(--eos-transition-focus);
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: var(--eos-duration-steady);
-  animation-timing-function: var(--eos-ease-standard);
+  animation-duration: var(--eos-duration-deliberate);
+  animation-timing-function: var(--eos-ease-emphasized);
 }
 
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none;
+  }
+
+  :focus-visible {
+    transition: none;
   }
 }

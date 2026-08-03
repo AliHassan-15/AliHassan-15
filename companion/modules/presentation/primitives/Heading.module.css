@@ -2,23 +2,59 @@
   margin: 0;
   color: var(--eos-color-text-primary);
   font-family: var(--eos-font-family-sans);
-  font-weight: var(--eos-font-weight-semibold);
+  font-weight: var(--eos-font-weight-medium);
   letter-spacing: var(--eos-letter-spacing-tight);
   text-wrap: balance;
 }
 
 .level-1 {
-  font-size: var(--eos-font-size-heading-1);
+  font-family: var(--eos-font-family-display);
+  font-size: clamp(2rem, 4.2vw, 2.75rem);
+  font-weight: var(--eos-font-weight-regular);
   line-height: var(--eos-line-height-tight);
+  letter-spacing: var(--eos-letter-spacing-display);
+  font-optical-sizing: auto;
+  text-wrap: balance;
 }
 
 .level-2 {
+  font-family: var(--eos-font-family-display);
   font-size: var(--eos-font-size-heading-2);
+  font-weight: var(--eos-font-weight-regular);
   line-height: var(--eos-line-height-snug);
+  letter-spacing: var(--eos-letter-spacing-display-sm);
+  text-wrap: balance;
 }
 
 .level-3 {
+  font-family: var(--eos-font-family-sans);
   font-size: var(--eos-font-size-heading-3);
   line-height: var(--eos-line-height-snug);
   font-weight: var(--eos-font-weight-medium);
+  letter-spacing: var(--eos-letter-spacing-display-xs);
+}
+
+@media (min-width: 1440px) {
+  .level-1 {
+    font-size: clamp(2.15rem, 2.65vw, 2.9rem);
+  }
+}
+
+@media (min-width: 1920px) {
+  .level-1 {
+    font-size: clamp(2.25rem, 2.2vw, 3rem);
+  }
+}
+
+@media (max-width: 390px) {
+  .level-1 {
+    font-size: clamp(1.85rem, 8.8vw, 2.1rem);
+    letter-spacing: var(--eos-letter-spacing-tight);
+  }
+}
+
+@media (max-width: 320px) {
+  .level-1 {
+    font-size: clamp(1.75rem, 9.5vw, 1.95rem);
+  }
 }

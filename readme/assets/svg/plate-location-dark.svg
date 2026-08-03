@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="52" viewBox="0 0 360 52" role="img" aria-labelledby="plate-location-title plate-location-desc">
+  <title id="plate-location-title">Location plate</title>
+  <desc id="plate-location-desc">Engineering plate labeled LOCATION.</desc>
+  <rect x="1" y="1" width="358" height="50" fill="#121110" stroke="#e8e7e4" stroke-width="0.8"/>
+  <g fill="none" stroke="#e8e7e4" stroke-width="0.8" stroke-linecap="square">
+    <path d="M1 8V1H8"/>
+    <path d="M352 1H359V8"/>
+    <path d="M1 44V51H8"/>
+    <path d="M352 51H359V44"/>
+  </g>
+  <text x="16" y="20" fill="#8a8680" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="0.1em" text-anchor="start">LOCATION</text>
+  <text x="16" y="38" fill="#e8e7e4" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="0.1em" text-anchor="start">PAKISTAN</text>
+  <g fill="#c4c1bb" opacity="0.48">
+    <rect x="332" y="14" width="8" height="1"/>
+    <rect x="339" y="14" width="1" height="8"/>
+  </g>
+</svg>

@@ -1,25 +1,414 @@
+/**
+ * Home document — arrival environment.
+ * Content unchanged; craftsmanship and spatial identity only.
+ */
+
 .article {
   display: grid;
-  gap: var(--eos-space-8);
-  max-width: var(--eos-measure-prose);
+  /* Continuous rooms — no theatrical section cuts */
+  gap: calc(var(--eos-space-8) + var(--eos-space-5));
+  max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-7)));
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .article {
+    max-width: min(
+      100%,
+      calc(var(--eos-measure-prose) + 18.5rem + var(--eos-space-8))
+    );
+  }
+}
+
+.article::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--eos-space-2) * -1) 0 auto;
+  height: var(--eos-mark-length);
+  pointer-events: none;
+  background: var(--eos-mark-posts);
+  opacity: var(--eos-mark-opacity-quiet);
 }
 
 .hero {
-  padding-top: var(--eos-space-4);
+  position: relative;
+  padding-top: calc(var(--eos-space-7) + var(--eos-space-1));
+  padding-bottom: calc(var(--eos-space-6) + var(--eos-space-1));
+  isolation: isolate;
+  /* Archive / library entrance — same building, quieter room */
 }
 
-.title {
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 32%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--eos-color-canvas) 92%, transparent) 70%,
+    var(--eos-color-canvas)
+  );
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.identityKicker {
+  font-family: var(--eos-font-family-mono);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  font-size: var(--eos-font-size-caption);
+  color: var(--eos-color-text-tertiary);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.homeHero {
+  position: relative;
+  padding-top: calc(var(--eos-space-9) + var(--eos-space-3));
+  padding-bottom: calc(var(--eos-space-8) + var(--eos-space-1));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  isolation: isolate;
+  /* Arrival room — open, quiet, minimal */
+  --eos-room-spine: 0.12;
+  --eos-room-field: 0.032;
+}
+
+.heroStage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--eos-space-7);
+  align-items: end;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .heroStage {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--eos-space-8);
+    align-items: end;
+  }
+}
+
+.homeHero::before {
+  content: none;
+}
+
+.homeHero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 48%;
+  z-index: 0;
+  pointer-events: none;
+  /* Soft room continuation — hero never “ends” */
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--eos-color-canvas) 55%, transparent) 55%,
+    color-mix(in srgb, var(--eos-color-canvas) 92%, transparent) 88%,
+    var(--eos-color-canvas)
+  );
+}
+
+.cameraPlane {
+  position: absolute;
+  inset: -10% -12% -8% -8%;
+  z-index: 0;
+  pointer-events: none;
+  will-change: auto;
+}
+
+.architecture {
+  position: absolute;
+  inset: 2% -4% auto;
+  height: 78%;
+  opacity: 0.018;
+  mask-image: radial-gradient(70% 68% at 74% 36%, #000 12%, transparent 82%);
+  transform: translate3d(
+    var(--eos-entrance-mg-x, 0rem),
+    var(--eos-entrance-mg-y, 0rem),
+    0
+  );
+}
+
+.architectureSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.archLines path {
+  stroke: var(--eos-color-border-strong);
+  stroke-width: 1;
+  opacity: 0.038;
+}
+
+.archFlow path {
+  stroke: var(--eos-color-border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 28;
+  opacity: 0.022;
+  /* Continuous operation — minutes, not seconds */
+  animation: eos-arch-flow 480s var(--eos-ease-linear) infinite;
+}
+
+.archBounds path {
+  stroke: var(--eos-color-border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 1 18;
+  opacity: 0.016;
+}
+
+.archNodes circle {
+  fill: var(--eos-color-text-tertiary);
+  opacity: 0.042;
+}
+
+.archFog {
+  position: absolute;
+  inset: 12% 18% 22% 28%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--eos-color-canvas) 92%, transparent),
+    transparent 80%
+  );
+  opacity: 0.18;
+}
+
+.presence {
+  position: absolute;
+  top: 6%;
+  right: 2%;
+  width: min(15.5rem, 48vw);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  /* Quieter — AH remains; portrait is the specimen */
+  opacity: 0.055;
+  transform: translate3d(
+    var(--eos-entrance-bg-x, 0rem),
+    var(--eos-entrance-bg-y, 0rem),
+    0
+  );
+}
+
+:global([data-eos-entrance="ready"]) .presence {
+  animation: eos-presence-breathe 360s var(--eos-ease-breathe) infinite
+    alternate;
+}
+
+.track {
+  position: absolute;
+  border: var(--eos-border-width-hairline) solid var(--eos-color-border-strong);
+  border-radius: var(--eos-radius-none);
+  inset: 18%;
+  opacity: 0.028;
+}
+
+.trackMid {
+  inset: 28%;
+  border-style: solid;
+  opacity: 0.018;
+  border-color: color-mix(
+    in srgb,
+    var(--eos-color-border-strong) 65%,
+    transparent
+  );
+}
+
+.trackOuter {
+  inset: 8%;
+  opacity: 0.014;
+}
+
+.trackInner {
+  inset: 38%;
+  opacity: 0.022;
+}
+
+.scanArc {
+  position: absolute;
+  inset: 14%;
+  border-radius: var(--eos-radius-none);
+  border: var(--eos-border-width-hairline) solid transparent;
+  border-top-color: color-mix(
+    in srgb,
+    var(--eos-color-border-strong) 32%,
+    transparent
+  );
+  border-left-color: color-mix(
+    in srgb,
+    var(--eos-color-border-strong) 32%,
+    transparent
+  );
+  opacity: 0.045;
+  transform: none;
+  pointer-events: none;
+  clip-path: polygon(0 0, 28% 0, 28% 2%, 2% 2%, 2% 28%, 0 28%);
+}
+
+.guide {
+  position: absolute;
+  background: var(--eos-color-border-strong);
+  opacity: 0.018;
+}
+
+.guideH {
+  left: 12%;
+  right: 12%;
+  top: 50%;
+  height: var(--eos-mark-weight);
+}
+
+.guideV {
+  top: 12%;
+  bottom: 12%;
+  left: 50%;
+  width: var(--eos-mark-weight);
+}
+
+.cal {
+  position: absolute;
+  width: var(--eos-mark-length);
+  height: var(--eos-mark-length);
+  border: 0;
+  background:
+    var(--eos-mark-stroke) center / 100% var(--eos-mark-weight) no-repeat,
+    var(--eos-mark-stroke) center / var(--eos-mark-weight) 100% no-repeat;
+  opacity: 0.04;
+}
+
+.calA {
+  top: 16%;
+  right: 24%;
+}
+
+.calB {
+  bottom: 22%;
+  left: 18%;
+}
+
+.calC {
+  top: 46%;
+  right: 10%;
+}
+
+.presenceCore {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-body-sm);
+  font-weight: var(--eos-font-weight-medium);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  text-indent: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--eos-color-text-secondary);
+  background-color: color-mix(
+    in srgb,
+    var(--eos-color-surface) 14%,
+    var(--eos-color-canvas)
+  );
+  background-image: var(--eos-mark-plate);
+  border: var(--eos-border-width-hairline) solid
+    color-mix(in srgb, var(--eos-color-border-subtle) 88%, transparent);
+}
+
+.presenceCore::before,
+.presenceCore::after {
+  content: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--eos-space-5);
+  max-width: var(--eos-measure-prose);
+  transform: translate3d(
+    var(--eos-entrance-fg-x, 0rem),
+    var(--eos-entrance-fg-y, 0rem),
+    0
+  );
+}
+
+.heroInner > span {
+  display: block;
+}
+
+@media (min-width: 1440px) {
+  .heroInner {
+    gap: var(--eos-space-6);
+  }
+
+  .article {
+    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-8)));
+  }
+}
+
+/* —— Typography already present; soft illumination settle only —— */
+
+.enterKicker {
+  font-family: var(--eos-font-family-mono);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  font-size: var(--eos-font-size-caption);
+  color: var(--eos-color-text-tertiary);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.985;
+}
+
+.enterTitle {
+  margin: 0;
+  max-width: 11ch;
+  opacity: 0.985;
+}
+
+.enterSubtitle {
   margin: 0;
   color: var(--eos-color-text-secondary);
-  font-size: var(--eos-font-size-heading-3);
-  font-weight: var(--eos-font-weight-medium);
-  letter-spacing: var(--eos-letter-spacing-tight);
+  font-size: var(--eos-font-size-body);
+  font-weight: var(--eos-font-weight-regular);
+  letter-spacing: var(--eos-letter-spacing-normal);
   line-height: var(--eos-line-height-snug);
+  max-width: var(--eos-measure-narrow);
+  opacity: 0.985;
 }
 
-.canonical {
+.enterLead {
   color: var(--eos-color-text-primary);
   max-width: var(--eos-measure-prose);
+  font-size: var(--eos-font-size-body);
+  line-height: var(--eos-line-height-relaxed);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  text-wrap: pretty;
+  orphans: 4;
+  widows: 4;
+  opacity: 0.988;
+}
+
+.enterBody {
+  opacity: 0.988;
+}
+
+:global([data-eos-entrance="ready"]) .enterKicker,
+:global([data-eos-entrance="ready"]) .enterTitle,
+:global([data-eos-entrance="ready"]) .enterSubtitle,
+:global([data-eos-entrance="ready"]) .enterLead,
+:global([data-eos-entrance="ready"]) .enterBody,
+:global([data-eos-entrance="ready"]) .metaRow {
+  animation: eos-enter-settle 1.2s var(--eos-ease-breathe) both;
 }
 
 .context,
@@ -28,19 +417,341 @@
   max-width: var(--eos-measure-prose);
 }
 
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eos-space-3) var(--eos-space-5);
+  align-items: baseline;
+  padding-top: var(--eos-space-3);
+  border-top: var(--eos-border-width-hairline) solid
+    var(--eos-color-border-subtle);
+  opacity: 0.985;
+}
+
 .block {
-  padding-block: var(--eos-space-1);
+  position: relative;
+  padding-block: calc(var(--eos-space-6) + var(--eos-space-1));
+  padding-inline-start: var(--eos-space-5);
+  scroll-margin-top: var(--eos-space-7);
+  /* Default room — structured engineering */
+  --eos-room-spine: 0.26;
+  --eos-room-mark: var(--eos-mark-opacity-quiet);
+}
+
+.block::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--eos-space-3);
+  bottom: var(--eos-space-3);
+  width: var(--eos-border-width-hairline);
+  background: var(--eos-color-border-subtle);
+  opacity: var(--eos-room-spine, 0.4);
+}
+
+.block::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--eos-space-3);
+  bottom: var(--eos-space-3);
+  width: var(--eos-mark-length);
+  pointer-events: none;
+  background: var(--eos-mark-spine-caps);
+  opacity: var(--eos-room-mark, var(--eos-mark-opacity));
+}
+
+.block:has(.principles) {
+  padding-block: calc(var(--eos-space-7) + var(--eos-space-2));
+  /* Architecture room — technical, precise, denser construction */
+  --eos-room-spine: 0.32;
+  --eos-room-mark: 0.05;
+}
+
+.block:has(.principles)::before {
+  top: var(--eos-space-4);
+  bottom: var(--eos-space-4);
+}
+
+.block:has(.principles)::after {
+  top: var(--eos-space-4);
+  bottom: var(--eos-space-4);
+}
+
+.block:has(.archiveGate) {
+  padding-block: calc(var(--eos-space-8) + var(--eos-space-2));
+  padding-inline-start: var(--eos-space-6);
+  /* Archive room — editorial, library, quieter construction */
+  --eos-room-spine: 0.3;
+  --eos-room-mark: var(--eos-mark-opacity-quiet);
+}
+
+.block:has(.archiveGate)::before {
+  top: calc(var(--eos-space-4) + var(--eos-space-1));
+  bottom: calc(var(--eos-space-4) + var(--eos-space-1));
+}
+
+.block:has(.archiveGate)::after {
+  top: calc(var(--eos-space-4) + var(--eos-space-1));
+  bottom: calc(var(--eos-space-4) + var(--eos-space-1));
+}
+
+.sectionLabel {
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  color: var(--eos-color-text-tertiary);
+  margin: 0 0 var(--eos-space-4);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
 }
 
 .principles {
-  margin: 0;
-  padding-left: var(--eos-space-5);
+  margin: var(--eos-space-6) 0 0;
+  padding: 0;
   display: grid;
-  gap: var(--eos-space-2);
-  list-style-position: outside;
-  color: var(--eos-color-text-primary);
+  gap: var(--eos-space-5);
+  list-style: none;
+  counter-reset: eos-principle;
 }
 
 .principles li {
-  padding-left: var(--eos-space-1);
+  position: relative;
+  padding-left: var(--eos-space-7);
+  counter-increment: eos-principle;
+  color: var(--eos-color-text-primary);
+  font-size: var(--eos-font-size-body);
+  line-height: var(--eos-line-height-relaxed);
+}
+
+.principles li::before {
+  content: counter(eos-principle, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  color: var(--eos-color-text-tertiary);
+}
+
+.archiveGate {
+  display: grid;
+  gap: var(--eos-space-6);
+  padding: var(--eos-space-5) 0 0;
+  border: 0;
+  border-top: var(--eos-border-width-hairline) solid
+    var(--eos-color-border-subtle);
+  background: var(--eos-mark-rule-caps);
+  box-shadow: none;
+  position: relative;
+}
+
+.archiveGate::before {
+  content: "";
+  position: absolute;
+  inset: var(--eos-space-4) calc(var(--eos-space-3) * -1)
+    calc(var(--eos-space-2) * -1);
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--eos-color-surface) 14%, transparent),
+    transparent 72%
+  );
+}
+
+.gateAction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eos-space-3);
+  min-height: var(--eos-size-control-md);
+  font-size: var(--eos-font-size-body);
+  font-weight: var(--eos-font-weight-medium);
+  letter-spacing: var(--eos-letter-spacing-normal);
+  color: var(--eos-color-text-primary);
+  text-decoration: none !important;
+  transition: var(--eos-transition-interactive);
+}
+
+.gateAction:hover {
+  opacity: var(--eos-interactive-hover-opacity);
+}
+
+.gateAction::after {
+  content: "→";
+  font-family: var(--eos-font-family-mono);
+  opacity: 0.12;
+}
+
+@keyframes eos-enter-settle {
+  from {
+    opacity: 0.985;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes eos-arch-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes eos-presence-breathe {
+  from {
+    opacity: 0.048;
+  }
+
+  to {
+    opacity: 0.062;
+  }
+}
+
+@media (max-width: 720px) {
+  .homeHero {
+    padding-top: var(--eos-space-6);
+    padding-bottom: var(--eos-space-6);
+  }
+
+  .presence {
+    width: min(11rem, 46vw);
+    top: 0;
+    right: -2%;
+  }
+
+  .architecture {
+    opacity: 0;
+  }
+
+  .block {
+    padding-inline-start: var(--eos-space-4);
+  }
+
+  .article {
+    gap: var(--eos-space-8);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .homeHero {
+    padding-top: calc(var(--eos-space-8) + var(--eos-space-2));
+    padding-bottom: var(--eos-space-7);
+  }
+
+  .article {
+    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-6)));
+  }
+
+  .presence {
+    width: min(13.5rem, 38vw);
+  }
+}
+
+@media (max-width: 414px) {
+  .homeHero {
+    padding-top: var(--eos-space-5);
+    padding-bottom: var(--eos-space-5);
+  }
+
+  .heroInner {
+    gap: var(--eos-space-4);
+  }
+
+  .principles {
+    gap: var(--eos-space-4);
+  }
+}
+
+@media (max-width: 320px) {
+  .homeHero {
+    padding-top: var(--eos-space-5);
+  }
+
+  .enterTitle {
+    max-width: none;
+  }
+
+  .presence {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .architecture,
+  .presence,
+  .heroInner {
+    transform: none;
+  }
+
+  .archFlow path {
+    animation: none;
+  }
+
+  .enterKicker,
+  .enterTitle,
+  .enterSubtitle,
+  .enterLead,
+  .enterBody,
+  .metaRow {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .presence {
+    opacity: 0.09;
+    animation: none !important;
+  }
+
+  .architecture {
+    opacity: 0.018;
+  }
+
+  .gateAction {
+    transition: none;
+  }
+}
+
+html[data-eos-motion="reduce"] .architecture,
+html[data-eos-motion="reduce"] .presence,
+html[data-eos-motion="reduce"] .heroInner {
+  transform: none;
+}
+
+html[data-eos-motion="reduce"] .archFlow path {
+  animation: none;
+}
+
+html[data-eos-motion="reduce"]
+  :is(
+    .enterKicker,
+    .enterTitle,
+    .enterSubtitle,
+    .enterLead,
+    .enterBody,
+    .metaRow
+  ) {
+  opacity: 1;
+  animation: none !important;
+}
+
+html[data-eos-motion="reduce"] .presence {
+  animation: none !important;
+}
+
+html[data-eos-motion="reduce"] .gateAction {
+  transition: none;
+}
+
+html[data-eos-arrival="silence"] .archFlow path,
+html[data-eos-arrival="silence"] .presence {
+  animation-play-state: paused;
 }
