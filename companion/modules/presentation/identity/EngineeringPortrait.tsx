@@ -1,13 +1,14 @@
+import { assetUrl } from "@/lib/site-url";
 import type { Identity } from "@/modules/meaning";
 import styles from "./EngineeringPortrait.module.css";
 
 export const PORTRAIT_ASSETS = {
-  primary: "/identity/portrait-primary.png",
-  primaryMd: "/identity/portrait-primary-md.png",
-  left: "/identity/portrait-left.png",
-  right: "/identity/portrait-right.png",
-  signature: "/identity/signature.png",
-  grain: "/identity/grain.png",
+  primary: assetUrl("/identity/portrait-primary.png"),
+  primaryMd: assetUrl("/identity/portrait-primary-md.png"),
+  left: assetUrl("/identity/portrait-left.png"),
+  right: assetUrl("/identity/portrait-right.png"),
+  signature: assetUrl("/identity/signature.png"),
+  grain: assetUrl("/identity/grain.png"),
 } as const;
 
 type EngineeringPortraitProps = {

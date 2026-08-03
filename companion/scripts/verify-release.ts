@@ -9,7 +9,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { getSiteUrl } from "../lib/site-url";
+import { assetUrl, getBasePath, getSiteUrl } from "../lib/site-url";
 import { COMPANION_PATHS } from "../modules/experience/routes";
 import { runEosConsistencyAudit } from "./verify-eos-consistency";
 import {
@@ -430,6 +430,90 @@ function verifyBuildArtifacts(): void {
     ];
     for (const name of audioExpected) {
       check(`static audio ${name}`, existsSync(path.join(audioDir, name)));
+    }
+
+    const identityDir = path.join(outDir, "identity");
+    const identityExpected = [
+      "portrait-primary.png",
+      "portrait-primary-md.png",
+      "grain.png",
+      "signature.png",
+    ];
+    for (const name of identityExpected) {
+      check(
+        `static identity ${name}`,
+        existsSync(path.join(identityDir, name)),
+      );
+    }
+
+    const base = getBasePath();
+    const indexHtml = readFileSync(path.join(outDir, "index.html"), "utf8");
+    const portraitPath = assetUrl("/identity/portrait-primary.png");
+    check(
+      "exported HTML portrait src uses basePath",
+      indexHtml.includes(`src="${portraitPath}"`),
+      portraitPath,
+    );
+    const grainCssVar = `url(&quot;${assetUrl("/identity/grain.png")}&quot;)`;
+    const grainCssVarRaw = `url("${assetUrl("/identity/grain.png")}")`;
+    check(
+      "exported HTML grain asset var uses basePath",
+      indexHtml.includes(grainCssVar) || indexHtml.includes(grainCssVarRaw),
+      assetUrl("/identity/grain.png"),
+    );
+    check(
+      "exported CSS has no root-absolute grain url",
+      (() => {
+        const cssFiles = walkFiles(
+          path.join(outDir, "_next", "static"),
+          (file) => file.endsWith(".css"),
+        );
+        for (const file of cssFiles) {
+          const css = readFileSync(file, "utf8");
+          if (/url\(\s*["']?\/identity\/grain\.png/.test(css)) {
+            return false;
+          }
+        }
+        return true;
+      })(),
+    );
+    check(
+      "client bundles resolve audio via assetUrl + basePath",
+      (() => {
+        const relativeAudio = "/audio/base-ambience.ogg";
+        const chunks = walkFiles(path.join(outDir, "_next", "static"), (file) =>
+          file.endsWith(".js"),
+        );
+        let sawRelative = false;
+        let sawDirectRootSrc = false;
+        let sawBase = base === "";
+        for (const chunk of chunks) {
+          const js = readFileSync(chunk, "utf8");
+          if (js.includes(relativeAudio)) {
+            sawRelative = true;
+          }
+          // Direct root src (broken on Pages) — helper call is src:n("/audio/...")
+          if (
+            js.includes(`src:"${relativeAudio}"`) ||
+            js.includes(`src:'${relativeAudio}'`)
+          ) {
+            sawDirectRootSrc = true;
+          }
+          if (base && js.includes(base)) {
+            sawBase = true;
+          }
+        }
+        return sawRelative && sawBase && !sawDirectRootSrc;
+      })(),
+      base
+        ? `${base} + assetUrl(${JSON.stringify("/audio/base-ambience.ogg")})`
+        : `assetUrl(${JSON.stringify("/audio/base-ambience.ogg")})`,
+    );
+    if (base) {
+      check(
+        "exported HTML has no unprefixed /identity/ portrait src",
+        !indexHtml.includes('src="/identity/'),
+      );
     }
 
     const nextStatic = path.join(outDir, "_next", "static");

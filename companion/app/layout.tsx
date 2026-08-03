@@ -1,13 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Instrument_Serif, Manrope } from "next/font/google";
-import type { ReactNode } from "react";
-import { getSiteOrigin } from "@/lib/site-url";
+import type { CSSProperties, ReactNode } from "react";
+import { assetUrl, getSiteOrigin } from "@/lib/site-url";
 import { getIdentity } from "@/modules/meaning";
 import {
   getThemeBootstrapScript,
   ThemeProvider,
 } from "@/modules/presentation/theme";
 import "@/styles/global.css";
+
+/** CSS public assets — must go through assetUrl (never root-absolute in CSS). */
+const eosAssetGrain = `url("${assetUrl("/identity/grain.png")}")`;
 
 const sans = Manrope({
   subsets: ["latin"],
@@ -85,11 +88,16 @@ type RootLayoutProps = {
   children: ReactNode;
 };
 
+const htmlAssetStyle = {
+  ["--eos-asset-grain"]: eosAssetGrain,
+} as CSSProperties;
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
       className={`${sans.variable} ${display.variable} ${mono.variable}`}
+      style={htmlAssetStyle}
       suppressHydrationWarning
     >
       <head>

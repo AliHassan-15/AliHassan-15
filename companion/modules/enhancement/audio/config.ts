@@ -1,3 +1,4 @@
+import { assetUrl } from "@/lib/site-url";
 import type {
   AmbientEnvironmentConfig,
   AmbientLayerId,
@@ -21,22 +22,22 @@ export const AMBIENT_ENVIRONMENT: AmbientEnvironmentConfig = {
   layers: [
     {
       id: "base",
-      src: "/audio/base-ambience.ogg",
+      src: assetUrl("/audio/base-ambience.ogg"),
       shipped: true,
     },
     {
       id: "air",
-      src: "/audio/low-air.ogg",
+      src: assetUrl("/audio/low-air.ogg"),
       shipped: true,
     },
     {
       id: "mechanical",
-      src: "/audio/mechanical-texture.ogg",
+      src: assetUrl("/audio/mechanical-texture.ogg"),
       shipped: true,
     },
     {
       id: "resonance",
-      src: "/audio/distant-resonance.ogg",
+      src: assetUrl("/audio/distant-resonance.ogg"),
       shipped: true,
     },
   ],
@@ -106,7 +107,7 @@ export function resolveAmbientRoom(pathname: string): AmbientRoomId {
 /** @deprecated Prefer AMBIENT_ENVIRONMENT — single-track placeholder removed. */
 export const AMBIENT_TRACK = {
   id: AMBIENT_ENVIRONMENT.id,
-  src: "/audio/base-ambience.ogg",
+  src: assetUrl("/audio/base-ambience.ogg"),
   settleDelayMs: AMBIENT_ENVIRONMENT.settleDelayMs,
   fadeMs: AMBIENT_ENVIRONMENT.fadeMs,
   targetVolume: AMBIENT_ENVIRONMENT.masterVolume,

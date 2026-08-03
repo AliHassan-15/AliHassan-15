@@ -576,3 +576,15 @@ Product meaning remains owned by `docs/product-bible/`. This log does not restat
 | **Rejected** | Product edits under the guise of deploy; silent feature removal |
 | **Revisit** | Custom domain; optional header injection if Pages/CDN later supports it |
 
+## D-ENG-044 — GitHub Pages public asset basePath restoration
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-04 |
+| **Milestone** | Release engineering |
+| **Decision** | Route every `public/` asset through `assetUrl()` / `getBasePath()`; inject CSS grain via `--eos-asset-grain` from root layout; never hardcode root-absolute `/identity/*` or `/audio/*` |
+| **Purpose** | Restore portrait, grain, signature, and ambient audio on the project Pages site without product redesign |
+| **Constraints** | No UI/feature changes; localhost (empty basePath) and Pages (`/AliHassan-15`) must both work |
+| **Rejected** | Redesign; feature removal; leaving CSS `url("/…")` root paths |
+| **Revisit** | Custom domain with empty or alternate basePath |
+

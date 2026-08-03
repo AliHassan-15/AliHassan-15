@@ -34,3 +34,13 @@ export function getBasePath(): string {
     ? raw.replace(/\/$/, "")
     : `/${raw.replace(/\/$/, "")}`;
 }
+
+/**
+ * Public asset URL under the active basePath.
+ * Use for every file served from `public/` — never hardcode root-absolute paths.
+ * Local (no basePath) → `/identity/…`; GitHub Pages → `/AliHassan-15/identity/…`.
+ */
+export function assetUrl(publicPath: string): string {
+  const normalized = publicPath.startsWith("/") ? publicPath : `/${publicPath}`;
+  return `${getBasePath()}${normalized}`;
+}

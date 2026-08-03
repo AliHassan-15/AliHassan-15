@@ -112,7 +112,8 @@ body::after {
   inset: 0;
   z-index: var(--eos-layer-canvas);
   pointer-events: none;
-  background-image: url("/identity/grain.png");
+  /* Path injected via --eos-asset-grain (layout) so basePath works on Pages */
+  background-image: var(--eos-asset-grain);
   background-size: 42rem 28rem;
   background-repeat: repeat;
   opacity: 0.02;
