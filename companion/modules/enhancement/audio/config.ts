@@ -85,21 +85,30 @@ export function shippedAmbientLayers(
   return config.layers.filter((layer) => layer.shipped);
 }
 
+/**
+ * Strip a trailing slash (except for the root path) so room matching stays
+ * correct regardless of `trailingSlash` router config or navigation source.
+ */
+function normalizeRoomPath(pathname: string): string {
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    return pathname.slice(0, -1);
+  }
+  return pathname;
+}
+
 export function resolveAmbientRoom(pathname: string): AmbientRoomId {
-  if (pathname.startsWith("/atlas")) {
+  const path = normalizeRoomPath(pathname);
+  if (path.startsWith("/atlas")) {
     return "atlas";
   }
-  if (pathname.startsWith("/journey")) {
+  if (path.startsWith("/journey")) {
     return "journey";
   }
-  if (pathname.startsWith("/archive/")) {
+  if (path.startsWith("/archive/")) {
     return "case-study";
   }
-  if (pathname === "/archive") {
+  if (path === "/archive") {
     return "evidence";
-  }
-  if (pathname === "/") {
-    return "arrival";
   }
   return "arrival";
 }

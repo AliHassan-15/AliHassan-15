@@ -18,6 +18,7 @@ import {
 } from "@/modules/presentation/engineering";
 import { extractPipelineStages } from "./extractPipelineStages";
 import { inspectPipelineStage } from "./inspectPipelineStage";
+import { PipelineFlythrough } from "./PipelineFlythrough";
 import styles from "./ArchitectureTopology.module.css";
 
 export type TopologyEvidenceLink = {
@@ -201,25 +202,32 @@ export function ArchitectureTopology({
       </div>
 
       <div className={styles.depth} aria-hidden="true">
-        <div className={styles.stack}>
-          {confirmedStages.map((stage, index) => (
-            <div
-              key={stage}
-              className={
-                index === safeIndex
-                  ? `${styles.plane} ${styles.planeSelected}`
-                  : styles.plane
-              }
-              style={
-                {
-                  "--eos-topology-index": String(index),
-                } as CSSProperties
-              }
-            >
-              {stage}
+        <PipelineFlythrough
+          stageCount={confirmedStages.length}
+          activeIndex={safeIndex}
+          className={styles.pipelineScene}
+          fallback={
+            <div className={styles.stack}>
+              {confirmedStages.map((stage, index) => (
+                <div
+                  key={stage}
+                  className={
+                    index === safeIndex
+                      ? `${styles.plane} ${styles.planeSelected}`
+                      : styles.plane
+                  }
+                  style={
+                    {
+                      "--eos-topology-index": String(index),
+                    } as CSSProperties
+                  }
+                >
+                  {stage}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          }
+        />
       </div>
 
       {inspection ? (

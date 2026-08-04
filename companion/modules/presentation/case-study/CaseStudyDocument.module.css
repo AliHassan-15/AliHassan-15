@@ -6,11 +6,13 @@
 .document {
   display: grid;
   gap: calc(var(--eos-space-8) + var(--eos-space-3));
-  max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-5)));
+  max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-8)));
+  width: 100%;
   position: relative;
   margin-inline: 0;
   isolation: isolate;
   padding-inline-start: var(--eos-space-5);
+  min-width: 0;
 }
 
 .document::before {
@@ -147,19 +149,19 @@
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .document {
-    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-3)));
+    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-5)));
   }
 }
 
 @media (min-width: 1440px) {
   .document {
-    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-6)));
+    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-9)));
     gap: calc(var(--eos-space-8) + var(--eos-space-4));
   }
 }
 
 @media (min-width: 1920px) {
   .document {
-    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-7)));
+    max-width: min(100%, 48rem);
   }
 }

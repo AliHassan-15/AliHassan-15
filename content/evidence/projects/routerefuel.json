@@ -74,7 +74,7 @@
     },
     "architecture": {
       "status": "confirmed",
-      "value": "Client POST /api/v1/route/ { start, finish } → geocode (Nominatim, cached) → drive route (OSRM, cached) → load corridor stations from DB → pick cheapest reachable stop each tank window → return geometry + stops + totals + meta.external_calls. Vehicle constants: MAX_RANGE_MILES = 500, MPG = 10."
+      "value": "Client POST /api/v1/route/ { start, finish } → geocode (Nominatim, cached) → drive route (OSRM, cached) → load corridor stations from DB → pick cheapest reachable stop each tank window → return geometry + stops + totals + meta.external_calls. Vehicle constants: MAX_RANGE_MILES = 500, MPG = 10. stages: Client request, Geocode, Drive route, Load corridor stations, Pick cheapest reachable stop, Return geometry and totals."
     },
     "decisions": {
       "status": "confirmed",

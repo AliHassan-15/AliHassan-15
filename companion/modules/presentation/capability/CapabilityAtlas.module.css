@@ -57,10 +57,18 @@
   }
 }
 
+/*
+ * Field — a real WebGL "Milky Way" constellation (`ConstellationField`) when
+ * spatial capability allows it, otherwise the flat SVG blueprint below.
+ * `aspect-ratio` (not `height: auto`) so the always-present container has a
+ * real box for the absolutely-positioned canvas to fill.
+ */
 .field {
+  position: relative;
   width: 100%;
-  height: auto;
+  aspect-ratio: 960 / 580;
   max-height: 34rem;
+  overflow: hidden;
   border: var(--eos-border-width-hairline) solid
     color-mix(in srgb, var(--eos-color-border-subtle) 80%, transparent);
   background: color-mix(
@@ -68,6 +76,16 @@
     var(--eos-color-surface) 18%,
     var(--eos-color-canvas)
   );
+}
+
+.constellationScene {
+  inset: 0;
+}
+
+.fieldFallback {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .grid line {

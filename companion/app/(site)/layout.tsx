@@ -1,7 +1,14 @@
 import type { ReactNode } from "react";
 import { AudioProvider } from "@/modules/enhancement/audio";
 import { MotionProvider } from "@/modules/enhancement/motion";
-import { SpatialProvider } from "@/modules/enhancement/spatial";
+/**
+ * Imported from the concrete file, not the `spatial` barrel: the barrel
+ * also re-exports `SceneCanvas`, whose `next/dynamic()` call would
+ * otherwise be pulled into this root layout's module graph — which wraps
+ * every route — causing Next to reference the Three.js chunk from every
+ * page instead of only the pages that actually render a scene (Rebuild M9).
+ */
+import { SpatialProvider } from "@/modules/enhancement/spatial/SpatialProvider";
 import {
   EngineeringProvider,
   EngineeringWorldRoot,

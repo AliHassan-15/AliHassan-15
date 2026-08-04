@@ -1,0 +1,8 @@
+/*
+ * `SceneCanvas`'s own `.root` already sets `position: absolute` — this only
+ * sizes it and requires its parent (`.stationsScene`) to be `position:
+ * relative` with a real height.
+ */
+.scene {
+  inset: 0;
+}

@@ -159,7 +159,7 @@
     },
     "architecture": {
       "status": "confirmed",
-      "value": "Deterministic backend work (auth, appointments, records, workflows) is kept separate from AI reasoning. Public testing evidence describes the clinical pipeline as: voice intake produces a structured patient report; sentiment/urgency extraction and severity scoring feed adaptive scheduling; appointment booking and pharmacy pickup follow. Severity scoring and LLM-output normalization are treated as safety-critical, threshold-driven modules.",
+      "value": "Deterministic backend work (auth, appointments, records, workflows) is kept separate from AI reasoning. Public testing evidence describes the clinical pipeline as: voice intake produces a structured patient report; sentiment/urgency extraction and severity scoring feed adaptive scheduling; appointment booking and pharmacy pickup follow. Severity scoring and LLM-output normalization are treated as safety-critical, threshold-driven modules. stages: Voice intake, Structured patient report, Sentiment/urgency extraction, Severity scoring, Adaptive scheduling, Appointment booking, Pharmacy pickup.",
       "confidence": "confirmed",
       "provenance": [
         {

@@ -173,9 +173,9 @@ ${evidenceRows(evidence)}`,
   const companion = section(
     "Engineering Companion",
     "companion",
-    `This README is the lobby.
+    `This README is the lobby — static by necessity, since GitHub renders no JavaScript, WebGL, or motion.
 
-The Companion is the engineering environment — Atlas, Journey, Architecture, Demonstrations, Evidence, and Case Studies as one continuous product.
+The Companion is the real destination: a cinematic engineering environment with a WebGL entrance sequence, a 3D architecture flythrough per case study, a skills constellation, and a camera-driven engineering journey — built on the same evidence as this README, not decoration layered on top of it.
 
 ${dualThemeImg("divider", 720, 28)}
 

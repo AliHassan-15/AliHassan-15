@@ -7,6 +7,7 @@ import {
   relatedRefFromLink,
   useOptionalEngineeringContext,
 } from "@/modules/presentation/engineering";
+import { ConstellationField } from "./ConstellationField";
 import type {
   CapabilityAtlasModel,
   CapabilityInspection,
@@ -219,112 +220,123 @@ export function CapabilityAtlas({
       </figcaption>
 
       <div className={styles.stage}>
-        <svg
-          className={styles.field}
-          viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
-          role="img"
-          aria-label="Engineering capability blueprint field"
-        >
-          <g className={styles.grid} aria-hidden="true">
-            <line x1="40" y1="24" x2="40" y2={viewBox.height - 24} />
-            <line
-              x1={viewBox.width - 40}
-              y1="24"
-              x2={viewBox.width - 40}
-              y2={viewBox.height - 24}
-            />
-            <line x1="40" y1="24" x2={viewBox.width - 40} y2="24" />
-            <line
-              x1="40"
-              y1={viewBox.height - 24}
-              x2={viewBox.width - 40}
-              y2={viewBox.height - 24}
-            />
-            <text x="48" y="18" className={styles.laneLabel}>
-              SYSTEM
-            </text>
-            <text x="288" y="18" className={styles.laneLabel}>
-              ARCHITECTURE
-            </text>
-            <text x="528" y="18" className={styles.laneLabel}>
-              TECHNOLOGY
-            </text>
-            <text x="768" y="18" className={styles.laneLabel}>
-              VALIDATION
-            </text>
-          </g>
-
-          <g className={styles.edges} aria-hidden="true">
-            {edges.map((edge) => {
-              const from = layoutById.get(edge.fromId);
-              const to = layoutById.get(edge.toId);
-              if (!from || !to) {
-                return null;
-              }
-              const lit =
-                Boolean(activeId) &&
-                (edge.fromId === activeId ||
-                  edge.toId === activeId ||
-                  (connected.has(edge.fromId) && connected.has(edge.toId)));
-              return (
-                <line
-                  key={edge.id}
-                  x1={from.x}
-                  y1={from.y}
-                  x2={to.x}
-                  y2={to.y}
-                  className={lit ? styles.edgeLit : styles.edge}
-                />
-              );
-            })}
-          </g>
-
-          <g className={styles.nodes}>
-            {inspections.map((entry, index) => {
-              const point = layoutById.get(entry.id);
-              if (!point) {
-                return null;
-              }
-              const selected = index === safeIndex;
-              const related =
-                Boolean(activeId) &&
-                activeId !== entry.id &&
-                connected.has(entry.id);
-              const dimmed =
-                Boolean(activeId) &&
-                !selected &&
-                !related &&
-                activeId !== entry.id;
-              return (
-                <g
-                  key={entry.id}
-                  transform={`translate(${point.x} ${point.y})`}
-                  className={
-                    selected
-                      ? styles.nodeSelected
-                      : related
-                        ? styles.nodeRelated
-                        : dimmed
-                          ? styles.nodeDimmed
-                          : styles.node
-                  }
-                  onMouseEnter={() => setHoveredId(entry.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onClick={() => selectCapability(index)}
-                >
-                  <title>{`${entry.kindLabel}: ${entry.label}`}</title>
-                  <circle r="4.5" className={styles.nodeCore} />
-                  <circle r="9" className={styles.nodeRing} />
-                  <text x="14" y="4" className={styles.nodeLabel}>
-                    {entry.label.length > 22
-                      ? `${entry.label.slice(0, 20)}…`
-                      : entry.label}
+        <div className={styles.field}>
+          <ConstellationField
+            model={model}
+            activeId={activeId}
+            connectedIds={connected}
+            className={styles.constellationScene}
+            fallback={
+              <svg
+                className={styles.fieldFallback}
+                viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
+                role="img"
+                aria-label="Engineering capability blueprint field"
+              >
+                <g className={styles.grid} aria-hidden="true">
+                  <line x1="40" y1="24" x2="40" y2={viewBox.height - 24} />
+                  <line
+                    x1={viewBox.width - 40}
+                    y1="24"
+                    x2={viewBox.width - 40}
+                    y2={viewBox.height - 24}
+                  />
+                  <line x1="40" y1="24" x2={viewBox.width - 40} y2="24" />
+                  <line
+                    x1="40"
+                    y1={viewBox.height - 24}
+                    x2={viewBox.width - 40}
+                    y2={viewBox.height - 24}
+                  />
+                  <text x="48" y="18" className={styles.laneLabel}>
+                    SYSTEM
+                  </text>
+                  <text x="288" y="18" className={styles.laneLabel}>
+                    ARCHITECTURE
+                  </text>
+                  <text x="528" y="18" className={styles.laneLabel}>
+                    TECHNOLOGY
+                  </text>
+                  <text x="768" y="18" className={styles.laneLabel}>
+                    VALIDATION
                   </text>
                 </g>
-              );
-            })}
-          </g>
-        </svg>
+
+                <g className={styles.edges} aria-hidden="true">
+                  {edges.map((edge) => {
+                    const from = layoutById.get(edge.fromId);
+                    const to = layoutById.get(edge.toId);
+                    if (!from || !to) {
+                      return null;
+                    }
+                    const lit =
+                      Boolean(activeId) &&
+                      (edge.fromId === activeId ||
+                        edge.toId === activeId ||
+                        (connected.has(edge.fromId) &&
+                          connected.has(edge.toId)));
+                    return (
+                      <line
+                        key={edge.id}
+                        x1={from.x}
+                        y1={from.y}
+                        x2={to.x}
+                        y2={to.y}
+                        className={lit ? styles.edgeLit : styles.edge}
+                      />
+                    );
+                  })}
+                </g>
+
+                <g className={styles.nodes}>
+                  {inspections.map((entry, index) => {
+                    const point = layoutById.get(entry.id);
+                    if (!point) {
+                      return null;
+                    }
+                    const selected = index === safeIndex;
+                    const related =
+                      Boolean(activeId) &&
+                      activeId !== entry.id &&
+                      connected.has(entry.id);
+                    const dimmed =
+                      Boolean(activeId) &&
+                      !selected &&
+                      !related &&
+                      activeId !== entry.id;
+                    return (
+                      <g
+                        key={entry.id}
+                        transform={`translate(${point.x} ${point.y})`}
+                        className={
+                          selected
+                            ? styles.nodeSelected
+                            : related
+                              ? styles.nodeRelated
+                              : dimmed
+                                ? styles.nodeDimmed
+                                : styles.node
+                        }
+                        onMouseEnter={() => setHoveredId(entry.id)}
+                        onMouseLeave={() => setHoveredId(null)}
+                        onClick={() => selectCapability(index)}
+                      >
+                        <title>{`${entry.kindLabel}: ${entry.label}`}</title>
+                        <circle r="4.5" className={styles.nodeCore} />
+                        <circle r="9" className={styles.nodeRing} />
+                        <text x="14" y="4" className={styles.nodeLabel}>
+                          {entry.label.length > 22
+                            ? `${entry.label.slice(0, 20)}…`
+                            : entry.label}
+                        </text>
+                      </g>
+                    );
+                  })}
+                </g>
+              </svg>
+            }
+          />
+        </div>
 
         <div
           className={styles.listGroup}

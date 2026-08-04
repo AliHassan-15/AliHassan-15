@@ -1,0 +1,8 @@
+.scene {
+  position: absolute;
+  /* Tight frame — rings hug the circular face, not a giant empty halo */
+  inset: -16%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}

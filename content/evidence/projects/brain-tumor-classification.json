@@ -71,7 +71,7 @@
     },
     "architecture": {
       "status": "confirmed",
-      "value": "Two model paths: ImageNet-pretrained Xception fine-tuned for four-class MRI classification, and a custom CNN built in Keras. Streamlit app.py loads saved weights (cnn_model.h5, xception_model.weights.h5), runs inference on uploaded scans, and produces saliency visualizations under saliency_maps/."
+      "value": "Two model paths: ImageNet-pretrained Xception fine-tuned for four-class MRI classification, and a custom CNN built in Keras. Streamlit app.py loads saved weights (cnn_model.h5, xception_model.weights.h5), runs inference on uploaded scans, and produces saliency visualizations under saliency_maps/. stages: Load saved weights, Run inference on uploaded scans, Produce saliency visualizations."
     },
     "decisions": {
       "status": "confirmed",

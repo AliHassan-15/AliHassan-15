@@ -1,0 +1,147 @@
+/**
+ * Floating command bar — replaces the traditional navbar (Document 06 §4:
+ * spatial navigation is an appropriate motion use; a fixed top rule is not
+ * required for orientation once wayfinding is this compact).
+ */
+
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: max(var(--eos-space-4), env(safe-area-inset-bottom, 0px));
+  z-index: var(--eos-layer-sticky);
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eos-space-1);
+  padding: 0.3rem;
+  border-radius: 999px;
+  border: var(--eos-border-width-hairline) solid
+    color-mix(in srgb, var(--eos-color-border-strong) 55%, transparent);
+  background: color-mix(in srgb, var(--eos-color-surface) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(1.1);
+  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.02);
+  /* Prefer viewport units with safe-area insets; overflow-x:clip on html
+     prevents the classic 100vw scrollbar-induced horizontal scroll */
+  max-width: calc(
+    100vw - max(var(--eos-space-4), env(safe-area-inset-left, 0px)) -
+      max(var(--eos-space-4), env(safe-area-inset-right, 0px))
+  );
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dock::-webkit-scrollbar {
+  display: none;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--eos-size-control-md);
+  height: var(--eos-size-control-md);
+  padding-inline: var(--eos-space-3);
+  border-radius: 999px;
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  color: var(--eos-color-text-secondary);
+  text-decoration: none !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  height: var(--eos-size-control-md);
+  padding-inline: var(--eos-space-4);
+  border-radius: 999px;
+  font-size: var(--eos-font-size-body-sm);
+  letter-spacing: var(--eos-letter-spacing-ui);
+  color: var(--eos-color-text-secondary);
+  text-decoration: none !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--eos-transition-interactive);
+}
+
+.item:hover {
+  color: var(--eos-color-text-primary);
+  background: var(--eos-color-accent-subtle);
+}
+
+.itemActive {
+  color: var(--eos-color-text-primary);
+  background: var(--eos-color-accent-subtle);
+}
+
+.divider {
+  width: var(--eos-border-width-hairline);
+  height: var(--eos-space-5);
+  background: var(--eos-color-border-subtle);
+  flex-shrink: 0;
+}
+
+.prefs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+  flex-shrink: 0;
+}
+
+.pref {
+  height: var(--eos-size-control-md);
+  padding-inline: var(--eos-space-3);
+  border-radius: 999px;
+  color: var(--eos-color-text-tertiary);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+}
+
+.pref:hover:not(:disabled) {
+  color: var(--eos-color-text-primary);
+  background: var(--eos-color-accent-subtle);
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .dock {
+    bottom: max(var(--eos-space-3), env(safe-area-inset-bottom, 0px));
+    gap: 0;
+    padding: 0.22rem;
+  }
+
+  .item {
+    padding-inline: var(--eos-space-3);
+    font-size: var(--eos-font-size-caption);
+  }
+
+  .mark {
+    min-width: var(--eos-size-control-sm);
+    height: var(--eos-size-control-sm);
+    padding-inline: var(--eos-space-2);
+  }
+
+  .pref {
+    height: var(--eos-size-control-sm);
+    padding-inline: var(--eos-space-2);
+  }
+
+  .divider {
+    height: var(--eos-space-4);
+  }
+}
+
+@media (max-width: 420px) {
+  .item {
+    padding-inline: 0.55rem;
+  }
+
+  .pref {
+    padding-inline: 0.45rem;
+  }
+}

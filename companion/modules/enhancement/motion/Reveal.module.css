@@ -1,18 +1,23 @@
 .reveal {
   animation-name: eos-reveal;
-  animation-duration: var(--eos-duration-deliberate);
-  animation-timing-function: var(--eos-ease-emphasized);
+  animation-duration: var(--eos-cinematic-duration-reveal-md);
+  animation-timing-function: var(--eos-cinematic-ease-reveal);
   animation-fill-mode: both;
-  animation-delay: calc(var(--eos-reveal-step, 0) * var(--eos-motion-stagger));
+  animation-delay: calc(
+    var(--eos-reveal-step, 0) * var(--eos-motion-stagger, 90ms)
+  );
+  will-change: opacity, transform;
 }
 
 @keyframes eos-reveal {
   from {
-    opacity: 0.99;
+    opacity: 0;
+    transform: translate3d(0, 0.85rem, 0);
   }
 
   to {
     opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -20,10 +25,14 @@
   .reveal {
     animation: none;
     opacity: 1;
+    transform: none;
+    will-change: auto;
   }
 }
 
 html[data-eos-motion="reduce"] .reveal {
   animation: none;
   opacity: 1;
+  transform: none;
+  will-change: auto;
 }

@@ -91,15 +91,19 @@
   outline-offset: var(--eos-space-1);
 }
 
-/* Editorial stage stack — flat document figure, not decorative 3D */
+/*
+ * Depth layer — a real WebGL pipeline flythrough (`PipelineFlythrough`) when
+ * spatial capability allows it, otherwise the flat CSS plane stack below.
+ * `SceneCanvas` itself decides which one mounts; this container only sizes
+ * and spaces whichever is rendered.
+ */
 .depth {
-  display: none;
   padding-block: var(--eos-space-4);
-  opacity: 0.55;
 }
 
-html[data-eos-spatial="full"] .depth {
-  display: block;
+.pipelineScene {
+  position: relative;
+  height: 15rem;
 }
 
 .stack {
@@ -107,6 +111,7 @@ html[data-eos-spatial="full"] .depth {
   display: grid;
   gap: var(--eos-space-2);
   margin-inline: 0;
+  opacity: 0.55;
 }
 
 .plane {
@@ -159,20 +164,8 @@ html[data-eos-spatial="full"] .depth {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .depth {
-    display: none;
-  }
-
   .stageControl,
   .plane {
     transition: none;
   }
-}
-
-html[data-eos-motion="reduce"] .depth {
-  display: none;
-}
-
-html[data-eos-spatial="off"] .depth {
-  display: none;
 }

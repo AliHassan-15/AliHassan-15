@@ -1,4 +1,4 @@
-import { ArchitectureTopology } from "@/modules/enhancement/spatial";
+import { ArchitectureTopology } from "@/modules/enhancement/spatial/ArchitectureTopology";
 import { COMPANION_PATHS } from "@/modules/experience/routes";
 import {
   discloseEvidenceString,

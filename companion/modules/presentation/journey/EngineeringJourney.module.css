@@ -22,6 +22,17 @@
   border: 0;
 }
 
+/* No fallback content lives here (Document 32) — collapse entirely unless
+   the real WebGL flythrough can mount. */
+.stationsScene {
+  height: 0;
+}
+
+html[data-eos-spatial="full"] .stationsScene {
+  position: relative;
+  height: 11rem;
+}
+
 .track {
   display: grid;
   grid-auto-flow: column;

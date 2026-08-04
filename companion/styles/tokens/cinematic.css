@@ -1,0 +1,57 @@
+/**
+ * Cinematic motion tokens — entrance sequences, chapter transitions, and
+ * camera drifts only. Deliberately separate from `--eos-duration-*`
+ * (Document 06): those govern UI feedback (hover, focus, press) and must
+ * stay swift; these govern storytelling and are allowed to breathe.
+ *
+ * Vocabulary is restricted to: breathing, orbiting, revealing, floating,
+ * scanning, focusing. Never bouncing, spinning, shaking, exploding.
+ */
+
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+  --eos-cinematic-duration-silence: 800ms;
+  --eos-cinematic-duration-reveal-sm: 900ms;
+  --eos-cinematic-duration-reveal-md: 1600ms;
+  --eos-cinematic-duration-reveal-lg: 2600ms;
+  --eos-cinematic-duration-drift: 5200ms;
+  --eos-cinematic-duration-orbit: 42000ms;
+
+  --eos-cinematic-ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --eos-cinematic-ease-breathe: var(--eos-primitive-ease-breathe);
+  --eos-cinematic-ease-drift: cubic-bezier(0.37, 0, 0.63, 1);
+
+  /* Depth planes for parallax — background, mid, foreground, presence */
+  --eos-cinematic-depth-bg: 0;
+  --eos-cinematic-depth-mid: 1;
+  --eos-cinematic-depth-fg: 2;
+  --eos-cinematic-depth-presence: 3;
+
+  /* Particle / lighting palette — reflected graphite, never saturated */
+  --eos-cinematic-particle-color: rgb(197 194 188 / 0.5);
+  --eos-cinematic-glow-color: rgb(120 128 145 / 0.16);
+  --eos-cinematic-fog-color: #0b0a09;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  [data-theme="light"],
+  [data-theme="dark"] {
+    --eos-cinematic-duration-silence: 0ms;
+    --eos-cinematic-duration-reveal-sm: 0ms;
+    --eos-cinematic-duration-reveal-md: 0ms;
+    --eos-cinematic-duration-reveal-lg: 0ms;
+    --eos-cinematic-duration-drift: 0ms;
+    --eos-cinematic-duration-orbit: 0ms;
+  }
+}
+
+html[data-eos-motion="reduce"] {
+  --eos-cinematic-duration-silence: 0ms;
+  --eos-cinematic-duration-reveal-sm: 0ms;
+  --eos-cinematic-duration-reveal-md: 0ms;
+  --eos-cinematic-duration-reveal-lg: 0ms;
+  --eos-cinematic-duration-drift: 0ms;
+  --eos-cinematic-duration-orbit: 0ms;
+}

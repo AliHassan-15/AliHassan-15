@@ -16,6 +16,13 @@ type RevealProps = {
  * Progressive reveal primitive — Server Component safe (CSS-driven).
  * Reduced motion collapses to immediate presence with hierarchy intact.
  */
+type RevealElementProps = {
+  className?: string;
+  style?: CSSProperties;
+  "data-eos-reveal"?: string;
+  children?: ReactNode;
+};
+
 export function Reveal({
   children,
   step = 0,
@@ -27,13 +34,15 @@ export function Reveal({
     "--eos-reveal-step": String(step),
   } as CSSProperties;
 
+  const Element = Comp as ElementType<RevealElementProps>;
+
   return (
-    <Comp
+    <Element
       className={cx(active && styles.reveal, className)}
       style={active ? style : undefined}
       data-eos-reveal={active ? "true" : undefined}
     >
       {children}
-    </Comp>
+    </Element>
   );
 }

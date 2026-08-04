@@ -1,0 +1,17 @@
+.root {
+  position: absolute;
+  overflow: visible;
+}
+
+.viewport {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.root canvas,
+.viewport canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

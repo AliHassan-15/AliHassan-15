@@ -1,3 +1,3 @@
 export { SiteShell } from "./SiteShell";
-export { SiteHeader } from "./SiteHeader";
+export { FloatingNav } from "./FloatingNav";
 export { SiteFooter } from "./SiteFooter";

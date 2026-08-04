@@ -11,6 +11,7 @@ import {
   useOptionalEngineeringContext,
 } from "@/modules/presentation/engineering";
 import type { JourneyModel, JourneyStation } from "./journey.types";
+import { StationFlythrough } from "./StationFlythrough";
 import styles from "./EngineeringJourney.module.css";
 
 type EngineeringJourneyProps = {
@@ -205,6 +206,13 @@ export function EngineeringJourney({
       data-eos-journey-station-active={activeId}
     >
       <div className={styles.live} aria-live="polite" ref={liveRef} />
+
+      <div className={styles.stationsScene} aria-hidden="true">
+        <StationFlythrough
+          stationCount={stations.length}
+          activeIndex={activeIndex}
+        />
+      </div>
 
       <div
         className={styles.track}

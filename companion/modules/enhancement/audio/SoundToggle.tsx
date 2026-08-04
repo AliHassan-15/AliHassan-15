@@ -46,7 +46,7 @@ export function SoundToggle({ className }: SoundToggleProps) {
         setPreference(on ? "off" : "on");
       }}
     >
-      Ambient · {on ? "On" : "Off"}
+      Ambient
     </Button>
   );
 }

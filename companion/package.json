@@ -19,9 +19,15 @@
     "audit:deps": "pnpm audit --prod --audit-level=high"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.1.2",
+    "@react-three/postprocessing": "^3.0.4",
+    "framer-motion": "^12.4.10",
+    "gsap": "^3.12.7",
     "next": "^15.5.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "three": "^0.185.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -29,6 +35,7 @@
     "@types/node": "^22.17.2",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
+    "@types/three": "^0.185.0",
     "eslint": "^9.33.0",
     "eslint-config-next": "^15.5.2",
     "eslint-config-prettier": "^10.1.8",

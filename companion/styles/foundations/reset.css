@@ -11,12 +11,14 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body {
   min-height: 100vh;
   min-height: 100dvh;
   line-height: var(--eos-line-height-normal);
+  overflow-x: clip;
 }
 
 img,

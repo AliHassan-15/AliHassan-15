@@ -14,7 +14,8 @@
 }
 
 .wide {
-  max-width: var(--eos-measure-wide);
+  /* Fills a typical laptop; scales up on large / ultrawide without infinite stretch */
+  max-width: min(100%, var(--eos-measure-wide));
 }
 
 @media (max-width: 414px) {
@@ -31,10 +32,20 @@
   }
 }
 
+@media (min-width: 1440px) {
+  .wide {
+    max-width: min(100%, 80rem);
+  }
+}
+
 @media (min-width: 1920px) {
   .root {
     padding-inline: max(var(--eos-space-7), env(safe-area-inset-left, 0px))
       max(var(--eos-space-7), env(safe-area-inset-right, 0px));
+  }
+
+  .wide {
+    max-width: min(100%, 88rem);
   }
 }
 
@@ -42,5 +53,9 @@
   .root {
     padding-inline: max(var(--eos-space-8), env(safe-area-inset-left, 0px))
       max(var(--eos-space-8), env(safe-area-inset-right, 0px));
+  }
+
+  .wide {
+    max-width: min(100%, 96rem);
   }
 }

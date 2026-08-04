@@ -1,4 +1,5 @@
 import type { SpatialCapability, SpatialGateReason } from "./types";
+import { releaseWebglContext } from "./releaseWebglContext";
 
 export type SpatialGateResult = {
   capability: SpatialCapability;
@@ -42,5 +43,31 @@ export function probeSpatialCapability(): SpatialGateResult {
     return { capability: "off", reason: "no-perspective" };
   }
 
+  if (!probeWebglSupport()) {
+    return { capability: "off", reason: "no-webgl" };
+  }
+
   return { capability: "full", reason: "ok" };
+}
+
+/**
+ * Cheap, disposable WebGL context probe — never reused for real rendering.
+ * Every scene in the Companion is progressive enhancement; if this fails,
+ * the fallback path (static image, CSS, or plain text) carries full meaning.
+ */
+function probeWebglSupport(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    const gl =
+      canvas.getContext("webgl2") ??
+      canvas.getContext("webgl") ??
+      canvas.getContext("experimental-webgl");
+    if (!gl || typeof gl !== "object") {
+      return false;
+    }
+    releaseWebglContext(gl as WebGLRenderingContext | WebGL2RenderingContext);
+    return true;
+  } catch {
+    return false;
+  }
 }

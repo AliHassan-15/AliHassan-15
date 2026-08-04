@@ -162,9 +162,9 @@ Public repositories used as proof channels:
   <img src="readme/assets/svg/header-companion-dark.svg" alt="" width="720" height="36" class="gh-dark-mode-only" />
 </p>
 
-This README is the lobby.
+This README is the lobby — static by necessity, since GitHub renders no JavaScript, WebGL, or motion.
 
-The Companion is the engineering environment — Atlas, Journey, Architecture, Demonstrations, Evidence, and Case Studies as one continuous product.
+The Companion is the real destination: a cinematic engineering environment with a WebGL entrance sequence, a 3D architecture flythrough per case study, a skills constellation, and a camera-driven engineering journey — built on the same evidence as this README, not decoration layered on top of it.
 
 <p>
   <img src="readme/assets/svg/divider-light.svg" alt="" width="720" height="28" class="gh-light-mode-only" />

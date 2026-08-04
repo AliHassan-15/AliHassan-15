@@ -84,7 +84,7 @@
     },
     "architecture": {
       "status": "confirmed",
-      "value": "Component boundaries: model.py / models_all (AttentionResUNet, with UNet/ResUNet variants available) → training/evaluation notebooks under Code/ → FastAPI api_server.py (CPU-forced inference, preprocess to 256², POST /api/enhance) → React/Vite frontend. Persistence of checkpoints under output/module3_deeplearning/models. Inference lifecycle: upload bytes → decode/resize/normalize [-1,1] → forward pass → PNG response. Failure boundary: missing checkpoint or undecodable image fails before enhancement.",
+      "value": "Component boundaries: model.py / models_all (AttentionResUNet, with UNet/ResUNet variants available) → training/evaluation notebooks under Code/ → FastAPI api_server.py (CPU-forced inference, preprocess to 256², POST /api/enhance) → React/Vite frontend. Persistence of checkpoints under output/module3_deeplearning/models. Inference lifecycle: upload bytes → decode/resize/normalize [-1,1] → forward pass → PNG response. Failure boundary: missing checkpoint or undecodable image fails before enhancement. stages: Upload bytes, Decode/resize/normalize, Forward pass, PNG response.",
       "confidence": "confirmed",
       "provenance": [
         {

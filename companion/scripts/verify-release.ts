@@ -607,20 +607,20 @@ function verifyA11ySourceContracts(): void {
   );
   check("SiteShell includes SkipLink", shell.includes("SkipLink"));
 
-  const header = readFileSync(
+  const nav = readFileSync(
     path.join(
       companionRoot,
       "modules",
       "presentation",
       "shell",
-      "SiteHeader.tsx",
+      "FloatingNav.tsx",
     ),
     "utf8",
   );
   check(
-    "SiteHeader uses primary nav landmark",
-    header.includes('aria-label="Primary"') ||
-      header.includes("aria-label='Primary'"),
+    "FloatingNav uses primary nav landmark",
+    nav.includes('aria-label="Primary"') ||
+      nav.includes("aria-label='Primary'"),
   );
 }
 

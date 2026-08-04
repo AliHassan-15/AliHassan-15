@@ -7,17 +7,11 @@
   display: grid;
   /* Continuous rooms — no theatrical section cuts */
   gap: calc(var(--eos-space-8) + var(--eos-space-5));
-  max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-7)));
+  /* Fill the shell; prose stays readable via element-level measures */
+  max-width: 100%;
+  width: 100%;
   position: relative;
-}
-
-@media (min-width: 900px) {
-  .article {
-    max-width: min(
-      100%,
-      calc(var(--eos-measure-prose) + 18.5rem + var(--eos-space-8))
-    );
-  }
+  min-width: 0;
 }
 
 .article::before {
@@ -75,6 +69,9 @@
   flex-direction: column;
   align-items: stretch;
   isolation: isolate;
+  /* Clip decorative architecture bleed horizontally; keep portrait rings visible */
+  overflow-x: clip;
+  overflow-y: visible;
   /* Arrival room — open, quiet, minimal */
   --eos-room-spine: 0.12;
   --eos-room-field: 0.032;
@@ -87,13 +84,28 @@
   gap: var(--eos-space-7);
   align-items: end;
   width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 900px) {
   .heroStage {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: var(--eos-space-8);
-    align-items: end;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
+    gap: var(--eos-space-4);
+    align-items: center;
+  }
+}
+
+@media (min-width: 1280px) {
+  .heroStage {
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem);
+    gap: var(--eos-space-5);
+  }
+}
+
+@media (min-width: 1600px) {
+  .heroStage {
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 24rem);
+    gap: var(--eos-space-5);
   }
 }
 
@@ -120,10 +132,11 @@
 
 .cameraPlane {
   position: absolute;
-  inset: -10% -12% -8% -8%;
+  inset: -10% -8% -8% -6%;
   z-index: 0;
   pointer-events: none;
   will-change: auto;
+  overflow: hidden;
 }
 
 .architecture {
@@ -131,12 +144,46 @@
   inset: 2% -4% auto;
   height: 78%;
   opacity: 0.018;
-  mask-image: radial-gradient(70% 68% at 74% 36%, #000 12%, transparent 82%);
+  mask-image:
+    radial-gradient(42% 36% at 16% 14%, #000 0%, transparent 72%),
+    radial-gradient(70% 68% at 74% 36%, #000 12%, transparent 82%);
+  -webkit-mask-image:
+    radial-gradient(42% 36% at 16% 14%, #000 0%, transparent 72%),
+    radial-gradient(70% 68% at 74% 36%, #000 12%, transparent 82%);
   transform: translate3d(
     var(--eos-entrance-mg-x, 0rem),
     var(--eos-entrance-mg-y, 0rem),
     0
   );
+}
+
+.architectureScene {
+  position: absolute;
+  inset: -6% -10% -4%;
+  /* Right portrait field + left field above the name */
+  mask-image:
+    radial-gradient(42% 36% at 16% 14%, #000 0%, transparent 72%),
+    radial-gradient(62% 64% at 70% 38%, #000 22%, transparent 86%);
+  -webkit-mask-image:
+    radial-gradient(42% 36% at 16% 14%, #000 0%, transparent 72%),
+    radial-gradient(62% 64% at 70% 38%, #000 22%, transparent 86%);
+  opacity: 0.9;
+  transition: opacity var(--eos-cinematic-duration-reveal-lg)
+    var(--eos-cinematic-ease-reveal);
+}
+
+html[data-eos-arrival="silence"] .architectureScene {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .architectureScene {
+    transition: none;
+  }
+}
+
+html[data-eos-motion="reduce"] .architectureScene {
+  transition: none;
 }
 
 .architectureSvg {
@@ -185,14 +232,14 @@
 
 .presence {
   position: absolute;
-  top: 6%;
-  right: 2%;
-  width: min(15.5rem, 48vw);
+  top: 10%;
+  right: 18%;
+  width: min(16rem, 42vw);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
-  /* Quieter — AH remains; portrait is the specimen */
-  opacity: 0.055;
+  /* Soft instrument field behind the specimen zone */
+  opacity: 0.07;
   transform: translate3d(
     var(--eos-entrance-bg-x, 0rem),
     var(--eos-entrance-bg-y, 0rem),
@@ -335,7 +382,8 @@
   z-index: 1;
   display: grid;
   gap: var(--eos-space-5);
-  max-width: var(--eos-measure-prose);
+  max-width: min(100%, var(--eos-measure-prose));
+  min-width: 0;
   transform: translate3d(
     var(--eos-entrance-fg-x, 0rem),
     var(--eos-entrance-fg-y, 0rem),
@@ -343,17 +391,76 @@
   );
 }
 
+.neuralField {
+  position: relative;
+  width: min(100%, 20rem);
+  height: 3.75rem;
+  margin-bottom: calc(var(--eos-space-2) * -1);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.neuralSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.neuralLines path {
+  stroke: var(--eos-color-border-strong);
+  stroke-width: 1;
+  opacity: 0.22;
+}
+
+.neuralNodes circle {
+  fill: var(--eos-color-text-tertiary);
+  opacity: 0.38;
+}
+
+.neuralPulse circle {
+  fill: none;
+  stroke: var(--eos-color-text-tertiary);
+  stroke-width: 0.8;
+  opacity: 0.2;
+  transform-origin: center;
+  animation: eos-neural-pulse 5.6s var(--eos-ease-breathe) infinite;
+}
+
+.neuralPulse circle:nth-child(2) {
+  animation-delay: 1.4s;
+}
+
+.neuralPulse circle:nth-child(3) {
+  animation-delay: 2.8s;
+}
+
+@keyframes eos-neural-pulse {
+  0%,
+  100% {
+    opacity: 0.08;
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 0.34;
+    transform: scale(1.35);
+  }
+}
+
 .heroInner > span {
   display: block;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1280px) {
   .heroInner {
     gap: var(--eos-space-6);
+    max-width: min(100%, 40rem);
   }
+}
 
-  .article {
-    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-8)));
+@media (min-width: 1600px) {
+  .heroInner {
+    max-width: min(100%, 44rem);
   }
 }
 
@@ -400,6 +507,26 @@
 
 .enterBody {
   opacity: 0.988;
+  display: grid;
+  gap: var(--eos-space-2);
+}
+
+.enterQuote {
+  margin: 0;
+  max-width: var(--eos-measure-prose);
+  font-style: italic;
+  color: var(--eos-color-text-secondary);
+  line-height: var(--eos-line-height-relaxed);
+  text-wrap: pretty;
+}
+
+.enterQuoteBy {
+  margin: 0;
+  font-family: var(--eos-font-family-mono);
+  font-size: var(--eos-font-size-caption);
+  letter-spacing: var(--eos-letter-spacing-wide);
+  color: var(--eos-color-text-tertiary);
+  opacity: 0.72;
 }
 
 :global([data-eos-entrance="ready"]) .enterKicker,
@@ -622,10 +749,14 @@
     padding-bottom: var(--eos-space-6);
   }
 
+  .cameraPlane {
+    inset: -6% -4% -4% -4%;
+  }
+
   .presence {
-    width: min(11rem, 46vw);
+    width: min(11rem, 40vw);
     top: 0;
-    right: -2%;
+    right: 0;
   }
 
   .architecture {
@@ -639,6 +770,10 @@
   .article {
     gap: var(--eos-space-8);
   }
+
+  .archiveGate::before {
+    inset-inline: 0;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -647,12 +782,13 @@
     padding-bottom: var(--eos-space-7);
   }
 
-  .article {
-    max-width: min(100%, calc(var(--eos-measure-prose) + var(--eos-space-6)));
+  .heroStage {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 16rem);
+    gap: var(--eos-space-6);
   }
 
   .presence {
-    width: min(13.5rem, 38vw);
+    width: min(13.5rem, 34vw);
   }
 }
 
@@ -696,6 +832,11 @@
     animation: none;
   }
 
+  .neuralPulse circle {
+    animation: none;
+    opacity: 0.16;
+  }
+
   .enterKicker,
   .enterTitle,
   .enterSubtitle,
@@ -728,6 +869,11 @@ html[data-eos-motion="reduce"] .heroInner {
 
 html[data-eos-motion="reduce"] .archFlow path {
   animation: none;
+}
+
+html[data-eos-motion="reduce"] .neuralPulse circle {
+  animation: none;
+  opacity: 0.16;
 }
 
 html[data-eos-motion="reduce"]
