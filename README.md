@@ -5,38 +5,32 @@
 Every artifact in the Engineering Operating System exists to demonstrate deliberate engineering—where systems thinking, technical depth, craftsmanship, clarity, and long-term quality consistently take precedence over trends, spectacle, or self-promotion.
 
 <p>
-  <img src="readme/assets/svg/hero-light.svg" alt="" width="720" height="137" class="gh-light-mode-only" />
   <img src="readme/assets/svg/hero-dark.svg" alt="" width="720" height="137" class="gh-dark-mode-only" />
 </p>
 
 <p>
-  <img src="readme/assets/svg/divider-light.svg" alt="" width="720" height="28" class="gh-light-mode-only" />
   <img src="readme/assets/svg/divider-dark.svg" alt="" width="720" height="28" class="gh-dark-mode-only" />
 </p>
 
 Pakistan · BS in Computer Science, FAST NUCES
 
 <p>
-  <img src="readme/assets/svg/plate-location-light.svg" alt="" width="360" height="52" class="gh-light-mode-only" />
   <img src="readme/assets/svg/plate-location-dark.svg" alt="" width="360" height="52" class="gh-dark-mode-only" />
 </p>
 
 Building independently and open to full-time software engineering opportunities.
 
 <p>
-  <img src="readme/assets/svg/plate-availability-light.svg" alt="" width="360" height="52" class="gh-light-mode-only" />
   <img src="readme/assets/svg/plate-availability-dark.svg" alt="" width="360" height="52" class="gh-dark-mode-only" />
 </p>
 
 <p>
-  <img src="readme/assets/svg/section-divider-light.svg" alt="" width="720" height="16" class="gh-light-mode-only" />
   <img src="readme/assets/svg/section-divider-dark.svg" alt="" width="720" height="16" class="gh-dark-mode-only" />
 </p>
 
 ## Philosophy
 
 <p>
-  <img src="readme/assets/svg/header-philosophy-light.svg" alt="" width="720" height="36" class="gh-light-mode-only" />
   <img src="readme/assets/svg/header-philosophy-dark.svg" alt="" width="720" height="36" class="gh-dark-mode-only" />
 </p>
 
@@ -47,38 +41,32 @@ Good engineering is when the code disappears behind the problem it solves. If so
 3. Let evidence guide decisions.
 
 <p>
-  <img src="readme/assets/svg/plate-quote-light.svg" alt="" width="720" height="72" class="gh-light-mode-only" />
   <img src="readme/assets/svg/plate-quote-dark.svg" alt="" width="720" height="72" class="gh-dark-mode-only" />
 </p>
 
 <p>
-  <img src="readme/assets/svg/section-divider-light.svg" alt="" width="720" height="16" class="gh-light-mode-only" />
   <img src="readme/assets/svg/section-divider-dark.svg" alt="" width="720" height="16" class="gh-dark-mode-only" />
 </p>
 
 ## Engineering focus
 
 <p>
-  <img src="readme/assets/svg/header-focus-light.svg" alt="" width="720" height="36" class="gh-light-mode-only" />
   <img src="readme/assets/svg/header-focus-dark.svg" alt="" width="720" height="36" class="gh-dark-mode-only" />
 </p>
 
 <p>
-  <img src="readme/assets/svg/plate-focus-light.svg" alt="" width="360" height="52" class="gh-light-mode-only" />
   <img src="readme/assets/svg/plate-focus-dark.svg" alt="" width="360" height="52" class="gh-dark-mode-only" />
 </p>
 
 I build production-ready full-stack and AI systems, with a focus on scalable architecture, clean engineering, and shipping reliable software that solves real problems.
 
 <p>
-  <img src="readme/assets/svg/section-divider-light.svg" alt="" width="720" height="16" class="gh-light-mode-only" />
   <img src="readme/assets/svg/section-divider-dark.svg" alt="" width="720" height="16" class="gh-dark-mode-only" />
 </p>
 
 ## Selected work
 
 <p>
-  <img src="readme/assets/svg/header-selected-light.svg" alt="" width="720" height="36" class="gh-light-mode-only" />
   <img src="readme/assets/svg/header-selected-dark.svg" alt="" width="720" height="36" class="gh-dark-mode-only" />
 </p>
 
@@ -125,14 +113,12 @@ Primary Developer — full-stack architecture, MERN stack, authentication and au
 Public repository (Project-Management-System) with React client, Node/Express backend, and MongoDB models for users, projects, and tasks.
 
 <p>
-  <img src="readme/assets/svg/section-divider-light.svg" alt="" width="720" height="16" class="gh-light-mode-only" />
   <img src="readme/assets/svg/section-divider-dark.svg" alt="" width="720" height="16" class="gh-dark-mode-only" />
 </p>
 
 ## Evidence
 
 <p>
-  <img src="readme/assets/svg/header-evidence-light.svg" alt="" width="720" height="36" class="gh-light-mode-only" />
   <img src="readme/assets/svg/header-evidence-dark.svg" alt="" width="720" height="36" class="gh-dark-mode-only" />
 </p>
 
@@ -151,14 +137,12 @@ Public repositories used as proof channels:
 | Flashcards Generator | [AliHassan-15/Flashcards-generator](https://github.com/AliHassan-15/Flashcards-generator) |
 
 <p>
-  <img src="readme/assets/svg/section-divider-light.svg" alt="" width="720" height="16" class="gh-light-mode-only" />
   <img src="readme/assets/svg/section-divider-dark.svg" alt="" width="720" height="16" class="gh-dark-mode-only" />
 </p>
 
 ## Engineering Companion
 
 <p>
-  <img src="readme/assets/svg/header-companion-light.svg" alt="" width="720" height="36" class="gh-light-mode-only" />
   <img src="readme/assets/svg/header-companion-dark.svg" alt="" width="720" height="36" class="gh-dark-mode-only" />
 </p>
 
@@ -167,7 +151,6 @@ This README is the lobby — static by necessity, since GitHub renders no JavaSc
 The Companion is the real destination: a cinematic engineering environment with a WebGL entrance sequence, a 3D architecture flythrough per case study, a skills constellation, and a camera-driven engineering journey — built on the same evidence as this README, not decoration layered on top of it.
 
 <p>
-  <img src="readme/assets/svg/divider-light.svg" alt="" width="720" height="28" class="gh-light-mode-only" />
   <img src="readme/assets/svg/divider-dark.svg" alt="" width="720" height="28" class="gh-dark-mode-only" />
 </p>
 
@@ -176,30 +159,25 @@ The Companion is the real destination: a cinematic engineering environment with 
 Local shell: [`companion/`](./companion)
 
 <p>
-  <img src="readme/assets/svg/section-divider-light.svg" alt="" width="720" height="16" class="gh-light-mode-only" />
   <img src="readme/assets/svg/section-divider-dark.svg" alt="" width="720" height="16" class="gh-dark-mode-only" />
 </p>
 
 ## Contact
 
 <p>
-  <img src="readme/assets/svg/header-contact-light.svg" alt="" width="720" height="36" class="gh-light-mode-only" />
   <img src="readme/assets/svg/header-contact-dark.svg" alt="" width="720" height="36" class="gh-dark-mode-only" />
 </p>
 
 <p>
-  <img src="readme/assets/svg/plate-contact-light.svg" alt="" width="360" height="52" class="gh-light-mode-only" />
   <img src="readme/assets/svg/plate-contact-dark.svg" alt="" width="360" height="52" class="gh-dark-mode-only" />
 </p>
 
 [GitHub](https://github.com/AliHassan-15) · [Companion](https://alihassan-15.github.io/AliHassan-15)
 
 <p>
-  <img src="readme/assets/svg/footer-plate-light.svg" alt="" width="720" height="40" class="gh-light-mode-only" />
   <img src="readme/assets/svg/footer-plate-dark.svg" alt="" width="720" height="40" class="gh-dark-mode-only" />
 </p>
 
 <p>
-  <img src="readme/assets/svg/plate-signature-light.svg" alt="" width="280" height="56" class="gh-light-mode-only" />
   <img src="readme/assets/svg/plate-signature-dark.svg" alt="" width="280" height="56" class="gh-dark-mode-only" />
 </p>
