@@ -13,66 +13,48 @@ from theme import BONE, BRIGHT, GREEN_INK, LINE, MONO, MUTED, PAIR_H, PAIR_W, PA
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
-SRC = os.path.join(ROOT, "assets", "source-prepped.png")
+PHOTO = os.path.join(ROOT, "assets", "pic.png")
 OUT = os.path.join(ROOT, "portrait.svg")
 PREVIEW = os.path.join(ROOT, "assets", "portrait-preview.png")
 DENSITY = os.path.join(ROOT, "assets", "ascii-density.png")
 
-COLS = 108
-RAMP = " .+*#"
-WHITE_FLOOR = 0.90
+COLS = 104
+RAMP = " .:-=+*#%@"
+WHITE_FLOOR = 0.93
 INK = "#e6edf3"
-# The face is drawn slowly so a reload lands on the features, then the rest follows.
-FACE_TIME = 3.6
-BODY_TIME = 1.6
+# The head is drawn a little slower, then the seated portrait finishes.
+FACE_TIME = 2.8
+BODY_TIME = 2.2
+CELL_RATIO = 1.72
 
 
-def focus_crop(gray, aspect):
-    """Zoom toward the head without stretching, so the glasses and beard survive."""
-    mask = gray < 242
-    ys, xs = np.where(mask)
-    if len(ys) < 50:
-        return gray
-    top, bottom = int(ys.min()), int(ys.max())
-    left, right = int(xs.min()), int(xs.max())
-    subject_h = max(1, bottom - top)
-    # Hair-to-chin is about a third of this seated photo. Give it half the frame.
-    crop_h = int(subject_h * 0.34 / 0.50)
-    crop_h = max(32, min(crop_h, gray.shape[0]))
-    crop_w = int(round(crop_h * aspect))
-    crop_w = max(32, min(crop_w, gray.shape[1]))
-    crop_h = max(32, min(int(round(crop_w / aspect)), gray.shape[0]))
-    cx = (left + right) // 2
-    y0 = max(0, top - int(crop_h * 0.03))
-    y0 = min(y0, gray.shape[0] - crop_h)
-    x0 = min(max(0, cx - crop_w // 2), gray.shape[1] - crop_w)
-    return gray[y0 : y0 + crop_h, x0 : x0 + crop_w]
+def seated_plate(cols, rows):
+    """Place the whole photo in the card, centered, so both shoulders stay even."""
+    color = cv2.cvtColor(np.array(Image.open(PHOTO).convert("RGB")), cv2.COLOR_RGB2GRAY)
+    # The studio wall is the light flat field. Skin, suit, laptop, and desk stay.
+    wall = color >= 206
+    plate = color.astype(np.float32)
+    plate[wall] = 255
+    # A light edge lift so the glasses and beard keep their shape. Not a line drawing.
+    blur = cv2.GaussianBlur(plate, (0, 0), 1.3)
+    plate = np.clip(plate - np.clip(blur - plate, 0, None) * 0.9, 0, 255)
+    subject = plate < 250
+    # Skin in the photo is almost as light as the wall. Pull it down so the face has a shape.
+    plate[subject] = np.clip(plate[subject] * 0.56 + 4, 0, 255)
 
-
-def carve_features(gray):
-    """Trace glasses, eyes, and beard so they stay dark after the image is reduced."""
-    face_rows = max(8, int(gray.shape[0] * 0.62))
-    face = gray[:face_rows].copy()
-    edges = cv2.Canny(face, 28, 90)
-    edges = cv2.dilate(edges, np.ones((2, 2), np.uint8), iterations=1)
-    face[edges > 0] = np.minimum(face[edges > 0], 18)
-    # Pupils and the beard are already dark. Keep them from washing out.
-    dark = face < 70
-    face[dark] = np.minimum(face[dark], 12)
-    out = gray.copy()
-    out[:face_rows] = face
-    return out
+    photo_rows = max(8, round(cols * (color.shape[0] / color.shape[1]) / CELL_RATIO))
+    photo_rows = min(photo_rows, rows)
+    resized = cv2.resize(plate.astype(np.uint8), (cols, photo_rows), interpolation=cv2.INTER_AREA)
+    canvas = np.full((rows, cols), 255, np.uint8)
+    y0 = max(0, (rows - photo_rows) // 2)
+    canvas[y0 : y0 + photo_rows, :] = resized
+    return canvas
 
 
 def rows_from_image():
     _, _, art_w, art_h = art_box()
-    aspect = art_w / art_h
-    cell_ratio = 1.72
-    rows = max(8, round(COLS * (art_h / art_w) / cell_ratio))
-    gray = np.array(Image.open(SRC).convert("L"))
-    gray = carve_features(focus_crop(gray, aspect))
-    image = Image.fromarray(gray, mode="L").resize((COLS, rows), Image.Resampling.LANCZOS)
-    pixels = np.array(image).astype(np.float32) / 255.0
+    rows = max(8, round(COLS * (art_h / art_w) / CELL_RATIO))
+    pixels = seated_plate(COLS, rows).astype(np.float32) / 255.0
     lines = []
     for y in range(rows):
         chars = []
@@ -81,15 +63,9 @@ def rows_from_image():
             if lum >= WHITE_FLOOR:
                 chars.append(" ")
                 continue
-            # Four solid tones. Fine ramps turn the face into noise at profile size.
-            if lum >= 0.72:
-                chars.append(".")
-            elif lum >= 0.50:
-                chars.append("+")
-            elif lum >= 0.30:
-                chars.append("*")
-            else:
-                chars.append("#")
+            shaped = lum ** 1.05
+            index = int((1.0 - shaped) * (len(RAMP) - 1) + 0.5)
+            chars.append(RAMP[max(0, min(len(RAMP) - 1, index))])
         lines.append("".join(chars))
     return lines, art_w, art_h
 
