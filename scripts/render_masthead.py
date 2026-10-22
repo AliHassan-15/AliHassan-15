@@ -4,11 +4,11 @@
 import os
 
 from svgutil import begin, esc, finish, write
-from theme import BONE, BRIGHT, FULL_W, GREEN_INK, LINE, MONO, MUTED, SANS
+from theme import BONE, BRIGHT, FULL_W, GREEN_INK, LINE, MUTED, SANS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "masthead.svg")
-W, H = FULL_W, 248
+W, H = FULL_W, 236
 
 
 def render():
@@ -28,8 +28,8 @@ def render():
         f'font-size="15" text-anchor="end" style="animation-delay:.16s">{esc("Lahore, Pakistan")}</text>'
     )
     parts.append(
-        f'<text class="rise" x="{W - 28}" y="104" fill="{GREEN_INK}" font-family="{MONO}" '
-        f'font-size="13" text-anchor="end" style="animation-delay:.2s">{esc("open to engineering roles")}</text>'
+        f'<text class="rise" x="{W - 28}" y="108" fill="{GREEN_INK}" font-family="{SANS}" '
+        f'font-size="16" text-anchor="end" style="animation-delay:.2s">{esc("open to engineering roles")}</text>'
     )
     parts.append(
         f'<line class="draw" x1="28" y1="124" x2="{W - 28}" y2="124" stroke="{LINE}" stroke-width="1"/>'
@@ -53,12 +53,11 @@ def render():
         f'style="animation-delay:.48s">{esc("I build, I experiment, and I ship.")}</text>'
     )
     parts.append(
-        f'<text class="rise" x="28" y="220" font-family="{SANS}" style="animation-delay:.66s">'
-        f'<tspan fill="{BRIGHT}" font-size="26" font-weight="700" text-decoration="underline" '
-        f'text-decoration-color="{BRIGHT}">'
+        f'<text class="rise" x="28" y="212" font-family="{SANS}" font-size="18" style="animation-delay:.66s">'
+        f'<tspan fill="{BRIGHT}" font-weight="700" text-decoration="underline">'
         f'{esc("Got something ambitious in mind?")}</tspan>'
-        f'<tspan fill="{GREEN_INK}" font-size="18">{esc("   Let’s build it together.")}</tspan>'
-        f'<tspan class="blink" fill="{BRIGHT}" font-size="26"> ▍</tspan>'
+        f'<tspan fill="{GREEN_INK}">{esc("   Let’s build it together.")}</tspan>'
+        f'<tspan class="blink" fill="{BRIGHT}"> ▍</tspan>'
         f"</text>"
     )
     return finish(parts, W, H)

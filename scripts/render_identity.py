@@ -15,10 +15,10 @@ SRC = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "identity.svg")
 
 FACTS = [
-    ("stack", "Python · React · FastAPI · PyTorch"),
+    ("stack", "MERN · Python · AI/ML · DevOps"),
     ("based", "Lahore, Pakistan"),
     ("school", "BS Computer Science, FAST-NUCES"),
-    ("record", "Dean's List ×5 · CGPA 3.58"),
+    ("record", "Dean's List ×5 · CGPA 3.57/4.00"),
 ]
 ROLES = [
     ("QBatch", "Full-stack intern", "2025"),
@@ -127,42 +127,42 @@ def render():
         f'font-size="30" font-weight="650">{esc("Ali Hassan")}</text>'
     )
     parts.append(
-        f'<text class="rise" x="24" y="102" fill="{GREEN_INK}" font-family="{SANS}" font-size="16" '
+        f'<text class="rise" x="24" y="114" fill="{GREEN_INK}" font-family="{SANS}" font-size="24" '
         f'style="animation-delay:.06s">{esc("Full-Stack Developer · AI/ML Engineer")}</text>'
     )
 
-    y = 140
+    y = 164
     delay = 0.1
     for key, value in FACTS:
         parts.append(f'<g class="rise" style="animation-delay:{delay:.2f}s">')
         parts.append(
-            f'<text x="24" y="{y}" fill="{GREEN_INK}" font-family="{MONO}" font-size="14">{esc(key)}</text>'
+            f'<text x="24" y="{y}" fill="{GREEN_INK}" font-family="{MONO}" font-size="24">{esc(key)}</text>'
         )
         parts.append(
-            f'<text x="108" y="{y}" fill="{BONE}" font-family="{MONO}" font-size="14">{esc(value)}</text>'
+            f'<text x="168" y="{y}" fill="{BONE}" font-family="{MONO}" font-size="24">{esc(value)}</text>'
         )
         parts.append("</g>")
-        y += 28
+        y += 40
         delay += 0.04
 
-    y += 6
+    y += 10
     for org, role, when in ROLES:
         parts.append(f'<g class="rise" style="animation-delay:{delay:.2f}s">')
         parts.append(
-            f'<text x="24" y="{y}" fill="{BONE}" font-family="{MONO}" font-size="13">{esc(org)}</text>'
+            f'<text x="24" y="{y}" fill="{BONE}" font-family="{MONO}" font-size="22">{esc(org)}</text>'
         )
         parts.append(
-            f'<text x="148" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="13">{esc(role)}</text>'
+            f'<text x="210" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="22">{esc(role)}</text>'
         )
         parts.append(
-            f'<text x="{PAIR_W - 24}" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="13" '
+            f'<text x="{PAIR_W - 24}" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="22" '
             f'text-anchor="end">{esc(when)}</text>'
         )
         parts.append("</g>")
-        y += 24
+        y += 36
         delay += 0.04
 
-    y += 6
+    y += 16
     parts.append(f'<line x1="24" y1="{y}" x2="{PAIR_W - 24}" y2="{y}" stroke="{LINE}"/>')
 
     total = active = current = longest = best_count = 0
