@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """A snake with eyes that starts short and grows each time it eats a green box.
 
-The board is a contribution-style grid with extra green boxes, so the snake
-has a full field to eat. The real year stays on the heatmap and the stats card.
+It turns up, down, left, and right, taking the shortest safe path to the nearest
+green box. The real year stays on the heatmap and the stats card.
 """
 
 import json
 import math
 import os
+from collections import deque
 
 from grid import weeks_for
 from svgutil import begin, finish, write
@@ -78,15 +79,125 @@ def board_from(days):
     return levels
 
 
-def route(levels, left, top):
-    points = []
-    for row in range(ROWS):
-        columns = range(COLS) if row % 2 == 0 else range(COLS - 1, -1, -1)
-        for col in columns:
-            x = left + col * STEP + CELL / 2
-            y = top + row * STEP + CELL / 2
-            points.append((x, y, levels[col][row]))
-    return points
+def neighbors(cell):
+    col, row = cell
+    for dc, dr in ((1, 0), (0, 1), (-1, 0), (0, -1)):
+        nxt = (col + dc, row + dr)
+        if 0 <= nxt[0] < COLS and 0 <= nxt[1] < ROWS:
+            yield nxt
+
+
+def shortest(start, goals, blocked):
+    """Steps from the cell after start through the nearest goal."""
+    if not goals:
+        return None
+    queue = deque([start])
+    prev = {start: None}
+    found = None
+    while queue:
+        cur = queue.popleft()
+        if cur in goals and cur != start:
+            found = cur
+            break
+        for nxt in neighbors(cur):
+            if nxt in prev or nxt in blocked:
+                continue
+            prev[nxt] = cur
+            queue.append(nxt)
+    if found is None:
+        return None
+    steps = []
+    cur = found
+    while cur != start:
+        steps.append(cur)
+        cur = prev[cur]
+    steps.reverse()
+    return steps
+
+
+def can_reach_tail(body):
+    if len(body) <= 2:
+        return True
+    return shortest(body[-1], {body[0]}, set(body) - {body[0]}) is not None
+
+
+def chase(body, food):
+    """First step toward the nearest food, or away from the tail when that bite would trap it."""
+    if len(body) < 2:
+        return None
+    tail = body[0]
+    neck = body[-2]
+    blocked = set(body)
+    blocked.discard(tail)
+    steps = shortest(body[-1], food, blocked) if food else None
+    if steps:
+        sim = deque(body)
+        virtual = set(food)
+        for nxt in steps:
+            grow = nxt in virtual and len(sim) < MAX_LEN
+            sim.append(nxt)
+            virtual.discard(nxt)
+            if not grow:
+                sim.popleft()
+        if can_reach_tail(sim):
+            return steps[0]
+    # No safe bite. Step into the open cell farthest from the tail so a lane opens.
+    dist = {tail: 0}
+    queue = deque([tail])
+    while queue:
+        cur = queue.popleft()
+        for nxt in neighbors(cur):
+            if nxt in dist or nxt in blocked:
+                continue
+            dist[nxt] = dist[cur] + 1
+            queue.append(nxt)
+    best = None
+    for nxt in neighbors(body[-1]):
+        if nxt == neck or nxt in blocked:
+            continue
+        score = dist.get(nxt, -1)
+        if best is None or score > best[0]:
+            best = (score, nxt)
+    return None if best is None else best[1]
+
+
+def seek_cells(levels):
+    """Steer into the nearest green box, one cell at a time, the way a player would."""
+    food = {(col, row) for col in range(COLS) for row in range(ROWS) if levels[col][row] > 0}
+    body = deque((col, 0) for col in range(START))
+    for cell in body:
+        food.discard(cell)
+    trail = list(body)
+    grew = []
+    guard = 0
+    limit = COLS * ROWS * 8
+
+    def advance(nxt, allow_grow):
+        will_grow = allow_grow and nxt in food and len(body) < MAX_LEN
+        body.append(nxt)
+        if will_grow:
+            grew.append(len(trail))
+        else:
+            body.popleft()
+        trail.append(nxt)
+        food.discard(nxt)
+
+    while food and guard < limit:
+        guard += 1
+        nxt = chase(body, food)
+        if nxt is None:
+            break
+        advance(nxt, True)
+    home = (START - 1, 0)
+    while body[-1] != home and guard < limit:
+        guard += 1
+        nxt = chase(body, {home})
+        if nxt is None or nxt == body[-1]:
+            break
+        advance(nxt, False)
+    eaten = sum(1 for cell in set(trail) if levels[cell[0]][cell[1]] > 0)
+    print(f"snake path {len(trail)} steps, ate {eaten}, left {len(food)}")
+    return trail, grew
 
 
 def path_d(points):
@@ -117,26 +228,6 @@ def motion(index, count, rotate):
     )
 
 
-def grow_times(points):
-    """Meals that add a segment, spread across the whole loop so the snake keeps lengthening."""
-    meals = [
-        index
-        for index, (_x, _y, level) in enumerate(points)
-        if level > 0 and index >= START + 2
-    ]
-    needed = MAX_LEN - START
-    if not meals or needed <= 0:
-        return []
-    stride = max(1, len(meals) // needed)
-    chosen = []
-    for meal in meals[::stride]:
-        if len(chosen) >= needed:
-            break
-        if not chosen or meal > chosen[-1]:
-            chosen.append(meal)
-    return chosen
-
-
 def appear_anim(path_index, count):
     step = max(0, path_index - (START - 1))
     start = min(0.9, max(0.04, step / (count - 1)))
@@ -148,8 +239,10 @@ def appear_anim(path_index, count):
 
 
 def eat_anim(color, path_index, count):
-    start = min(0.94, path_index / count)
-    mid = min(0.97, start + 0.01)
+    """The box goes dark when the head lands on it, then the board refills for the next loop."""
+    step = max(0, path_index - (START - 1))
+    start = min(0.94, max(0.02, step / (count - 1)))
+    mid = min(0.965, start + 0.012)
     empty = GREEN[0]
     return (
         f'<animate attributeName="fill" values="{color};{color};{empty};{empty};{color}" '
@@ -157,35 +250,53 @@ def eat_anim(color, path_index, count):
     )
 
 
+def cell_center(col, row, left, top):
+    return left + col * STEP + CELL / 2, top + row * STEP + CELL / 2
+
+
 def render(data):
+    global DUR
     levels = board_from(data["days"])
     grid_w = COLS * STEP
     left = max(28, int((FULL_W - grid_w) / 2))
     top = 46
     height = top + ROWS * STEP + 18
-    points = route(levels, left, top)
+    trail, grew = seek_cells(levels)
+    points = []
+    arrival = {}
+    for index, (col, row) in enumerate(trail):
+        x, y = cell_center(col, row, left, top)
+        points.append((x, y, levels[col][row] if index >= START else 0))
+        arrival.setdefault((col, row), index)
     count = len(points)
-    grows = grow_times(points)
+    # A player-paced step. The old sweep used about this long per box.
+    DUR = max(16.0, round((count - 1) * 0.075, 2))
+    grows = grew
+    opening = set(trail[:START])
 
     parts = begin(FULL_W, height, "Snake eating green contribution boxes", "ali@github ~ $ ./snake.sh")
     parts.append(f'<path id="route" d="{path_d(points)}" fill="none"/>')
 
     box = CELL - 4
     corner = max(3, round(5 * SCALE))
-    for index, (x, y, level) in enumerate(points):
-        origin_x = x - box / 2
-        origin_y = y - box / 2
-        # The opening cells are already under the snake, so they read as eaten.
-        if index < START:
-            color = GREEN[0]
-            extra = ""
-        else:
-            color = GREEN[max(0, min(4, level))]
-            extra = eat_anim(color, index, count) if level else ""
-        parts.append(
-            f'<rect x="{origin_x:.1f}" y="{origin_y:.1f}" width="{box}" height="{box}" rx="{corner}" '
-            f'fill="{color}">{extra}</rect>'
-        )
+    for row in range(ROWS):
+        for col in range(COLS):
+            x, y = cell_center(col, row, left, top)
+            origin_x = x - box / 2
+            origin_y = y - box / 2
+            level = levels[col][row]
+            cell = (col, row)
+            # The cells under the starting snake are already eaten.
+            if cell in opening or level <= 0:
+                color = GREEN[0]
+                extra = ""
+            else:
+                color = GREEN[max(0, min(4, level))]
+                extra = eat_anim(color, arrival[cell], count) if cell in arrival else ""
+            parts.append(
+                f'<rect x="{origin_x:.1f}" y="{origin_y:.1f}" width="{box}" height="{box}" rx="{corner}" '
+                f'fill="{color}">{extra}</rect>'
+            )
 
     # Tail first, so the head and its eyes paint on top.
     stroke = max(1.25, 2 * SCALE)
@@ -196,7 +307,7 @@ def render(data):
         green = int(231 + (68 - 231) * shade)
         blue = int(135 + (41 - 135) * shade)
         color = f"#{red:02x}{green:02x}{blue:02x}"
-        if index >= START:
+        if index >= START and index - START < len(grows):
             hidden = appear_anim(grows[index - START], count)
             shown = "0"
         else:
