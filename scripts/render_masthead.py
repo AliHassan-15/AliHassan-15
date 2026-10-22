@@ -28,8 +28,12 @@ def render():
         f'font-size="15" text-anchor="end" style="animation-delay:.16s">{esc("Lahore, Pakistan")}</text>'
     )
     parts.append(
-        f'<text class="rise" x="{W - 28}" y="122" fill="{GREEN_INK}" font-family="{SANS}" '
-        f'font-size="16" text-anchor="end" style="animation-delay:.2s">{esc("open to engineering roles")}</text>'
+        f'<text class="rise" x="{W - 28}" y="122" font-family="{SANS}" '
+        f'font-size="16" text-anchor="end" style="animation-delay:.2s">'
+        f'<tspan fill="{GREEN_INK}">{esc("open to engineering roles")}</tspan>'
+        f'<tspan fill="{MUTED}">{esc("   ·   ")}</tspan>'
+        f'<tspan fill="{BRIGHT}" text-decoration="underline">{esc("portfolio")}</tspan>'
+        f"</text>"
     )
     parts.append(
         f'<line class="draw" x1="28" y1="148" x2="{W - 28}" y2="148" stroke="{LINE}" stroke-width="1"/>'
