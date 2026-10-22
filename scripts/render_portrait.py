@@ -50,7 +50,76 @@ def seated_plate(cols, rows):
     plate = np.clip(plate - np.clip(blur - plate, 0, None) * 0.9, 0, 255)
     subject = plate < 250
     plate[subject] = np.clip(plate[subject] * 0.56 + 4, 0, 255)
-    return cv2.resize(plate.astype(np.uint8), (cols, rows), interpolation=cv2.INTER_AREA)
+    small = cv2.resize(plate.astype(np.uint8), (cols, rows), interpolation=cv2.INTER_AREA)
+    return carve_features(small)
+
+
+def carve_features(plate):
+    """Separate the brows, glasses, eyes, nose, and mustache from the skin."""
+    # Values land on distinct ramp characters: skin '+', frame '#', pupil '@', mustache '%'.
+    skin = 150
+    brow = 24
+    frame = 42
+    lens = 178
+    pupil = 6
+    stache = 20
+
+    def ink(y, x, value):
+        if 0 <= y < plate.shape[0] and 0 <= x < plate.shape[1]:
+            plate[y, x] = value
+
+    # Brows sit on their own row, with the outer end lifted so each one arches.
+    for x in range(38, 46):
+        ink(20, x, brow)
+    ink(19, 37, brow)
+    ink(19, 38, brow)
+    for x in range(53, 62):
+        ink(20, x, brow)
+    ink(19, 60, brow)
+    ink(19, 61, brow)
+    for x in range(46, 53):
+        ink(20, x, skin)
+    for x in range(36, 64):
+        if plate[21, x] < 130:
+            plate[21, x] = skin
+
+    def lens_at(x0, x1, pupil_x):
+        for y in (22, 23, 24):
+            for x in range(x0, x1 + 1):
+                on_frame = y in (22, 24) or x in (x0, x1)
+                ink(y, x, frame if on_frame else lens)
+        # Drop the corners so the rim reads as a round frame, not a box.
+        for y in (22, 24):
+            ink(y, x0, skin)
+            ink(y, x1, skin)
+        ink(23, pupil_x, pupil)
+        ink(23, pupil_x + 1, pupil)
+        ink(23, pupil_x + 2, 214)
+
+    lens_at(37, 45, 40)
+    lens_at(53, 61, 56)
+    for y in (22, 23, 24):
+        for x in range(46, 53):
+            ink(y, x, skin)
+    for x in range(48, 51):
+        ink(23, x, frame)
+
+    # A light ridge with a shadow on each side, then two nostrils.
+    for y in (25, 26, 27):
+        ink(y, 47, 96)
+        ink(y, 48, 188)
+        ink(y, 49, 188)
+        ink(y, 50, 96)
+    for x, value in ((46, 16), (47, 110), (48, 168), (49, 168), (50, 110), (51, 16)):
+        ink(28, x, value)
+
+    # The mustache was three rows tall. Keep the middle row and open the lip above it.
+    for x in range(43, 57):
+        ink(29, x, skin)
+        ink(30, x, stache)
+        if plate[31, x] < 90:
+            plate[31, x] = 118
+    return plate
 
 
 def rows_from_image():
