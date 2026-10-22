@@ -122,17 +122,6 @@ def chart(parts, data, top):
 def render():
     data = load()
     parts = begin(PAIR_W, PAIR_H, "Ali Hassan — year in contributions", "ali@github ~ $ ./stats.sh")
-    # Quiet continuous glow behind the card so the pair feels alive next to the portrait.
-    parts.append(
-        f'<circle cx="{PAIR_W - 120}" cy="220" r="90" fill="{GREEN_INK}" opacity="0.05">'
-        f'<animate attributeName="r" values="70;110;70" dur="8s" repeatCount="indefinite"/>'
-        f'<animate attributeName="opacity" values="0.03;0.09;0.03" dur="8s" repeatCount="indefinite"/>'
-        f"</circle>"
-        f'<circle cx="140" cy="{PAIR_H - 180}" r="120" fill="{GREEN_INK}" opacity="0.04">'
-        f'<animate attributeName="r" values="95;140;95" dur="10s" begin="1s" repeatCount="indefinite"/>'
-        f'<animate attributeName="opacity" values="0.02;0.07;0.02" dur="10s" begin="1s" repeatCount="indefinite"/>'
-        f"</circle>"
-    )
     parts.append(
         f'<text class="rise" x="24" y="74" fill="{BONE}" font-family="{SANS}" '
         f'font-size="30" font-weight="650">{esc("Ali Hassan")}</text>'

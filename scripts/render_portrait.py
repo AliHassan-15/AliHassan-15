@@ -3,6 +3,7 @@
 
 import html
 import os
+import random
 
 import cv2
 import numpy as np
@@ -31,33 +32,36 @@ HOLD = 4.0
 
 
 def ambient_backdrop(parts, x0, y0, art_w, art_h):
-    """Soft green glow that keeps breathing behind the ASCII."""
-    cx = x0 + art_w / 2
-    cy = y0 + art_h * 0.36
+    """Tiny light-gray dust that drifts slowly behind the ASCII."""
+    rng = random.Random(15)
+    shades = ("#6e7681", "#8b949e", "#aab1ba")
     parts.append(
         f'<defs><clipPath id="artClip">'
         f'<rect x="{x0}" y="{y0}" width="{art_w:.1f}" height="{art_h:.1f}" rx="4"/>'
         f"</clipPath></defs>"
     )
     parts.append(f'<g clip-path="url(#artClip)">')
-    parts.append(
-        f'<g transform="translate({cx:.1f} {cy:.1f})">'
-        f'<animateTransform attributeName="transform" type="scale" values="1;1.06;1" '
-        f'dur="9s" repeatCount="indefinite" additive="sum"/>'
-        f'<circle cx="0" cy="0" r="130" fill="#0e4429" opacity="0.28">'
-        f'<animate attributeName="r" values="105;145;105" dur="7s" repeatCount="indefinite"/>'
-        f'<animate attributeName="opacity" values="0.16;0.38;0.16" dur="7s" repeatCount="indefinite"/>'
-        f"</circle>"
-        f'<circle cx="-110" cy="95" r="78" fill="#006d32" opacity="0.18">'
-        f'<animate attributeName="r" values="60;95;60" dur="8.5s" repeatCount="indefinite"/>'
-        f'<animate attributeName="opacity" values="0.1;0.26;0.1" dur="8.5s" repeatCount="indefinite"/>'
-        f"</circle>"
-        f'<circle cx="120" cy="140" r="68" fill="#26a641" opacity="0.12">'
-        f'<animate attributeName="r" values="50;82;50" dur="10s" begin="1.2s" repeatCount="indefinite"/>'
-        f'<animate attributeName="opacity" values="0.06;0.2;0.06" dur="10s" begin="1.2s" repeatCount="indefinite"/>'
-        f"</circle>"
-        f"</g>"
-    )
+    for _ in range(52):
+        px = x0 + rng.uniform(6, art_w - 6)
+        py = y0 + rng.uniform(6, art_h - 6)
+        radius = rng.uniform(0.45, 1.15)
+        opacity = rng.uniform(0.16, 0.42)
+        drift_x = rng.uniform(-12, 12)
+        drift_y = rng.uniform(-16, 16)
+        dur = rng.uniform(16, 30)
+        begin = rng.uniform(0, dur)
+        fade = max(0.06, opacity * 0.35)
+        parts.append(
+            f'<circle cx="{px:.1f}" cy="{py:.1f}" r="{radius:.2f}" '
+            f'fill="{rng.choice(shades)}" opacity="{opacity:.2f}">'
+            f'<animate attributeName="cx" values="{px:.1f};{px + drift_x:.1f};{px:.1f}" '
+            f'dur="{dur:.1f}s" begin="-{begin:.1f}s" repeatCount="indefinite"/>'
+            f'<animate attributeName="cy" values="{py:.1f};{py + drift_y:.1f};{py:.1f}" '
+            f'dur="{dur * 1.15:.1f}s" begin="-{begin:.1f}s" repeatCount="indefinite"/>'
+            f'<animate attributeName="opacity" values="{opacity:.2f};{fade:.2f};{opacity:.2f}" '
+            f'dur="{dur * 0.85:.1f}s" begin="-{begin:.1f}s" repeatCount="indefinite"/>'
+            f"</circle>"
+        )
     parts.append("</g>")
 
 
