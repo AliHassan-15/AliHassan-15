@@ -14,9 +14,9 @@ The Mine/ folder is private and must stay untracked.
 
 <br>
 
-<h3><code>ali@github ~ $ ./contributions.sh</code></h3>
+<h3><code>ali@github ~ $ ./snake.sh</code></h3>
 
-<img src="./heatmap.svg" width="100%" alt="Filled GitHub contribution calendar for the last year, refreshed daily." />
+<img src="./snake.svg" width="100%" alt="A snake with eyes that starts short and grows as it eats green contribution boxes." />
 
 <br>
 
@@ -31,9 +31,9 @@ The Mine/ folder is private and must stay untracked.
 
 <br>
 
-<h3><code>ali@github ~ $ ./snake.sh</code></h3>
+<h3><code>ali@github ~ $ ./contributions.sh</code></h3>
 
-<img src="./snake.svg" width="100%" alt="A snake with eyes that starts short and grows as it eats green contribution boxes." />
+<img src="./heatmap.svg" width="100%" alt="Filled GitHub contribution calendar for the last year, refreshed daily." />
 
 <br>
 
