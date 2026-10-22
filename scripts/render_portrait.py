@@ -29,26 +29,28 @@ CELL_RATIO = 1.72
 
 
 def seated_plate(cols, rows):
-    """Place the whole photo in the card, centered, so both shoulders stay even."""
+    """Fill the card. Trim the wall above and the desk below, and take the same slice off both sides."""
     color = cv2.cvtColor(np.array(Image.open(PHOTO).convert("RGB")), cv2.COLOR_RGB2GRAY)
-    # The studio wall is the light flat field. Skin, suit, laptop, and desk stay.
-    wall = color >= 206
-    plate = color.astype(np.float32)
+    height, width = color.shape
+    # Shoulder band, above the desk, so the crop is centered on the body and not the laptop.
+    band = color[int(height * 0.55) : int(height * 0.68)]
+    xs = np.where(band < 200)[1]
+    center = int((xs.min() + xs.max()) / 2) if len(xs) else width // 2
+    # Hair begins near 8% and the hands end near 91%. A small equal pad keeps the head off the chrome.
+    y0 = int(round(height * 0.045))
+    y1 = int(round(height * 0.935))
+    aspect = cols / (rows * CELL_RATIO)
+    crop_w = min(width, int(round((y1 - y0) * aspect)))
+    x0 = int(center - crop_w / 2)
+    x0 = max(0, min(x0, width - crop_w))
+    plate = color[y0:y1, x0 : x0 + crop_w].astype(np.float32)
+    wall = plate >= 206
     plate[wall] = 255
-    # A light edge lift so the glasses and beard keep their shape. Not a line drawing.
     blur = cv2.GaussianBlur(plate, (0, 0), 1.3)
     plate = np.clip(plate - np.clip(blur - plate, 0, None) * 0.9, 0, 255)
     subject = plate < 250
-    # Skin in the photo is almost as light as the wall. Pull it down so the face has a shape.
     plate[subject] = np.clip(plate[subject] * 0.56 + 4, 0, 255)
-
-    photo_rows = max(8, round(cols * (color.shape[0] / color.shape[1]) / CELL_RATIO))
-    photo_rows = min(photo_rows, rows)
-    resized = cv2.resize(plate.astype(np.uint8), (cols, photo_rows), interpolation=cv2.INTER_AREA)
-    canvas = np.full((rows, cols), 255, np.uint8)
-    y0 = max(0, (rows - photo_rows) // 2)
-    canvas[y0 : y0 + photo_rows, :] = resized
-    return canvas
+    return cv2.resize(plate.astype(np.uint8), (cols, rows), interpolation=cv2.INTER_AREA)
 
 
 def rows_from_image():
