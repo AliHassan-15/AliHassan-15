@@ -32,7 +32,8 @@ def render():
         f'font-size="16" text-anchor="end" style="animation-delay:.2s">'
         f'<tspan fill="{GREEN_INK}">{esc("open to engineering roles")}</tspan>'
         f'<tspan fill="{MUTED}">{esc("   ·   ")}</tspan>'
-        f'<tspan fill="{BRIGHT}" text-decoration="underline">{esc("portfolio")}</tspan>'
+        f'<tspan fill="{BRIGHT}" font-size="17" font-weight="700" text-decoration="underline">'
+        f'{esc("Portfolio")}</tspan>'
         f"</text>"
     )
     parts.append(
