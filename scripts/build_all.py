@@ -26,6 +26,7 @@ LIVE = [
     "fetch_contributions.py",
     "render_heatmap.py",
     "render_snake.py",
+    "render_identity.py",
 ]
 
 

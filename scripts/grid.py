@@ -45,6 +45,19 @@ def month_labels(grid):
     return labels
 
 
+def snake_route(grid, left, top, step, cell):
+    """Cell-center points in a snake-game path: across, turn, back across."""
+    points = []
+    columns = len(grid)
+    for row in range(7):
+        order = range(columns) if row % 2 == 0 else range(columns - 1, -1, -1)
+        for col in order:
+            x = left + col * step + cell / 2
+            y = top + row * step + cell / 2
+            points.append((x, y, grid[col][row]))
+    return points
+
+
 def human_date(iso):
     date = datetime.date.fromisoformat(iso)
     return date.strftime("%d %b %Y").lstrip("0")

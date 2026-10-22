@@ -6,65 +6,64 @@ Daily refresh:    .github/workflows/refresh-profile.yml
 The Mine/ folder is private and must stay untracked.
 -->
 
-<img src="./masthead.svg" width="900" alt="Ali Hassan, software engineer. MERN, Python, and applied AI. Lahore, Pakistan. Open to engineering roles." />
+<img src="./masthead.svg" width="100%" alt="Ali Hassan, software engineer. MERN, Python, and applied AI. Lahore. Open to engineering roles." />
 
 <br>
 
-<img src="./metrics.svg" width="900" alt="Dean's List five times. More than 300 students mentored. More than 10 LLMs fine-tuned. Six apps deployed." />
+<img src="./metrics.svg" width="100%" alt="Dean's List five times, 300 students mentored, 10 LLMs fine-tuned, 6 apps deployed." />
 
 <br>
 
-<p>
-<img src="./portrait.svg" width="430" alt="ASCII portrait of Ali Hassan, typed in once." />
-<img src="./identity.svg" width="470" alt="Ali Hassan. Software engineer in Lahore. FAST-NUCES, Dean's List, QBatch, Headstarter, and the MERN, Python, and AI stack." />
-</p>
+<h3><code>ali@github ~ $ ./contributions.sh</code></h3>
+
+<img src="./heatmap.svg" width="100%" alt="Filled GitHub contribution calendar for the last year, refreshed daily." />
 
 <br>
 
-<img src="./work.svg" width="900" alt="Selected work. DeepMed, HAULIX, RELAY, and Underwater Enhancement." />
+<h3><code>ali@github ~ $ whoami</code></h3>
+
+<table width="100%">
+<tr>
+<td width="50%" valign="top"><img src="./portrait.svg" width="100%" alt="ASCII portrait of Ali Hassan." /></td>
+<td width="50%" valign="top"><img src="./identity.svg" width="100%" alt="Ali Hassan — role, record, and this year's GitHub stats." /></td>
+</tr>
+</table>
+
+<br>
+
+<h3><code>ali@github ~ $ ./snake.sh</code></h3>
+
+<img src="./snake.svg" width="100%" alt="A snake eating the contribution calendar, one box at a time." />
+
+<br>
+
+<h3><code>ali@github ~ $ ./work.sh</code></h3>
+
+<img src="./work.svg" width="100%" alt="Selected work: DeepMed, HAULIX, RELAY, Underwater Enhancement, RouteWise ELD, and Brain Tumor MRI." />
 
 <p>
 <a href="https://github.com/AliHassan-15/DEEPMED-Testing"><b>DeepMed</b></a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
+&nbsp;·&nbsp;
 <a href="https://github.com/AliHassan-15/HAULIX"><b>HAULIX</b></a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
+&nbsp;·&nbsp;
 <a href="https://github.com/AliHassan-15/RELAY"><b>RELAY</b></a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="https://github.com/AliHassan-15/Underwater-Image-Enhancement-System"><b>Underwater Enhancement</b></a>
-</p>
-
-<p>
-<a href="https://github.com/AliHassan-15/RouteWise-ELD">RouteWise ELD</a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="https://github.com/AliHassan-15/Project-Management-System">Stellar</a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="https://github.com/AliHassan-15/Codebase-RAG">Codebase RAG</a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="https://github.com/AliHassan-15/Brain-Tumor-Classification">Brain Tumor MRI</a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="https://github.com/AliHassan-15/GameStore-site">GameStore</a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="https://github.com/AliHassan-15/RouteRefuel">RouteRefuel</a>
+&nbsp;·&nbsp;
+<a href="https://github.com/AliHassan-15/Underwater-Image-Enhancement-System"><b>Underwater</b></a>
+&nbsp;·&nbsp;
+<a href="https://github.com/AliHassan-15/RouteWise-ELD"><b>RouteWise ELD</b></a>
+&nbsp;·&nbsp;
+<a href="https://github.com/AliHassan-15/Brain-Tumor-Classification"><b>Brain Tumor MRI</b></a>
 </p>
 
 <br>
 
-<img src="./heatmap.svg" width="900" alt="GitHub contribution calendar for the last year, refreshed daily." />
+<h3><code>ali@github ~ $ ./links.sh</code></h3>
 
-<br>
+<p><b>Software Engineer · MERN · Python · AI</b></p>
 
-<img src="./snake.svg" width="900" alt="Animated snake walking the same year of GitHub contributions." />
-
-<br>
-
-<p>
-<a href="https://www.linkedin.com/in/ali-hassan--tech"><b>LinkedIn</b></a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="mailto:hassanakramali@gmail.com"><b>Email</b></a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="https://x.com/Ali_Hassan_"><b>X</b></a>
-&nbsp;&nbsp;·&nbsp;&nbsp;
-<a href="https://github.com/AliHassan-15"><b>GitHub</b></a>
-</p>
+<a href="https://www.linkedin.com/in/ali-hassan--tech"><img src="https://img.shields.io/badge/LinkedIn-Ali%20Hassan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+<a href="mailto:hassanakramali@gmail.com"><img src="https://img.shields.io/badge/Email-contact-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
+<a href="https://x.com/Ali_Hassan_"><img src="https://img.shields.io/badge/X-Ali__Hassan_-111111?style=for-the-badge&logo=x&logoColor=white" alt="X" /></a>
+<a href="https://github.com/AliHassan-15"><img src="https://img.shields.io/badge/GitHub-AliHassan--15-238636?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
 
 </div>

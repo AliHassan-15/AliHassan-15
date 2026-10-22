@@ -6,8 +6,8 @@ import os
 
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 
-from svgutil import BONE, COPPER, LINE, MONO, MUTED, PANEL, begin, finish, write
-from theme import PORTRAIT_H, PORTRAIT_W, art_box
+from svgutil import begin, finish, write
+from theme import BONE, GREEN_INK, LINE, MONO, MUTED, PAIR_H, PAIR_W, PANEL, art_box
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
@@ -15,12 +15,12 @@ SRC = os.path.join(ROOT, "assets", "source-prepped.png")
 OUT = os.path.join(ROOT, "portrait.svg")
 PREVIEW = os.path.join(ROOT, "assets", "portrait-preview.png")
 
-COLS = 78
+COLS = 100
 RAMP = " .:-=+*#%@"
-GAMMA = 0.78
-CONTRAST = 1.28
-WHITE_FLOOR = 0.84
-INK = "#e7e1d6"
+GAMMA = 1.05
+CONTRAST = 1.12
+WHITE_FLOOR = 0.94
+INK = "#c9d1d9"
 
 
 def rows_from_image():
@@ -50,9 +50,9 @@ def save_preview(lines, art_w, art_h):
     cols = len(lines[0])
     cell_w = art_w / cols
     cell_h = art_h / rows
-    canvas = Image.new("RGB", (PORTRAIT_W, PORTRAIT_H), PANEL)
+    canvas = Image.new("RGB", (PAIR_W, PAIR_H), PANEL)
     draw = ImageDraw.Draw(canvas)
-    font_size = max(8, int(cell_h * 0.92))
+    font_size = max(7, int(min(cell_h * 0.8, cell_w / 0.55)))
     try:
         font = ImageFont.truetype(r"C:\Windows\Fonts\consola.ttf", font_size)
     except OSError:
@@ -75,15 +75,9 @@ def render():
     x0, y0, _, _ = art_box()
     cell_h = art_h / rows
     font_size = cell_h * 0.92
-    row_dur = 3.4 / rows
+    row_dur = 2.6 / rows
 
-    parts = begin(
-        PORTRAIT_W,
-        PORTRAIT_H,
-        "ASCII portrait of Ali Hassan",
-        "ali@github",
-        "portrait",
-    )
+    parts = begin(PAIR_W, PAIR_H, "ASCII portrait of Ali Hassan", "ali@github ~ $ ./portrait.sh")
     for index, line in enumerate(lines):
         y = y0 + index * cell_h
         baseline = y + cell_h * 0.78
@@ -104,7 +98,7 @@ def render():
         )
         parts.append(
             f'<rect x="{x0}" y="{y + 1:.2f}" width="2" height="{cell_h - 2:.2f}" '
-            f'fill="{COPPER}" opacity="0">'
+            f'fill="{GREEN_INK}" opacity="0">'
             f'<animate attributeName="x" from="{x0}" to="{x0 + art_w:.1f}" '
             f'begin="{delay:.3f}s" dur="{row_dur:.3f}s" fill="freeze"/>'
             f'<set attributeName="opacity" to="0.95" begin="{delay:.3f}s"/>'
@@ -112,20 +106,20 @@ def render():
             f"</rect>"
         )
 
-    foot_y = PORTRAIT_H - 20
+    foot_y = PAIR_H - 18
     parts.append(
-        f'<text x="22" y="{foot_y}" fill="{MUTED}" font-family="{MONO}" font-size="12">'
+        f'<line x1="18" y1="{PAIR_H - 36}" x2="{PAIR_W - 18}" y2="{PAIR_H - 36}" stroke="{LINE}"/>'
+    )
+    parts.append(
+        f'<text x="22" y="{foot_y}" fill="{MUTED}" font-family="{MONO}" font-size="13">'
         f'whoami <tspan fill="{BONE}">Ali Hassan</tspan></text>'
     )
     parts.append(
-        f'<rect x="148" y="{foot_y - 10}" width="7" height="12" fill="{COPPER}">'
-        f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.55;0.56;1" '
-        f'dur="1.15s" repeatCount="indefinite"/></rect>'
+        f'<rect x="168" y="{foot_y - 11}" width="8" height="13" fill="{GREEN_INK}">'
+        f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.51;1" '
+        f'dur="1.1s" repeatCount="indefinite"/></rect>'
     )
-    parts.append(
-        f'<rect x="20" y="{PORTRAIT_H - 40}" width="{PORTRAIT_W - 40}" height="1" fill="{LINE}"/>'
-    )
-    return finish(parts, PORTRAIT_W, PORTRAIT_H)
+    return finish(parts, PAIR_W, PAIR_H)
 
 
 if __name__ == "__main__":

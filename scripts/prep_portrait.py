@@ -15,7 +15,7 @@ from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
-SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "assets", "avatar.png")
+SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "assets", "profile.work.png")
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "assets", "source-prepped.png")
 
 # art box aspect: width / height
@@ -65,7 +65,9 @@ def main():
     fine = cv2.GaussianBlur(smooth, (0, 0), 1.2).astype(np.float32)
     coarse = cv2.GaussianBlur(smooth, (0, 0), 5.0).astype(np.float32)
     edges = np.clip((coarse - fine) / 36.0, 0, 1)
-    drawn = np.clip(tone - 0.42 * edges, 0, 1)
+    drawn = np.clip(tone - 0.28 * edges, 0, 1)
+    # Skin must stay gray, not white, or the ASCII face becomes an empty hole.
+    drawn = np.clip(drawn * 0.62 + 0.05, 0, 1)
 
     hard = np.where(alpha > 110, alpha, 0).astype(np.uint8)
     mask = cv2.GaussianBlur(hard.astype(np.float32) / 255.0, (0, 0), 0.6)
@@ -76,22 +78,16 @@ def main():
     top, bottom = int(ys.min()), int(ys.max())
     left, right = int(xs.min()), int(xs.max())
     box_h = max(1, bottom - top)
-    box_w = max(1, right - left)
 
-    # Tall portrait crop, biased slightly upward so the cap and eyes stay in frame.
-    crop_h = max(box_h, int(box_w / aspect))
-    crop_w = max(box_w, int(crop_h * aspect))
-    if crop_w / crop_h > aspect:
-        crop_h = int(round(crop_w / aspect))
-    else:
-        crop_w = int(round(crop_h * aspect))
-
-    pad = int(0.03 * max(crop_w, crop_h))
-    crop_w += pad
-    crop_h = int(round(crop_w / aspect))
-
+    # Keep the head large. A half-body frame makes the shirt eat the ASCII.
+    head_top = top
+    head_bottom = top + int(box_h * 0.46)
+    head_h = max(1, head_bottom - head_top)
     cx = (left + right) // 2
-    cy = int(top + box_h * 0.46)
+    cy = head_top + head_h // 2
+
+    crop_h = int(head_h * 1.12)
+    crop_w = int(round(crop_h * aspect))
     x0 = cx - crop_w // 2
     y0 = cy - crop_h // 2
 

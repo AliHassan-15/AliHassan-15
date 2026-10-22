@@ -1,39 +1,40 @@
-"""Shared sizes and colors for the profile art."""
+"""Shared sizes and GitHub-dark colors. Cards are meant to sit on the profile page."""
 
-FULL_W = 900
+FULL_W = 1060
 
-PORTRAIT_W = 430
-PORTRAIT_H = 640
-IDENTITY_W = 470
-IDENTITY_H = 640
+# Portrait and record are a matched pair, so a 50/50 table keeps them level.
+PAIR_W = 820
+PAIR_H = 900
 
-# ASCII sampling box inside the portrait card.
-ART_X = 22
-ART_TOP = 54
-ART_BOTTOM = 46
+ART_X = 18
+ART_TOP = 52
+ART_BOTTOM = 40
 
-PANEL = "#101113"
-RAISED = "#18191d"
-BONE = "#f3efe6"
-MUTED = "#8d877c"
-FAINT = "#5e5a53"
-COPPER = "#e0b07a"
-LINE = "#2c2b28"
-INK = "#101113"
-
-# GitHub levels 0–4. Empty is quiet; the top end is luminous, not neon-noise.
-GREEN = ["#16181c", "#17352a", "#1b6844", "#3fbe7c", "#c8f6dc"]
+PANEL = "#0d1117"
+RAISED = "#161b22"
+BONE = "#e6edf3"
+MUTED = "#8b949e"
+LINE = "#30363d"
+GREEN_INK = "#3fb950"
+BRIGHT = "#7ee787"
+# Solid GitHub contribution boxes, empty through busiest.
+GREEN = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+DOTS = ("#ff5f57", "#febc2e", "#28c840")
 
 SANS = "ui-sans-serif, Segoe UI, Helvetica, Arial, sans-serif"
 MONO = "ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace"
 
 USERNAME = "AliHassan-15"
 
+# Backward-compatible names used by older imports.
+COPPER = GREEN_INK
+INK = BONE
+
 
 def art_box():
     return (
         ART_X,
         ART_TOP,
-        PORTRAIT_W - ART_X * 2,
-        PORTRAIT_H - ART_TOP - ART_BOTTOM,
+        PAIR_W - ART_X * 2,
+        PAIR_H - ART_TOP - ART_BOTTOM,
     )

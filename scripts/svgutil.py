@@ -1,35 +1,26 @@
-"""Small SVG helpers. Each file is its own document, so ids can stay simple."""
+"""SVG card chrome shared by every profile graphic."""
 
-from theme import BONE, COPPER, FULL_W, GREEN, LINE, MONO, MUTED, PANEL, RAISED, SANS
+from theme import DOTS, LINE, MONO, MUTED, PANEL, RAISED
 
 CSS = """
-.rise { animation: rise .55s cubic-bezier(.16,.84,.32,1) both; }
-@keyframes rise {
-  from { opacity: 0; transform: translateY(7px); }
-  to { opacity: 1; transform: none; }
-}
+.rise { animation: rise .5s cubic-bezier(.16,.84,.32,1) both; }
+.pop { transform-box: fill-box; transform-origin: center; animation: pop .42s cubic-bezier(.16,.84,.32,1) both; }
+.draw { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 1s ease forwards; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.35); } to { opacity: 1; transform: none; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .rise, .wipe, .cursor, .draw, .pop {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    stroke-dashoffset: 0 !important;
-  }
+  .rise, .pop, .draw { animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
 }
 """
 
 
 def esc(value):
-    return (
-        str(value)
-        .replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-    )
+    return str(value).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def begin(w, h, title, label=None, aside=None):
-    """Open a card. Returns a list of SVG chunks. Content starts below y=48 when labeled."""
+def begin(w, h, title, prompt):
+    """Terminal window. Content starts under the title bar at y=46."""
     parts = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         (
@@ -38,40 +29,23 @@ def begin(w, h, title, label=None, aside=None):
         ),
         f"<title>{esc(title)}</title>",
         f"<style>{CSS}</style>",
-        (
-            f'<defs><clipPath id="shell">'
-            f'<rect width="{w}" height="{h}" rx="16"/>'
-            f"</clipPath></defs>"
-        ),
-        '<g clip-path="url(#shell)">',
-        f'<rect width="{w}" height="{h}" fill="{PANEL}"/>',
-        f'<rect width="3" height="{h}" fill="{COPPER}"/>',
-        (
-            f'<rect x="16" y="1" width="{w - 32}" height="1" fill="#ffffff" opacity="0.07"/>'
-        ),
+        f'<rect width="{w}" height="{h}" rx="12" fill="{PANEL}"/>',
+        f'<rect width="{w}" height="38" rx="12" fill="{RAISED}"/>',
+        f'<rect y="20" width="{w}" height="18" fill="{RAISED}"/>',
+        f'<line x1="0" y1="38" x2="{w}" y2="38" stroke="{LINE}"/>',
     ]
-    if label:
-        parts.append(
-            f'<text x="22" y="30" fill="{MUTED}" font-family="{MONO}" font-size="12">'
-            f"{esc(label)}</text>"
-        )
-    if aside:
-        parts.append(
-            f'<text x="{w - 20}" y="30" fill="{MUTED}" '
-            f'font-family="{MONO}" font-size="12" text-anchor="end">{esc(aside)}</text>'
-        )
-    if label:
-        parts.append(
-            f'<rect x="20" y="44" width="{w - 40}" height="1" fill="{LINE}"/>'
-        )
+    for index, color in enumerate(DOTS):
+        parts.append(f'<circle cx="{18 + index * 16}" cy="19" r="5" fill="{color}"/>')
+    parts.append(
+        f'<text x="{w / 2}" y="24" fill="{MUTED}" font-family="{MONO}" font-size="13" '
+        f'text-anchor="middle">{esc(prompt)}</text>'
+    )
     return parts
 
 
 def finish(parts, w, h):
-    parts.append("</g>")
     parts.append(
-        f'<rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="16" '
-        f'fill="none" stroke="{LINE}"/>'
+        f'<rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="12" fill="none" stroke="{LINE}"/>'
     )
     parts.append("</svg>")
     return "".join(parts)
@@ -81,7 +55,3 @@ def write(path, svg):
     with open(path, "w", encoding="utf-8", newline="\n") as handle:
         handle.write(svg)
     print(f"wrote {path} ({len(svg)} bytes)")
-
-
-# Re-exported for render scripts that want one import.
-__all__ = ["FULL_W", "SANS", "MONO", "BONE", "MUTED", "COPPER", "LINE", "PANEL", "begin", "finish", "esc", "write"]
