@@ -7,8 +7,10 @@ from svgutil import begin, esc, finish, write
 from theme import BONE, BRIGHT, FULL_W, GREEN_INK, LINE, MUTED, SANS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "masthead.svg")
+OUT = os.path.join(HERE, "..", "whoami.svg")
 W, H = FULL_W, 292
+# Room for a separate bold "Portfolio" label on the right.
+PORTFOLIO_W = 96
 
 
 def render():
@@ -28,13 +30,16 @@ def render():
         f'font-size="15" text-anchor="end" style="animation-delay:.16s">{esc("Lahore, Pakistan")}</text>'
     )
     parts.append(
-        f'<text class="rise" x="{W - 28}" y="122" font-family="{SANS}" '
+        f'<text class="rise" x="{W - 28 - PORTFOLIO_W}" y="122" font-family="{SANS}" '
         f'font-size="16" text-anchor="end" style="animation-delay:.2s">'
         f'<tspan fill="{GREEN_INK}">{esc("open to engineering roles")}</tspan>'
-        f'<tspan fill="{MUTED}">{esc("   ·   ")}</tspan>'
-        f'<tspan fill="{BRIGHT}" font-size="17" font-weight="700" text-decoration="underline">'
-        f'{esc("Portfolio")}</tspan>'
+        f'<tspan fill="{MUTED}">{esc("   ·")}</tspan>'
         f"</text>"
+    )
+    parts.append(
+        f'<text class="rise" x="{W - 28}" y="122" fill="{BRIGHT}" font-family="{SANS}" '
+        f'font-size="18" font-weight="700" text-anchor="end" text-decoration="underline" '
+        f'style="animation-delay:.22s">{esc("Portfolio")}</text>'
     )
     parts.append(
         f'<line class="draw" x1="28" y1="148" x2="{W - 28}" y2="148" stroke="{LINE}" stroke-width="1"/>'

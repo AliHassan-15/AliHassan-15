@@ -6,7 +6,7 @@ Daily refresh:    .github/workflows/refresh-profile.yml
 The Mine/ folder is private and must stay untracked.
 -->
 
-<a href="https://github.com/AliHassan-15"><img src="./masthead.svg" width="100%" alt="Ali Hassan — full-stack developer, Python, AI/ML. Lahore. Portfolio." /></a>
+<a href="https://github.com/AliHassan-15"><img src="./whoami.svg" width="100%" alt="Ali Hassan — full-stack developer, Python, AI/ML. Lahore. Portfolio." /></a>
 
 <br>
 
