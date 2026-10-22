@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the portrait as monochrome ASCII that types itself once, then holds."""
+"""Render the portrait as monochrome ASCII that types, holds, then types again."""
 
 import html
 import os
@@ -26,6 +26,58 @@ INK = "#e6edf3"
 FACE_TIME = 2.8
 BODY_TIME = 2.2
 CELL_RATIO = 1.72
+# Hold the finished portrait before the typing loop starts again.
+HOLD = 4.0
+
+
+def ambient_backdrop(parts, x0, y0, art_w, art_h):
+    """Soft green glow that keeps breathing behind the ASCII."""
+    cx = x0 + art_w / 2
+    cy = y0 + art_h * 0.36
+    parts.append(
+        f'<defs><clipPath id="artClip">'
+        f'<rect x="{x0}" y="{y0}" width="{art_w:.1f}" height="{art_h:.1f}" rx="4"/>'
+        f"</clipPath></defs>"
+    )
+    parts.append(f'<g clip-path="url(#artClip)">')
+    parts.append(
+        f'<g transform="translate({cx:.1f} {cy:.1f})">'
+        f'<animateTransform attributeName="transform" type="scale" values="1;1.06;1" '
+        f'dur="9s" repeatCount="indefinite" additive="sum"/>'
+        f'<circle cx="0" cy="0" r="130" fill="#0e4429" opacity="0.28">'
+        f'<animate attributeName="r" values="105;145;105" dur="7s" repeatCount="indefinite"/>'
+        f'<animate attributeName="opacity" values="0.16;0.38;0.16" dur="7s" repeatCount="indefinite"/>'
+        f"</circle>"
+        f'<circle cx="-110" cy="95" r="78" fill="#006d32" opacity="0.18">'
+        f'<animate attributeName="r" values="60;95;60" dur="8.5s" repeatCount="indefinite"/>'
+        f'<animate attributeName="opacity" values="0.1;0.26;0.1" dur="8.5s" repeatCount="indefinite"/>'
+        f"</circle>"
+        f'<circle cx="120" cy="140" r="68" fill="#26a641" opacity="0.12">'
+        f'<animate attributeName="r" values="50;82;50" dur="10s" begin="1.2s" repeatCount="indefinite"/>'
+        f'<animate attributeName="opacity" values="0.06;0.2;0.06" dur="10s" begin="1.2s" repeatCount="indefinite"/>'
+        f"</circle>"
+        f"</g>"
+    )
+    parts.append("</g>")
+
+
+def frac(time, cycle):
+    return max(0.0, min(1.0, time / cycle))
+
+
+def key_times(*times):
+    """Strictly increasing keyTimes that always end at 1."""
+    cleaned = []
+    last = -1.0
+    for index, value in enumerate(times):
+        stamp = float(value)
+        if index == len(times) - 1:
+            stamp = 1.0
+        elif stamp <= last:
+            stamp = min(0.999, last + 0.0005)
+        cleaned.append(f"{stamp:.4f}")
+        last = stamp
+    return ";".join(cleaned)
 
 
 def seated_plate(cols, rows):
@@ -212,19 +264,27 @@ def render():
     delays, durations = row_clock(lines)
     content = [index for index, line in enumerate(lines) if line.strip()]
     face_cut = content[0] + int((content[-1] - content[0]) * 0.46) if content else 0
+    typed = delays[-1] + durations[-1] if delays else FACE_TIME + BODY_TIME
+    cycle = typed + HOLD
 
     parts = begin(PAIR_W, PAIR_H, "ASCII portrait of Ali Hassan", "ali@github ~ $ ./portrait.sh")
+    ambient_backdrop(parts, x0, y0, art_w, art_h)
     for index, line in enumerate(lines):
         y = y0 + index * cell_h
         baseline = y + cell_h * 0.78
         delay = delays[index]
         row_dur = max(0.01, durations[index])
         safe = html.escape(line)
+        t_open = frac(delay, cycle)
+        t_done = frac(delay + row_dur, cycle)
+        t_hold = frac(typed + HOLD * 0.88, cycle)
+        width_times = key_times(0, t_open, t_done, t_hold, 1)
         parts.append(
             f'<clipPath id="row{index}">'
             f'<rect x="{x0}" y="{y:.2f}" width="0" height="{cell_h:.2f}">'
-            f'<animate attributeName="width" from="0" to="{art_w:.1f}" '
-            f'begin="{delay:.3f}s" dur="{row_dur:.3f}s" fill="freeze"/>'
+            f'<animate attributeName="width" values="0;0;{art_w:.1f};{art_w:.1f};0" '
+            f'keyTimes="{width_times}" dur="{cycle:.3f}s" repeatCount="indefinite" '
+            f'calcMode="linear"/>'
             f"</rect></clipPath>"
         )
         parts.append(
@@ -238,10 +298,12 @@ def render():
         parts.append(
             f'<rect x="{x0}" y="{y + 0.6:.2f}" width="{cursor_w}" height="{max(1, cell_h - 1.2):.2f}" '
             f'fill="{cursor_fill}" opacity="0">'
-            f'<animate attributeName="x" from="{x0}" to="{x0 + art_w:.1f}" '
-            f'begin="{delay:.3f}s" dur="{row_dur:.3f}s" fill="freeze"/>'
-            f'<set attributeName="opacity" to="1" begin="{delay:.3f}s"/>'
-            f'<set attributeName="opacity" to="0" begin="{delay + row_dur:.3f}s"/>'
+            f'<animate attributeName="x" values="{x0};{x0};{x0 + art_w:.1f};{x0 + art_w:.1f};{x0}" '
+            f'keyTimes="{width_times}" dur="{cycle:.3f}s" repeatCount="indefinite" '
+            f'calcMode="linear"/>'
+            f'<animate attributeName="opacity" values="0;0;1;0;0" '
+            f'keyTimes="{key_times(0, t_open, min(t_open + 0.001, t_done), t_done, 1)}" '
+            f'dur="{cycle:.3f}s" repeatCount="indefinite"/>'
             f"</rect>"
         )
 
