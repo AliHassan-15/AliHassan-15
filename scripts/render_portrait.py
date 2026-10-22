@@ -382,7 +382,7 @@ def render():
         f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.51;1" '
         f'dur="1.1s" repeatCount="indefinite"/></rect>'
     )
-    return finish(parts, PAIR_W, PAIR_H)
+    return finish(parts, PAIR_W, PAIR_H, dust=False)
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ from theme import BONE, BRIGHT, FULL_W, GREEN_INK, LINE, MUTED, SANS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "masthead.svg")
-W, H = FULL_W, 254
+W, H = FULL_W, 292
 
 
 def render():
@@ -32,7 +32,7 @@ def render():
         f'font-size="16" text-anchor="end" style="animation-delay:.2s">{esc("open to engineering roles")}</text>'
     )
     parts.append(
-        f'<line class="draw" x1="28" y1="144" x2="{W - 28}" y2="144" stroke="{LINE}" stroke-width="1"/>'
+        f'<line class="draw" x1="28" y1="148" x2="{W - 28}" y2="148" stroke="{LINE}" stroke-width="1"/>'
     )
     # The question is the only loud line. Everything above it stays quiet.
     parts.append(
@@ -43,17 +43,17 @@ def render():
         "</style>"
     )
     parts.append(
-        f'<text class="rise" x="28" y="174" fill="{MUTED}" font-family="{SANS}" font-size="15" '
+        f'<text class="rise" x="28" y="190" fill="{MUTED}" font-family="{SANS}" font-size="15" '
         f'style="animation-delay:.32s">'
         f'{esc("I turn ideas into real-world products, from full-stack apps to AI-powered systems built to solve problems that matter.")}'
         f"</text>"
     )
     parts.append(
-        f'<text class="rise" x="28" y="204" fill="{BONE}" font-family="{SANS}" font-size="16" '
+        f'<text class="rise" x="28" y="230" fill="{BONE}" font-family="{SANS}" font-size="16" '
         f'style="animation-delay:.48s">{esc("I build, I experiment, and I ship.")}</text>'
     )
     parts.append(
-        f'<text class="rise" x="28" y="234" font-family="{SANS}" font-size="18" style="animation-delay:.66s">'
+        f'<text class="rise" x="28" y="270" font-family="{SANS}" font-size="18" style="animation-delay:.66s">'
         f'<tspan fill="{BRIGHT}" font-weight="700" text-decoration="underline">'
         f'{esc("Got something ambitious in mind?")}</tspan>'
         f'<tspan fill="{GREEN_INK}">{esc("   Let’s build it together.")}</tspan>'
