@@ -1,0 +1,11 @@
+# Private source documents. Never publish.
+Mine/
+
+.venv/
+__pycache__/
+*.py[cod]
+.Python
+
+# Local previews and source photos. The portrait SVG is the published art.
+preview.html
+assets/

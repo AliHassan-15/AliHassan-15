@@ -1,0 +1,5 @@
+# Local only. The daily workflow does not rebuild the portrait.
+pillow
+numpy
+opencv-python-headless
+rembg[cpu]
