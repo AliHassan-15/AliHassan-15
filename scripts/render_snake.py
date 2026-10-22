@@ -18,14 +18,16 @@ ROOT = os.path.join(HERE, "..")
 SRC = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "snake.svg")
 
-COLS = 18
-ROWS = 7
-CELL = 40
-GAP = 10
+COLS = 25
+ROWS = 9
+CELL = 30
+GAP = 6
 STEP = CELL + GAP
 DUR = 18
 START = 3
 MAX_LEN = 16
+# The previous board used 40px cells. The snake scales with the boxes.
+SCALE = CELL / 40
 
 
 def load():
@@ -34,7 +36,7 @@ def load():
 
 
 def board_from(days):
-    """18 by 7 field. Real active weeks stay bright, and quiet weeks get food too."""
+    """A denser field. Real active weeks stay bright, and quiet weeks get food too."""
     source = weeks_for(days)
     levels = [[0 for _ in range(ROWS)] for _ in range(COLS)]
     if source:
@@ -43,10 +45,11 @@ def board_from(days):
             stop = max(start + 1, int((col + 1) * len(source) / COLS))
             for row in range(ROWS):
                 real = 0
-                for src_col in range(start, min(stop, len(source))):
-                    cell = source[src_col][row]
-                    if cell is not None:
-                        real = max(real, cell[2])
+                if row < 7:
+                    for src_col in range(start, min(stop, len(source))):
+                        cell = source[src_col][row]
+                        if cell is not None:
+                            real = max(real, cell[2])
                 levels[col][row] = real
     filled = 0
     for col in range(COLS):
@@ -158,7 +161,7 @@ def render(data):
     levels = board_from(data["days"])
     grid_w = COLS * STEP
     left = max(28, int((FULL_W - grid_w) / 2))
-    top = 28
+    top = 46
     height = top + ROWS * STEP + 18
     points = route(levels, left, top)
     count = len(points)
@@ -168,6 +171,7 @@ def render(data):
     parts.append(f'<path id="route" d="{path_d(points)}" fill="none"/>')
 
     box = CELL - 4
+    corner = max(3, round(5 * SCALE))
     for index, (x, y, level) in enumerate(points):
         origin_x = x - box / 2
         origin_y = y - box / 2
@@ -179,13 +183,14 @@ def render(data):
             color = GREEN[max(0, min(4, level))]
             extra = eat_anim(color, index, count) if level else ""
         parts.append(
-            f'<rect x="{origin_x:.1f}" y="{origin_y:.1f}" width="{box}" height="{box}" rx="7" '
+            f'<rect x="{origin_x:.1f}" y="{origin_y:.1f}" width="{box}" height="{box}" rx="{corner}" '
             f'fill="{color}">{extra}</rect>'
         )
 
     # Tail first, so the head and its eyes paint on top.
+    stroke = max(1.25, 2 * SCALE)
     for index in range(MAX_LEN - 1, 0, -1):
-        radius = max(16, 27 - index * 0.7)
+        radius = max(16 * SCALE, 27 * SCALE - index * 0.7 * SCALE)
         shade = index / MAX_LEN
         red = int(126 + (14 - 126) * shade)
         green = int(231 + (68 - 231) * shade)
@@ -199,21 +204,21 @@ def render(data):
             shown = "1"
         parts.append(
             f'<g opacity="{shown}">{motion(index, count, False)}'
-            f'<circle r="{radius:.1f}" fill="{color}" stroke="#0d1117" stroke-width="2"/>'
+            f'<circle r="{radius:.1f}" fill="{color}" stroke="#0d1117" stroke-width="{stroke:.2f}"/>'
             f"{hidden}</g>"
         )
 
     parts.append(
         f"<g>{motion(0, count, True)}"
-        f'<ellipse cx="4" cy="0" rx="30" ry="22" fill="#7ee787"/>'
-        f'<ellipse cx="4" cy="0" rx="30" ry="22" fill="none" stroke="#0d1117" stroke-width="2"/>'
-        f'<circle cx="18" cy="-7" r="5.4" fill="#f4fff8"/>'
-        f'<circle cx="18" cy="7" r="5.4" fill="#f4fff8"/>'
-        f'<circle cx="19.8" cy="-7" r="2.6" fill="#0d1117"/>'
-        f'<circle cx="19.8" cy="7" r="2.6" fill="#0d1117"/>'
-        f'<circle cx="20.8" cy="-8.1" r="1" fill="#ffffff"/>'
-        f'<circle cx="20.8" cy="5.9" r="1" fill="#ffffff"/>'
-        f'<polygon points="28,-1.6 38,0 28,1.6" fill="#f85149"/>'
+        f'<ellipse cx="{4 * SCALE:.1f}" cy="0" rx="{30 * SCALE:.1f}" ry="{22 * SCALE:.1f}" fill="#7ee787"/>'
+        f'<ellipse cx="{4 * SCALE:.1f}" cy="0" rx="{30 * SCALE:.1f}" ry="{22 * SCALE:.1f}" fill="none" stroke="#0d1117" stroke-width="{stroke:.2f}"/>'
+        f'<circle cx="{18 * SCALE:.1f}" cy="{-7 * SCALE:.1f}" r="{5.4 * SCALE:.1f}" fill="#f4fff8"/>'
+        f'<circle cx="{18 * SCALE:.1f}" cy="{7 * SCALE:.1f}" r="{5.4 * SCALE:.1f}" fill="#f4fff8"/>'
+        f'<circle cx="{19.8 * SCALE:.1f}" cy="{-7 * SCALE:.1f}" r="{2.6 * SCALE:.1f}" fill="#0d1117"/>'
+        f'<circle cx="{19.8 * SCALE:.1f}" cy="{7 * SCALE:.1f}" r="{2.6 * SCALE:.1f}" fill="#0d1117"/>'
+        f'<circle cx="{20.8 * SCALE:.1f}" cy="{-8.1 * SCALE:.1f}" r="{SCALE:.1f}" fill="#ffffff"/>'
+        f'<circle cx="{20.8 * SCALE:.1f}" cy="{5.9 * SCALE:.1f}" r="{SCALE:.1f}" fill="#ffffff"/>'
+        f'<polygon points="{28 * SCALE:.1f},{-1.6 * SCALE:.1f} {38 * SCALE:.1f},0 {28 * SCALE:.1f},{1.6 * SCALE:.1f}" fill="#f85149"/>'
         f"</g>"
     )
     return finish(parts, FULL_W, height)
