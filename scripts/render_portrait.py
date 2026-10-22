@@ -32,9 +32,9 @@ HOLD = 4.0
 
 
 def dust_field(parts, x0, y0, art_w, art_h, lines):
-    """Light-gray dust drawn over the portrait so it stays visible on the dark field."""
+    """Light-gray dust that wanders slowly; some twinkle like stars."""
     rng = random.Random(15)
-    shades = ("#8b949e", "#aab1ba", "#c9d1d9")
+    shades = ("#8b949e", "#aab1ba", "#c9d1d9", "#e6edf3")
     rows = max(1, len(lines))
     cols = max(1, len(lines[0]) if lines else 1)
     cell_w = art_w / cols
@@ -53,30 +53,61 @@ def dust_field(parts, x0, y0, art_w, art_h, lines):
         empties = [
             (x0 + art_w * rng.random(), y0 + art_h * rng.random()) for _ in range(40)
         ]
+    left = x0 + 4
+    right = x0 + art_w - 4
+    top = y0 + 4
+    bottom = y0 + art_h - 4
+
+    def clamp(px, py):
+        return max(left, min(right, px)), max(top, min(bottom, py))
+
     parts.append(
         f'<defs><clipPath id="artClip">'
         f'<rect x="{x0}" y="{y0}" width="{art_w:.1f}" height="{art_h:.1f}" rx="4"/>'
         f"</clipPath></defs>"
     )
     parts.append(f'<g clip-path="url(#artClip)">')
-    for index in range(64):
+    for index in range(70):
         px, py = empties[rng.randrange(len(empties))]
-        px += rng.uniform(-cell_w * 0.35, cell_w * 0.35)
-        py += rng.uniform(-cell_h * 0.35, cell_h * 0.35)
-        radius = rng.uniform(0.7, 1.6)
-        opacity = rng.uniform(0.28, 0.55)
-        drift_x = rng.uniform(-10, 10)
-        drift_y = rng.uniform(-14, 14)
-        dur = rng.uniform(18, 32)
-        begin = (index * 0.37) % dur
-        fade = max(0.12, opacity * 0.4)
+        px += rng.uniform(-cell_w * 0.4, cell_w * 0.4)
+        py += rng.uniform(-cell_h * 0.4, cell_h * 0.4)
+        px, py = clamp(px, py)
+        # A few waypoints so the path wanders instead of bouncing on one line.
+        waypoints = [(px, py)]
+        for _ in range(3):
+            waypoints.append(
+                clamp(
+                    waypoints[-1][0] + rng.uniform(-28, 28),
+                    waypoints[-1][1] + rng.uniform(-36, 36),
+                )
+            )
+        waypoints.append((px, py))
+        xs = ";".join(f"{point[0]:.1f}" for point in waypoints)
+        ys = ";".join(f"{point[1]:.1f}" for point in waypoints)
+        radius = rng.uniform(0.85, 1.85)
+        opacity = rng.uniform(0.32, 0.62)
+        move_dur = rng.uniform(14, 26)
+        twinkle = index % 5 != 0  # most of them blink; a few stay steady
+        if twinkle:
+            blink_dur = rng.uniform(2.2, 5.5)
+            blink_values = f"0.08;{opacity:.2f};0.12;{opacity:.2f};0.05;{opacity:.2f}"
+            blink_times = "0;0.18;0.35;0.55;0.72;1"
+        else:
+            blink_dur = move_dur
+            blink_values = f"{opacity:.2f};{opacity * 0.7:.2f};{opacity:.2f}"
+            blink_times = "0;0.5;1"
         parts.append(
-            f'<circle cx="0" cy="0" r="{radius:.2f}" fill="{rng.choice(shades)}" opacity="{opacity:.2f}">'
-            f'<animateTransform attributeName="transform" type="translate" '
-            f'values="{px:.1f} {py:.1f};{px + drift_x:.1f} {py + drift_y:.1f};{px:.1f} {py:.1f}" '
-            f'dur="{dur:.1f}s" begin="{begin:.1f}s" repeatCount="indefinite"/>'
-            f'<animate attributeName="opacity" values="{opacity:.2f};{fade:.2f};{opacity:.2f}" '
-            f'dur="{dur * 0.9:.1f}s" begin="{begin:.1f}s" repeatCount="indefinite"/>'
+            f'<circle cx="{px:.1f}" cy="{py:.1f}" r="{radius:.2f}" '
+            f'fill="{rng.choice(shades)}" opacity="{opacity:.2f}">'
+            f'<animate attributeName="cx" values="{xs}" dur="{move_dur:.1f}s" '
+            f'begin="{(index * 0.29) % move_dur:.1f}s" repeatCount="indefinite" '
+            f'calcMode="linear"/>'
+            f'<animate attributeName="cy" values="{ys}" dur="{move_dur * 1.12:.1f}s" '
+            f'begin="{(index * 0.41) % move_dur:.1f}s" repeatCount="indefinite" '
+            f'calcMode="linear"/>'
+            f'<animate attributeName="opacity" values="{blink_values}" '
+            f'keyTimes="{blink_times}" dur="{blink_dur:.1f}s" '
+            f'begin="{(index * 0.53) % blink_dur:.1f}s" repeatCount="indefinite"/>'
             f"</circle>"
         )
     parts.append("</g>")
