@@ -31,35 +31,52 @@ CELL_RATIO = 1.72
 HOLD = 4.0
 
 
-def ambient_backdrop(parts, x0, y0, art_w, art_h):
-    """Tiny light-gray dust that drifts slowly behind the ASCII."""
+def dust_field(parts, x0, y0, art_w, art_h, lines):
+    """Light-gray dust drawn over the portrait so it stays visible on the dark field."""
     rng = random.Random(15)
-    shades = ("#6e7681", "#8b949e", "#aab1ba")
+    shades = ("#8b949e", "#aab1ba", "#c9d1d9")
+    rows = max(1, len(lines))
+    cols = max(1, len(lines[0]) if lines else 1)
+    cell_w = art_w / cols
+    cell_h = art_h / rows
+    empties = []
+    for row, line in enumerate(lines):
+        for col, char in enumerate(line):
+            if char == " ":
+                empties.append(
+                    (
+                        x0 + (col + 0.5) * cell_w,
+                        y0 + (row + 0.5) * cell_h,
+                    )
+                )
+    if not empties:
+        empties = [
+            (x0 + art_w * rng.random(), y0 + art_h * rng.random()) for _ in range(40)
+        ]
     parts.append(
         f'<defs><clipPath id="artClip">'
         f'<rect x="{x0}" y="{y0}" width="{art_w:.1f}" height="{art_h:.1f}" rx="4"/>'
         f"</clipPath></defs>"
     )
     parts.append(f'<g clip-path="url(#artClip)">')
-    for _ in range(52):
-        px = x0 + rng.uniform(6, art_w - 6)
-        py = y0 + rng.uniform(6, art_h - 6)
-        radius = rng.uniform(0.45, 1.15)
-        opacity = rng.uniform(0.16, 0.42)
-        drift_x = rng.uniform(-12, 12)
-        drift_y = rng.uniform(-16, 16)
-        dur = rng.uniform(16, 30)
-        begin = rng.uniform(0, dur)
-        fade = max(0.06, opacity * 0.35)
+    for index in range(64):
+        px, py = empties[rng.randrange(len(empties))]
+        px += rng.uniform(-cell_w * 0.35, cell_w * 0.35)
+        py += rng.uniform(-cell_h * 0.35, cell_h * 0.35)
+        radius = rng.uniform(0.7, 1.6)
+        opacity = rng.uniform(0.28, 0.55)
+        drift_x = rng.uniform(-10, 10)
+        drift_y = rng.uniform(-14, 14)
+        dur = rng.uniform(18, 32)
+        begin = (index * 0.37) % dur
+        fade = max(0.12, opacity * 0.4)
         parts.append(
-            f'<circle cx="{px:.1f}" cy="{py:.1f}" r="{radius:.2f}" '
-            f'fill="{rng.choice(shades)}" opacity="{opacity:.2f}">'
-            f'<animate attributeName="cx" values="{px:.1f};{px + drift_x:.1f};{px:.1f}" '
-            f'dur="{dur:.1f}s" begin="-{begin:.1f}s" repeatCount="indefinite"/>'
-            f'<animate attributeName="cy" values="{py:.1f};{py + drift_y:.1f};{py:.1f}" '
-            f'dur="{dur * 1.15:.1f}s" begin="-{begin:.1f}s" repeatCount="indefinite"/>'
+            f'<circle cx="0" cy="0" r="{radius:.2f}" fill="{rng.choice(shades)}" opacity="{opacity:.2f}">'
+            f'<animateTransform attributeName="transform" type="translate" '
+            f'values="{px:.1f} {py:.1f};{px + drift_x:.1f} {py + drift_y:.1f};{px:.1f} {py:.1f}" '
+            f'dur="{dur:.1f}s" begin="{begin:.1f}s" repeatCount="indefinite"/>'
             f'<animate attributeName="opacity" values="{opacity:.2f};{fade:.2f};{opacity:.2f}" '
-            f'dur="{dur * 0.85:.1f}s" begin="-{begin:.1f}s" repeatCount="indefinite"/>'
+            f'dur="{dur * 0.9:.1f}s" begin="{begin:.1f}s" repeatCount="indefinite"/>'
             f"</circle>"
         )
     parts.append("</g>")
@@ -272,7 +289,6 @@ def render():
     cycle = typed + HOLD
 
     parts = begin(PAIR_W, PAIR_H, "ASCII portrait of Ali Hassan", "ali@github ~ $ ./portrait.sh")
-    ambient_backdrop(parts, x0, y0, art_w, art_h)
     for index, line in enumerate(lines):
         y = y0 + index * cell_h
         baseline = y + cell_h * 0.78
@@ -310,6 +326,9 @@ def render():
             f'dur="{cycle:.3f}s" repeatCount="indefinite"/>'
             f"</rect>"
         )
+
+    # Dust sits above the ASCII so it shows in the empty dark space around the figure.
+    dust_field(parts, x0, y0, art_w, art_h, lines)
 
     foot_size = 28
     _, art_top, _, art_h = art_box()
