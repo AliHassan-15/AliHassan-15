@@ -36,7 +36,7 @@ def render():
             f'font-family="{SANS}" font-size="13" style="animation-delay:{delay + 0.05:.2f}s">'
             f"{esc(label)}</text>"
         )
-    return finish(parts, W, H)
+    return finish(parts, W, H, dust=False)
 
 
 if __name__ == "__main__":

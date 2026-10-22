@@ -349,7 +349,7 @@ def render(data):
         f'<polygon points="{28 * SCALE:.1f},{-1.6 * SCALE:.1f} {38 * SCALE:.1f},0 {28 * SCALE:.1f},{1.6 * SCALE:.1f}" fill="#f85149"/>'
         f"</g>"
     )
-    return finish(parts, FULL_W, height)
+    return finish(parts, FULL_W, height, dust=False)
 
 
 if __name__ == "__main__":

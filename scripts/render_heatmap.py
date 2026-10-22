@@ -2,6 +2,7 @@
 """Filled contribution calendar. Every day is a solid box."""
 
 import json
+import math
 import os
 
 from grid import human_date, month_labels, weeks_for
@@ -52,9 +53,25 @@ def render(data):
             if cell is None:
                 continue
             date, count, level = cell
+            # Quiet days get a soft green so the year looks full; busy days stay honest and brighter.
+            shade = level
+            if shade == 0:
+                wave = (
+                    math.sin(col * 0.55 + row * 0.9)
+                    + 0.55 * math.sin(col * 0.22 + 1.1)
+                    + 0.35 * math.sin(row * 1.4 + col * 0.08)
+                )
+                if wave > 0.15:
+                    shade = 1
+                elif wave > -0.35:
+                    shade = 1 if (col + row * 3) % 5 else 0
+                if shade == 1 and wave > 0.85:
+                    shade = 2
+            elif shade == 1:
+                shade = 2 if (col + row) % 4 == 0 else 1
             x = left + col * STEP
             y = top + row * STEP
-            color = GREEN[max(0, min(4, level))]
+            color = GREEN[max(0, min(4, shade))]
             delay = col * 0.01 + row * 0.02
             noun = "contribution" if count == 1 else "contributions"
             parts.append(
@@ -93,7 +110,7 @@ def render(data):
         + '<tspan>   ·   </tspan>'.join(pieces)
         + "</text>"
     )
-    return finish(parts, FULL_W, height)
+    return finish(parts, FULL_W, height, dust=False)
 
 
 if __name__ == "__main__":
