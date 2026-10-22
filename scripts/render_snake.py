@@ -12,23 +12,27 @@ from collections import deque
 
 from grid import weeks_for
 from svgutil import begin, finish, write
-from theme import FULL_W, GREEN
+from theme import FULL_W, GREEN, MONO, MUTED
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
 SRC = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "snake.svg")
 
-COLS = 25
-ROWS = 9
-CELL = 30
-GAP = 6
+# Leave room for a quiet caption on each side of the board.
+SIDE = 78
+COLS = 34
+ROWS = 11
+CELL = 22
+GAP = 4
 STEP = CELL + GAP
 DUR = 18
 START = 3
-MAX_LEN = 16
-# The previous board used 40px cells. The snake scales with the boxes.
+MAX_LEN = 18
+# The first board used 40px cells. The snake scales with the boxes.
 SCALE = CELL / 40
+# Seconds per cell. Higher is slower.
+STEP_SEC = 0.12
 
 
 def load():
@@ -254,11 +258,20 @@ def cell_center(col, row, left, top):
     return left + col * STEP + CELL / 2, top + row * STEP + CELL / 2
 
 
+def side_caption(x, y, label, rotate):
+    """A quiet vertical line in the empty margin beside the board."""
+    return (
+        f'<text x="{x:.1f}" y="{y:.1f}" fill="{MUTED}" font-family="{MONO}" font-size="11" '
+        f'letter-spacing="1.4" text-anchor="middle" '
+        f'transform="rotate({rotate} {x:.1f} {y:.1f})">{label}</text>'
+    )
+
+
 def render(data):
     global DUR
     levels = board_from(data["days"])
     grid_w = COLS * STEP
-    left = max(28, int((FULL_W - grid_w) / 2))
+    left = max(SIDE, int((FULL_W - grid_w) / 2))
     top = 46
     height = top + ROWS * STEP + 18
     trail, grew = seek_cells(levels)
@@ -269,12 +282,16 @@ def render(data):
         points.append((x, y, levels[col][row] if index >= START else 0))
         arrival.setdefault((col, row), index)
     count = len(points)
-    # A player-paced step. The old sweep used about this long per box.
-    DUR = max(16.0, round((count - 1) * 0.075, 2))
+    DUR = max(22.0, round((count - 1) * STEP_SEC, 2))
     grows = grew
     opening = set(trail[:START])
+    mid_y = top + (ROWS * STEP) / 2
+    left_x = left / 2
+    right_x = left + grid_w + (FULL_W - left - grid_w) / 2
 
     parts = begin(FULL_W, height, "Snake eating green contribution boxes", "ali@github ~ $ ./snake.sh")
+    parts.append(side_caption(left_x, mid_y, "less is more", -90))
+    parts.append(side_caption(right_x, mid_y, "build · ship", 90))
     parts.append(f'<path id="route" d="{path_d(points)}" fill="none"/>')
 
     box = CELL - 4
