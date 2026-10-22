@@ -2,8 +2,8 @@
 """Filled contribution calendar. Every day is a solid box."""
 
 import json
-import math
 import os
+import random
 
 from grid import human_date, month_labels, weeks_for
 from svgutil import begin, esc, finish, write
@@ -48,27 +48,16 @@ def render(data):
             f"{esc(name)}</text>"
         )
 
+    # Sparse random greens on quiet days only. Real contribution days keep their real shade.
+    rng = random.Random(42)
     for col, column in enumerate(grid):
         for row, cell in enumerate(column):
             if cell is None:
                 continue
             date, count, level = cell
-            # Quiet days get a soft green so the year looks full; busy days stay honest and brighter.
             shade = level
-            if shade == 0:
-                wave = (
-                    math.sin(col * 0.55 + row * 0.9)
-                    + 0.55 * math.sin(col * 0.22 + 1.1)
-                    + 0.35 * math.sin(row * 1.4 + col * 0.08)
-                )
-                if wave > 0.15:
-                    shade = 1
-                elif wave > -0.35:
-                    shade = 1 if (col + row * 3) % 5 else 0
-                if shade == 1 and wave > 0.85:
-                    shade = 2
-            elif shade == 1:
-                shade = 2 if (col + row) % 4 == 0 else 1
+            if shade == 0 and rng.random() < 0.18:
+                shade = rng.choice((1, 1, 1, 2))
             x = left + col * STEP
             y = top + row * STEP
             color = GREEN[max(0, min(4, shade))]
