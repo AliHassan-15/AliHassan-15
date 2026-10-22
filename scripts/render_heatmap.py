@@ -12,7 +12,7 @@ from theme import BONE, FULL_W, GREEN, GREEN_INK, MONO, MUTED, SANS
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
 SRC = os.path.join(ROOT, "data", "contributions.json")
-OUT = os.path.join(ROOT, "heatmap.svg")
+OUT = os.path.join(ROOT, "contributions.svg")
 
 CELL = 15
 GAP = 4
@@ -48,16 +48,16 @@ def render(data):
             f"{esc(name)}</text>"
         )
 
-    # Sparse random greens on quiet days only. Real contribution days keep their real shade.
-    rng = random.Random(42)
+    # A light random scatter on quiet days only — no stripes. Real busy days stay honest.
+    rng = random.Random(data.get("total_contributions", 0) * 97 + 13)
     for col, column in enumerate(grid):
         for row, cell in enumerate(column):
             if cell is None:
                 continue
             date, count, level = cell
             shade = level
-            if shade == 0 and rng.random() < 0.18:
-                shade = rng.choice((1, 1, 1, 2))
+            if shade == 0 and rng.random() < 0.11:
+                shade = 1 if rng.random() < 0.75 else 2
             x = left + col * STEP
             y = top + row * STEP
             color = GREEN[max(0, min(4, shade))]

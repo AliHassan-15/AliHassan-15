@@ -33,7 +33,7 @@ The Mine/ folder is private and must stay untracked.
 
 <h3><code>ali@github ~ $ ./contributions.sh</code></h3>
 
-<img src="./heatmap.svg" width="100%" alt="Filled GitHub contribution calendar for the last year, refreshed daily." />
+<img src="./contributions.svg" width="100%" alt="Filled GitHub contribution calendar for the last year, refreshed daily." />
 
 <br>
 
