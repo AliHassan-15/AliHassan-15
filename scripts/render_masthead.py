@@ -4,11 +4,11 @@
 import os
 
 from svgutil import begin, esc, finish, write
-from theme import BONE, FULL_W, GREEN_INK, LINE, MONO, MUTED, SANS
+from theme import BONE, BRIGHT, FULL_W, GREEN_INK, LINE, MONO, MUTED, SANS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "masthead.svg")
-W, H = FULL_W, 148
+W, H = FULL_W, 248
 
 
 def render():
@@ -32,7 +32,34 @@ def render():
         f'font-size="13" text-anchor="end" style="animation-delay:.2s">{esc("open to engineering roles")}</text>'
     )
     parts.append(
-        f'<line class="draw" x1="28" y1="{H - 18}" x2="{W - 28}" y2="{H - 18}" stroke="{LINE}" stroke-width="1"/>'
+        f'<line class="draw" x1="28" y1="124" x2="{W - 28}" y2="124" stroke="{LINE}" stroke-width="1"/>'
+    )
+    # The question is the only loud line. Everything above it stays quiet.
+    parts.append(
+        "<style>"
+        ".blink{animation:blink 1.15s steps(1) infinite}"
+        "@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}"
+        "@media (prefers-reduced-motion:reduce){.blink{animation:none;opacity:1}}"
+        "</style>"
+    )
+    parts.append(
+        f'<text class="rise" x="28" y="152" fill="{MUTED}" font-family="{SANS}" font-size="15" '
+        f'style="animation-delay:.32s">'
+        f'{esc("I turn ideas into real-world products, from full-stack apps to AI-powered systems built to solve problems that matter.")}'
+        f"</text>"
+    )
+    parts.append(
+        f'<text class="rise" x="28" y="182" fill="{BONE}" font-family="{SANS}" font-size="16" '
+        f'style="animation-delay:.48s">{esc("I build, I experiment, and I ship.")}</text>'
+    )
+    parts.append(
+        f'<text class="rise" x="28" y="220" font-family="{SANS}" style="animation-delay:.66s">'
+        f'<tspan fill="{BRIGHT}" font-size="26" font-weight="700" text-decoration="underline" '
+        f'text-decoration-color="{BRIGHT}">'
+        f'{esc("Got something ambitious in mind?")}</tspan>'
+        f'<tspan fill="{GREEN_INK}" font-size="18">{esc("   Let’s build it together.")}</tspan>'
+        f'<tspan class="blink" fill="{BRIGHT}" font-size="26"> ▍</tspan>'
+        f"</text>"
     )
     return finish(parts, W, H)
 
