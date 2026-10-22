@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Record card that sits level with the portrait. Stats come from live data."""
+"""Stats card that sits level with the portrait. Numbers and the monthly bars are live."""
 
+import datetime
 import json
 import os
 
 from grid import human_date
 from svgutil import begin, esc, finish, write
-from theme import BONE, GREEN, GREEN_INK, LINE, MONO, MUTED, PAIR_H, PAIR_W, RAISED, SANS
+from theme import BONE, GREEN_INK, LINE, MONO, MUTED, PAIR_H, PAIR_W, RAISED, SANS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
@@ -14,7 +15,7 @@ SRC = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "identity.svg")
 
 FACTS = [
-    ("now", "Software engineer · MERN, Python, AI"),
+    ("stack", "Python · React · FastAPI · PyTorch"),
     ("based", "Lahore, Pakistan"),
     ("school", "BS Computer Science, FAST-NUCES"),
     ("record", "Dean's List ×5 · CGPA 3.58"),
@@ -54,16 +55,80 @@ def tile(parts, x, y, w, h, label, value, caption, delay):
     parts.append("</g>")
 
 
+def months_of(data):
+    buckets = {}
+    for day in data["days"]:
+        key = day["date"][:7]
+        buckets[key] = buckets.get(key, 0) + int(day["count"])
+    rows = []
+    for key in sorted(buckets):
+        year, month = key.split("-")
+        label = datetime.date(int(year), int(month), 1).strftime("%b")
+        rows.append((label, buckets[key]))
+    return rows
+
+
+def chart(parts, data, top):
+    """Monthly bars. The tallest month carries its real total, the way a stats card does."""
+    rows = months_of(data) if data else []
+    bottom = PAIR_H - 36
+    parts.append(
+        f'<rect x="24" y="{top}" width="{PAIR_W - 48}" height="{bottom - top}" rx="12" '
+        f'fill="{RAISED}" stroke="{LINE}"/>'
+    )
+    parts.append(
+        f'<text x="44" y="{top + 28}" fill="{MUTED}" font-family="{MONO}" font-size="13">'
+        f'{esc("contributions / month")}</text>'
+    )
+    if not rows:
+        return
+    peak = max(count for _, count in rows) or 1
+    plot_top = top + 78
+    plot_bottom = bottom - 36
+    plot_h = max(40, plot_bottom - plot_top)
+    inner_left = 44
+    inner_right = PAIR_W - 44
+    slot = (inner_right - inner_left) / len(rows)
+    bar_w = min(36, slot * 0.62)
+    for index, (label, count) in enumerate(rows):
+        bar_h = 0 if count <= 0 else max(6, plot_h * (count / peak))
+        x = inner_left + index * slot + (slot - bar_w) / 2
+        y = plot_bottom - bar_h
+        color = "#7ee787" if count == peak and count > 0 else "#3fb950"
+        delay = 0.15 + index * 0.05
+        parts.append(f'<g><title>{esc(label)} · {count}</title>')
+        if count > 0:
+            parts.append(
+                f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{bar_h:.1f}" rx="5" fill="{color}">'
+                f'<animate attributeName="height" from="0" to="{bar_h:.1f}" dur="0.7s" '
+                f'begin="{delay:.2f}s" fill="freeze"/>'
+                f'<animate attributeName="y" from="{plot_bottom:.1f}" to="{y:.1f}" dur="0.7s" '
+                f'begin="{delay:.2f}s" fill="freeze"/>'
+                f"</rect>"
+            )
+            if count == peak:
+                parts.append(
+                    f'<text x="{x + bar_w / 2:.1f}" y="{y - 10:.1f}" fill="{GREEN_INK}" '
+                    f'font-family="{SANS}" font-size="14" font-weight="700" text-anchor="middle">'
+                    f"{count:,}</text>"
+                )
+        parts.append(
+            f'<text x="{x + bar_w / 2:.1f}" y="{plot_bottom + 20:.1f}" fill="{MUTED}" '
+            f'font-family="{MONO}" font-size="12" text-anchor="middle">{esc(label)}</text>'
+        )
+        parts.append("</g>")
+
+
 def render():
     data = load()
-    parts = begin(PAIR_W, PAIR_H, "Ali Hassan — role, record, and GitHub year", "ali@github ~ $ whoami")
+    parts = begin(PAIR_W, PAIR_H, "Ali Hassan — year in contributions", "ali@github ~ $ ./stats.sh")
     parts.append(
-        f'<text class="rise" x="24" y="78" fill="{BONE}" font-family="{SANS}" '
+        f'<text class="rise" x="24" y="74" fill="{BONE}" font-family="{SANS}" '
         f'font-size="30" font-weight="650">{esc("Ali Hassan")}</text>'
     )
     parts.append(
-        f'<text class="rise" x="24" y="104" fill="{GREEN_INK}" font-family="{SANS}" font-size="15" '
-        f'style="animation-delay:.06s">{esc("Software Engineer")}</text>'
+        f'<text class="rise" x="24" y="102" fill="{GREEN_INK}" font-family="{SANS}" font-size="16" '
+        f'style="animation-delay:.06s">{esc("Full-Stack Developer · AI/ML Engineer")}</text>'
     )
 
     y = 140
@@ -80,7 +145,24 @@ def render():
         y += 28
         delay += 0.04
 
-    y += 8
+    y += 6
+    for org, role, when in ROLES:
+        parts.append(f'<g class="rise" style="animation-delay:{delay:.2f}s">')
+        parts.append(
+            f'<text x="24" y="{y}" fill="{BONE}" font-family="{MONO}" font-size="13">{esc(org)}</text>'
+        )
+        parts.append(
+            f'<text x="148" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="13">{esc(role)}</text>'
+        )
+        parts.append(
+            f'<text x="{PAIR_W - 24}" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="13" '
+            f'text-anchor="end">{esc(when)}</text>'
+        )
+        parts.append("</g>")
+        y += 24
+        delay += 0.04
+
+    y += 6
     parts.append(f'<line x1="24" y1="{y}" x2="{PAIR_W - 24}" y2="{y}" stroke="{LINE}"/>')
 
     total = active = current = longest = best_count = 0
@@ -96,17 +178,29 @@ def render():
         days = max(1, len(data["days"]))
     avg = f"{(total / active):.1f}" if active else "0"
 
+    # Streaks, volume, then the best day beside the average.
+    span = "—"
+    long_span = "—"
+    if data:
+        span = f"{human_date(data['current_streak']['start'])} – {human_date(data['current_streak']['end'])}"
+        long_span = f"{human_date(data['longest_streak']['start'])} – {human_date(data['longest_streak']['end'])}"
+        if data["current_streak"]["length"] <= 1:
+            span = human_date(data["current_streak"]["end"])
+    share = f"{round(100 * active / days)}% of the year" if days else "—"
+    def day_word(count):
+        return f"{count} day" if count == 1 else f"{count} days"
+
     tiles = [
-        ("contributions", f"{total:,}", "last 12 months"),
-        ("active days", str(active), f"of {days} days"),
-        ("longest streak", f"{longest}d", "best run"),
+        ("current streak", day_word(current), span),
+        ("longest streak", day_word(longest), long_span),
+        ("contributions", f"{total:,}", "in the last year"),
+        ("active days", f"{active} / {days}", share),
         ("best day", str(best_count), best_when),
-        ("current streak", f"{current}d", "today"),
-        ("per active day", avg, "contributions"),
+        ("avg / active day", avg, "contributions"),
     ]
     gap = 12
     tile_w = (PAIR_W - 48 - gap) / 2
-    tile_h = 96
+    tile_h = 104
     top = y + 16
     for index, spec in enumerate(tiles):
         col, row = index % 2, index // 2
@@ -120,47 +214,8 @@ def render():
             0.28 + index * 0.05,
         )
 
-    y = top + 3 * (tile_h + gap) + 8
-    parts.append(
-        f'<text class="rise" x="24" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="12" '
-        f'style="animation-delay:.55s">{esc("experience")}</text>'
-    )
-    y += 26
-    delay = 0.6
-    for org, role, when in ROLES:
-        parts.append(f'<g class="rise" style="animation-delay:{delay:.2f}s">')
-        parts.append(
-            f'<text x="24" y="{y}" fill="{BONE}" font-family="{MONO}" font-size="14">{esc(org)}</text>'
-        )
-        parts.append(
-            f'<text x="150" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="13">{esc(role)}</text>'
-        )
-        parts.append(
-            f'<text x="{PAIR_W - 24}" y="{y}" fill="{MUTED}" font-family="{MONO}" font-size="13" '
-            f'text-anchor="end">{esc(when)}</text>'
-        )
-        parts.append("</g>")
-        y += 26
-        delay += 0.04
-
-    y += 8
-    parts.append(f'<line x1="24" y1="{y}" x2="{PAIR_W - 24}" y2="{y}" stroke="{LINE}"/>')
-    y += 28
-    parts.append(
-        f'<text class="rise" x="24" y="{y}" fill="{BONE}" font-family="{MONO}" font-size="13" '
-        f'style="animation-delay:.78s">{esc("TypeScript · Python · React · Next.js · Node")}</text>'
-    )
-    y += 24
-    parts.append(
-        f'<text class="rise" x="24" y="{y}" fill="{BONE}" font-family="{MONO}" font-size="13" '
-        f'style="animation-delay:.84s">{esc("Django · FastAPI · PyTorch · PostgreSQL · Docker")}</text>'
-    )
-    y += 28
-    for index, color in enumerate(["#0d1117", "#3fb950", "#e6edf3", "#8b949e", *GREEN]):
-        parts.append(
-            f'<rect class="pop" x="{24 + index * 20}" y="{y}" width="14" height="14" rx="3" '
-            f'fill="{color}" stroke="{LINE}" style="animation-delay:{0.9 + index * 0.03:.2f}s"/>'
-        )
+    chart_top = top + 3 * (tile_h + gap) + 16
+    chart(parts, data, chart_top)
     return finish(parts, PAIR_W, PAIR_H)
 
 

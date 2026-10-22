@@ -15,7 +15,7 @@ from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
-SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "assets", "profile.work.png")
+SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "assets", "pic.png")
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "assets", "source-prepped.png")
 
 # art box aspect: width / height
@@ -67,7 +67,8 @@ def main():
     edges = np.clip((coarse - fine) / 36.0, 0, 1)
     drawn = np.clip(tone - 0.28 * edges, 0, 1)
     # Skin must stay gray, not white, or the ASCII face becomes an empty hole.
-    drawn = np.clip(drawn * 0.62 + 0.05, 0, 1)
+    # Keep skin dark enough that the face survives at profile size, lighter than the suit.
+    drawn = np.clip(drawn * 0.46 + 0.03, 0, 1)
 
     hard = np.where(alpha > 110, alpha, 0).astype(np.uint8)
     mask = cv2.GaussianBlur(hard.astype(np.float32) / 255.0, (0, 0), 0.6)
@@ -79,14 +80,14 @@ def main():
     left, right = int(xs.min()), int(xs.max())
     box_h = max(1, bottom - top)
 
-    # Keep the head large. A half-body frame makes the shirt eat the ASCII.
+    # Seated frame: hair through the hands, so the taller card is a full portrait.
     head_top = top
-    head_bottom = top + int(box_h * 0.46)
+    head_bottom = top + int(box_h * 0.98)
     head_h = max(1, head_bottom - head_top)
     cx = (left + right) // 2
     cy = head_top + head_h // 2
 
-    crop_h = int(head_h * 1.12)
+    crop_h = int(head_h * 1.06)
     crop_w = int(round(crop_h * aspect))
     x0 = cx - crop_w // 2
     y0 = cy - crop_h // 2

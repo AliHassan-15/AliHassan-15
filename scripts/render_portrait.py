@@ -14,11 +14,12 @@ ROOT = os.path.join(HERE, "..")
 SRC = os.path.join(ROOT, "assets", "source-prepped.png")
 OUT = os.path.join(ROOT, "portrait.svg")
 PREVIEW = os.path.join(ROOT, "assets", "portrait-preview.png")
+DENSITY = os.path.join(ROOT, "assets", "ascii-density.png")
 
 COLS = 100
 RAMP = " .:-=+*#%@"
-GAMMA = 1.05
-CONTRAST = 1.12
+GAMMA = 1.22
+CONTRAST = 1.18
 WHITE_FLOOR = 0.94
 INK = "#c9d1d9"
 
@@ -66,6 +67,18 @@ def save_preview(lines, art_w, art_h):
             draw.text((x0 + col * cell_w, baseline), char, fill=INK, font=font)
     canvas.save(PREVIEW)
     print(f"wrote {PREVIEW}")
+    cell = 6
+    density = Image.new("RGB", (cols * cell, rows * cell), PANEL)
+    pixels = density.load()
+    for row, line in enumerate(lines):
+        for col, char in enumerate(line):
+            level = RAMP.find(char)
+            shade = 13 if level < 0 else int(18 + (level / (len(RAMP) - 1)) * 220)
+            for dy in range(cell):
+                for dx in range(cell):
+                    pixels[col * cell + dx, row * cell + dy] = (shade, shade, shade)
+    density.save(DENSITY)
+    print(f"wrote {DENSITY}")
 
 
 def render():

@@ -3,12 +3,13 @@
 FULL_W = 1060
 
 # Portrait and record are a matched pair, so a 50/50 table keeps them level.
+# The record includes a monthly chart, so the pair is tall enough for a seated portrait.
 PAIR_W = 820
-PAIR_H = 900
+PAIR_H = 1280
 
 ART_X = 18
-ART_TOP = 52
-ART_BOTTOM = 40
+ART_TOP = 48
+ART_BOTTOM = 46
 
 PANEL = "#0d1117"
 RAISED = "#161b22"

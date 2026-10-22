@@ -6,7 +6,7 @@ Daily refresh:    .github/workflows/refresh-profile.yml
 The Mine/ folder is private and must stay untracked.
 -->
 
-<img src="./masthead.svg" width="100%" alt="Ali Hassan, software engineer. MERN, Python, and applied AI. Lahore. Open to engineering roles." />
+<img src="./masthead.svg" width="100%" alt="Ali Hassan, full-stack developer and AI/ML engineer. Python. Lahore. Open to engineering roles." />
 
 <br>
 
@@ -33,7 +33,7 @@ The Mine/ folder is private and must stay untracked.
 
 <h3><code>ali@github ~ $ ./snake.sh</code></h3>
 
-<img src="./snake.svg" width="100%" alt="A snake eating the contribution calendar, one box at a time." />
+<img src="./snake.svg" width="100%" alt="A snake with eyes that starts short and grows as it eats green contribution boxes." />
 
 <br>
 
@@ -59,7 +59,7 @@ The Mine/ folder is private and must stay untracked.
 
 <h3><code>ali@github ~ $ ./links.sh</code></h3>
 
-<p><b>Software Engineer · MERN · Python · AI</b></p>
+<p><b>Full-Stack Developer · Python · AI/ML</b></p>
 
 <a href="https://www.linkedin.com/in/ali-hassan--tech"><img src="https://img.shields.io/badge/LinkedIn-Ali%20Hassan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 <a href="mailto:hassanakramali@gmail.com"><img src="https://img.shields.io/badge/Email-contact-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>

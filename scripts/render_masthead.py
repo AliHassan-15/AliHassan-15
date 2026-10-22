@@ -12,18 +12,16 @@ W, H = FULL_W, 148
 
 
 def render():
-    parts = begin(W, H, "Ali Hassan, software engineer", "ali@github ~ $ whoami")
+    parts = begin(W, H, "Ali Hassan, full-stack developer and AI/ML engineer", "ali@github ~ $ whoami")
     parts.append(
         f'<text class="rise" x="28" y="78" fill="{BONE}" font-family="{SANS}" '
         f'font-size="40" font-weight="650">{esc("Ali Hassan")}</text>'
     )
     parts.append(
-        f'<text class="rise" x="28" y="108" fill="{GREEN_INK}" font-family="{SANS}" '
-        f'font-size="16" style="animation-delay:.08s">{esc("Software Engineer")}</text>'
-    )
-    parts.append(
-        f'<text class="rise" x="196" y="108" fill="{MUTED}" font-family="{SANS}" font-size="16" '
-        f'style="animation-delay:.12s">{esc("·  MERN  ·  Python  ·  Applied AI")}</text>'
+        f'<text class="rise" x="28" y="108" font-family="{SANS}" font-size="16" style="animation-delay:.08s">'
+        f'<tspan fill="{GREEN_INK}">{esc("Full-Stack Developer")}</tspan>'
+        f'<tspan fill="{MUTED}">{esc("   ·   Python   ·   AI/ML")}</tspan>'
+        f"</text>"
     )
     parts.append(
         f'<text class="rise" x="{W - 28}" y="78" fill="{BONE}" font-family="{SANS}" '
