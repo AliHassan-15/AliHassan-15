@@ -37,9 +37,11 @@ def render():
         f"</text>"
     )
     parts.append(
+        f'<a href="https://ali-hassan-tech.vercel.app/">'
         f'<text class="rise" x="{W - 28}" y="122" fill="{BRIGHT}" font-family="{SANS}" '
         f'font-size="18" font-weight="700" text-anchor="end" text-decoration="underline" '
         f'style="animation-delay:.22s">{esc("Portfolio")}</text>'
+        f"</a>"
     )
     parts.append(
         f'<line class="draw" x1="28" y1="148" x2="{W - 28}" y2="148" stroke="{LINE}" stroke-width="1"/>'
